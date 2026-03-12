@@ -5,6 +5,7 @@ import {
   focusRing,
   createComponent,
   ExtractProps,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 
 import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -176,10 +177,13 @@ const radioInputStencil = createStencil({
   },
 });
 
+const styledRadioInputDisplayName = 'StyledRadioInput';
+
 const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & StyledType>({
-  displayName: 'StyledRadioInput',
+  displayName: styledRadioInputDisplayName,
   Component: ({children, variant, ...elemProps}: StyledRadioButtonProps, ref, Element) => {
-    return <Element ref={ref} {...mergeStyles(elemProps, radioInputStencil({variant}))} />;
+    const resolved = useResolvedStencil(styledRadioInputDisplayName, radioInputStencil, {variant});
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });
 

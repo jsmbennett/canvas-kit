@@ -1,5 +1,9 @@
 import * as React from 'react';
-import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  composeHooks,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {
   useListItemRegister,
   useOverflowListItemMeasure,
@@ -55,16 +59,19 @@ export const breadcrumbsItemStencil = createStencil({
 
 export const useBreadcrumbsItem = composeHooks(useOverflowListItemMeasure, useListItemRegister);
 
+const displayName = 'Breadcrumbs.Item';
+
 export const BreadcrumbsItem = createSubcomponent('li')({
-  displayName: 'Breadcrumbs.Item',
+  displayName,
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsItem,
   subComponents: {
     Link: BreadcrumbsLink,
   },
 })<BreadcrumbsItemProps>(({children, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil(displayName, breadcrumbsItemStencil, undefined);
   return (
-    <Element {...mergeStyles(elemProps, breadcrumbsItemStencil())}>
+    <Element {...mergeStyles(elemProps, resolved)}>
       {children}
       <SystemIcon
         icon={chevronRightSmallIcon}

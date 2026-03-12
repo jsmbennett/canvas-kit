@@ -1,5 +1,9 @@
 import * as React from 'react';
-import {accessibleHide, createComponent} from '@workday/canvas-kit-react/common';
+import {
+  accessibleHide,
+  createComponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {system} from '@workday/canvas-tokens-web';
@@ -31,8 +35,10 @@ export const paginationAdditionalDetailsStencil = createStencil({
   },
 });
 
+const displayName = 'Pagination.AdditionalDetails';
+
 export const AdditionalDetails = createComponent('div')({
-  displayName: 'Pagination.AdditionalDetails',
+  displayName,
   Component(
     {children, shouldAnnounceToScreenReader, ...elemProps}: AdditionalDetailsProps,
     ref,
@@ -40,15 +46,12 @@ export const AdditionalDetails = createComponent('div')({
   ) {
     const model = React.useContext(PaginationContext);
     const liveRegionProps = useLiveRegion({shouldAnnounceToScreenReader});
+    const resolved = useResolvedStencil(displayName, paginationAdditionalDetailsStencil, {
+      shouldHideDetails: elemProps.shouldHideDetails,
+    });
 
     return (
-      <Element
-        ref={ref}
-        {...mergeStyles(
-          {...liveRegionProps, ...elemProps},
-          paginationAdditionalDetailsStencil({shouldHideDetails: elemProps.shouldHideDetails})
-        )}
-      >
+      <Element ref={ref} {...mergeStyles({...liveRegionProps, ...elemProps}, resolved)}>
         {typeof children === 'function' ? children(model) : children}
       </Element>
     );

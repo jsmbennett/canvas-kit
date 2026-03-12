@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 
 import {handleCsProp, createStencil, CSProps} from '@workday/canvas-kit-styling';
 
@@ -12,9 +12,12 @@ export const avatarImageStencil = createStencil({
   },
 });
 
+const displayName = 'AvatarImage';
+
 export const AvatarImage = createComponent('img')({
-  displayName: 'AvatarImage',
+  displayName,
   Component: ({...elemProps}: AvatarImageProps, ref, Element) => {
-    return <Element ref={ref} {...handleCsProp(elemProps, avatarImageStencil())} />;
+    const resolved = useResolvedStencil(displayName, avatarImageStencil, undefined);
+    return <Element ref={ref} {...handleCsProp(elemProps, resolved)} />;
   },
 });

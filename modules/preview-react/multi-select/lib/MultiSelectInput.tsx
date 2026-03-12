@@ -8,6 +8,7 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {
   createStencil,
@@ -190,7 +191,10 @@ export interface MultiSelectInputProps
   error?: ErrorType;
 }
 
+const multiSelectInputDisplayName = 'MultiSelect.Input';
+
 export const MultiSelectInput = createSubcomponent(TextInput)({
+  displayName: multiSelectInputDisplayName,
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
 })<MultiSelectInputProps>(
@@ -208,8 +212,11 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
     },
     Element
   ) => {
+    const resolved = useResolvedStencil(multiSelectInputDisplayName, multiSelectInputStencil, {
+      error,
+    });
     return (
-      <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({error}))}>
+      <div {...handleCsProp({className, cs, style}, resolved)}>
         <InputGroup>
           <InputGroup.Input data-part="form-input" {...formInputProps} />
           <InputGroup.Input
@@ -231,7 +238,10 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
   }
 );
 
+const multiSelectSearchInputDisplayName = 'MultiSelect.SearchInput';
+
 export const MultiSelectSearchInput = createSubcomponent(TextInput)({
+  displayName: multiSelectSearchInputDisplayName,
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
 })<MultiSelectInputProps>(
@@ -250,8 +260,13 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
     },
     Element
   ) => {
+    const resolved = useResolvedStencil(
+      multiSelectSearchInputDisplayName,
+      multiSelectInputStencil,
+      {}
+    );
     return (
-      <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({}))}>
+      <div {...handleCsProp({className, cs, style}, resolved)}>
         <InputGroup>
           <InputGroup.InnerStart pointerEvents="none" width={system.space.x8}>
             <SystemIcon icon={searchIcon} size={system.space.x4} />

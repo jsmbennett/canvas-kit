@@ -1,4 +1,8 @@
-import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  createElemPropsHook,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {useMenuModel, menuListStencil} from '@workday/canvas-kit-react/menu';
 import {ListBox, ListBoxProps} from '@workday/canvas-kit-react/collection';
 import {system} from '@workday/canvas-tokens-web';
@@ -26,16 +30,22 @@ const comboboxMenuListStencil = createStencil({
   extends: menuListStencil,
 });
 
+const displayName = 'ComboboxMenuList';
+
 export const ComboboxMenuList = createSubcomponent('ul')({
+  displayName,
   modelHook: useComboboxModel,
   elemPropsHook: useComboboxMenuList,
 })<ComboboxMenuListProps>(({children, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil(displayName, comboboxMenuListStencil, {
+    orientation: model.state.orientation,
+  });
   return (
     <ListBox
       as={Element}
       model={model}
       marginY={cssVar(system.space.x2)}
-      {...handleCsProp(elemProps, comboboxMenuListStencil({orientation: model.state.orientation}))}
+      {...handleCsProp(elemProps, resolved)}
     >
       {children}
     </ListBox>

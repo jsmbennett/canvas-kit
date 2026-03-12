@@ -1,5 +1,11 @@
 import * as React from 'react';
-import {createComponent, ErrorType, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  ErrorType,
+  focusRing,
+  useUniqueId,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {calc, cssVar, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '../../layout';
@@ -42,11 +48,18 @@ const switchContainerStencil = createStencil({
   },
 });
 
+const switchContainerDisplayName = 'SwitchContainer';
+
 const SwitchContainer = createComponent('div')({
-  displayName: 'SwitchContainer',
+  displayName: switchContainerDisplayName,
   Component: ({children, ...elemProps}, ref, Element) => {
+    const resolved = useResolvedStencil(
+      switchContainerDisplayName,
+      switchContainerStencil,
+      undefined
+    );
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, switchContainerStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );
@@ -115,10 +128,13 @@ const switchInputStencil = createStencil({
   },
 });
 
+const switchInputDisplayName = 'SwitchInput';
+
 const SwitchInput = createComponent('input')<SwitchProps>({
-  displayName: 'SwitchInput',
+  displayName: switchInputDisplayName,
   Component: ({error, ...elemProps}, ref, Element) => {
-    return <Element ref={ref} {...mergeStyles(elemProps, switchInputStencil({error}))} />;
+    const resolved = useResolvedStencil(switchInputDisplayName, switchInputStencil, {error});
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });
 
@@ -138,11 +154,18 @@ const switchBackgroundStencil = createStencil({
   },
 });
 
+const switchBackgroundDisplayName = 'SwitchBackground';
+
 const SwitchBackground = createComponent('div')({
-  displayName: 'SwitchBackground',
+  displayName: switchBackgroundDisplayName,
   Component: ({children, ...elemProps}, ref, Element) => {
+    const resolved = useResolvedStencil(
+      switchBackgroundDisplayName,
+      switchBackgroundStencil,
+      undefined
+    );
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, switchBackgroundStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );
@@ -172,10 +195,13 @@ const switchCircleStencil = createStencil({
   },
 });
 
+const switchCircleDisplayName = 'SwitchCircle';
+
 const SwitchCircle = createComponent('div')<Pick<SwitchProps, 'checked'>>({
-  displayName: 'SwitchCircle',
+  displayName: switchCircleDisplayName,
   Component: ({checked, ...elemProps}, ref, Element) => {
-    return <Element ref={ref} {...mergeStyles(elemProps, switchCircleStencil({checked}))} />;
+    const resolved = useResolvedStencil(switchCircleDisplayName, switchCircleStencil, {checked});
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });
 

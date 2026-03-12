@@ -1,6 +1,11 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps, accessibleHide} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  accessibleHide,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -70,27 +75,21 @@ export const formFieldLabelStencil = createStencil({
   },
 });
 
+const displayName = 'FormField.Label';
+
 export const FormFieldLabel = createSubcomponent('label')({
-  displayName: 'FormField.Label',
+  displayName,
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
 })<FormFieldLabelProps>(
   ({children, typeLevel, variant, isHidden, ...elemProps}, Element, model) => {
-    return (
-      <Element
-        {...mergeStyles(
-          elemProps,
-          formFieldLabelStencil({
-            typeLevel,
-            variant,
-            isHidden: isHidden ? 'true' : undefined,
-            isRequired: model.state.isRequired as any,
-            orientation: model.state.orientation,
-          })
-        )}
-      >
-        {children}
-      </Element>
-    );
+    const resolved = useResolvedStencil(displayName, formFieldLabelStencil, {
+      typeLevel,
+      variant,
+      isHidden: isHidden ? 'true' : undefined,
+      isRequired: model.state.isRequired as any,
+      orientation: model.state.orientation,
+    });
+    return <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>;
   }
 );

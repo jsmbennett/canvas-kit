@@ -3,7 +3,12 @@ import * as React from 'react';
 import {ButtonLabelIcon} from '../lib/parts/ButtonLabelIcon';
 import {ButtonLabel} from '../lib/parts/ButtonLabel';
 
-import {createComponent, GrowthBehavior, focusRing} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  GrowthBehavior,
+  focusRing,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, px2rem, createVars, calc} from '@workday/canvas-kit-styling';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {base, brand, system} from '@workday/canvas-tokens-web';
@@ -391,8 +396,10 @@ export const buttonStencil = createStencil({
  * The base button which which is the foundation of all Button variants (`PrimaryButton`,
  * `SecondaryButton`, `TertiaryButton`, `DeleteButton`, `ToolbarIconButton` and `ToolbarDropdownButton`).
  */
+const displayName = 'BaseButton';
+
 export const BaseButton = createComponent('button')({
-  displayName: 'BaseButton',
+  displayName,
   Component: (
     {
       children,
@@ -407,12 +414,13 @@ export const BaseButton = createComponent('button')({
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil(displayName, buttonStencil, {size, iconPosition, grow});
     return (
       <Element
         ref={ref}
         type="button"
         {...mergeStyles(elemProps, [
-          buttonStencil({size, iconPosition, grow}),
+          resolved,
           buttonColorPropVars.default(colors?.default || {}),
           buttonColorPropVars.focus(colors?.focus || {}),
           buttonColorPropVars.hover(colors?.hover || {}),

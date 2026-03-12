@@ -1,4 +1,8 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {chevronUpIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useExpandableIcon} from './hooks/useExpandableIcon';
@@ -75,18 +79,22 @@ export const expandableIconStencil = createStencil({
   ],
 });
 
+const displayName = 'Expandable.Icon';
+
 export const ExpandableIcon = createSubcomponent('span')({
+  displayName,
   modelHook: useExpandableModel,
   elemPropsHook: useExpandableIcon,
 })<ExpandableIconProps>(({icon, visible, iconPosition = 'start', ...elementProps}, Element) => {
+  const resolved = useResolvedStencil(displayName, expandableIconStencil, {
+    position: iconPosition,
+    isExpanded: visible,
+  });
   return (
     <SystemIcon
       as={Element}
       icon={icon || chevronUpIcon}
-      {...mergeStyles(
-        elementProps,
-        expandableIconStencil({position: iconPosition, isExpanded: visible})
-      )}
+      {...mergeStyles(elementProps, resolved)}
     />
   );
 });

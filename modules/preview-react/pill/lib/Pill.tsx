@@ -1,5 +1,5 @@
 import {buttonStencil} from '@workday/canvas-kit-react/button';
-import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
+import {createContainer, focusRing, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {px2rem, createStencil, cssVar} from '@workday/canvas-kit-styling';
 
@@ -191,8 +191,10 @@ export const pillStencil = createStencil({
  * </Pill>
  * ```
  */
+const displayName = 'Pill';
+
 export const Pill = createContainer('button')({
-  displayName: 'Pill',
+  displayName,
   modelHook: usePillModel,
   subComponents: {
     /**
@@ -260,13 +262,21 @@ export const Pill = createContainer('button')({
 
   const isReadOnly = variant === 'readOnly';
 
+  const resolvedWithVariant = useResolvedStencil(displayName, pillStencil, {
+    maxWidth: maxWidthCSSValue,
+    variant,
+  });
+  const resolvedDefault = useResolvedStencil(displayName, pillStencil, {
+    maxWidth: maxWidthCSSValue,
+  });
+
   return variant?.match(/^(readOnly|removable)$/) ? (
     <Box
       as={Element !== 'button' ? Element : 'span'}
       id={isReadOnly ? model.state.id : undefined}
       {...mergeStyles(elemProps, [
         model.state.disabled ? 'disabled' : undefined,
-        pillStencil({maxWidth: maxWidthCSSValue, variant}),
+        resolvedWithVariant,
       ])}
     >
       {isReadOnly ? <PillLabel>{children}</PillLabel> : children}
@@ -274,10 +284,7 @@ export const Pill = createContainer('button')({
   ) : (
     <Element
       disabled={model.state.disabled}
-      {...mergeStyles(elemProps, [
-        model.state.disabled ? 'disabled' : undefined,
-        pillStencil({maxWidth: maxWidthCSSValue}),
-      ])}
+      {...mergeStyles(elemProps, [model.state.disabled ? 'disabled' : undefined, resolvedDefault])}
     >
       {children}
     </Element>

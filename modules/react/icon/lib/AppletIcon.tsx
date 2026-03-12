@@ -2,7 +2,7 @@ import {colors, BrandingColor, CanvasColor} from '@workday/canvas-kit-react/toke
 import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Svg, SvgProps, svgStencil} from './Svg';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {handleCsProp, createStencil, px2rem, cssVar} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
@@ -107,8 +107,10 @@ export const appletIconStencil = createStencil({
   }),
 });
 
+const displayName = 'AppletIcon';
+
 export const AppletIcon = createComponent('span')({
-  displayName: 'AppletIcon',
+  displayName,
   Component: ({size, icon, color, ...elemProps}: AppletIconProps, ref, Element) => {
     const colors = color && {
       color200: base[`${color}200` as keyof typeof base],
@@ -117,15 +119,18 @@ export const AppletIcon = createComponent('span')({
       color500: base[`${color}500` as keyof typeof base],
     };
 
+    const resolved = useResolvedStencil(displayName, appletIconStencil, {
+      ...colors,
+      size: size ? px2rem(size) : undefined,
+    });
+
     return (
       <Svg
         src={icon}
         type={CanvasIconTypes.Applet}
         as={Element}
         ref={ref}
-        {...handleCsProp(elemProps, [
-          appletIconStencil({...colors, size: size ? px2rem(size) : undefined}),
-        ])}
+        {...handleCsProp(elemProps, [resolved])}
       />
     );
   },

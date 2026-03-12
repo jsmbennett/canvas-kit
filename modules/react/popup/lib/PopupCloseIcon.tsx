@@ -1,5 +1,9 @@
 import {xIcon} from '@workday/canvas-system-icons-web';
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 
 import {usePopupCloseButton, usePopupModel} from './hooks';
@@ -17,18 +21,21 @@ export const popupCloseIconStencil = createStencil({
   },
 });
 
+const displayName = 'Popup.CloseIcon';
+
 export const PopupCloseIcon = createSubcomponent('button')({
-  displayName: 'Popup.CloseIcon',
+  displayName,
   modelHook: usePopupModel,
   elemPropsHook: usePopupCloseButton,
 })<PopupCloseIconProps>(({children, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil(displayName, popupCloseIconStencil, undefined);
   return (
     <TertiaryButton
       as={Element}
       size="medium"
       icon={xIcon}
       type="button"
-      {...mergeStyles(elemProps, popupCloseIconStencil())}
+      {...mergeStyles(elemProps, resolved)}
     />
   );
 });

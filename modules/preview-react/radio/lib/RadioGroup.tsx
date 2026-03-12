@@ -1,4 +1,9 @@
-import {createContainer, Themeable, ErrorType} from '@workday/canvas-kit-react/common';
+import {
+  createContainer,
+  Themeable,
+  ErrorType,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {useRadioModel} from './hooks/useRadioModel';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {RadioLabel} from './RadioLabel';
@@ -53,8 +58,10 @@ const radioGroupStencil = createStencil({
  * </RadioGroup>
  * ```
  */
+const displayName = 'RadioGroup';
+
 export const RadioGroup = createContainer('div')({
-  displayName: 'RadioGroup',
+  displayName,
   modelHook: useRadioModel,
   subComponents: {
     /**
@@ -85,5 +92,6 @@ export const RadioGroup = createContainer('div')({
     Label: RadioLabel,
   },
 })<RadioGroupProps>(({children, error, theme, ...elemProps}, Element) => {
-  return <Element {...mergeStyles(elemProps, radioGroupStencil({error}))}>{children}</Element>;
+  const resolved = useResolvedStencil(displayName, radioGroupStencil, {error});
+  return <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>;
 });

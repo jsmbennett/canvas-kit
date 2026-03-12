@@ -9,6 +9,7 @@ import {
   createModelHook,
   createContainer,
   useUniqueId,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -93,13 +94,21 @@ export const useMenuGroupHeading = createElemPropsHook(useMenuGroupModel)(model 
   };
 });
 
+const menuGroupHeadingDisplayName = 'Menu.Group.Heading';
+
 const MenuGroupHeading = createSubcomponent('div')({
+  displayName: menuGroupHeadingDisplayName,
   modelHook: useMenuGroupModel,
   elemPropsHook: useMenuGroupHeading,
 })(({children, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil(
+    menuGroupHeadingDisplayName,
+    menuGroupHeadingStencil,
+    undefined
+  );
   return (
     <OverflowTooltip>
-      <Element {...mergeStyles(elemProps, menuGroupHeadingStencil())}>{children}</Element>
+      <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>
     </OverflowTooltip>
   );
 });

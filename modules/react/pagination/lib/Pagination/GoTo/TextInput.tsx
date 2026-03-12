@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {TextInput, TextInputProps} from '@workday/canvas-kit-react/text-input';
 
 import {GoToContext} from './useGoToForm';
@@ -18,17 +18,20 @@ export const paginationGoToTextInputStencil = createStencil({
   },
 });
 
+const displayName = 'Pagination.GoToTextInput';
+
 export const GoToTextInput = createComponent('input')({
-  displayName: 'Pagination.GoToTextInput',
+  displayName,
   Component(elemProps: GoToTextInputProps, ref, Element) {
     const {inputProps} = React.useContext(GoToContext);
+    const resolved = useResolvedStencil(displayName, paginationGoToTextInputStencil, undefined);
 
     return (
       <TextInput
         ref={ref}
         as={Element}
         size={1}
-        {...handleCsProp({...inputProps, ...elemProps}, paginationGoToTextInputStencil())}
+        {...handleCsProp({...inputProps, ...elemProps}, resolved)}
       />
     );
   },

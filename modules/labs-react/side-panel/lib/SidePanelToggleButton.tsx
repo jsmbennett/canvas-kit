@@ -3,6 +3,7 @@ import {
   createElemPropsHook,
   createSubcomponent,
   ExtractProps,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
@@ -130,8 +131,10 @@ export const useSidePanelToggleButtonElemProps = createElemPropsHook(useSidePane
   }
 );
 
+const displayName = 'SidePanel.ToggleButton';
+
 export const SidePanelToggleButton = createSubcomponent('button')({
-  displayName: 'SidePanel.ToggleButton',
+  displayName,
   modelHook: useSidePanelModel,
   elemPropsHook: useSidePanelToggleButtonElemProps,
 })(
@@ -147,6 +150,10 @@ export const SidePanelToggleButton = createSubcomponent('button')({
     Element,
     model
   ) => {
+    const resolved = useResolvedStencil(displayName, sidePanelToggleButtonStencil, {
+      state: model.state.transitionState,
+      origin: model.state.origin,
+    });
     return (
       <Tooltip
         type="muted"
@@ -159,13 +166,7 @@ export const SidePanelToggleButton = createSubcomponent('button')({
           icon={icon}
           as={Element}
           variant={variant}
-          {...handleCsProp(
-            elemProps,
-            sidePanelToggleButtonStencil({
-              state: model.state.transitionState,
-              origin: model.state.origin,
-            })
-          )}
+          {...handleCsProp(elemProps, resolved)}
           onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
             elemProps.onClick?.(event);
             model.events.handleAnimationStart();

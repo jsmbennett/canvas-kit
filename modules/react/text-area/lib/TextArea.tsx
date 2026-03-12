@@ -1,4 +1,9 @@
-import {createComponent, GrowthBehavior, ErrorType} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  GrowthBehavior,
+  ErrorType,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {createStencil, calc, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {textInputStencil} from '@workday/canvas-kit-react/text-input';
@@ -54,13 +59,18 @@ export const textAreaStencil = createStencil({
   },
 });
 
+const displayName = 'TextArea';
+
 export const TextArea = createComponent('textarea')({
-  displayName: 'TextArea',
+  displayName,
   Component: (
     {resize = TextAreaResizeDirection.Both, grow, error, ...elemProps}: TextAreaProps,
     ref,
     Element
-  ) => <Element ref={ref} {...handleCsProp(elemProps, textAreaStencil({error, grow, resize}))} />,
+  ) => {
+    const resolved = useResolvedStencil(displayName, textAreaStencil, {error, grow, resize});
+    return <Element ref={ref} {...handleCsProp(elemProps, resolved)} />;
+  },
   subComponents: {
     ErrorType,
     ResizeDirection: TextAreaResizeDirection,

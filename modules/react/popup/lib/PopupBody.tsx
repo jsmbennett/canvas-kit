@@ -1,4 +1,8 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {Card} from '@workday/canvas-kit-react/card';
 import {usePopupModel} from './hooks';
 import {createStencil} from '@workday/canvas-kit-styling';
@@ -12,9 +16,12 @@ export const popupBodyStencil = createStencil({
   },
 });
 
+const displayName = 'Popup.Body';
+
 export const PopupBody = createSubcomponent('div')({
-  displayName: 'Popup.Body',
+  displayName,
   modelHook: usePopupModel,
 })<ExtractProps<typeof Card.Body>>(elemProps => {
-  return <Card.Body {...mergeStyles(elemProps, popupBodyStencil())} />;
+  const resolved = useResolvedStencil(displayName, popupBodyStencil, undefined);
+  return <Card.Body {...mergeStyles(elemProps, resolved)} />;
 });

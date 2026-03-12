@@ -1,5 +1,5 @@
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
@@ -105,13 +105,21 @@ const secondaryButtonStencil = createStencil({
   },
 });
 
+const displayName = 'SecondaryButton';
+
 export const SecondaryButton = createComponent('button')({
-  displayName: 'SecondaryButton',
+  displayName,
   Component: (
     {children, variant, size, iconPosition, grow, cs, ...elemProps}: SecondaryButtonProps,
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil(displayName, secondaryButtonStencil, {
+      variant,
+      iconPosition,
+      grow,
+      size,
+    });
     return (
       <Button
         as={Element}
@@ -119,7 +127,7 @@ export const SecondaryButton = createComponent('button')({
         iconPosition={iconPosition}
         size={size}
         grow={grow}
-        cs={[secondaryButtonStencil({variant, iconPosition, grow, size}), cs]}
+        cs={[resolved, cs]}
         {...elemProps}
       >
         {children}

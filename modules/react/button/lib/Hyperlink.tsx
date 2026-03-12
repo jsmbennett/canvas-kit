@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {createStencil, CSProps, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system, brand} from '@workday/canvas-tokens-web';
 
@@ -84,11 +84,16 @@ export const hyperlinkStencil = createStencil({
  * `Hyperlink`s should be used when you want to navigate away from the current page or to an anchor
  * on the current page.
  */
+const displayName = 'Hyperlink';
+
 export const Hyperlink = createComponent('a')({
-  displayName: 'Hyperlink',
-  Component: ({children, variant, ...elemProps}: HyperlinkProps, ref, Element) => (
-    <Element ref={ref} {...handleCsProp(elemProps, hyperlinkStencil({variant}))}>
-      {children}
-    </Element>
-  ),
+  displayName,
+  Component: ({children, variant, ...elemProps}: HyperlinkProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, hyperlinkStencil, {variant});
+    return (
+      <Element ref={ref} {...handleCsProp(elemProps, resolved)}>
+        {children}
+      </Element>
+    );
+  },
 });

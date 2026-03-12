@@ -2,7 +2,7 @@ import {brand, system} from '@workday/canvas-tokens-web';
 import {BaseButton, ButtonContainerProps, buttonStencil} from '@workday/canvas-kit-react/button';
 import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 const segmentedControlButtonStencil = createStencil({
@@ -93,19 +93,23 @@ export interface SegmentedControlButtonProps extends ButtonContainerProps {
 /**
  * @deprecated ⚠️ `SegmentedControlButton` in Main has been deprecated and will be removed in a future major version. Please use [`SegmentedControl` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-segmented-control--docs) instead.
  */
+const segmentedControlButtonStencilName = 'SegmentedControlButton';
+
 export const SegmentedControlButton = createComponent('button')({
   displayName: 'Button',
   Component: ({value, icon, toggled, ...props}: SegmentedControlButtonProps, ref, Element) => {
+    const resolved = useResolvedStencil(
+      segmentedControlButtonStencilName,
+      segmentedControlButtonStencil,
+      {segmentedControlButtonSize: props.size || 'medium'}
+    );
     return (
       <BaseButton
         as={Element}
         ref={ref}
         aria-pressed={toggled}
         value={value}
-        {...handleCsProp(
-          props,
-          segmentedControlButtonStencil({segmentedControlButtonSize: props.size || 'medium'})
-        )}
+        {...handleCsProp(props, resolved)}
       >
         <BaseButton.Icon size={props.size || 'large'} icon={icon} />
       </BaseButton>

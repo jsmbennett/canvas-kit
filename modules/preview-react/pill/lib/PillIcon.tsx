@@ -1,4 +1,4 @@
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
@@ -18,15 +18,19 @@ export const pillIconStencil = createStencil({
   },
 });
 
+const displayName = 'Pill.Icon';
+
 export const PillIcon = createSubcomponent('span')({
+  displayName,
   modelHook: usePillModel,
 })<PillIconProps>(({icon, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil(displayName, pillIconStencil, undefined);
   return (
     <SystemIcon
       as={Element}
       role="img"
       icon={icon || plusIcon}
-      {...mergeStyles(elemProps, pillIconStencil())}
+      {...mergeStyles(elemProps, resolved)}
     />
   );
 });

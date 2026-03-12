@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {textStencil} from '@workday/canvas-kit-react/text';
 import {createStencil} from '@workday/canvas-kit-styling';
@@ -25,11 +25,14 @@ export const cardHeadingStencil = createStencil({
   defaultModifiers: {typeLevel: 'body.large'},
 });
 
+const displayName = 'Card.Heading';
+
 export const CardHeading = createComponent('h3')({
-  displayName: 'Card.Heading',
+  displayName,
   Component: ({children, ...elemProps}: CardHeadingProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, cardHeadingStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, cardHeadingStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

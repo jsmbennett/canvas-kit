@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-import {accessibleHide, createComponent} from '@workday/canvas-kit-react/common';
+import {
+  accessibleHide,
+  createComponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp, keyframes} from '@workday/canvas-kit-styling';
 
 import {SkeletonHeader} from './parts/SkeletonHeader';
@@ -52,18 +56,23 @@ export const skeletonStencil = createStencil({
  * `Skeleton` places its children in a container element with `aria-hidden` set to `true` and
  * announces itself using a visually hidden element.
  */
+const displayName = 'Skeleton';
+
 export const Skeleton = createComponent('div')({
-  displayName: 'Skeleton',
+  displayName,
   Component: (
     {children, 'aria-label': loadingAriaLabel = 'Loading', ...elemProps}: SkeletonProps,
     ref,
     Element
-  ) => (
-    <Element ref={ref} {...handleCsProp(elemProps, skeletonStencil())}>
-      <div data-part="skeleton-accessible-hide">{loadingAriaLabel}</div>
-      <div aria-hidden={true}>{children}</div>
-    </Element>
-  ),
+  ) => {
+    const resolved = useResolvedStencil(displayName, skeletonStencil, undefined);
+    return (
+      <Element ref={ref} {...handleCsProp(elemProps, resolved)}>
+        <div data-part="skeleton-accessible-hide">{loadingAriaLabel}</div>
+        <div aria-hidden={true}>{children}</div>
+      </Element>
+    );
+  },
   subComponents: {
     /**
      * `Skeleton.Header` renders a placeholder for header content such as headings.

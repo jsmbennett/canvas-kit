@@ -1,4 +1,4 @@
-import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
+import {ErrorType, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {createStencil, calc, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
@@ -59,14 +59,27 @@ const indeterminateBoxStencil = createStencil({
   },
 });
 
+const displayName = 'CheckboxCheck';
+const indeterminateBoxDisplayName = 'CheckboxCheck.IndeterminateBox';
+
 export const CheckboxCheck = createComponent('div')({
-  displayName: 'CheckboxCheck',
+  displayName,
   Component: ({checked, error, indeterminate, variant}: CheckboxCheckProps) => {
+    const resolved = useResolvedStencil(displayName, checkboxCheckStencil, {
+      checked,
+      indeterminate,
+      variant,
+    });
+    const indeterminateResolved = useResolvedStencil(
+      indeterminateBoxDisplayName,
+      indeterminateBoxStencil,
+      undefined
+    );
     return (
       <CheckBackground error={error}>
-        <div {...checkboxCheckStencil({checked, indeterminate, variant})}>
+        <div {...resolved}>
           {indeterminate ? (
-            <div {...indeterminateBoxStencil()} />
+            <div {...indeterminateResolved} />
           ) : (
             checked && <SystemIcon icon={checkSmallIcon} />
           )}

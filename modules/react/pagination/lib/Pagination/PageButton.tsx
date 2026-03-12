@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {brand, system} from '@workday/canvas-tokens-web';
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {PaginationContext} from './usePaginationModel';
 
@@ -52,8 +52,10 @@ export interface PageButtonProps {
   children?: React.ReactNode;
 }
 
+const displayName = 'Pagination.PageButton';
+
 export const PageButton = createComponent('button')({
-  displayName: 'Pagination.PageButton',
+  displayName,
   Component({pageNumber, children, ...elemProps}: PageButtonProps) {
     const model = React.useContext(PaginationContext);
     const isCurrentPage = pageNumber === model.state.currentPage;
@@ -63,13 +65,17 @@ export const PageButton = createComponent('button')({
       model.events.goTo(pageNumber);
     };
 
+    const resolved = useResolvedStencil(displayName, paginationPageButtonStencil, {
+      toggled: isCurrentPage,
+    });
+
     return (
       <BaseButton
         aria-current={isCurrentPage ? 'page' : undefined}
         aria-pressed={undefined}
         size="small"
         onClick={handleClick}
-        {...handleCsProp(elemProps, paginationPageButtonStencil({toggled: isCurrentPage}))}
+        {...handleCsProp(elemProps, resolved)}
       >
         {children || pageNumber}
       </BaseButton>

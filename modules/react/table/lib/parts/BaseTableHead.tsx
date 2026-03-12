@@ -1,5 +1,5 @@
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {calc, createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -18,11 +18,14 @@ export const baseTableHeadStencil = createStencil({
   },
 });
 
+const displayName = 'Table.Head';
+
 export const BaseTableHead = createComponent('thead')({
-  displayName: 'Table.Head',
+  displayName,
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, baseTableHeadStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, baseTableHeadStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

@@ -1,7 +1,7 @@
 import {brand, system} from '@workday/canvas-tokens-web';
 import {calc, createStencil, handleCsProp, px2rem, cssVar} from '@workday/canvas-kit-styling';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {focusRing, createComponent} from '@workday/canvas-kit-react/common';
+import {focusRing, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 import {BaseButton, buttonColorPropVars, buttonStencil} from './BaseButton';
@@ -94,8 +94,10 @@ export const toolbarDropdownButtonStencil = createStencil({
   },
 });
 
+const displayName = 'ToolbarDropdownButton';
+
 export const ToolbarDropdownButton = createComponent('button')({
-  displayName: 'ToolbarDropdownButton',
+  displayName,
   Component: (
     {
       icon,
@@ -107,16 +109,12 @@ export const ToolbarDropdownButton = createComponent('button')({
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil(displayName, toolbarDropdownButtonStencil, {
+      shouldMirrorIcon,
+      shouldMirrorIconInRTL,
+    });
     return (
-      <BaseButton
-        ref={ref}
-        as={Element}
-        size="small"
-        {...handleCsProp(
-          elemProps,
-          toolbarDropdownButtonStencil({shouldMirrorIcon, shouldMirrorIconInRTL})
-        )}
-      >
+      <BaseButton ref={ref} as={Element} size="small" {...handleCsProp(elemProps, resolved)}>
         {icon ? (
           <BaseButton.Icon
             className="wdc-toolbar-dropdown-btn-custom-icon"

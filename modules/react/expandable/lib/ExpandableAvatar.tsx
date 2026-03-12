@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-preview-react/avatar';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -12,17 +12,20 @@ export const expandableAvatarStencil = createStencil({
   },
 });
 
+const displayName = 'Expandable.Avatar';
+
 // When the component is created, it needs to be a button element to match AvatarProps.
 // Once Avatar becomes a `createComponent` we can default the element type to a `div`
 // and the types should be properly extracted
 // Setting isDecorative prop to true by default since avatars in expandable headers are typically decorative
 export const ExpandableAvatar = createComponent('div')({
-  displayName: 'Expandable.Avatar',
+  displayName,
   Component: (
     {name = '', isDecorative = true, ...elemProps}: ExpandableAvatarProps,
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil(displayName, expandableAvatarStencil, undefined);
     return (
       <Avatar
         as={Element}
@@ -30,7 +33,7 @@ export const ExpandableAvatar = createComponent('div')({
         isDecorative={isDecorative}
         ref={ref}
         size="extraSmall"
-        {...mergeStyles(elemProps, expandableAvatarStencil())}
+        {...mergeStyles(elemProps, resolved)}
       />
     );
   },

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createContainer, ExtractProps, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
 
 import {ToastCloseIcon} from './ToastCloseIcon';
@@ -75,8 +75,10 @@ const toastStencil = createStencil({
  * );
  *```
  */
+const displayName = 'Toast';
+
 export const Toast = createContainer('div')({
-  displayName: 'Toast',
+  displayName,
   modelHook: useToastModel,
   subComponents: {
     /**
@@ -109,10 +111,11 @@ export const Toast = createContainer('div')({
     Link: ToastLink,
   },
 })<ToastProps>(({children, ...elemProps}, _, model) => {
+  const resolved = useResolvedStencil(displayName, toastStencil, undefined);
   return (
     <Popup.Card
       {...getAriaAttributes(model.state.mode, model.state.id)}
-      {...mergeStyles(elemProps, toastStencil())}
+      {...mergeStyles(elemProps, resolved)}
     >
       {children}
     </Popup.Card>

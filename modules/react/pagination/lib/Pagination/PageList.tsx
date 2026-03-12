@@ -3,7 +3,7 @@ import * as React from 'react';
 import {PaginationModel} from './types';
 import {ListItem, ListItemProps} from './common/List';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {PaginationContext} from './usePaginationModel';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -23,12 +23,15 @@ export const paginationPageListStencil = createStencil({
   },
 });
 
+const pageListDisplayName = 'Pagination.PageList';
+
 export const PageList = createComponent('ol')({
-  displayName: 'Pagination.PageList',
+  displayName: pageListDisplayName,
   Component({children, ...elemProps}: PageListProps, ref, Element) {
     const model = React.useContext(PaginationContext);
+    const resolved = useResolvedStencil(pageListDisplayName, paginationPageListStencil, undefined);
     return (
-      <Element ref={ref} role="list" {...mergeStyles(elemProps, paginationPageListStencil())}>
+      <Element ref={ref} role="list" {...mergeStyles(elemProps, resolved)}>
         {typeof children === 'function' ? children(model) : children}
       </Element>
     );

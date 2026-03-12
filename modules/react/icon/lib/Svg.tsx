@@ -1,6 +1,6 @@
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {validateIconType} from './utils';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
@@ -70,13 +70,17 @@ export const transformColorNameToToken = (color?: string) => {
   return color;
 };
 
+const displayName = 'Svg';
+
 export const Svg = createComponent('span')({
-  displayName: 'Svg',
+  displayName,
   Component: (
     {shouldMirror, shouldMirrorInRTL, src, type, ...elemProps}: SvgProps,
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil(displayName, svgStencil, {shouldMirror, shouldMirrorInRTL});
+
     try {
       validateIconType(src, type);
     } catch (e) {
@@ -88,7 +92,7 @@ export const Svg = createComponent('span')({
       <Element
         ref={ref}
         dangerouslySetInnerHTML={{__html: src.svg}}
-        {...mergeStyles(elemProps, svgStencil({shouldMirror, shouldMirrorInRTL}))}
+        {...mergeStyles(elemProps, resolved)}
       />
     );
   },

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -44,6 +44,8 @@ export const cardStencil = createStencil({
   },
 });
 
+const displayName = 'Card';
+
 /**
  * `Card` is a container component that holds a {@link CardBody Card.Body} and an optional
  * {@link CardHeading Card.Heading}. `Card` wraps a non-semantic `div` element. The element can be
@@ -57,10 +59,11 @@ export const cardStencil = createStencil({
  * common `<ul>` can be a useful way to elevate the accessibility of your design.
  */
 export const Card = createComponent('div')({
-  displayName: 'Card',
+  displayName,
   Component: ({children, variant, ...elemProps}: CardProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, cardStencil, {variant});
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, cardStencil({variant}))}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

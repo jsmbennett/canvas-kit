@@ -6,6 +6,7 @@ import {
   createElemPropsHook,
   createSubcomponent,
   subModelHook,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
@@ -56,13 +57,16 @@ export const useBreadcrumbsOverflowButton = composeHooks(
   subModelHook((m: ReturnType<typeof useBreadcrumbsModel>) => m.menu, useMenuTarget)
 );
 
+const displayName = 'Breadcrumbs.OverflowButton';
+
 export const BreadcrumbsOverflowButton = createSubcomponent('button')({
-  displayName: 'Breadcrumbs.OverflowButton',
+  displayName,
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsOverflowButton,
 })<BreadcrumbsOverflowButtonProps>(({style, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil(displayName, breadcrumbsOverflowButtonStencil, undefined);
   return (
-    <li {...breadcrumbsOverflowButtonStencil()} {...style}>
+    <li {...resolved} {...style}>
       <TertiaryButton
         as={Element}
         icon={relatedActionsIcon}

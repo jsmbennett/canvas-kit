@@ -1,5 +1,5 @@
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
@@ -56,13 +56,16 @@ const deleteButtonStencil = createStencil({
  * have significant consequences. They commonly appear in confirmation dialogs as the final
  * confirmation before being deleted.
  */
+const displayName = 'DeleteButton';
+
 export const DeleteButton = createComponent('button')({
-  displayName: 'DeleteButton',
+  displayName,
   Component: (
     {children, size, iconPosition, grow, cs, ...elemProps}: DeleteButtonProps,
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil(displayName, deleteButtonStencil, {size, iconPosition});
     return (
       <Button
         as={Element}
@@ -70,7 +73,7 @@ export const DeleteButton = createComponent('button')({
         size={size}
         grow={grow}
         iconPosition={iconPosition}
-        cs={[deleteButtonStencil({size, iconPosition}), cs]}
+        cs={[resolved, cs]}
         {...elemProps}
       >
         {children}

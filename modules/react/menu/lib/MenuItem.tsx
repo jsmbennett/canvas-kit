@@ -9,6 +9,7 @@ import {
   createElemPropsHook,
   useLocalRef,
   createComponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
@@ -154,15 +155,14 @@ const MenuItemText = createComponent('span')({
   },
 });
 
+const styledMenuItemDisplayName = 'MenuItem';
+
 export const StyledMenuItem = createComponent('button')({
-  displayName: 'MenuItem',
+  displayName: styledMenuItemDisplayName,
   Component: ({children, isDisabled, ...elemProps}: MenuItemProps, ref, Element) => {
+    const resolved = useResolvedStencil(styledMenuItemDisplayName, menuItemStencil, {});
     return (
-      <Element
-        ref={ref}
-        aria-disabled={isDisabled}
-        {...mergeStyles(elemProps, menuItemStencil({}))}
-      >
+      <Element ref={ref} aria-disabled={isDisabled} {...mergeStyles(elemProps, resolved)}>
         {typeof children === 'string' ? <MenuItemText>{children}</MenuItemText> : children}
       </Element>
     );

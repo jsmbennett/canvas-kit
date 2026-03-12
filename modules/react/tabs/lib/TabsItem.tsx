@@ -10,6 +10,7 @@ import {
   createSubcomponent,
   useModalityType,
   createComponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
@@ -158,11 +159,14 @@ const tabItemStencil = createStencil({
   },
 });
 
+const displayName = 'StyledTabItem';
+
 export const StyledTabItem = createComponent('button')<TabsItemProps>({
-  displayName: 'StyledTabItem',
+  displayName,
   Component: ({children, ...elemProps}, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, tabItemStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tabItemStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

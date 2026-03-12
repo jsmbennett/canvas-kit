@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {Property} from 'csstype';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -98,11 +98,13 @@ export const avatarStencil = createStencil({
   },
 });
 
+const displayName = 'Avatar';
+
 /**
  * JSDoc for Avatar. Will be part of the Component API docs
  */
 export const Avatar = createComponent('div')({
-  displayName: 'Avatar',
+  displayName,
 
   Component: (
     {
@@ -126,12 +128,15 @@ export const Avatar = createComponent('div')({
       }
     };
 
+    const resolved = useResolvedStencil(displayName, avatarStencil, {
+      variant,
+      size,
+      imageLoaded,
+      objectFit,
+    });
+
     return (
-      <BaseAvatar
-        as={Element}
-        ref={ref}
-        {...handleCsProp(elemProps, avatarStencil({variant, size, imageLoaded, objectFit}))}
-      >
+      <BaseAvatar as={Element} ref={ref} {...handleCsProp(elemProps, resolved)}>
         {url && (
           <>
             <BaseAvatar.Image

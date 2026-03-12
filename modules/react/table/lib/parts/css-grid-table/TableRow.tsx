@@ -1,6 +1,6 @@
 import React from 'react';
 import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {createStencil, createVars} from '@workday/canvas-kit-styling';
 
 const tableRowChildrenVars = createVars('cellNumber');
@@ -14,8 +14,10 @@ const tableRowStencil = createStencil({
   },
 });
 
+const displayName = 'Table.Row';
+
 export const TableRow = createComponent('tr')({
-  displayName: 'Table.Row',
+  displayName,
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     // This calculates the amount of valid React children cells within the row and will update the gridTemplateColumns style property with that amount of cells within the row
     const validChildren = (children: React.ReactNode) => {
@@ -27,14 +29,12 @@ export const TableRow = createComponent('tr')({
      * This is the calculated amount of valid React children
      */
     const childrenArray = validChildren(children).length;
+    const resolved = useResolvedStencil(displayName, tableRowStencil, undefined);
 
     return (
       <Element
         ref={ref}
-        {...mergeStyles(elemProps, [
-          tableRowStencil(),
-          {[tableRowChildrenVars.cellNumber]: childrenArray},
-        ])}
+        {...mergeStyles(elemProps, [resolved, {[tableRowChildrenVars.cellNumber]: childrenArray}])}
       >
         {children}
       </Element>

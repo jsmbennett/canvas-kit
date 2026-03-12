@@ -3,6 +3,7 @@ import {
   createElemPropsHook,
   ExtractProps,
   composeHooks,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
 import {useReturnFocus, useFocusRedirect} from '@workday/canvas-kit-react/popup';
@@ -50,17 +51,22 @@ export const menuListStencil = createStencil({
   },
 });
 
+const displayName = 'Menu.List';
+
 export const MenuList = createSubcomponent('div')({
-  displayName: 'Menu.List',
+  displayName,
   modelHook: useMenuModel,
   elemPropsHook: useMenuList,
 })<MenuListProps>(({children, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil(displayName, menuListStencil, {
+    orientation: model.state.orientation,
+  });
   return (
     <ListBox
       as={Element}
       model={model}
       marginY={cssVar(system.space.x2)}
-      {...handleCsProp(elemProps, menuListStencil({orientation: model.state.orientation}))}
+      {...handleCsProp(elemProps, resolved)}
     >
       {children}
     </ListBox>

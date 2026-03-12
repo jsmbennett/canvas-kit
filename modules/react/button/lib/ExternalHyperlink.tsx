@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {extLinkIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {HyperlinkProps, hyperlinkStencil} from './Hyperlink';
@@ -41,26 +41,26 @@ export const externalHyperlinkStencil = createStencil({
  * `ExternalHyperlink`s also have an `inverse` variant. Use this variant when you need to place the
  * link on a dark or colorful background such as `blueberry400`.
  */
+const displayName = 'ExternalHyperlink';
+
 export const ExternalHyperlink = createComponent('a')({
-  displayName: 'ExternalHyperlink',
+  displayName,
   Component: (
     {children, iconLabel, variant, ...elemProps}: ExternalHyperlinkProps,
     ref,
     Element
-  ) => (
-    <Element
-      ref={ref}
-      target="_blank"
-      rel="noreferrer"
-      {...handleCsProp(elemProps, externalHyperlinkStencil({variant}))}
-    >
-      <span data-part="external-hyperlink-children">{children}</span>
-      <SystemIcon
-        icon={extLinkIcon}
-        role="img"
-        aria-label={iconLabel}
-        {...externalHyperlinkStencil.parts.externalHyperlinkIcon}
-      />
-    </Element>
-  ),
+  ) => {
+    const resolved = useResolvedStencil(displayName, externalHyperlinkStencil, {variant});
+    return (
+      <Element ref={ref} target="_blank" rel="noreferrer" {...handleCsProp(elemProps, resolved)}>
+        <span data-part="external-hyperlink-children">{children}</span>
+        <SystemIcon
+          icon={extLinkIcon}
+          role="img"
+          aria-label={iconLabel}
+          {...externalHyperlinkStencil.parts.externalHyperlinkIcon}
+        />
+      </Element>
+    );
+  },
 });

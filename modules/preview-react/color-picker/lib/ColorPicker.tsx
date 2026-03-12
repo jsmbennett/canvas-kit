@@ -1,4 +1,5 @@
 import {checkIcon} from '@workday/canvas-system-icons-web';
+import {useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import * as React from 'react';
@@ -57,6 +58,8 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   resetLabel?: string;
 }
+
+const colorPickerDisplayName = 'ColorPicker';
 
 const defaultColorSet = {
   blueberry600: '#004387',
@@ -187,6 +190,8 @@ export const ColorPicker = ({
     isCustomColor(colorSet, value) ? value : ''
   );
 
+  const resolved = useResolvedStencil(colorPickerDisplayName, colorPickerStencil, undefined);
+
   const onCustomHexChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCustomHexValue(event.target.value);
     setValidHexValue('');
@@ -207,7 +212,7 @@ export const ColorPicker = ({
   };
 
   return (
-    <div {...handleCsProp(elemProps, colorPickerStencil())}>
+    <div {...handleCsProp(elemProps, resolved)}>
       {onColorReset && resetColor && (
         <ResetButton onClick={onColorReset} resetColor={resetColor} label={resetLabel} />
       )}

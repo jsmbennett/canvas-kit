@@ -1,5 +1,5 @@
 import {system} from '@workday/canvas-tokens-web';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {CSProps, createStencil, handleCsProp, keyframes, px2rem} from '@workday/canvas-kit-styling';
 
@@ -62,11 +62,14 @@ export const loadingSparklesStencil = createStencil({
 /**
  * A simple component that displays three horizontal sparkles, to be used when an AI operation is in progress.
  */
+const displayName = 'LoadingSparkles';
+
 export const LoadingSparkles = createComponent('div')({
-  displayName: 'LoadingSparkles',
+  displayName,
   Component: (elemProps: CSProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, loadingSparklesStencil, undefined);
     return (
-      <Element ref={ref} role="status" {...handleCsProp(elemProps, loadingSparklesStencil())}>
+      <Element ref={ref} role="status" {...handleCsProp(elemProps, resolved)}>
         <Sparkle />
         <Sparkle />
         <Sparkle />

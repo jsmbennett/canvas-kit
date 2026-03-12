@@ -6,7 +6,11 @@ import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 import {useSelectInput} from './hooks/useSelectInput';
 import {useSelectModel} from './hooks/useSelectModel';
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {system, brand} from '@workday/canvas-tokens-web';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput, never>, CSProps {
@@ -88,12 +92,16 @@ export const selectInputStencil = createStencil({
   },
 });
 
+const displayName = 'Select.Input';
+
 export const SelectInput = createSubcomponent(TextInput)({
+  displayName,
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(({inputStartIcon, formInputProps, error, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil(displayName, selectInputStencil, {error: error ?? undefined});
   return (
-    <InputGroup data-width="ck-formfield-width" {...selectInputStencil({error: error})}>
+    <InputGroup data-width="ck-formfield-width" {...resolved}>
       {inputStartIcon && model.state.selectedIds.length > 0 && (
         <InputGroup.InnerStart {...selectInputStencil.parts.startIconContainer}>
           <SystemIcon {...selectInputStencil.parts.startIcon} icon={inputStartIcon} />

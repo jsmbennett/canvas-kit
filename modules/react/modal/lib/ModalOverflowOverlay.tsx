@@ -1,4 +1,8 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 
 import {ModalOverlay} from './ModalOverlay';
 import {useModalModel} from './hooks';
@@ -12,9 +16,12 @@ export const modalOverflowOverlayStencil = createStencil({
   },
 });
 
+const displayName = 'Modal.OverflowOverlay';
+
 export const ModalOverflowOverlay = createSubcomponent('div')({
-  displayName: 'Modal.OverflowOverlay',
+  displayName,
   modelHook: useModalModel,
 })<ExtractProps<typeof ModalOverlay, never>>((elemProps, Element) => {
-  return <ModalOverlay as={Element} {...mergeStyles(elemProps, modalOverflowOverlayStencil())} />;
+  const resolved = useResolvedStencil(displayName, modalOverflowOverlayStencil, undefined);
+  return <ModalOverlay as={Element} {...mergeStyles(elemProps, resolved)} />;
 });

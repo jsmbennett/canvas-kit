@@ -1,6 +1,11 @@
 import React from 'react';
 
-import {Themeable, createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {
+  Themeable,
+  createSubcomponent,
+  ExtractProps,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {useRadioModel} from './hooks/useRadioModel';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {RadioInput} from './RadioInput';
@@ -35,8 +40,10 @@ const radioLabelStencil = createStencil({
 
 export const RadioLabelContext = React.createContext({} as RadioLabelContextInterface);
 
+const displayName = 'Radio.Label';
+
 export const RadioLabel = createSubcomponent('label')({
-  displayName: 'Radio.Label',
+  displayName,
   modelHook: useRadioModel,
   subComponents: {
     /**
@@ -67,9 +74,10 @@ export const RadioLabel = createSubcomponent('label')({
     Text: RadioText,
   },
 })<RadioLabelProps>(({children, variant, disabled, value, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil(displayName, radioLabelStencil, {variant});
   return (
     <RadioLabelContext.Provider value={{variant, disabled}}>
-      <Flex as={Element} {...mergeStyles(elemProps, radioLabelStencil({variant}))}>
+      <Flex as={Element} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Flex>
     </RadioLabelContext.Provider>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 
 import {AvatarImage} from './AvatarImage';
 import {AvatarName} from './AvatarName';
@@ -117,13 +117,16 @@ export const baseAvatarStencil = createStencil({
 /**
  * JSDoc for Avatar. Will be part of the Component API docs
  */
+const displayName = 'BaseAvatar';
+
 export const BaseAvatar = createComponent('div')({
-  displayName: 'BaseAvatar',
+  displayName,
   subComponents: {
     Image: AvatarImage,
     Name: AvatarName,
   },
   Component: ({variant, size, ...elemProps}: BaseAvatarProps, ref, Element) => {
-    return <Element ref={ref} {...handleCsProp(elemProps, baseAvatarStencil({variant, size}))} />;
+    const resolved = useResolvedStencil(displayName, baseAvatarStencil, {variant, size});
+    return <Element ref={ref} {...handleCsProp(elemProps, resolved)} />;
   },
 });

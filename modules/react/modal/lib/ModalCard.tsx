@@ -1,4 +1,8 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
 
 import {useModalCard, useModalModel} from './hooks';
@@ -24,10 +28,13 @@ export const modalCardStencil = createStencil({
   },
 });
 
+const displayName = 'Modal.Card';
+
 export const ModalCard = createSubcomponent('div')({
-  displayName: 'Modal.Card',
+  displayName,
   modelHook: useModalModel,
   elemPropsHook: useModalCard,
 })<ModalCardProps>((elemProps, Element) => {
-  return <Popup.Card as={Element} {...mergeStyles(elemProps, modalCardStencil())} />;
+  const resolved = useResolvedStencil(displayName, modalCardStencil, undefined);
+  return <Popup.Card as={Element} {...mergeStyles(elemProps, resolved)} />;
 });

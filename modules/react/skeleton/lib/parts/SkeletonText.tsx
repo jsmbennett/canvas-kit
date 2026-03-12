@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -34,12 +34,15 @@ export const skeletonTextStencil = createStencil({
   }),
 });
 
+const displayName = 'Skeleton.Text';
+
 export const SkeletonText = createComponent('div')({
-  displayName: 'Skeleton.Text',
+  displayName,
   Component: ({backgroundColor, lineCount = 2, ...elemProps}: SkeletonTextProps, ref, Element) => {
     const lines = new Array(lineCount).fill(null);
+    const resolved = useResolvedStencil(displayName, skeletonTextStencil, {backgroundColor});
     return lineCount > 0 ? (
-      <Element ref={ref} {...handleCsProp(elemProps, skeletonTextStencil({backgroundColor}))}>
+      <Element ref={ref} {...handleCsProp(elemProps, resolved)}>
         {lines.map((_value, index) => (
           <div data-part={'skeleton-text-lines'} key={index}></div>
         ))}

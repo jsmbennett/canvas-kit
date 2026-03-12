@@ -4,6 +4,7 @@ import {
   TransformOrigin,
   createComponent,
   getTransformOrigin,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 
 import {
@@ -33,6 +34,8 @@ export interface TooltipContainerProps extends React.HTMLAttributes<HTMLDivEleme
    */
   elementHasFocus?: boolean;
 }
+
+const displayName = 'TooltipContainer';
 
 const defaultTransformOrigin = {
   vertical: 'bottom',
@@ -122,7 +125,7 @@ export const tooltipContainerStencil = createStencil({
 });
 
 export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
-  displayName: 'TooltipContainer',
+  displayName,
   Component: (
     {children, transformOrigin = defaultTransformOrigin, elementHasFocus = false, ...elemProps},
     ref,
@@ -133,15 +136,17 @@ export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
       cssVar(system.space.x2)
     );
 
+    const resolved = useResolvedStencil(displayName, tooltipContainerStencil, {
+      tooltipTransformOriginHorizontal: transformOrigin?.horizontal,
+      tooltipTransformOriginVertical: transformOrigin?.vertical,
+      elementHasFocus,
+    });
+
     return (
       <Element
         ref={ref}
         {...mergeStyles(elemProps, [
-          tooltipContainerStencil({
-            tooltipTransformOriginHorizontal: transformOrigin?.horizontal,
-            tooltipTransformOriginVertical: transformOrigin?.vertical,
-            elementHasFocus,
-          }),
+          resolved,
           tooltipTranslateVars({positionX: translate.x, positionY: translate.y}),
         ])}
       >

@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
@@ -46,13 +50,15 @@ export const expandableTargetStencil = createStencil({
   },
 });
 
+const displayName = 'Expandable.Target';
+
 export const ExpandableTarget = createSubcomponent('button')({
+  displayName,
   modelHook: useExpandableModel,
   elemPropsHook: useExpandableTarget,
 })<ExpandableTargetProps>(({children, headingLevel, ...elementProps}, Element) => {
-  const button = (
-    <Element {...mergeStyles(elementProps, expandableTargetStencil())}>{children}</Element>
-  );
+  const resolved = useResolvedStencil(displayName, expandableTargetStencil, undefined);
+  const button = <Element {...mergeStyles(elementProps, resolved)}>{children}</Element>;
 
   return headingLevel ? (
     <Heading size="small" as={headingLevel} margin="0">

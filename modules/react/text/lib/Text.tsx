@@ -1,5 +1,5 @@
 import {system} from '@workday/canvas-tokens-web';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
 
@@ -122,11 +122,14 @@ export const textStencil = createStencil({
  * );
  * ```
  */
+const displayName = 'Text';
+
 export const Text = createComponent('span')({
-  displayName: 'Text',
+  displayName,
   Component: ({children, typeLevel, variant, ...elemProps}: TextProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, textStencil, {typeLevel, variant});
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, textStencil({typeLevel, variant}))}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

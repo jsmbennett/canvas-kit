@@ -1,5 +1,5 @@
 import {system} from '@workday/canvas-tokens-web';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {
   handleCsProp,
   keyframes,
@@ -92,24 +92,25 @@ export const loadingDotsStencil = createStencil({
   },
 });
 
+const displayName = 'LoadingDots';
+
 /**
  * A simple component that displays three horizontal dots, to be used when some data is loading.
  */
 export const LoadingDots = createComponent('div')({
-  displayName: 'LoadingDots',
+  displayName,
   Component: (
     {loadingDotColor, animationDurationMs, variant, ...elemProps}: LoadingDotsProps,
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil(displayName, loadingDotsStencil, {
+      loadingDotColor,
+      animationDurationMs,
+      variant,
+    });
     return (
-      <Element
-        ref={ref}
-        {...handleCsProp(
-          elemProps,
-          loadingDotsStencil({loadingDotColor, animationDurationMs, variant})
-        )}
-      >
+      <Element ref={ref} {...handleCsProp(elemProps, resolved)}>
         <div data-part="loading-animation-dot" />
         <div data-part="loading-animation-dot" />
         <div data-part="loading-animation-dot" />

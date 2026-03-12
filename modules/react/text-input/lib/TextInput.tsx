@@ -3,6 +3,7 @@ import {
   GrowthBehavior,
   ErrorType,
   forwardFitTokens,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, px2rem, calc, CSProps} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
@@ -116,19 +117,17 @@ export const textInputStencil = createStencil({
   },
 });
 
+const displayName = 'TextInput';
+
 export const TextInput = createComponent('input')({
-  displayName: 'TextInput',
+  displayName,
   Component: ({grow, error, width, ...elemProps}: TextInputProps, ref, Element) => {
-    return (
-      <Element
-        type="text"
-        ref={ref}
-        {...mergeStyles(
-          elemProps,
-          textInputStencil({width: typeof width === 'number' ? px2rem(width) : width, grow, error})
-        )}
-      />
-    );
+    const resolved = useResolvedStencil(displayName, textInputStencil, {
+      width: typeof width === 'number' ? px2rem(width) : width,
+      grow,
+      error,
+    });
+    return <Element type="text" ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
   subComponents: {
     ErrorType,

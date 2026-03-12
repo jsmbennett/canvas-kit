@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-import {createContainer, ExtractProps, focusRing} from '@workday/canvas-kit-react/common';
+import {
+  createContainer,
+  ExtractProps,
+  focusRing,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {useBannerModel} from './hooks';
@@ -113,8 +118,10 @@ export const bannerStencil = createStencil({
  * );
  * ```
  */
+const displayName = 'Banner';
+
 export const Banner = createContainer('button')({
-  displayName: 'Banner',
+  displayName,
   modelHook: useBannerModel,
   subComponents: {
     /**
@@ -147,14 +154,9 @@ export const Banner = createContainer('button')({
     ActionText: BannerActionText,
   },
 })<BannerProps>(({children, ...elemProps}, Element, model) => {
-  return (
-    <Element
-      {...mergeStyles(
-        elemProps,
-        bannerStencil({hasErrors: model.state.hasError, isSticky: model.state.isSticky})
-      )}
-    >
-      {children}
-    </Element>
-  );
+  const resolved = useResolvedStencil(displayName, bannerStencil, {
+    hasErrors: model.state.hasError,
+    isSticky: model.state.isSticky,
+  });
+  return <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>;
 });

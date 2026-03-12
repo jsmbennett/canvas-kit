@@ -3,6 +3,8 @@ import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
 import {brand, base} from '@workday/canvas-tokens-web';
 import {createStyles, getCache, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
+import type {StencilProviderMap} from './stencil';
+import {StencilOverrideContext} from './stencil/StencilProviderContext';
 
 export interface CanvasProviderProps {
   /**
@@ -12,6 +14,12 @@ export interface CanvasProviderProps {
    * While we support theme overrides, we advise to use global theming via CSS Variables.
    */
   theme?: PartialEmotionCanvasTheme;
+  /**
+   * Optional stencil override map from `createStencilProviderContext()`.
+   * When provided, Canvas components within this provider will use overridden stencils
+   * for the component displayNames specified in the map.
+   */
+  stencilProviderContext?: StencilProviderMap;
 }
 
 const mappedKeys = {
@@ -114,11 +122,20 @@ export const useCanvasThemeToCssVars = (
 export const CanvasProvider = ({
   children,
   theme = {canvas: {}}, // default to empty theme to avoid breaking changes
+  stencilProviderContext,
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const {className, ...elemProps} = useCanvasThemeToCssVars(theme, props);
   const cache = getCache();
   const rest = {...elemProps, ...props};
+  const content =
+    stencilProviderContext != null ? (
+      <StencilOverrideContext.Provider value={stencilProviderContext}>
+        {children}
+      </StencilOverrideContext.Provider>
+    ) : (
+      children
+    );
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme as Theme}>
@@ -126,7 +143,7 @@ export const CanvasProvider = ({
           dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
           {...(rest as React.HTMLAttributes<HTMLDivElement>)}
         >
-          {children}
+          {content}
         </div>
       </ThemeProvider>
     </CacheProvider>

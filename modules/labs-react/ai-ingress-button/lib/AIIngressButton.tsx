@@ -1,4 +1,9 @@
-import {createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  focusRing,
+  useUniqueId,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {BaseButton, BaseButtonProps, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createStencil, handleCsProp, calc} from '@workday/canvas-kit-styling';
 import {system, base} from '@workday/canvas-tokens-web';
@@ -172,16 +177,19 @@ export const AIIngressButtonStencil = createStencil({
   ],
 });
 
+const displayName = 'AIIngressButton';
+
 export const AIIngressButton = createComponent('button')({
-  displayName: 'AIIngressButton',
+  displayName,
   Component: ({toggled, variant, ...elemProps}: AIIngressButtonProps, ref, Element) => {
     const svgGradientId = useUniqueId();
+    const resolved = useResolvedStencil(displayName, AIIngressButtonStencil, {toggled, variant});
     return (
       <BaseButton
         ref={ref}
         as={Element}
         {...handleCsProp(elemProps, [
-          AIIngressButtonStencil({toggled, variant}),
+          resolved,
           {
             [systemIconStencil.vars.color]: `url(#${svgGradientId})`,
           },

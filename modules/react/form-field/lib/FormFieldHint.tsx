@@ -1,4 +1,8 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {system, brand} from '@workday/canvas-tokens-web';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
@@ -26,26 +30,24 @@ export const formFieldHintStencil = createStencil({
   },
 });
 
+const displayName = 'FormField.Hint';
+
 export const FormFieldHint = createSubcomponent('p')({
-  displayName: 'FormField.Hint',
+  displayName,
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldHint,
 })<ExtractProps<typeof Text, never>>(
   ({children, typeLevel, variant, ...elemProps}, Element, model) => {
+    const resolved = useResolvedStencil(displayName, formFieldHintStencil, {
+      typeLevel,
+      variant,
+      error: model.state.error,
+    });
     if (!children) {
       // If there is no hint text just skip rendering
       return null;
     }
 
-    return (
-      <Element
-        {...mergeStyles(
-          elemProps,
-          formFieldHintStencil({typeLevel, variant, error: model.state.error})
-        )}
-      >
-        {children}
-      </Element>
-    );
+    return <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>;
   }
 );
