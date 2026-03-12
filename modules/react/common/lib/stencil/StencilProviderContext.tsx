@@ -1,20 +1,14 @@
 import * as React from 'react';
+import {createStencil} from '@workday/canvas-kit-styling';
+
+type StencilConfigInput = Parameters<typeof createStencil>[0];
 
 /**
- * A stencil override function accepts the same arguments as the default stencil
- * and returns the same shape (className, style, etc.) for spreading onto elements.
- */
-export type StencilOverrideFn = (args?: Record<string, unknown>) => {
-  className?: string;
-  style?: React.CSSProperties;
-  [key: string]: unknown;
-};
-
-/**
- * Map of Canvas component displayNames to override stencil functions.
+ * Map of Canvas component displayNames to stencil config objects.
+ * Values should be the same input you would pass to `createStencil`.
  * Keys should match the `displayName` of components created via `createComponent`.
  */
-export type StencilProviderMap = Record<string, StencilOverrideFn>;
+export type StencilProviderMap = Record<string, StencilConfigInput>;
 
 /**
  * @internal Used by CanvasProvider and useResolvedStencil.
@@ -23,13 +17,19 @@ export const StencilOverrideContext = React.createContext<StencilProviderMap | n
 
 /**
  * Creates a stencil provider context value (provider map) to pass to CanvasProvider.
- * CanvasProvider will wrap children with the stencil context when this value is provided.
+ * This is an identity helper used to make intent explicit at call sites.
+ * CanvasProvider will pass this map through context, and each component instance
+ * will call `createStencil` from `useResolvedStencil` when it resolves an override.
  *
  * @example
  * ```tsx
  * const stencilOverrides = createStencilProviderContext({
- *   Text: (args) => myCustomTextStencil(args),
- *   PrimaryButton: (args) => myCustomButtonStencil(args),
+ *   Text: {
+ *     base: {color: 'rebeccapurple'},
+ *   },
+ *   PrimaryButton: {
+ *     base: {fontWeight: 700},
+ *   },
  * });
  *
  * <CanvasProvider stencilProviderContext={stencilOverrides}>
@@ -51,16 +51,23 @@ export function createStencilProviderContext(providerMap: StencilProviderMap): S
  * @param args - Arguments to pass to the stencil (modifiers, etc.)
  * @returns The stencil result (className, style, etc.) for spreading onto elements
  */
-export function useResolvedStencil<TArgs extends Record<string, unknown> | undefined, TResult>(
+export function useResolvedStencil<TArgs extends object | undefined, TResult>(
   componentName: string,
   defaultStencil: (args?: TArgs) => TResult,
   args?: TArgs
 ): TResult {
   const providerMap = React.useContext(StencilOverrideContext);
-  const override = providerMap?.[componentName];
+  const overrideConfig = providerMap?.[componentName];
+  const overrideStencil = React.useMemo(
+    () =>
+      overrideConfig
+        ? (createStencil(overrideConfig) as unknown as (args?: TArgs) => TResult)
+        : undefined,
+    [overrideConfig]
+  );
 
-  if (override) {
-    return override(args) as TResult;
+  if (overrideStencil) {
+    return overrideStencil(args);
   }
   return defaultStencil(args);
 }

@@ -63,15 +63,14 @@ import {
   CanvasProvider,
   createStencilProviderContext,
 } from '@workday/canvas-kit-react/common';
-import {createStencil} from '@workday/canvas-kit-styling';
-
-const myTextStencil = createStencil({
-  base: {fontSize: '18px', fontWeight: 600},
-});
 
 const stencilOverrides = createStencilProviderContext({
-  Text: (args) => myTextStencil(args),
-  PrimaryButton: (args) => myButtonStencil(args),
+  Text: {
+    base: {fontSize: '18px', fontWeight: 600},
+  },
+  PrimaryButton: {
+    base: {fontWeight: 700},
+  },
 });
 
 <CanvasProvider stencilProviderContext={stencilOverrides}>
@@ -80,9 +79,8 @@ const stencilOverrides = createStencilProviderContext({
 ```
 
 The provider map keys must match the component's `displayName` (e.g. `"Text"`, `"PrimaryButton"`,
-`"Card.Body"`). The override function receives the same arguments as the default stencil and should
-return the same shape (`className`, `style`, etc.). When no `stencilProviderContext` is passed,
-components use their default stencils unchanged.
+`"Card.Body"`). Each value should be a config object accepted by `createStencil`. When no
+`stencilProviderContext` is passed, components use their default stencils unchanged.
 
 #### Storybook Decorator
 

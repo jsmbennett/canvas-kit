@@ -70,7 +70,7 @@ export const toolbarIconButtonStencil = createStencil({
 
 export const displayName = 'ToolbarIconButton';
 
-const ToolbarIconButton = createComponent('button')({
+export const ToolbarIconButton = createComponent('button')({
   displayName,
   Component: (
     {

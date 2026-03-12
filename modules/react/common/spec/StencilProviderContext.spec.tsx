@@ -6,15 +6,13 @@ import {createStencil} from '@workday/canvas-kit-styling';
 
 describe('createStencilProviderContext', () => {
   it('should use resolved stencil from context when provider map is passed', () => {
-    const overrideStencil = createStencil({
-      base: {
-        color: 'rgb(255, 0, 0)',
-        fontSize: '99px',
-      },
-    });
-
     const stencilOverrides = createStencilProviderContext({
-      Text: args => overrideStencil(args),
+      Text: {
+        base: {
+          color: 'rgb(255, 0, 0)',
+          fontSize: '99px',
+        },
+      },
     });
 
     render(
@@ -29,14 +27,12 @@ describe('createStencilProviderContext', () => {
   });
 
   it('should use default stencil when no override is provided for component', () => {
-    const overrideStencil = createStencil({
-      base: {
-        color: 'rgb(0, 0, 255)',
-      },
-    });
-
     const stencilOverrides = createStencilProviderContext({
-      PrimaryButton: args => overrideStencil(args),
+      PrimaryButton: {
+        base: {
+          color: 'rgb(0, 0, 255)',
+        },
+      },
     });
 
     render(
@@ -65,6 +61,54 @@ describe('createStencilProviderContext', () => {
     expect(el).toBeInTheDocument();
     expect(el.tagName).toBe('SPAN');
   });
+
+  it('should create a unique stencil per component instance', () => {
+    const stencilOverrides = createStencilProviderContext({
+      Text: {
+        base: {
+          color: 'rgb(255, 0, 0)',
+        },
+      },
+    });
+
+    const TwoTexts = () => (
+      <>
+        <Text data-testid="text-1">One</Text>
+        <Text data-testid="text-2">Two</Text>
+      </>
+    );
+
+    render(
+      <CanvasProvider stencilProviderContext={stencilOverrides}>
+        <TwoTexts />
+      </CanvasProvider>
+    );
+
+    const className1 = screen.getByTestId('text-1').getAttribute('class') || '';
+    const className2 = screen.getByTestId('text-2').getAttribute('class') || '';
+
+    expect(className1).not.toEqual(className2);
+  });
+
+  it('should accept createStencil config objects in provider map', () => {
+    const stencilOverrides = createStencilProviderContext({
+      Text: {
+        base: {
+          color: 'rgb(0, 128, 0)',
+        },
+      },
+    });
+
+    render(
+      <CanvasProvider stencilProviderContext={stencilOverrides}>
+        <Text data-testid="text-with-config-override">Config override</Text>
+      </CanvasProvider>
+    );
+
+    expect(screen.getByTestId('text-with-config-override')).toHaveStyle({
+      color: 'rgb(0, 128, 0)',
+    });
+  });
 });
 
 describe('useResolvedStencil', () => {
@@ -92,12 +136,11 @@ describe('useResolvedStencil', () => {
     const defaultStencil = createStencil({
       base: {padding: '10px'},
     });
-    const overrideStencil = createStencil({
-      base: {padding: '20px', margin: '5px'},
-    });
 
     const stencilOverrides = createStencilProviderContext({
-      TestComponent: () => overrideStencil(),
+      TestComponent: {
+        base: {padding: '20px', margin: '5px'},
+      },
     });
 
     const TestComponent = () => {
