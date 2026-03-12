@@ -1,22 +1,24 @@
 import * as React from 'react';
 import {screen, render} from '@testing-library/react';
-import {createStencilProviderContext, useResolvedStencil, CanvasProvider} from '../index';
+import {useResolvedStencil, CanvasProvider, type StencilProviderMap} from '../index';
 import {Text} from '@workday/canvas-kit-react/text';
 import {createStencil} from '@workday/canvas-kit-styling';
 
-describe('createStencilProviderContext', () => {
+describe('stencilOverrides map', () => {
   it('should use resolved stencil from context when provider map is passed', () => {
-    const stencilOverrides = createStencilProviderContext({
+    const stencilOverrides: StencilProviderMap = {
       Text: {
-        base: {
-          color: 'rgb(255, 0, 0)',
-          fontSize: '99px',
+        stencil: {
+          base: {
+            color: 'rgb(255, 0, 0)',
+            fontSize: '99px',
+          },
         },
       },
-    });
+    };
 
     render(
-      <CanvasProvider stencilProviderContext={stencilOverrides}>
+      <CanvasProvider stencilOverrides={stencilOverrides}>
         <Text data-testid="text-with-override">Hello</Text>
       </CanvasProvider>
     );
@@ -27,16 +29,18 @@ describe('createStencilProviderContext', () => {
   });
 
   it('should use default stencil when no override is provided for component', () => {
-    const stencilOverrides = createStencilProviderContext({
+    const stencilOverrides: StencilProviderMap = {
       PrimaryButton: {
-        base: {
-          color: 'rgb(0, 0, 255)',
+        stencil: {
+          base: {
+            color: 'rgb(0, 0, 255)',
+          },
         },
       },
-    });
+    };
 
     render(
-      <CanvasProvider stencilProviderContext={stencilOverrides}>
+      <CanvasProvider stencilOverrides={stencilOverrides}>
         <Text data-testid="text-no-override" typeLevel="body.large">
           Default Text
         </Text>
@@ -48,7 +52,7 @@ describe('createStencilProviderContext', () => {
     expect(el).toHaveStyle({fontSize: expect.any(String)});
   });
 
-  it('should use default stencil when no stencilProviderContext is passed to CanvasProvider', () => {
+  it('should use default stencil when no stencilOverrides is passed to CanvasProvider', () => {
     render(
       <CanvasProvider>
         <Text data-testid="text-default" typeLevel="body.large">
@@ -63,13 +67,15 @@ describe('createStencilProviderContext', () => {
   });
 
   it('should create a unique stencil per component instance', () => {
-    const stencilOverrides = createStencilProviderContext({
+    const stencilOverrides: StencilProviderMap = {
       Text: {
-        base: {
-          color: 'rgb(255, 0, 0)',
+        stencil: {
+          base: {
+            color: 'rgb(255, 0, 0)',
+          },
         },
       },
-    });
+    };
 
     const TwoTexts = () => (
       <>
@@ -79,7 +85,7 @@ describe('createStencilProviderContext', () => {
     );
 
     render(
-      <CanvasProvider stencilProviderContext={stencilOverrides}>
+      <CanvasProvider stencilOverrides={stencilOverrides}>
         <TwoTexts />
       </CanvasProvider>
     );
@@ -91,16 +97,18 @@ describe('createStencilProviderContext', () => {
   });
 
   it('should accept createStencil config objects in provider map', () => {
-    const stencilOverrides = createStencilProviderContext({
+    const stencilOverrides: StencilProviderMap = {
       Text: {
-        base: {
-          color: 'rgb(0, 128, 0)',
+        stencil: {
+          base: {
+            color: 'rgb(0, 128, 0)',
+          },
         },
       },
-    });
+    };
 
     render(
-      <CanvasProvider stencilProviderContext={stencilOverrides}>
+      <CanvasProvider stencilOverrides={stencilOverrides}>
         <Text data-testid="text-with-config-override">Config override</Text>
       </CanvasProvider>
     );
@@ -137,11 +145,11 @@ describe('useResolvedStencil', () => {
       base: {padding: '10px'},
     });
 
-    const stencilOverrides = createStencilProviderContext({
+    const stencilOverrides: StencilProviderMap = {
       TestComponent: {
-        base: {padding: '20px', margin: '5px'},
+        stencil: {base: {padding: '20px', margin: '5px'}},
       },
-    });
+    };
 
     const TestComponent = () => {
       const resolved = useResolvedStencil('TestComponent', defaultStencil, undefined);
@@ -149,7 +157,7 @@ describe('useResolvedStencil', () => {
     };
 
     render(
-      <CanvasProvider stencilProviderContext={stencilOverrides}>
+      <CanvasProvider stencilOverrides={stencilOverrides}>
         <TestComponent />
       </CanvasProvider>
     );
@@ -157,5 +165,65 @@ describe('useResolvedStencil', () => {
     const el = screen.getByTestId('resolved');
     expect(el).toHaveStyle({padding: '20px'});
     expect(el).toHaveStyle({margin: '5px'});
+  });
+
+  it('should merge with default stencil when mergeWithDefault is true', () => {
+    const defaultStencil = createStencil({
+      base: {padding: '10px', margin: '5px'},
+    });
+
+    const stencilOverrides: StencilProviderMap = {
+      TestComponent: {
+        mergeWithDefault: true,
+        stencil: {
+          base: {padding: '20px'},
+        },
+      },
+    };
+
+    const TestComponent = () => {
+      const resolved = useResolvedStencil('TestComponent', defaultStencil, undefined);
+      return <div data-testid="resolved-merged" {...resolved} />;
+    };
+
+    render(
+      <CanvasProvider stencilOverrides={stencilOverrides}>
+        <TestComponent />
+      </CanvasProvider>
+    );
+
+    const el = screen.getByTestId('resolved-merged');
+    expect(el).toHaveStyle({padding: '20px'});
+    expect(el).toHaveStyle({margin: '5px'});
+  });
+
+  it('should replace default stencil when mergeWithDefault is false', () => {
+    const defaultStencil = createStencil({
+      base: {padding: '10px', margin: '5px'},
+    });
+
+    const stencilOverrides: StencilProviderMap = {
+      TestComponent: {
+        mergeWithDefault: false,
+        stencil: {
+          base: {padding: '20px'},
+        },
+      },
+    };
+
+    const TestComponent = () => {
+      const resolved = useResolvedStencil('TestComponent', defaultStencil, undefined);
+      return <div data-testid="resolved-replaced" {...resolved} />;
+    };
+
+    render(
+      <CanvasProvider stencilOverrides={stencilOverrides}>
+        <TestComponent />
+      </CanvasProvider>
+    );
+
+    const el = screen.getByTestId('resolved-replaced');
+    expect(el).toHaveStyle({padding: '20px'});
+    expect(el).not.toHaveStyle({margin: '5px'});
   });
 });

@@ -4,7 +4,7 @@ import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming
 import {brand, base} from '@workday/canvas-tokens-web';
 import {createStyles, getCache, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
 import type {StencilProviderMap} from './stencil';
-import {StencilOverrideContext} from './stencil/StencilProviderContext';
+import {StencilOverrideContext} from './stencil/stencilOverrideProvider';
 
 export interface CanvasProviderProps {
   /**
@@ -15,11 +15,12 @@ export interface CanvasProviderProps {
    */
   theme?: PartialEmotionCanvasTheme;
   /**
-   * Optional stencil override map from `createStencilProviderContext()`.
+   * Optional stencil override map keyed by component displayName.
    * When provided, Canvas components within this provider will use overridden stencils
-   * for the component displayNames specified in the map.
+   * for the component displayNames specified in the map. Each map entry can choose
+   * to merge with or replace the component default stencil.
    */
-  stencilProviderContext?: StencilProviderMap;
+  stencilOverrides?: StencilProviderMap;
 }
 
 const mappedKeys = {
@@ -122,15 +123,15 @@ export const useCanvasThemeToCssVars = (
 export const CanvasProvider = ({
   children,
   theme = {canvas: {}}, // default to empty theme to avoid breaking changes
-  stencilProviderContext,
+  stencilOverrides,
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const {className, ...elemProps} = useCanvasThemeToCssVars(theme, props);
   const cache = getCache();
   const rest = {...elemProps, ...props};
   const content =
-    stencilProviderContext != null ? (
-      <StencilOverrideContext.Provider value={stencilProviderContext}>
+    stencilOverrides != null ? (
+      <StencilOverrideContext.Provider value={stencilOverrides}>
         {children}
       </StencilOverrideContext.Provider>
     ) : (

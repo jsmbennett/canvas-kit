@@ -1,6 +1,6 @@
 export {
-  createStencilProviderContext,
   useResolvedStencil,
   StencilOverrideContext,
+  type StencilOptions,
   type StencilProviderMap,
-} from './StencilProviderContext';
+} from './stencilOverrideProvider';
