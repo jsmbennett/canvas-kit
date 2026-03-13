@@ -1,4 +1,4 @@
-import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 
@@ -82,10 +82,8 @@ export const paginationStencil = createStencil({
  * );
  * ```
  */
-const displayName = 'Pagination';
-
 export const Pagination = createComponent('nav')({
-  displayName,
+  displayName: 'Pagination',
   Component(props: PaginationProps, ref, Element) {
     const model = useDefaultModel(
       props.model,
@@ -95,11 +93,9 @@ export const Pagination = createComponent('nav')({
 
     const {lastPage, firstPage, initialCurrentPage, rangeSize, onPageChange, ...elemProps} = props;
 
-    const resolved = useResolvedStencil(displayName, paginationStencil, undefined);
-
     return (
       <PaginationContext.Provider value={model}>
-        <Element ref={ref} {...mergeStyles(elemProps, resolved)} />
+        <Element ref={ref} {...mergeStyles(elemProps, paginationStencil())} />
       </PaginationContext.Provider>
     );
   },

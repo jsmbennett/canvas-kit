@@ -32,14 +32,12 @@ export const actionBarTextStencil = createStencil({
   },
 });
 
-const displayName = 'Banner.ActionText';
-
 export const BannerActionText = createSubcomponent('span')({
-  displayName,
+  displayName: 'Banner.ActionTextText',
   modelHook: useBannerModel,
   elemPropsHook: useBannerActionText,
 })<BannerActionTextProps>(({children = 'View All', ...elemProps}, Element, model) => {
-  const resolved = useResolvedStencil(displayName, actionBarTextStencil, {
+  const resolved = useResolvedStencil('Banner.ActionTextText', actionBarTextStencil, {
     isSticky: model.state.isSticky,
   });
   return <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>;

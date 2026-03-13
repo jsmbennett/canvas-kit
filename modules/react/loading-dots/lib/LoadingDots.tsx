@@ -1,4 +1,4 @@
-import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {
   CSProps,
   calc,
@@ -34,7 +34,7 @@ const keyframesLoading = keyframes({
 export interface LoadingDotsProps extends CSProps {
   /**
    * Applies backgroundColor to loading dots, intended for use with the circle variant design on grey/dark/image-based backgrounds.
-   * @default `system.color.bg.alt.strong`
+   * @default `system.color.accent.muted.default`
    */
   loadingDotColor?: string;
   /**
@@ -48,20 +48,25 @@ export interface LoadingDotsProps extends CSProps {
 export const loadingDotsStencil = createStencil({
   vars: {
     animationDurationMs: '40ms',
-    loadingDotColor: system.color.bg.muted.strong,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    loadingDotColor: cssVar(system.color.accent.muted.default, system.color.bg.muted.strong),
   },
   parts: {
     loadingAnimationDot: 'loading-animation-dot',
   },
   base: ({loadingDotColor, animationDurationMs, loadingAnimationDotPart}) => ({
     display: 'inline-flex',
-    gap: system.space.x2,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.sm, system.space.x2),
     [loadingAnimationDotPart]: {
       backgroundColor: loadingDotColor,
-      width: system.space.x4,
-      height: system.space.x4,
-      fontSize: system.space.zero,
-      borderRadius: system.shape.round,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      width: cssVar(system.size.xxxs, system.space.x4),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      height: cssVar(system.size.xxxs, system.space.x4),
+      fontSize: 0,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderRadius: cssVar(system.shape.full, system.shape.round),
       outline: `${px2rem(2)} solid transparent`,
       transform: 'scale(0)',
       display: 'inline-block',
@@ -92,25 +97,24 @@ export const loadingDotsStencil = createStencil({
   },
 });
 
-const displayName = 'LoadingDots';
-
 /**
  * A simple component that displays three horizontal dots, to be used when some data is loading.
  */
 export const LoadingDots = createComponent('div')({
-  displayName,
+  displayName: 'LoadingDots',
   Component: (
     {loadingDotColor, animationDurationMs, variant, ...elemProps}: LoadingDotsProps,
     ref,
     Element
   ) => {
-    const resolved = useResolvedStencil(displayName, loadingDotsStencil, {
-      loadingDotColor,
-      animationDurationMs,
-      variant,
-    });
     return (
-      <Element ref={ref} {...handleCsProp(elemProps, resolved)}>
+      <Element
+        ref={ref}
+        {...handleCsProp(
+          elemProps,
+          loadingDotsStencil({loadingDotColor, animationDurationMs, variant})
+        )}
+      >
         <div data-part="loading-animation-dot" />
         <div data-part="loading-animation-dot" />
         <div data-part="loading-animation-dot" />

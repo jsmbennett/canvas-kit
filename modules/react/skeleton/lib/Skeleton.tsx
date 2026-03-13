@@ -56,16 +56,14 @@ export const skeletonStencil = createStencil({
  * `Skeleton` places its children in a container element with `aria-hidden` set to `true` and
  * announces itself using a visually hidden element.
  */
-const displayName = 'Skeleton';
-
 export const Skeleton = createComponent('div')({
-  displayName,
+  displayName: 'Skeleton',
   Component: (
     {children, 'aria-label': loadingAriaLabel = 'Loading', ...elemProps}: SkeletonProps,
     ref,
     Element
   ) => {
-    const resolved = useResolvedStencil(displayName, skeletonStencil, undefined);
+    const resolved = useResolvedStencil('Skeleton', skeletonStencil, undefined);
     return (
       <Element ref={ref} {...handleCsProp(elemProps, resolved)}>
         <div data-part="skeleton-accessible-hide">{loadingAriaLabel}</div>

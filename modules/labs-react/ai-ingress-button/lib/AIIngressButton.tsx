@@ -179,13 +179,14 @@ export const AIIngressButtonStencil = createStencil({
   ],
 });
 
-const displayName = 'AIIngressButton';
-
 export const AIIngressButton = createComponent('button')({
-  displayName,
+  displayName: 'AIIngressButton',
   Component: ({toggled, variant, ...elemProps}: AIIngressButtonProps, ref, Element) => {
     const svgGradientId = useUniqueId();
-    const resolved = useResolvedStencil(displayName, AIIngressButtonStencil, {toggled, variant});
+    const resolved = useResolvedStencil('AIIngressButton', AIIngressButtonStencil, {
+      toggled,
+      variant,
+    });
     return (
       <BaseButton
         ref={ref}

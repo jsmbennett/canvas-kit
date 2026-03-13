@@ -12,20 +12,18 @@ export const expandableAvatarStencil = createStencil({
   },
 });
 
-const displayName = 'Expandable.Avatar';
-
 // When the component is created, it needs to be a button element to match AvatarProps.
 // Once Avatar becomes a `createComponent` we can default the element type to a `div`
 // and the types should be properly extracted
 // Setting isDecorative prop to true by default since avatars in expandable headers are typically decorative
 export const ExpandableAvatar = createComponent('div')({
-  displayName,
+  displayName: 'Expandable.Avatar',
   Component: (
     {name = '', isDecorative = true, ...elemProps}: ExpandableAvatarProps,
     ref,
     Element
   ) => {
-    const resolved = useResolvedStencil(displayName, expandableAvatarStencil, undefined);
+    const resolved = useResolvedStencil('Expandable.Avatar', expandableAvatarStencil);
     return (
       <Avatar
         as={Element}

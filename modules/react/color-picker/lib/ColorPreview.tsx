@@ -18,18 +18,18 @@ export interface ColorPreviewProps extends TextInputProps {
 
 export const colorPreviewStencil = createStencil({
   base: {
-    backgroundColor: system.color.bg.default,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderColor: cssVar(system.color.border.inverse.default, base.neutral0),
     pointerEvents: 'none',
   },
 });
 
-const displayName = 'ColorPreview';
-
 export const ColorPreview = createComponent('input')({
-  displayName,
+  displayName: 'ColorPreview',
   Component: ({id, value, ...elemProps}: ColorPreviewProps, ref, Element) => {
-    const resolved = useResolvedStencil(displayName, colorPreviewStencil, undefined);
+    const resolved = useResolvedStencil('ColorPreview', colorPreviewStencil, undefined);
     return (
       <ColorInput
         ref={ref}

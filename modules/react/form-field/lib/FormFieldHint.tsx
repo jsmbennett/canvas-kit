@@ -1,11 +1,7 @@
-import {
-  ExtractProps,
-  createSubcomponent,
-  useResolvedStencil,
-} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldHint, useFormFieldModel} from './hooks';
@@ -13,15 +9,17 @@ import {useFormFieldHint, useFormFieldModel} from './hooks';
 export const formFieldHintStencil = createStencil({
   extends: textStencil,
   base: {
-    margin: system.space.zero,
+    margin: 0,
   },
   modifiers: {
     error: {
       error: {
-        color: brand.error.base,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.brand.fg.critical.default, brand.error.base),
       },
       caution: {
-        color: system.color.text.caution.default,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.fg.default, system.color.text.caution.default),
       },
     },
   },
@@ -30,24 +28,26 @@ export const formFieldHintStencil = createStencil({
   },
 });
 
-const displayName = 'FormField.Hint';
-
 export const FormFieldHint = createSubcomponent('p')({
-  displayName,
+  displayName: 'FormField.Hint',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldHint,
 })<ExtractProps<typeof Text, never>>(
   ({children, typeLevel, variant, ...elemProps}, Element, model) => {
-    const resolved = useResolvedStencil(displayName, formFieldHintStencil, {
-      typeLevel,
-      variant,
-      error: model.state.error,
-    });
     if (!children) {
       // If there is no hint text just skip rendering
       return null;
     }
 
-    return <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>;
+    return (
+      <Element
+        {...mergeStyles(
+          elemProps,
+          formFieldHintStencil({typeLevel, variant, error: model.state.error})
+        )}
+      >
+        {children}
+      </Element>
+    );
   }
 );

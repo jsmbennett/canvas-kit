@@ -16,12 +16,14 @@ export const modalOverflowOverlayStencil = createStencil({
   },
 });
 
-const displayName = 'Modal.OverflowOverlay';
-
 export const ModalOverflowOverlay = createSubcomponent('div')({
-  displayName,
+  displayName: 'Modal.OverflowOverlay',
   modelHook: useModalModel,
 })<ExtractProps<typeof ModalOverlay, never>>((elemProps, Element) => {
-  const resolved = useResolvedStencil(displayName, modalOverflowOverlayStencil, undefined);
+  const resolved = useResolvedStencil(
+    'Modal.OverflowOverlay',
+    modalOverflowOverlayStencil,
+    undefined
+  );
   return <ModalOverlay as={Element} {...mergeStyles(elemProps, resolved)} />;
 });

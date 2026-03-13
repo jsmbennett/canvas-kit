@@ -1,5 +1,5 @@
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
-import {focusRing, useResolvedStencil} from '@workday/canvas-kit-react/common';
+import {focusRing} from '@workday/canvas-kit-react/common';
 import {Subtext} from '@workday/canvas-kit-react/text';
 import {calc, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -45,14 +45,11 @@ export const resetButtonStencil = createStencil({
   }),
 });
 
-const displayName = 'ColorPicker.ResetButton';
-
 export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
   const handleResetColor = () => onClick(resetColor);
-  const resolved = useResolvedStencil(displayName, resetButtonStencil, undefined);
 
   return (
-    <button onClick={handleResetColor} {...handleCsProp({}, resolved)}>
+    <button onClick={handleResetColor} {...handleCsProp({}, resetButtonStencil())}>
       <ColorSwatch color={resetColor} data-color="" />
       <Subtext size="medium" as="div" {...resetButtonStencil.parts.label}>
         {label}

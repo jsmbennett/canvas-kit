@@ -23,15 +23,13 @@ export const bannerIconStencil = createStencil({
   },
 });
 
-const displayName = 'Banner.Icon';
-
 export const BannerIcon = createSubcomponent('span')({
-  displayName,
+  displayName: 'Banner.Icon',
   modelHook: useBannerModel,
   elemPropsHook: useBannerIcon,
 })<BannerIconProps>((elemProps, Element, model) => {
   const {icon, ...iconButtonProps} = elemProps;
-  const resolved = useResolvedStencil(displayName, bannerIconStencil, undefined);
+  const resolved = useResolvedStencil('Banner.Icon', bannerIconStencil, undefined);
 
   return (
     <SystemIcon

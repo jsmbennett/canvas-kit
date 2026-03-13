@@ -1,7 +1,7 @@
 import {Property} from 'csstype';
 import React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -125,13 +125,15 @@ export const Avatar = createComponent('div')({
         setImageLoaded(true);
       }
     };
+    const resolved = useResolvedStencil('Avatar', avatarStencil, {
+      variant,
+      size,
+      imageLoaded,
+      objectFit,
+    });
 
     return (
-      <BaseAvatar
-        as={Element}
-        ref={ref}
-        {...handleCsProp(elemProps, avatarStencil({variant, size, imageLoaded, objectFit}))}
-      >
+      <BaseAvatar as={Element} ref={ref} {...handleCsProp(elemProps, resolved)}>
         {url && (
           <>
             <BaseAvatar.Image

@@ -16,12 +16,10 @@ export const baseTableCellStencil = createStencil({
   },
 });
 
-const displayName = 'Table.Cell';
-
 export const BaseTableCell = createComponent('td')({
-  displayName,
+  displayName: 'Table.Cell',
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
-    const resolved = useResolvedStencil(displayName, baseTableCellStencil, undefined);
+    const resolved = useResolvedStencil('Table.Cell', baseTableCellStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}

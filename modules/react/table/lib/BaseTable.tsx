@@ -66,12 +66,10 @@ export default function App() {
 }
 ```
  */
-const displayName = 'BaseTable';
-
 export const BaseTable = createComponent('table')({
-  displayName,
+  displayName: 'BaseTable',
   Component: ({children, ...elemProps}: BaseTableProps, ref, Element) => {
-    const resolved = useResolvedStencil(displayName, baseTableStencil, undefined);
+    const resolved = useResolvedStencil('BaseTable', baseTableStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}

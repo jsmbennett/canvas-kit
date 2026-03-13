@@ -18,6 +18,7 @@ export interface SwatchBookProps {
 
 const colorPickerSwatchBookStencil = createStencil({
   vars: {
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     shadow: `${cssVar(system.color.border.inverse.default, base.neutral0)} 0 0 0 ${px2rem(2)}, ${
       system.color.border.input.default
     } 0 0 0 ${px2rem(3)}`,
@@ -28,15 +29,20 @@ const colorPickerSwatchBookStencil = createStencil({
   base: ({tilePart, shadow}) => ({
     display: 'flex',
     flexWrap: 'wrap',
-    margin: `0 ${calc.negate(system.space.x2)} ${calc.negate(system.space.x2)} 0`,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    margin: `0 ${calc.negate(cssVar(system.gap.sm, system.space.x2))} ${calc.negate(cssVar(system.gap.sm, system.space.x2))} 0`,
     [tilePart]: {
       display: 'flex',
-      width: px2rem(20),
-      height: px2rem(20),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      width: cssVar(system.size.xxs, px2rem(20)),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      height: cssVar(system.size.xxs, px2rem(20)),
       cursor: 'pointer',
-      borderRadius: system.shape.half,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderRadius: cssVar(system.shape.sm, system.shape.half),
       transition: 'box-shadow 120ms ease',
-      margin: `0px ${system.space.x2} ${system.space.x2} 0px`,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      margin: `0px ${cssVar(system.gap.sm, system.space.x2)} ${cssVar(system.gap.sm, system.space.x2)} 0px`,
 
       '&:hover': {
         boxShadow: shadow,
@@ -63,10 +69,8 @@ const colorPickerSwatchBookStencil = createStencil({
   }),
 });
 
-const displayName = 'ColorPicker.SwatchBook';
-
 export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => {
-  const resolved = useResolvedStencil(displayName, colorPickerSwatchBookStencil, undefined);
+  const resolved = useResolvedStencil('SwatchBook', colorPickerSwatchBookStencil, undefined);
   return (
     <div {...resolved}>
       {colors.map((color: string | SwatchBookColorObject, index: number) => {

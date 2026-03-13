@@ -2,6 +2,7 @@ import {
   ExtractProps,
   createElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
@@ -34,8 +35,9 @@ export const ComboboxCard = createSubcomponent('div')({
   modelHook: useComboboxModel,
   elemPropsHook: useComboboxCard,
 })<ComboboxCardProps>(({children, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil('Combobox.Card', comboboxCardStencil, undefined);
   return (
-    <Menu.Card as={Element} {...handleCsProp(elemProps, comboboxCardStencil())}>
+    <Menu.Card as={Element} {...handleCsProp(elemProps, resolved)}>
       {children}
     </Menu.Card>
   );

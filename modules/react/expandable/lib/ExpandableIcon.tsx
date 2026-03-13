@@ -1,12 +1,8 @@
 import {IconPositions} from '@workday/canvas-kit-react/button';
-import {
-  ExtractProps,
-  createSubcomponent,
-  useResolvedStencil,
-} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {chevronUpIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -31,7 +27,8 @@ export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon
 export const expandableIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
-    padding: system.space.x1,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: cssVar(system.padding.xxs, system.space.x1),
   },
   modifiers: {
     isExpanded: {
@@ -50,20 +47,23 @@ export const expandableIconStencil = createStencil({
       styles: {
         marginInlineStart: 'auto',
         transform: 'rotate(180deg)',
-        paddingInlineEnd: system.space.x3,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        paddingInlineEnd: cssVar(system.padding.sm, system.space.x3),
       },
     },
     {
       modifiers: {position: 'end', isExpanded: true},
       styles: {
         marginInlineStart: 'auto',
-        paddingInlineStart: system.space.x3,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
       },
     },
     {
       modifiers: {position: 'start', isExpanded: false},
       styles: {
-        marginInlineEnd: system.space.x2,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        marginInlineEnd: cssVar(system.padding.xs, system.space.x2),
         transform: 'rotate(90deg)',
         ':dir(rtl)': {
           transform: 'rotate(-90deg)',
@@ -73,29 +73,27 @@ export const expandableIconStencil = createStencil({
     {
       modifiers: {position: 'start', isExpanded: true},
       styles: {
-        marginInlineEnd: system.space.x2,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        marginInlineEnd: cssVar(system.padding.xs, system.space.x2),
         transform: 'rotate(180deg)',
       },
     },
   ],
 });
 
-const displayName = 'Expandable.Icon';
-
 export const ExpandableIcon = createSubcomponent('span')({
-  displayName,
   modelHook: useExpandableModel,
   elemPropsHook: useExpandableIcon,
 })<ExpandableIconProps>(({icon, visible, iconPosition = 'start', ...elementProps}, Element) => {
-  const resolved = useResolvedStencil(displayName, expandableIconStencil, {
-    position: iconPosition,
-    isExpanded: visible,
-  });
   return (
     <SystemIcon
       as={Element}
       icon={icon || chevronUpIcon}
-      {...mergeStyles(elementProps, resolved)}
+      size={px2rem(16)}
+      {...mergeStyles(
+        elementProps,
+        expandableIconStencil({position: iconPosition, isExpanded: visible})
+      )}
     />
   );
 });

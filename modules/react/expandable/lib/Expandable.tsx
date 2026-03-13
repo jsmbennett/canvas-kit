@@ -34,10 +34,8 @@ export const expandableContainerStencil = createStencil({
  * hoisted model pattern.
  */
 
-const displayName = 'Expandable';
-
 export const Expandable = createContainer('div')({
-  displayName,
+  displayName: 'Expandable',
   modelHook: useExpandableModel,
   subComponents: {
     /**
@@ -75,6 +73,6 @@ export const Expandable = createContainer('div')({
     Content: ExpandableContent,
   },
 })<ExpandableProps>(({children, ...elementProps}, Element) => {
-  const resolved = useResolvedStencil(displayName, expandableContainerStencil, undefined);
+  const resolved = useResolvedStencil('Expandable', expandableContainerStencil, undefined);
   return <Element {...mergeStyles(elementProps, resolved)}>{children}</Element>;
 });

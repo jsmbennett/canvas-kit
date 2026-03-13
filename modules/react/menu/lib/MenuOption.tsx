@@ -31,12 +31,10 @@ const MenuOptionText = createComponent('span')({
   },
 });
 
-const menuOptionDisplayName = 'MenuOption';
-
 export const StyledMenuOption = createComponent('li')({
-  displayName: menuOptionDisplayName,
+  displayName: 'MenuOption',
   Component: ({children, ...elemProps}: MenuItemProps, ref, Element) => {
-    const resolved = useResolvedStencil(menuOptionDisplayName, menuItemStencil, {});
+    const resolved = useResolvedStencil('MenuOption', menuItemStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {typeof children === 'string' ? <MenuOptionText>{children}</MenuOptionText> : children}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {BaseButton, ButtonContainerProps, buttonStencil} from '@workday/canvas-kit-react/button';
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Text} from '@workday/canvas-kit-react/text';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
@@ -279,13 +279,14 @@ export const SegmentedControlItem = createSubcomponent('button')({
 })<ItemProps>(({children, icon, tooltipProps, ...elemProps}, Element, {state: {size}}) => {
   const variant = getVariant(icon, children);
   const iconSize = size === 'small' ? 'extraSmall' : 'small';
+  const resolved = useResolvedStencil('SegmentedControl.Item', segmentedControlItemStencil, {
+    size,
+    variant,
+  });
 
   return (
     <Container tooltipProps={tooltipProps}>
-      <BaseButton
-        as={Element}
-        {...handleCsProp(elemProps, segmentedControlItemStencil({size, variant}))}
-      >
+      <BaseButton as={Element} {...handleCsProp(elemProps, resolved)}>
         {icon && <BaseButton.Icon icon={icon} size={iconSize} />}
         {children && <Text>{children}</Text>}
       </BaseButton>

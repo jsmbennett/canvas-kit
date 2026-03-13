@@ -1,25 +1,29 @@
 import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
-import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
-const checkboxRippleStencil = createStencil({
+export const checkboxRippleStencil = createStencil({
+  parts: {
+    ripple: 'checkbox-ripple',
+  },
   base: {
-    borderRadius: system.shape.round,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.full, system.shape.round),
     boxShadow: 'none',
-    height: calc.add(system.space.x4, px2rem(2)),
-    width: calc.add(system.space.x4, px2rem(2)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(base.size225, px2rem(18)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(base.size225, px2rem(18)),
     transition: 'box-shadow 150ms ease-out',
     position: 'absolute',
     pointerEvents: 'none',
   },
 });
 
-const displayName = 'CheckboxRipple';
-
 export const CheckboxRipple = createComponent('span')({
-  displayName,
+  displayName: 'CheckboxRipple',
   Component: (elemProps: CSProps) => {
-    const resolved = useResolvedStencil(displayName, checkboxRippleStencil, undefined);
-    return <span {...handleCsProp(elemProps, resolved)} />;
+    const resolved = useResolvedStencil('CheckboxRipple', checkboxRippleStencil, undefined);
+    return <span {...handleCsProp(elemProps, resolved)} {...checkboxRippleStencil.parts.ripple} />;
   },
 });

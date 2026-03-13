@@ -24,13 +24,11 @@ export const bannerLabelStencil = createStencil({
   },
 });
 
-const displayName = 'Banner.Label';
-
 export const BannerLabel = createSubcomponent('div')({
-  displayName,
+  displayName: 'Banner.Label',
   modelHook: useBannerModel,
   elemPropsHook: useBannerLabel,
 })<BannerLabelProps>(({children, ...elemProps}, Element) => {
-  const resolved = useResolvedStencil(displayName, bannerLabelStencil, undefined);
+  const resolved = useResolvedStencil('Banner.Label', bannerLabelStencil, undefined);
   return <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>;
 });

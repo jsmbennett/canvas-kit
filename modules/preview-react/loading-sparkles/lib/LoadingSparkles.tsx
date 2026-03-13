@@ -62,12 +62,10 @@ export const loadingSparklesStencil = createStencil({
 /**
  * A simple component that displays three horizontal sparkles, to be used when an AI operation is in progress.
  */
-const displayName = 'LoadingSparkles';
-
 export const LoadingSparkles = createComponent('div')({
-  displayName,
+  displayName: 'LoadingSparkles',
   Component: (elemProps: CSProps, ref, Element) => {
-    const resolved = useResolvedStencil(displayName, loadingSparklesStencil, undefined);
+    const resolved = useResolvedStencil('LoadingSparkles', loadingSparklesStencil, undefined);
     return (
       <Element ref={ref} role="status" {...handleCsProp(elemProps, resolved)}>
         <Sparkle />

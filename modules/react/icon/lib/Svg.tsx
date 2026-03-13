@@ -71,24 +71,20 @@ export const transformColorNameToToken = (color?: string) => {
   return color;
 };
 
-const displayName = 'Svg';
-
 export const Svg = createComponent('span')({
-  displayName,
+  displayName: 'Svg',
   Component: (
     {shouldMirror, shouldMirrorInRTL, src, type, ...elemProps}: SvgProps,
     ref,
     Element
   ) => {
-    const resolved = useResolvedStencil(displayName, svgStencil, {shouldMirror, shouldMirrorInRTL});
-
+    const resolved = useResolvedStencil('Svg', svgStencil, {shouldMirror, shouldMirrorInRTL});
     try {
       validateIconType(src, type);
     } catch (e) {
       console.error(e);
       return null;
     }
-
     return (
       <Element
         ref={ref}

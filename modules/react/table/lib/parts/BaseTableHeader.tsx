@@ -15,12 +15,10 @@ export const baseTableHeaderStencil = createStencil({
   },
 });
 
-const displayName = 'Table.Header';
-
 export const BaseTableHeader = createComponent('th')({
-  displayName,
+  displayName: 'Table.Header',
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
-    const resolved = useResolvedStencil(displayName, baseTableHeaderStencil, undefined);
+    const resolved = useResolvedStencil('Table.Header', baseTableHeaderStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}

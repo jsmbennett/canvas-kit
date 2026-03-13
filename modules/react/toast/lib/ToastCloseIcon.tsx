@@ -11,12 +11,10 @@ export const toastCloseIconStencil = createStencil({
   },
 });
 
-const displayName = 'Toast.CloseIcon';
-
 export const ToastCloseIcon = createComponent('button')({
-  displayName,
+  displayName: 'Toast.CloseIcon',
   Component: (elemProps: ToastCloseIconProps, ref, Element) => {
-    const resolved = useResolvedStencil(displayName, toastCloseIconStencil, undefined);
+    const resolved = useResolvedStencil('Toast.CloseIcon', toastCloseIconStencil, undefined);
     return (
       <Popup.CloseIcon as={Element} ref={ref} size="small" {...mergeStyles(elemProps, resolved)} />
     );

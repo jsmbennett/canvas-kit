@@ -27,12 +27,10 @@ export const baseTableBodyStencil = createStencil({
   },
 });
 
-const displayName = 'Table.Body';
-
 export const BaseTableBody = createComponent('tbody')({
-  displayName,
+  displayName: 'Table.Body',
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
-    const resolved = useResolvedStencil(displayName, baseTableBodyStencil, undefined);
+    const resolved = useResolvedStencil('Table.Body', baseTableBodyStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}

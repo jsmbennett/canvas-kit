@@ -30,21 +30,19 @@ const comboboxMenuListStencil = createStencil({
   extends: menuListStencil,
 });
 
-const displayName = 'ComboboxMenuList';
-
 export const ComboboxMenuList = createSubcomponent('ul')({
-  displayName,
   modelHook: useComboboxModel,
   elemPropsHook: useComboboxMenuList,
 })<ComboboxMenuListProps>(({children, ...elemProps}, Element, model) => {
-  const resolved = useResolvedStencil(displayName, comboboxMenuListStencil, {
+  const resolved = useResolvedStencil('Combobox.Menu.List', comboboxMenuListStencil, {
     orientation: model.state.orientation,
   });
   return (
     <ListBox
       as={Element}
       model={model}
-      marginY={cssVar(system.space.x2)}
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      marginY={cssVar(system.gap.none, system.space.x2)}
       {...handleCsProp(elemProps, resolved)}
     >
       {children}

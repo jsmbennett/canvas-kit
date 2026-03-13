@@ -15,10 +15,8 @@ const tableRowStencil = createStencil({
   },
 });
 
-const displayName = 'Table.Row';
-
 export const TableRow = createComponent('tr')({
-  displayName,
+  displayName: 'Table.Row',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     // This calculates the amount of valid React children cells within the row and will update the gridTemplateColumns style property with that amount of cells within the row
     const validChildren = (children: React.ReactNode) => {
@@ -30,7 +28,7 @@ export const TableRow = createComponent('tr')({
      * This is the calculated amount of valid React children
      */
     const childrenArray = validChildren(children).length;
-    const resolved = useResolvedStencil(displayName, tableRowStencil, undefined);
+    const resolved = useResolvedStencil('Table.Row', tableRowStencil, undefined);
 
     return (
       <Element

@@ -32,14 +32,16 @@ export const useActionBarOverflowButton = composeHooks(
   createSubModelElemPropsHook(useActionBarModel)(m => m.menu, useMenuTarget)
 );
 
-const displayName = 'ActionBar.OverflowButton';
-
 export const ActionBarOverflowButton = createSubcomponent('button')({
-  displayName,
+  displayName: 'ActionBar.OverflowButton',
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarOverflowButton,
 })<ActionBarOverflowButtonProps>((elemProps, Element) => {
-  const resolved = useResolvedStencil(displayName, actionBarOverflowButtonStencil, undefined);
+  const resolved = useResolvedStencil(
+    'ActionBar.OverflowButton',
+    actionBarOverflowButtonStencil,
+    undefined
+  );
   return (
     <SecondaryButton as={Element} icon={relatedActionsIcon} {...mergeStyles(elemProps, resolved)} />
   );

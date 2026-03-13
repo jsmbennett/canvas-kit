@@ -9,12 +9,10 @@ export const baseTableCaptionStencil = createStencil({
   },
 });
 
-const displayName = 'Table.Caption';
-
 export const BaseTableCaption = createComponent('caption')({
-  displayName,
+  displayName: 'Table.Caption',
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
-    const resolved = useResolvedStencil(displayName, baseTableCaptionStencil, undefined);
+    const resolved = useResolvedStencil('Table.Caption', baseTableCaptionStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}

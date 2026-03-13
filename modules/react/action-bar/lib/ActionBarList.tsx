@@ -7,8 +7,8 @@ import {
   useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useActionBarModel} from './useActionBarModel';
 
@@ -38,17 +38,21 @@ export interface ActionBarListProps<T = any>
 export const actionBarListStencil = createStencil({
   base: {
     display: 'flex',
-    boxShadow: system.depth[1],
-    gap: system.space.x4,
-    background: system.color.bg.default,
-    borderBlockStart: `solid 1px ${cssVar(system.color.border.divider)}`,
-    padding: `${cssVar(system.space.x4)} ${cssVar(system.space.x10)} `,
+    boxShadow: system.depth[2],
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.md, system.space.x4),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    background: cssVar(system.color.surface.default, system.color.bg.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderBlockStart: `solid ${px2rem(1)}  ${cssVar(system.color.border.default, system.color.border.divider)}`,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: `${cssVar(system.padding.md, system.space.x4)} ${cssVar(base.size500, system.space.x10)} `,
     position: 'fixed',
     insetBlockEnd: 0,
-    insetInlineStart: 0,
-    insetInlineEnd: 0,
+    insetInline: 0,
     '@media (max-width: 767.5px)': {
-      padding: system.space.x4,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      padding: cssVar(system.size.xxxs, system.space.x4),
       '> *': {
         flex: 1,
       },
@@ -58,14 +62,12 @@ export const actionBarListStencil = createStencil({
 
 export const useActionBarList = useOverflowListMeasure;
 
-const displayName = 'ActionBar.List';
-
 export const ActionBarList = createSubcomponent('div')({
-  displayName,
+  displayName: 'ActionBar.List',
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarList,
 })<ActionBarListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
-  const resolved = useResolvedStencil(displayName, actionBarListStencil, undefined);
+  const resolved = useResolvedStencil('ActionBar.List', actionBarListStencil, undefined);
   return (
     <Element {...mergeStyles(elemProps, resolved)}>
       {useListRenderItems(model, children)}

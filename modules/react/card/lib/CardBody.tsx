@@ -12,12 +12,10 @@ export const cardBodyStencil = createStencil({
   defaultModifiers: {typeLevel: 'subtext.large'},
 });
 
-const displayName = 'Card.Body';
-
 export const CardBody = createComponent('div')({
-  displayName,
+  displayName: 'Card.Body',
   Component: ({children, ...elemProps}: CardBodyProps, ref, Element) => {
-    const resolved = useResolvedStencil(displayName, cardBodyStencil, undefined);
+    const resolved = useResolvedStencil('Card.Body', cardBodyStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}

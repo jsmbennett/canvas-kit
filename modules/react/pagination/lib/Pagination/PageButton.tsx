@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
-import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {PaginationContext} from './usePaginationModel';
@@ -10,13 +10,20 @@ import {PaginationContext} from './usePaginationModel';
 export const paginationPageButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    minWidth: system.space.x8,
-    padding: system.space.zero,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    minWidth: cssVar(system.size.sm, system.space.x8),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.sm, system.space.x8),
+    padding: 0,
     fontWeight: system.fontWeight.normal,
     [buttonStencil.vars.label]: system.color.fg.default,
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [buttonStencil.vars.background]: cssVar(
+        system.color.surface.alt.default,
+        system.color.bg.alt.soft
+      ),
       [buttonStencil.vars.label]: system.color.fg.strong,
     },
 
@@ -32,11 +39,19 @@ export const paginationPageButtonStencil = createStencil({
     toggled: {
       true: {
         fontWeight: system.fontWeight.bold,
-        [buttonStencil.vars.background]: brand.primary.base,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        [buttonStencil.vars.background]: cssVar(
+          system.color.brand.accent.primary,
+          brand.primary.base
+        ),
         [buttonStencil.vars.label]: system.color.fg.inverse,
 
         '&:hover, &.hover, &:active, &.active, &:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: brand.primary.base,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          [buttonStencil.vars.background]: cssVar(
+            system.color.brand.accent.primary,
+            brand.primary.base
+          ),
           [buttonStencil.vars.label]: system.color.fg.inverse,
         },
 
@@ -53,10 +68,8 @@ export interface PageButtonProps {
   children?: React.ReactNode;
 }
 
-const displayName = 'Pagination.PageButton';
-
 export const PageButton = createComponent('button')({
-  displayName,
+  displayName: 'Pagination.PageButton',
   Component({pageNumber, children, ...elemProps}: PageButtonProps) {
     const model = React.useContext(PaginationContext);
     const isCurrentPage = pageNumber === model.state.currentPage;
@@ -66,17 +79,13 @@ export const PageButton = createComponent('button')({
       model.events.goTo(pageNumber);
     };
 
-    const resolved = useResolvedStencil(displayName, paginationPageButtonStencil, {
-      toggled: isCurrentPage,
-    });
-
     return (
       <BaseButton
         aria-current={isCurrentPage ? 'page' : undefined}
         aria-pressed={undefined}
         size="small"
         onClick={handleClick}
-        {...handleCsProp(elemProps, resolved)}
+        {...handleCsProp(elemProps, paginationPageButtonStencil({toggled: isCurrentPage}))}
       >
         {children || pageNumber}
       </BaseButton>

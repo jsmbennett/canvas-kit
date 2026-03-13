@@ -21,7 +21,7 @@ const fadeIn = keyframes({
     background: 'none',
   },
   '100%': {
-    background: cssVar(system.color.bg.overlay),
+    background: cssVar(system.color.surface.overlay.scrim, system.color.bg.overlay),
   },
 });
 
@@ -31,11 +31,12 @@ export const modalOverlayContainerStencil = createStencil({
   },
   base: ({containerCenter}) => ({
     position: 'fixed',
-    top: system.space.zero,
-    left: system.space.zero,
+    top: 0,
+    left: 0,
     width: '100vw',
     height: '100vh',
-    background: system.color.bg.overlay,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    background: cssVar(system.color.surface.overlay.scrim, system.color.bg.overlay),
     animationDuration: '0.3s',
     animationName: fadeIn,
     // Allow overriding of animation in special cases
@@ -47,8 +48,8 @@ export const modalOverlayContainerStencil = createStencil({
       maxHeight: '100%',
       display: 'flex',
       position: 'absolute',
-      left: system.space.zero,
-      top: system.space.zero,
+      left: 0,
+      top: 0,
       justifyContent: 'center',
       alignItems: 'center',
       height: '100%',
@@ -73,16 +74,14 @@ export const useModalOverlay = createElemPropsHook(usePopupModel)(({state}, ref)
   };
 });
 
-const modalOpenOverlayDisplayName = 'Modal.OpenOverlay';
-
 const OpenModalOverlay = createSubcomponent('div')({
-  displayName: modalOpenOverlayDisplayName,
+  displayName: 'Modal.OpenOverlay',
   modelHook: useModalModel,
   elemPropsHook: useModalOverlay,
 })<ModalOverlayProps>((elemProps, Element, model) => {
   const windowSize = useWindowSize();
   const containerCenter = windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw';
-  const resolved = useResolvedStencil(modalOpenOverlayDisplayName, modalOverlayContainerStencil, {
+  const resolved = useResolvedStencil('Modal.OpenOverlay', modalOverlayContainerStencil, {
     containerCenter,
   });
   const content = (

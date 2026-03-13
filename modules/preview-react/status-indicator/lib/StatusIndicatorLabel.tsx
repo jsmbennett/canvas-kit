@@ -19,12 +19,10 @@ const statusIndicatorLabelStencil = createStencil({
   defaultModifiers: {typeLevel: 'subtext.large'},
 });
 
-const displayName = 'StatusIndicator.Label';
-
 export const StatusIndicatorLabel = createComponent('span')({
-  displayName,
+  displayName: 'StatusIndicator.Label',
   Component: ({children, typeLevel, ...elemProps}: StatusIndicatorLabelProps, ref, Element) => {
-    const resolved = useResolvedStencil(displayName, statusIndicatorLabelStencil, {
+    const resolved = useResolvedStencil('StatusIndicator.Label', statusIndicatorLabelStencil, {
       typeLevel,
     });
     return (

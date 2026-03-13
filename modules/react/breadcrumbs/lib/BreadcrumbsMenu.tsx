@@ -13,13 +13,11 @@ export const breadcrumbsMenuItemStencil = createStencil({
   },
 });
 
-const breadcrumbsMenuItemDisplayName = 'Breadcrumbs.Menu.Item';
-
 export const BreadcrumbsMenuItem = createComponent('a')({
-  displayName: breadcrumbsMenuItemDisplayName,
+  displayName: 'Breadcrumbs.Menu.Item',
   Component: (props: ExtractProps<typeof Menu.Item, never>, ref, Element) => {
     const resolved = useResolvedStencil(
-      breadcrumbsMenuItemDisplayName,
+      'Breadcrumbs.Menu.Item',
       breadcrumbsMenuItemStencil,
       undefined
     );
@@ -35,11 +33,9 @@ export const breadcrumbsMenuCardStencil = createStencil({
   },
 });
 
-const breadcrumbsMenuCardDisplayName = 'Breadcrumbs.Menu.Card';
-
-export const BreadcrumbsMenuCard = (elemProps: ExtractProps<typeof Menu.Card, never>) => {
+export const BreadcrumbsMenuCard = (elemProps: ExtractProps<typeof Menu.Card>) => {
   const resolved = useResolvedStencil(
-    breadcrumbsMenuCardDisplayName,
+    'Breadcrumbs.Menu.Card',
     breadcrumbsMenuCardStencil,
     undefined
   );

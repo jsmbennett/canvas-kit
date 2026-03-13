@@ -51,12 +51,10 @@ export interface DividerProps extends CSProps {
  *
  * ```
  */
-const displayName = 'Divider';
-
 export const Divider = createComponent('hr')({
-  displayName,
+  displayName: 'Divider',
   Component: ({space, ...elemProps}: DividerProps, ref, Element) => {
-    const resolved = useResolvedStencil(displayName, dividerStencil, {space});
+    const resolved = useResolvedStencil('Divider', dividerStencil, {space});
     return <Element ref={ref} {...handleCsProp(elemProps, resolved)} />;
   },
 });

@@ -63,12 +63,10 @@ export const tableHeaderStencil = createStencil({
   },
 });
 
-const tableBodyDisplayName = 'Table.Body';
-
 export const TableBody = createComponent('tbody')({
-  displayName: tableBodyDisplayName,
+  displayName: 'Table.Body',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
-    const resolved = useResolvedStencil(tableBodyDisplayName, tableBodyStencil, undefined);
+    const resolved = useResolvedStencil('Table.Body', tableBodyStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
@@ -76,13 +74,11 @@ export const TableBody = createComponent('tbody')({
     );
   },
 });
-
-const tableCaptionDisplayName = 'Table.Caption';
 
 export const TableCaption = createComponent('caption')({
-  displayName: tableCaptionDisplayName,
+  displayName: 'Table.Caption',
   Component: ({children, ...elemProps}: FlexProps, ref, Element) => {
-    const resolved = useResolvedStencil(tableCaptionDisplayName, tableCaptionStencil, undefined);
+    const resolved = useResolvedStencil('Table.Caption', tableCaptionStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
@@ -90,13 +86,11 @@ export const TableCaption = createComponent('caption')({
     );
   },
 });
-
-const tableCellDisplayName = 'Table.Cell';
 
 export const TableCell = createComponent('td')({
-  displayName: tableCellDisplayName,
+  displayName: 'Table.Cell',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
-    const resolved = useResolvedStencil(tableCellDisplayName, tableCellStencil, undefined);
+    const resolved = useResolvedStencil('Table.Cell', tableCellStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
@@ -104,13 +98,11 @@ export const TableCell = createComponent('td')({
     );
   },
 });
-
-const tableFooterDisplayName = 'Table.Footer';
 
 export const TableFooter = createComponent('tfoot')({
-  displayName: tableFooterDisplayName,
+  displayName: 'Table.Footer',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
-    const resolved = useResolvedStencil(tableFooterDisplayName, tableFooterStencil, undefined);
+    const resolved = useResolvedStencil('Table.Footer', tableFooterStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
@@ -118,13 +110,11 @@ export const TableFooter = createComponent('tfoot')({
     );
   },
 });
-
-const tableHeadDisplayName = 'Table.Head';
 
 export const TableHead = createComponent('thead')({
-  displayName: tableHeadDisplayName,
+  displayName: 'Table.Head',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
-    const resolved = useResolvedStencil(tableHeadDisplayName, tableHeadStencil, undefined);
+    const resolved = useResolvedStencil('Table.Head', tableHeadStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
@@ -133,12 +123,10 @@ export const TableHead = createComponent('thead')({
   },
 });
 
-const tableHeaderDisplayName = 'Table.Header';
-
 export const TableHeader = createComponent('th')({
-  displayName: tableHeaderDisplayName,
+  displayName: 'Table.Header',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
-    const resolved = useResolvedStencil(tableHeaderDisplayName, tableHeaderStencil, undefined);
+    const resolved = useResolvedStencil('Table.Header', tableHeaderStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
@@ -190,12 +178,10 @@ export default function App() {
 }
 ```
  */
-const tableDisplayName = 'Table';
-
 export const Table = createComponent('table')({
-  displayName: tableDisplayName,
+  displayName: 'Table',
   Component: ({children, ...elemProps}: TableProps, ref, Element) => {
-    const resolved = useResolvedStencil(tableDisplayName, tableStencil, undefined);
+    const resolved = useResolvedStencil('Table', tableStencil, undefined);
     return (
       <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}

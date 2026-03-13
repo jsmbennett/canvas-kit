@@ -16,14 +16,11 @@ export const selectCardStencil = createStencil({
   },
 });
 
-const displayName = 'Select.Card';
-
 export const SelectCard = createSubcomponent('div')({
-  displayName,
   modelHook: useSelectModel,
   elemPropsHook: useSelectCard,
 })<ExtractProps<typeof Combobox.Menu.Card>>(({children, ...elemProps}, Element) => {
-  const resolved = useResolvedStencil(displayName, selectCardStencil, undefined);
+  const resolved = useResolvedStencil('Select.Card', selectCardStencil, undefined);
   return (
     <Combobox.Menu.Card as={Element} {...handleCsProp(elemProps, resolved)}>
       {children}
