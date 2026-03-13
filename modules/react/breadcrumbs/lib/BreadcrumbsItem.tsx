@@ -4,10 +4,14 @@ import {
   useListItemRegister,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
-import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  composeHooks,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -40,13 +44,10 @@ export const breadcrumbsItemStencil = createStencil({
     display: 'inline-flex',
     whiteSpace: 'nowrap',
     [systemIconStencil.vars.size]: px2rem(20),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.icon.default),
+    [systemIconStencil.vars.color]: system.color.icon.default,
     [chevronRightIconPart]: {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(system.size.sm, system.space.x8),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(system.size.sm, system.space.x8),
+      height: system.space.x8,
+      width: system.space.x8,
       justifyContent: 'center',
       alignItems: 'center',
       display: 'inline-flex',
@@ -59,16 +60,19 @@ export const breadcrumbsItemStencil = createStencil({
 
 export const useBreadcrumbsItem = composeHooks(useOverflowListItemMeasure, useListItemRegister);
 
+const displayName = 'Breadcrumbs.Item';
+
 export const BreadcrumbsItem = createSubcomponent('li')({
-  displayName: 'Breadcrumbs.Item',
+  displayName,
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsItem,
   subComponents: {
     Link: BreadcrumbsLink,
   },
 })<BreadcrumbsItemProps>(({children, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil(displayName, breadcrumbsItemStencil, undefined);
   return (
-    <Element {...mergeStyles(elemProps, breadcrumbsItemStencil())}>
+    <Element {...mergeStyles(elemProps, resolved)}>
       {children}
       <SystemIcon
         icon={chevronRightSmallIcon}

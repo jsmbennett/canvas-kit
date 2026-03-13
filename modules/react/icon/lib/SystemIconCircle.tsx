@@ -1,4 +1,8 @@
-import {createComponent, pickForegroundColor} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  pickForegroundColor,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
@@ -80,8 +84,10 @@ export const systemIconCircleStencil = createStencil({
   }),
 });
 
+const displayName = 'SystemIconCircle';
+
 export const SystemIconCircle = createComponent('span')({
-  displayName: 'SystemIconCircle',
+  displayName,
   Component: (
     {
       background,
@@ -105,17 +111,14 @@ export const SystemIconCircle = createComponent('span')({
       colors.frenchVanilla100
     );
 
+    const resolved = useResolvedStencil(displayName, systemIconCircleStencil, {
+      containerSize: typeof size === 'number' ? px2rem(size) : size,
+      background: transformColorNameToToken(background),
+      color: color || iconColor,
+    });
+
     return (
-      <div
-        {...mergeStyles(
-          elemProps,
-          systemIconCircleStencil({
-            containerSize: typeof size === 'number' ? px2rem(size) : size,
-            background: transformColorNameToToken(background),
-            color: color || iconColor,
-          })
-        )}
-      >
+      <div {...mergeStyles(elemProps, resolved)}>
         <SystemIcon
           as={Element}
           ref={ref}

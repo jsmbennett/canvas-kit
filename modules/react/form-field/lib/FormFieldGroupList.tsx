@@ -1,14 +1,7 @@
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {FlexProps} from '@workday/canvas-kit-react/layout';
-import {
-  CSProps,
-  calc,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldModel} from './hooks';
 
@@ -18,45 +11,40 @@ const formFieldGroupListStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.md, system.shape.x1Half),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.sm, system.space.x2),
-    padding: `${px2rem(10)} ${cssVar(base.size150, system.space.x3)} ${cssVar(system.padding.xs, system.space.x2)}`,
-    margin: `0 ${calc.negate(cssVar(base.size150, system.space.x3))}`,
+    borderRadius: system.shape.x1Half,
+    gap: system.space.x2,
+    padding: `${px2rem(10)} ${system.space.x3} ${system.space.x2}`,
+    margin: `0 ${calc.negate(system.space.x3)}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
   },
   modifiers: {
     error: {
       error: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.surface.critical.default, brand.error.lightest),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.border.critical, brand.common.errorInner)}`,
+        backgroundColor: brand.error.lightest,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.errorInner}`,
       },
       caution: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${cssVar(system.color.brand.border.caution, brand.common.alertOuter)}, inset 0 0 0 ${px2rem(3)} ${cssVar(
-          system.color.brand.focus.caution.inner,
+        backgroundColor: brand.alert.lightest,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.alertOuter}, inset 0 0 0 ${px2rem(3)} ${
           brand.common.alertInner
-        )}`,
+        }`,
       },
     },
   },
 });
 
+const displayName = 'FormFieldGroup.List';
+
 export const FormFieldGroupList = createSubcomponent('div')({
-  displayName: 'FormFieldGroup.List',
+  displayName,
   modelHook: useFormFieldModel,
 })<FormFieldGroupListProps>(({children, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil(displayName, formFieldGroupListStencil, {
+    error: model.state.error,
+  });
   return (
-    <Element
-      data-width="ck-formfield-width"
-      {...handleCsProp(elemProps, formFieldGroupListStencil({error: model.state.error}))}
-    >
+    <Element data-width="ck-formfield-width" {...handleCsProp(elemProps, resolved)}>
       {children}
     </Element>
   );

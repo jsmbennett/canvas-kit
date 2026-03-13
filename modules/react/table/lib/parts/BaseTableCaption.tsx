@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -9,11 +9,14 @@ export const baseTableCaptionStencil = createStencil({
   },
 });
 
+const displayName = 'Table.Caption';
+
 export const BaseTableCaption = createComponent('caption')({
-  displayName: 'Table.Caption',
+  displayName,
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, baseTableCaptionStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, baseTableCaptionStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

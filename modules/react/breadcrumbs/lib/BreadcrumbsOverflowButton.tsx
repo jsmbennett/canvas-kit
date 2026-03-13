@@ -5,11 +5,12 @@ import {
   createElemPropsHook,
   createSubcomponent,
   subModelHook,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -33,14 +34,11 @@ export const breadcrumbsOverflowButtonStencil = createStencil({
   base: ({chevronRightIconPart}) => ({
     alignItems: 'center',
     display: 'flex',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.icon.default),
+    [systemIconStencil.vars.color]: system.color.icon.default,
     [systemIconStencil.vars.size]: px2rem(20),
     [chevronRightIconPart]: {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(system.size.sm, system.space.x8),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(system.size.sm, system.space.x8),
+      height: system.space.x8,
+      width: system.space.x8,
       justifyContent: 'center',
       alignItems: 'center',
       display: 'inline-flex',
@@ -60,13 +58,16 @@ export const useBreadcrumbsOverflowButton = composeHooks(
   subModelHook((m: ReturnType<typeof useBreadcrumbsModel>) => m.menu, useMenuTarget)
 );
 
+const displayName = 'Breadcrumbs.OverflowButton';
+
 export const BreadcrumbsOverflowButton = createSubcomponent('button')({
-  displayName: 'Breadcrumbs.OverflowButton',
+  displayName,
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsOverflowButton,
 })<BreadcrumbsOverflowButtonProps>(({style, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil(displayName, breadcrumbsOverflowButtonStencil, undefined);
   return (
-    <li {...breadcrumbsOverflowButtonStencil()} {...style}>
+    <li {...resolved} {...style}>
       <TertiaryButton
         as={Element}
         icon={relatedActionsIcon}

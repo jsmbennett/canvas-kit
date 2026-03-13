@@ -6,11 +6,12 @@ import {
   createElemPropsHook,
   createSubModelElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -28,8 +29,7 @@ const tabsOverflowButtonStencil = createStencil({
   base: {
     '&:has([data-part="tabs-overflow-button-icon"])': {
       display: 'flex',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      gap: cssVar(system.gap.none, system.space.zero),
+      gap: system.space.zero,
     },
   },
 });
@@ -44,17 +44,16 @@ export const useTabsOverflowButton = composeHooks(
   createSubModelElemPropsHook(useTabsModel)(m => m.menu, useMenuTarget)
 );
 
+const displayName = 'Tabs.OverflowButton';
+
 export const TabsOverflowButton = createSubcomponent('button')({
-  displayName: 'Tabs.OverflowButton',
+  displayName,
   modelHook: useTabsModel,
   elemPropsHook: useTabsOverflowButton,
 })<OverflowButtonProps>(({children, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil(displayName, tabsOverflowButtonStencil, undefined);
   return (
-    <StyledTabItem
-      type="button"
-      as={Element}
-      {...mergeStyles(elemProps, tabsOverflowButtonStencil())}
-    >
+    <StyledTabItem type="button" as={Element} {...mergeStyles(elemProps, resolved)}>
       <span>{children}</span>
       <SystemIcon data-part="tabs-overflow-button-icon" icon={chevronDownSmallIcon} />
     </StyledTabItem>

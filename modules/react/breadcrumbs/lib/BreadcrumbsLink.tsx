@@ -1,5 +1,5 @@
 import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -38,13 +38,18 @@ export const breadcrumbsLinkStencil = createStencil({
   }),
 });
 
+const displayName = 'Breadcrumbs.Link';
+
 export const BreadcrumbsLink = createComponent('a')({
-  displayName: 'Breadcrumbs.Link',
+  displayName,
   Component: (
     {maxWidth = 350, href, tooltipProps = {}, children, ...elemProps}: BreadcrumbsLinkProps,
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil(displayName, breadcrumbsLinkStencil, {
+      maxWidth: typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth,
+    });
     return (
       <OverflowTooltip {...tooltipProps}>
         <Hyperlink
@@ -53,12 +58,7 @@ export const BreadcrumbsLink = createComponent('a')({
           as={Element}
           role="link"
           variant="standalone"
-          {...handleCsProp(
-            elemProps,
-            breadcrumbsLinkStencil({
-              maxWidth: typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth,
-            })
-          )}
+          {...handleCsProp(elemProps, resolved)}
         >
           {children}
         </Hyperlink>

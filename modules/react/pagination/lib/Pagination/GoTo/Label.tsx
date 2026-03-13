@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {Subtext} from '@workday/canvas-kit-react/text';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 
@@ -20,17 +20,20 @@ export const paginationGoToLabelStencil = createStencil({
   },
 });
 
+const displayName = 'Pagination.GoToLabel';
+
 export const GoToLabel = createComponent('label')({
-  displayName: 'Pagination.GoToLabel',
+  displayName,
   Component({children, ...elemProps}: GoToLabelProps, ref, Element) {
     const model = React.useContext(PaginationContext);
+    const resolved = useResolvedStencil(displayName, paginationGoToLabelStencil, undefined);
     return (
       <Subtext
         ref={ref}
         as={Element}
         size="medium"
         variant="hint"
-        {...handleCsProp(elemProps, paginationGoToLabelStencil())}
+        {...handleCsProp(elemProps, resolved)}
       >
         {typeof children === 'function' ? children(model) : children}
       </Subtext>

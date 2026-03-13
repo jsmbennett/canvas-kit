@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {ToastBody} from './ToastBody';
@@ -51,13 +51,9 @@ const toastStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'row',
-    width: px2rem(360),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.xs, system.space.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xl, system.shape.x2),
+    width: calc.add(calc.multiply(system.space.x20, 4), system.space.x10),
+    padding: system.space.zero,
+    gap: system.space.x1,
   },
 });
 
@@ -79,8 +75,10 @@ const toastStencil = createStencil({
  * );
  *```
  */
+const displayName = 'Toast';
+
 export const Toast = createContainer('div')({
-  displayName: 'Toast',
+  displayName,
   modelHook: useToastModel,
   subComponents: {
     /**
@@ -113,10 +111,11 @@ export const Toast = createContainer('div')({
     Link: ToastLink,
   },
 })<ToastProps>(({children, ...elemProps}, _, model) => {
+  const resolved = useResolvedStencil(displayName, toastStencil, undefined);
   return (
     <Popup.Card
       {...getAriaAttributes(model.state.mode, model.state.id)}
-      {...mergeStyles(elemProps, toastStencil())}
+      {...mergeStyles(elemProps, resolved)}
     >
       {children}
     </Popup.Card>

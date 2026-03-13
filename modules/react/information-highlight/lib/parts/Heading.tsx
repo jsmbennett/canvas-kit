@@ -1,4 +1,4 @@
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -25,16 +25,12 @@ const informationHighlightHeadingStencil = createStencil({
 export interface InformationHighlightHeadingProps
   extends Partial<ExtractProps<typeof Heading, never>> {}
 
+const displayName = 'InformationHighlight.Heading';
+
 export const InformationHighlightHeading = createComponent('h3')({
-  displayName: 'Heading',
+  displayName,
   Component: ({size = 'small', ...elemProps}: InformationHighlightHeadingProps, ref, Element) => {
-    return (
-      <Heading
-        as={Element}
-        ref={ref}
-        size={size}
-        {...handleCsProp(elemProps, informationHighlightHeadingStencil())}
-      />
-    );
+    const resolved = useResolvedStencil(displayName, informationHighlightHeadingStencil, undefined);
+    return <Heading as={Element} ref={ref} size={size} {...handleCsProp(elemProps, resolved)} />;
   },
 });

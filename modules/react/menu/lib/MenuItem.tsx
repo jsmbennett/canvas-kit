@@ -12,12 +12,13 @@ import {
   createElemPropsHook,
   createSubcomponent,
   useLocalRef,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
 
@@ -59,32 +60,20 @@ export const menuItemStencil = createStencil({
     selected: 'menu-item-selected',
   },
   base: ({textPart, iconPart, selectedPart}) => ({
-    fontFamily: system.fontFamily.default,
-    fontWeight: system.fontWeight.normal,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
+    ...system.type.subtext.large,
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.md, system.space.x4),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${cssVar(system.padding.sm, system.space.x2)} ${cssVar(system.padding.md, system.space.x4)}`,
+    gap: system.space.x4,
+    padding: `${system.space.x2} ${system.space.x4}`,
     boxSizing: 'border-box',
     cursor: 'pointer',
     color: system.color.fg.default,
     borderWidth: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xxl, '0'),
     textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: cssVar(system.size.md, system.space.x10),
+    minHeight: system.space.x10,
     overflowWrap: 'anywhere',
     // We want the icon colors to be the same as the text color
     [systemIconStencil.vars.color]: 'currentColor',
@@ -102,53 +91,45 @@ export const menuItemStencil = createStencil({
 
     // Selected styles
     '&[aria-selected=true]': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.brand.fg.primary.strong, brand.primary.dark),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(system.color.brand.surface.primary.strong, brand.primary.lightest),
+      color: brand.primary.dark,
+      backgroundColor: brand.primary.lightest,
 
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
       },
       '&:where(.focus, :focus-visible)': {
-        [systemIconStencil.vars.color]: 'currentColor',
+        [systemIconStencil.vars.color]: brand.primary.accent,
         outline: 'none',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
-        color: cssVar(system.color.fg.inverse, brand.primary.accent),
+        backgroundColor: brand.primary.base,
+        color: systemIconStencil.vars.color,
       },
     },
 
     // Hover styles
     '&:is(.hover, :hover)': {
       color: system.color.fg.strong,
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(system.color.surface.overlay.hover.default, brand.neutral.lightest),
+      backgroundColor: brand.neutral.lightest,
     },
 
     // Focus styles
     '&:is(.focus, :focus-visible)': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.fg.inverse, brand.primary.accent),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+      color: brand.primary.accent,
+      backgroundColor: brand.primary.base,
       outline: `${px2rem(2)} solid transparent`,
       outlineOffset: `-${px2rem(2)}`,
     },
 
     // Disabled styles
     '&:is(:disabled, [aria-disabled=true])': {
+      color: system.color.fg.disabled,
       cursor: 'default',
-      opacity: system.opacity.disabled,
 
       '&:where(.hover, :hover, [aria-selected=true])': {
         background: 'none',
       },
       // Focus + Disabled
       '&:where(.focus, :focus-visible)': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.light),
-        opacity: system.opacity.disabled,
+        backgroundColor: brand.primary.light,
       },
     },
 
@@ -173,15 +154,14 @@ const MenuItemText = createComponent('span')({
   },
 });
 
+const styledMenuItemDisplayName = 'MenuItem';
+
 export const StyledMenuItem = createComponent('button')({
-  displayName: 'MenuItem',
+  displayName: styledMenuItemDisplayName,
   Component: ({children, isDisabled, ...elemProps}: MenuItemProps, ref, Element) => {
+    const resolved = useResolvedStencil(styledMenuItemDisplayName, menuItemStencil, {});
     return (
-      <Element
-        ref={ref}
-        aria-disabled={isDisabled}
-        {...mergeStyles(elemProps, menuItemStencil({}))}
-      >
+      <Element ref={ref} aria-disabled={isDisabled} {...mergeStyles(elemProps, resolved)}>
         {typeof children === 'string' ? <MenuItemText>{children}</MenuItemText> : children}
       </Element>
     );

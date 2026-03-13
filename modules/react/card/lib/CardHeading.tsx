@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {textStencil} from '@workday/canvas-kit-react/text';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface CardHeadingProps extends BoxProps {
@@ -20,17 +20,19 @@ export const cardHeadingStencil = createStencil({
   base: {
     color: system.color.fg.strong,
     fontWeight: system.fontWeight.bold,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    marginBlock: cssVar(system.padding.none, system.space.zero),
+    marginBlock: system.space.zero,
   },
   defaultModifiers: {typeLevel: 'body.large'},
 });
 
+const displayName = 'Card.Heading';
+
 export const CardHeading = createComponent('h3')({
-  displayName: 'Card.Heading',
+  displayName,
   Component: ({children, ...elemProps}: CardHeadingProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, cardHeadingStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, cardHeadingStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

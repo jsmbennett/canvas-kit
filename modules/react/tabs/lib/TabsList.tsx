@@ -12,6 +12,7 @@ import {
   createSubcomponent,
   useLocalRef,
   useModalityType,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
@@ -163,23 +164,21 @@ export const tabsListStencil = createStencil({
   },
 });
 
+const displayName = 'Tabs.List';
+
 export const TabsList = createSubcomponent('div')({
-  displayName: 'Tabs.List',
+  displayName,
   modelHook: useTabsModel,
   elemPropsHook: useTabsList,
 })<TabListProps & {maskImage?: string}>(
   ({children, overflowButton, ...elemProps}, Element, model) => {
     const modality = useModalityType();
+    const resolved = useResolvedStencil(displayName, tabsListStencil, {
+      modality,
+    });
 
     return (
-      <Element
-        {...mergeStyles(
-          elemProps,
-          tabsListStencil({
-            modality: modality,
-          })
-        )}
-      >
+      <Element {...mergeStyles(elemProps, resolved)}>
         {useListRenderItems(model, children)}
         {overflowButton}
       </Element>

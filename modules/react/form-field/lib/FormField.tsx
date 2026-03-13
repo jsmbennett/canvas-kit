@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {GrowthBehavior, createContainer} from '@workday/canvas-kit-react/common';
+import {
+  GrowthBehavior,
+  createContainer,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {FormFieldContainer} from './FormFieldContainer';
@@ -111,19 +115,11 @@ export const FormField = createContainer('div')({
     Field: FormFieldField,
   },
 })<FormFieldProps>(({children, grow, orientation = 'vertical', ...elemProps}, Element, model) => {
-  return (
-    <Element
-      {...mergeStyles(
-        elemProps,
-        formFieldStencil({
-          grow,
-          orientation: model.state.orientation,
-          error: model.state.error,
-          required: model.state.isRequired,
-        })
-      )}
-    >
-      {children}
-    </Element>
-  );
+  const resolved = useResolvedStencil('FormField', formFieldStencil, {
+    grow,
+    orientation: model.state.orientation,
+    error: model.state.error,
+    required: model.state.isRequired,
+  });
+  return <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>;
 });

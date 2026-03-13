@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {calc, createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -47,11 +47,14 @@ export const pillCountStencil = createStencil({
   }),
 });
 
+const displayName = 'Pill.Count';
+
 export const PillCount = createComponent('span')({
-  displayName: 'Pill.Count',
+  displayName,
   Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, pillCountStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, pillCountStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

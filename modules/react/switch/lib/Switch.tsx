@@ -1,6 +1,12 @@
 import * as React from 'react';
 
-import {ErrorType, createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
+import {
+  ErrorType,
+  createComponent,
+  focusRing,
+  useResolvedStencil,
+  useUniqueId,
+} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
@@ -39,18 +45,23 @@ export interface SwitchProps {
 const switchContainerStencil = createStencil({
   base: {
     position: 'relative',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xs, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.sm, system.space.x8),
+    height: system.space.x6,
+    width: system.space.x8,
   },
 });
 
+const switchContainerDisplayName = 'SwitchContainer';
+
 const SwitchContainer = createComponent('div')({
-  displayName: 'SwitchContainer',
+  displayName: switchContainerDisplayName,
   Component: ({children, ...elemProps}, ref, Element) => {
+    const resolved = useResolvedStencil(
+      switchContainerDisplayName,
+      switchContainerStencil,
+      undefined
+    );
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, switchContainerStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );
@@ -61,18 +72,16 @@ const switchInputStencil = createStencil({
   base: {
     display: 'flex',
     position: 'absolute',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xs, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.sm, system.space.x8),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.full, system.shape.round),
+    height: system.space.x6,
+    width: system.space.x8,
+    margin: system.space.zero,
+    marginLeft: system.space.x1,
+    borderRadius: system.shape.round,
     opacity: '0',
     cursor: 'pointer',
     '&:checked, &.checked': {
       '& ~ div:first-of-type': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+        backgroundColor: brand.primary.base,
       },
       '&:disabled, &.disabled': {
         '& ~ div:first-of-type': {
@@ -97,29 +106,31 @@ const switchInputStencil = createStencil({
     error: {
       error: {
         '& ~ div:first-of-type': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           boxShadow: `
-              0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, base.neutral0)},
-              0 0 0 ${system.space.x1} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)},
+              0 0 0 ${px2rem(2)} ${cssVar(system.color.border.inverse.default, base.neutral0)},
+              0 0 0 ${system.space.x1} ${brand.common.errorInner},
               0 0 0 ${px2rem(5)} transparent`,
         },
       },
       caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
-          0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, base.neutral0)},
-          0 0 0 ${system.space.x1} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)},
-          0 0 0 ${px2rem(5)} ${cssVar(system.color.brand.border.caution, brand.common.alertOuter)}`,
+          0 0 0 ${px2rem(2)} ${cssVar(system.color.border.inverse.default, base.neutral0)},
+          0 0 0 ${system.space.x1} ${brand.common.alertInner},
+          0 0 0 ${px2rem(5)} ${brand.common.alertOuter}`,
         },
       },
     },
   },
 });
 
+const switchInputDisplayName = 'SwitchInput';
+
 const SwitchInput = createComponent('input')<SwitchProps>({
-  displayName: 'SwitchInput',
+  displayName: switchInputDisplayName,
   Component: ({error, ...elemProps}, ref, Element) => {
-    return <Element ref={ref} {...mergeStyles(elemProps, switchInputStencil({error}))} />;
+    const resolved = useResolvedStencil(switchInputDisplayName, switchInputStencil, {error});
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });
 
@@ -129,26 +140,28 @@ const switchBackgroundStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     pointerEvents: 'none',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    marginTop: cssVar(system.gap.xs, system.space.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.sm, system.space.x8),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xxxs, system.space.x4),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.full, system.shape.round),
-    padding: `0 ${px2rem(2)}`,
+    marginTop: system.space.x1,
+    width: system.space.x8,
+    height: system.space.x4,
+    borderRadius: system.shape.round,
+    padding: `${system.space.zero} ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: cssVar(system.color.accent.muted.soft, system.color.bg.muted.soft),
+    backgroundColor: system.color.bg.muted.soft,
   },
 });
 
+const switchBackgroundDisplayName = 'SwitchBackground';
+
 const SwitchBackground = createComponent('div')({
-  displayName: 'SwitchBackground',
+  displayName: switchBackgroundDisplayName,
   Component: ({children, ...elemProps}, ref, Element) => {
+    const resolved = useResolvedStencil(
+      switchBackgroundDisplayName,
+      switchBackgroundStencil,
+      undefined
+    );
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, switchBackgroundStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );
@@ -157,39 +170,34 @@ const SwitchBackground = createComponent('div')({
 
 const switchCircleStencil = createStencil({
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(base.size150, system.space.x3),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(base.size150, system.space.x3),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.full, system.shape.round),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: system.space.x3,
+    height: system.space.x3,
+    borderRadius: system.shape.round,
     boxShadow: system.depth[1],
     transition: 'transform 150ms ease',
     pointerEvents: 'none',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: cssVar(system.color.fg.inverse, brand.primary.accent),
+    backgroundColor: brand.primary.accent,
     transform: `translateX(${system.space.zero})`,
   },
   modifiers: {
     checked: {
       true: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        transform: `translateX(${cssVar(system.size.xxxs, system.space.x4)})`,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        transform: `translateX(${system.space.x4})`,
         ':dir(rtl)': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          transform: `translateX(${calc.negate(cssVar(system.size.xxxs, system.space.x4))})`,
+          transform: `translateX(${calc.negate(system.space.x4)})`,
         },
       },
     },
   },
 });
 
+const switchCircleDisplayName = 'SwitchCircle';
+
 const SwitchCircle = createComponent('div')<Pick<SwitchProps, 'checked'>>({
-  displayName: 'SwitchCircle',
+  displayName: switchCircleDisplayName,
   Component: ({checked, ...elemProps}, ref, Element) => {
-    return <Element ref={ref} {...mergeStyles(elemProps, switchCircleStencil({checked}))} />;
+    const resolved = useResolvedStencil(switchCircleDisplayName, switchCircleStencil, {checked});
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });
 

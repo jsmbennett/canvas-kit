@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 
 import {getInitialsFromName} from './getInitialsFromName';
@@ -21,11 +21,14 @@ export const avatarNameStencil = createStencil({
   },
 });
 
+const displayName = 'AvatarName';
+
 export const AvatarName = createComponent('span')({
-  displayName: 'AvatarName',
+  displayName,
   Component: ({name, preferredInitials, ...elemProps}: AvatarNameProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, avatarNameStencil, undefined);
     return (
-      <Element ref={ref} {...handleCsProp(elemProps, avatarNameStencil())}>
+      <Element ref={ref} {...handleCsProp(elemProps, resolved)}>
         {preferredInitials || getInitialsFromName(name)}
       </Element>
     );

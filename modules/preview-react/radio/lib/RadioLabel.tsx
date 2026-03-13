@@ -1,9 +1,14 @@
 import React from 'react';
 
-import {ExtractProps, Themeable, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  Themeable,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {RadioInput} from './RadioInput';
 import {RadioText} from './RadioText';
@@ -28,18 +33,18 @@ export interface RadioLabelProps
 const radioLabelStencil = createStencil({
   base: {
     alignItems: 'flex-start',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: cssVar(base.size225, system.space.x6),
+    minHeight: system.space.x6,
     position: 'relative',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.sm, system.space.x3),
+    gap: system.space.x3,
   },
 });
 
 export const RadioLabelContext = React.createContext({} as RadioLabelContextInterface);
 
+const displayName = 'Radio.Label';
+
 export const RadioLabel = createSubcomponent('label')({
-  displayName: 'Radio.Label',
+  displayName,
   modelHook: useRadioModel,
   subComponents: {
     /**
@@ -70,9 +75,10 @@ export const RadioLabel = createSubcomponent('label')({
     Text: RadioText,
   },
 })<RadioLabelProps>(({children, variant, disabled, value, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil(displayName, radioLabelStencil, {variant});
   return (
     <RadioLabelContext.Provider value={{variant, disabled}}>
-      <Flex as={Element} {...mergeStyles(elemProps, radioLabelStencil({variant}))}>
+      <Flex as={Element} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Flex>
     </RadioLabelContext.Provider>

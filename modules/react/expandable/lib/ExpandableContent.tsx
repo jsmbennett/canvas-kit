@@ -1,8 +1,12 @@
 import React from 'react';
 
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useExpandableContent} from './hooks/useExpandableContent';
@@ -18,16 +22,18 @@ export interface ExpandableContentProps extends ExtractProps<typeof Box, never> 
 
 export const expandableContentStencil = createStencil({
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    background: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${cssVar(system.padding.md, system.space.x4)} ${cssVar(system.padding.xs, system.space.x2)} ${cssVar(system.padding.xs, system.space.x2)}`,
+    background: system.color.bg.transparent.default,
+    padding: `${system.space.x4} ${system.space.x2} ${system.space.x2}`,
   },
 });
 
+const displayName = 'Expandable.Content';
+
 export const ExpandableContent = createSubcomponent('div')({
+  displayName,
   modelHook: useExpandableModel,
   elemPropsHook: useExpandableContent,
 })<ExpandableContentProps>(({children, ...elementProps}, Element) => {
-  return <Element {...mergeStyles(elementProps, expandableContentStencil())}>{children}</Element>;
+  const resolved = useResolvedStencil(displayName, expandableContentStencil, undefined);
+  return <Element {...mergeStyles(elementProps, resolved)}>{children}</Element>;
 });

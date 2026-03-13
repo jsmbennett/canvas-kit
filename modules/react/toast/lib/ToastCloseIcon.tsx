@@ -1,4 +1,4 @@
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {createStencil} from '@workday/canvas-kit-styling';
@@ -11,16 +11,14 @@ export const toastCloseIconStencil = createStencil({
   },
 });
 
+const displayName = 'Toast.CloseIcon';
+
 export const ToastCloseIcon = createComponent('button')({
-  displayName: 'Toast.CloseIcon',
+  displayName,
   Component: (elemProps: ToastCloseIconProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, toastCloseIconStencil, undefined);
     return (
-      <Popup.CloseIcon
-        as={Element}
-        ref={ref}
-        size="small"
-        {...mergeStyles(elemProps, toastCloseIconStencil())}
-      />
+      <Popup.CloseIcon as={Element} ref={ref} size="small" {...mergeStyles(elemProps, resolved)} />
     );
   },
 });

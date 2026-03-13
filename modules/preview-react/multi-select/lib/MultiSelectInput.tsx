@@ -7,10 +7,18 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {
+  CSProps,
+  calc,
+  createStencil,
+  cssVar,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
@@ -20,49 +28,35 @@ import {useMultiSelectModel} from './useMultiSelectModel';
 
 export const multiSelectInputStencil = createStencil({
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     border: `1px solid ${system.color.border.input.default}`,
     display: 'flex',
     flexDirection: 'column',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.md, system.shape.x1Half),
+    backgroundColor: system.color.bg.default,
+    borderRadius: system.shape.x1Half,
     boxSizing: 'border-box',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: cssVar(system.size.md, system.space.x10),
+    minHeight: system.space.x10,
     transition: '0.2s box-shadow, 0.2s border-color',
     margin: 0, // Fix Safari
     [textInputStencil.vars.width]: '100%',
 
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      borderColor: cssVar(system.color.border.input.hover, system.color.border.input.strong),
+      borderColor: system.color.border.input.strong,
     },
 
     '&:has(:focus-visible:not([disabled])), &.focus': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      borderColor: cssVar(system.color.brand.border.primary, system.color.border.primary.default),
-      boxShadow: `inset 0 0 0 1px ${cssVar(system.color.brand.focus.primary, system.color.border.primary.default)}`,
+      borderColor: system.color.border.primary.default,
+      boxShadow: `inset 0 0 0 1px ${system.color.border.primary.default}`,
     },
 
     '& [data-part="user-input"]': {
-      fontFamily: system.fontFamily.default,
-      fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-      fontWeight: system.fontWeight.normal,
-      lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(
-        system.color.surface.transparent,
-        system.color.bg.transparent.default
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      borderRadius: cssVar(system.shape.md, system.shape.x1),
+      ...system.type.subtext.large,
+      backgroundColor: system.color.bg.transparent.default,
+      borderRadius: system.shape.x1,
 
       // collapse the height of the input by the border width so that an empty multi-select
       // is the same height as a `TextInput`
       '&:where([data-part="user-input"], [data-part="form-input"])': {
-        height: px2rem(38),
+        height: calc.subtract(system.space.x10, px2rem(2)),
       },
 
       // Remove the focus ring - it is handled at the container level
@@ -79,97 +73,68 @@ export const multiSelectInputStencil = createStencil({
       },
     },
 
-    '&:has(:disabled, .disabled) :where([data-part="user-input"])': {
-      opacity: system.opacity.disabled,
-      [systemIconStencil.vars.color]: system.color.fg.disabled,
-    },
-
     '&:has(:disabled, .disabled)': {
-      opacity: system.opacity.disabled,
-      [systemIconStencil.vars.color]: system.color.fg.disabled,
-    },
-
-    '&:has(:disabled, .disabled) :where([data-part="form-input"])': {
-      opacity: system.opacity.zero,
+      borderColor: system.color.border.input.disabled,
+      color: system.color.text.disabled,
+      backgroundColor: system.color.bg.alt.softer,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 
     '& :where([data-part="form-input"])': {
       position: 'absolute',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
+      top: system.space.zero,
+      bottom: system.space.zero,
+      left: system.space.zero,
+      right: system.space.zero,
       opacity: system.opacity.zero,
       cursor: 'default',
       pointerEvents: 'none',
     },
 
     '& :where([data-part="separator"])': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(system.color.border.default, system.color.border.divider),
+      backgroundColor: system.color.border.divider,
       height: 1,
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      margin: `0 ${cssVar(system.gap.sm, system.space.x2)}`,
+      margin: `${system.space.zero} ${system.space.x2}`,
     },
 
     '& :where([data-part="list"])': {
       display: 'flex',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      gap: cssVar(system.gap.sm, system.space.x2),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      padding: cssVar(system.padding.xs, system.space.x2),
+      gap: system.space.x2,
+      padding: system.space.x2,
       flexWrap: 'wrap',
     },
   },
   modifiers: {
     error: {
       error: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        borderColor: cssVar(system.color.brand.border.critical, brand.common.errorInner),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)}`,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.surface.critical.default, brand.error.lightest),
+        borderColor: brand.common.errorInner,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}`,
+        backgroundColor: brand.error.lightest,
         '&:has(:hover, :disabled, :focus-visible), &:is(.hover, .disabled, .focus)': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          borderColor: cssVar(system.color.brand.border.critical, brand.common.errorInner),
+          borderColor: brand.common.errorInner,
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          borderColor: cssVar(system.color.brand.border.critical, brand.common.errorInner),
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)}, 0 0 0 2px ${
-            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            cssVar(
-              system.color.focus.inverse,
-              cssVar(system.color.border.inverse.default, base.neutral0)
-            )
-          }, 0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
+          borderColor: brand.common.errorInner,
+          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}, 0 0 0 2px ${cssVar(
+            system.color.border.inverse.default,
+            base.neutral0
+          )}, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
       },
       caution: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        borderColor: cssVar(system.color.brand.border.caution, brand.common.alertOuter),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)}`,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
+        borderColor: brand.common.alertOuter,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner}`,
+        backgroundColor: brand.alert.lightest,
         '&:has(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled])), .focus:not(:has([disabled]))':
           {
-            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            borderColor: cssVar(system.color.brand.border.caution, brand.common.alertOuter),
+            borderColor: brand.common.alertOuter,
           },
-        '&:hover, &.hover': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          borderColor: cssVar(system.color.brand.border.caution, brand.common.alertOuter),
-        },
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)},
-        0 0 0 2px ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
-        0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
+        0 0 0 2px ${cssVar(system.color.border.inverse.default, base.neutral0)},
+        0 0 0 4px ${brand.common.focusOutline}`,
         },
         outlineOffset: px2rem(2),
       },
@@ -222,7 +187,10 @@ export interface MultiSelectInputProps
   error?: ErrorType;
 }
 
+const multiSelectInputDisplayName = 'MultiSelect.Input';
+
 export const MultiSelectInput = createSubcomponent(TextInput)({
+  displayName: multiSelectInputDisplayName,
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
 })<MultiSelectInputProps>(
@@ -240,8 +208,11 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
     },
     Element
   ) => {
+    const resolved = useResolvedStencil(multiSelectInputDisplayName, multiSelectInputStencil, {
+      error,
+    });
     return (
-      <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({error}))}>
+      <div {...handleCsProp({className, cs, style}, resolved)}>
         <InputGroup>
           <InputGroup.Input data-part="form-input" {...formInputProps} />
           <InputGroup.Input
@@ -263,7 +234,10 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
   }
 );
 
+const multiSelectSearchInputDisplayName = 'MultiSelect.SearchInput';
+
 export const MultiSelectSearchInput = createSubcomponent(TextInput)({
+  displayName: multiSelectSearchInputDisplayName,
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectInput,
 })<MultiSelectInputProps>(
@@ -282,8 +256,13 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
     },
     Element
   ) => {
+    const resolved = useResolvedStencil(
+      multiSelectSearchInputDisplayName,
+      multiSelectInputStencil,
+      {}
+    );
     return (
-      <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({}))}>
+      <div {...handleCsProp({className, cs, style}, resolved)}>
         <InputGroup>
           <InputGroup.InnerStart pointerEvents="none" width={system.space.x8}>
             <SystemIcon icon={searchIcon} size={system.space.x4} />

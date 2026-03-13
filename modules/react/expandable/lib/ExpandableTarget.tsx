@@ -1,9 +1,13 @@
 import React from 'react';
 
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useExpandableModel} from './hooks/useExpandableModel';
@@ -26,41 +30,36 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
 
 export const expandableTargetStencil = createStencil({
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    background: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderColor: cssVar(system.color.border.transparent, system.color.bg.transparent.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xxl, system.shape.x6),
+    background: system.color.bg.transparent.default,
+    borderColor: system.color.bg.transparent.default,
+    borderRadius: system.shape.x1,
     borderWidth: 0,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.none, system.space.zero),
+    gap: system.space.x2,
     justifyContent: 'start',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: cssVar(system.padding.xs, system.space.x2),
+    padding: system.space.x2,
     cursor: 'pointer',
     width: '100%',
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(system.color.surface.overlay.hover.default, system.color.bg.alt.soft),
+      backgroundColor: system.color.bg.alt.soft,
     },
     '&:focus-visible, &.focus': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      outline: `${cssVar(system.color.brand.border.primary, brand.common.focusOutline)} solid ${px2rem(2)}`,
+      outline: `${brand.common.focusOutline} solid ${px2rem(2)}`,
     },
   },
 });
 
+const displayName = 'Expandable.Target';
+
 export const ExpandableTarget = createSubcomponent('button')({
+  displayName,
   modelHook: useExpandableModel,
   elemPropsHook: useExpandableTarget,
 })<ExpandableTargetProps>(({children, headingLevel, ...elementProps}, Element) => {
-  const button = (
-    <Element {...mergeStyles(elementProps, expandableTargetStencil())}>{children}</Element>
-  );
+  const resolved = useResolvedStencil(displayName, expandableTargetStencil, undefined);
+  const button = <Element {...mergeStyles(elementProps, resolved)}>{children}</Element>;
 
   return headingLevel ? (
     <Heading size="small" as={headingLevel} margin="0">

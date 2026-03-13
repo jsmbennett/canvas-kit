@@ -1,7 +1,7 @@
 import {CSSObject} from '@emotion/styled';
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
 import {svgStencil} from './Svg';
@@ -151,25 +151,22 @@ export const base64Encoded = (str: string) => {
   return Buffer.from(str, 'binary').toString('base64');
 };
 
+const displayName = 'Graphic';
+
 export const Graphic = createComponent('span')({
-  displayName: 'Graphic',
+  displayName,
   Component: (
     {grow = false, width, height, src, srcset, alt, sizes, ...elemProps}: GraphicProps,
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil(displayName, graphicImageStencil, {
+      grow,
+      width: typeof width === 'number' ? px2rem(width) : width,
+      height: typeof height === 'number' ? px2rem(height) : height,
+    });
     return (
-      <Element
-        ref={ref}
-        {...handleCsProp(
-          elemProps,
-          graphicImageStencil({
-            grow,
-            width: typeof width === 'number' ? px2rem(width) : width,
-            height: typeof height === 'number' ? px2rem(height) : height,
-          })
-        )}
-      >
+      <Element ref={ref} {...handleCsProp(elemProps, resolved)}>
         <img
           data-part="graphic-img"
           src={src.svg ? `data:image/svg+xml;base64,${base64Encoded(src.svg)}` : src.url}

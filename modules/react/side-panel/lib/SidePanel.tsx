@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-import {createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {
+  createContainer,
+  createElemPropsHook,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -122,21 +126,12 @@ export const SidePanel = createContainer('section')({
     Element,
     model
   ) => {
-    return (
-      <Element
-        {...handleCsProp(elemProps, [
-          panelStencil({
-            expanded: model.state.transitionState,
-            variant,
-            expandedWidth:
-              typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
-            collapsedWidth:
-              typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
-          }),
-        ])}
-      >
-        {children}
-      </Element>
-    );
+    const resolved = useResolvedStencil('SidePanel', panelStencil, {
+      expanded: model.state.transitionState,
+      variant,
+      expandedWidth: typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
+      collapsedWidth: typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
+    });
+    return <Element {...handleCsProp(elemProps, [resolved])}>{children}</Element>;
   }
 );

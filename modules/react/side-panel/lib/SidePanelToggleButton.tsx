@@ -5,6 +5,7 @@ import {
   ExtractProps,
   createElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
@@ -142,8 +143,10 @@ export const useSidePanelToggleButton = createElemPropsHook(useSidePanelModel)((
   };
 });
 
+const displayName = 'SidePanel.ToggleButton';
+
 export const SidePanelToggleButton = createSubcomponent('button')({
-  displayName: 'SidePanel.ToggleButton',
+  displayName,
   modelHook: useSidePanelModel,
   elemPropsHook: useSidePanelToggleButton,
 })(
@@ -160,6 +163,10 @@ export const SidePanelToggleButton = createSubcomponent('button')({
     Element,
     model
   ) => {
+    const resolved = useResolvedStencil(displayName, sidePanelToggleButtonStencil, {
+      state: model.state.transitionState,
+      origin: model.state.origin,
+    });
     return (
       <Tooltip
         type="muted"
@@ -174,13 +181,7 @@ export const SidePanelToggleButton = createSubcomponent('button')({
           as={Element}
           variant={variant}
           aria-label={tooltipText}
-          {...handleCsProp(
-            elemProps,
-            sidePanelToggleButtonStencil({
-              state: model.state.transitionState,
-              origin: model.state.origin,
-            })
-          )}
+          {...handleCsProp(elemProps, resolved)}
           onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
             elemProps.onClick?.(event);
             model.events.handleAnimationStart();

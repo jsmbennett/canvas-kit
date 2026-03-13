@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
@@ -23,51 +23,40 @@ export const hyperlinkStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
     textDecoration: 'underline',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    color: cssVar(system.color.fg.info.default, system.color.text.primary.default),
+    color: system.color.text.primary.default,
     cursor: 'pointer',
-    borderRadius: px2rem(2),
+    borderRadius: system.shape.half,
     padding: `0 ${px2rem(2)} `,
     margin: '0 -2px',
     transition: 'color 0.15s,background-color 0.15s',
     wordBreak: 'break-word',
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.fg.info.strong, system.color.text.primary.strong),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      background: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+      color: system.color.text.primary.strong,
+      background: system.color.bg.alt.soft,
     },
     '&:focus, &.focus, &:focus-visible': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      boxShadow: `0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.primary, brand.common.focusOutline)}`,
+      boxShadow: `0 0 0 ${px2rem(2)} ${cssVar(brand.common.focusOutline)}`,
       outline: 'none',
     },
     '&:active, &.active': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.fg.info.strong, system.color.text.primary.stronger),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      background: cssVar(system.color.surface.alt.default, system.color.bg.alt.default),
+      color: system.color.text.primary.stronger,
+      background: system.color.bg.alt.default,
     },
   },
   modifiers: {
     variant: {
       inverse: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+        color: system.color.text.inverse,
         '&:hover, &.hover': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+          color: system.color.text.inverse,
           background: 'rgba(255, 255, 255, 0.1)',
         },
         '&:focus, &.focus, &:focus-visible': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token.
-          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.fg.inverse, system.color.text.inverse)}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.text.inverse)}`,
         },
         '&:active, &.active': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          color: cssVar(system.color.brand.fg.primary.strong, system.color.text.primary.stronger),
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          background: cssVar(system.color.surface.navigation, system.color.bg.alt.soft),
+          color: system.color.text.primary.stronger,
+          background: system.color.bg.alt.soft,
         },
       },
       standalone: {
@@ -75,22 +64,17 @@ export const hyperlinkStencil = createStencil({
       },
       standaloneInverse: {
         textDecoration: 'none',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+        color: system.color.text.inverse,
         '&:hover, &.hover': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+          color: system.color.text.inverse,
           background: 'rgba(255, 255, 255, 0.1)',
         },
         '&:focus, &.focus, &:focus-visible': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.focus.inverse, system.color.text.inverse)}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.text.inverse)}`,
         },
         '&:active, &.active': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          color: cssVar(system.color.brand.fg.primary.strong, system.color.text.primary.stronger),
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          background: cssVar(system.color.surface.navigation, system.color.bg.alt.soft),
+          color: system.color.text.primary.stronger,
+          background: system.color.bg.alt.soft,
         },
       },
     },
@@ -101,11 +85,16 @@ export const hyperlinkStencil = createStencil({
  * `Hyperlink`s should be used when you want to navigate away from the current page or to an anchor
  * on the current page.
  */
+const displayName = 'Hyperlink';
+
 export const Hyperlink = createComponent('a')({
-  displayName: 'Hyperlink',
-  Component: ({children, variant, ...elemProps}: HyperlinkProps, ref, Element) => (
-    <Element ref={ref} {...handleCsProp(elemProps, hyperlinkStencil({variant}))}>
-      {children}
-    </Element>
-  ),
+  displayName,
+  Component: ({children, variant, ...elemProps}: HyperlinkProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, hyperlinkStencil, {variant});
+    return (
+      <Element ref={ref} {...handleCsProp(elemProps, resolved)}>
+        {children}
+      </Element>
+    );
+  },
 });

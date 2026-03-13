@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {LabelText} from '@workday/canvas-kit-react/text';
-import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 interface CheckboxContainerProps extends CSProps {
   children: React.ReactNode;
@@ -17,8 +17,7 @@ const checkboxContainerStencil = createStencil({
   base: {
     display: 'flex',
     alignItems: 'center',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: cssVar(base.size225, system.space.x6),
+    minHeight: system.space.x6,
     position: 'relative',
     /**
      * Using a wrapper prevents the browser default behavior of trigging
@@ -27,25 +26,25 @@ const checkboxContainerStencil = createStencil({
      */
     '&>div': {
       display: 'flex',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(base.size225, px2rem(18)),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      minWidth: cssVar(base.size225, px2rem(18)),
+      height: calc.add(system.space.x4, px2rem(2)),
+      minWidth: calc.add(system.space.x4, px2rem(2)),
+      marginTop: px2rem(3),
       alignSelf: 'flex-start',
-      position: 'relative',
     },
     '& > label': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
+      paddingInlineStart: system.space.x3,
     },
   },
 });
 
+const displayName = 'CheckboxContainer';
+
 export const CheckboxContainer = createComponent('div')({
-  displayName: 'CheckboxContainer',
+  displayName,
   Component: ({children, disabled, id, label, variant}: CheckboxContainerProps) => {
+    const resolved = useResolvedStencil(displayName, checkboxContainerStencil, undefined);
     return (
-      <div {...checkboxContainerStencil()}>
+      <div {...resolved}>
         <div>{children}</div>
         {label && (
           <LabelText

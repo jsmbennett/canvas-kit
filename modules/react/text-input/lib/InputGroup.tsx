@@ -9,9 +9,10 @@ import {
   createSubcomponent,
   dispatchInputEvent,
   useForkRef,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -40,10 +41,8 @@ export const inputGroupInnerStencil = createStencil({
      * on your own.
      */
     insetInlineEnd: 'initial',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.md, system.space.x10),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.md, system.space.x10),
+    width: system.space.x10,
+    height: system.space.x10,
     /**
      * Some inner input group elements are decoration only and should not have pointer events
      */
@@ -66,45 +65,37 @@ export const inputGroupInnerStencil = createStencil({
   },
 });
 
+const inputGroupInnerStartDisplayName = 'InputGroup.InnerStart';
+
 const InputGroupInnerStart = createSubcomponent('div')({
   modelHook: useInputGroupModel,
 })<ExtractProps<typeof Flex, never>>(
   ({pointerEvents, insetInlineStart, insetInlineEnd, width, height, ...elemProps}, Element) => {
-    return (
-      <Element
-        {...mergeStyles(
-          elemProps,
-          inputGroupInnerStencil({
-            pointerEvents,
-            insetInlineStart: toPx(insetInlineStart),
-            insetInlineEnd: toPx(insetInlineEnd),
-            width: toPx(width),
-            height: toPx(height),
-          })
-        )}
-      />
-    );
+    const resolved = useResolvedStencil(inputGroupInnerStartDisplayName, inputGroupInnerStencil, {
+      pointerEvents,
+      insetInlineStart: toPx(insetInlineStart),
+      insetInlineEnd: toPx(insetInlineEnd),
+      width: toPx(width),
+      height: toPx(height),
+    });
+    return <Element {...mergeStyles(elemProps, resolved)} />;
   }
 );
+
+const inputGroupInnerEndDisplayName = 'InputGroup.InnerEnd';
 
 const InputGroupInnerEnd = createSubcomponent('div')({
   modelHook: useInputGroupModel,
 })<ExtractProps<typeof Flex, never>>(
   ({pointerEvents, insetInlineStart, insetInlineEnd, width, height, ...elemProps}, Element) => {
-    return (
-      <Element
-        {...mergeStyles(
-          elemProps,
-          inputGroupInnerStencil({
-            pointerEvents,
-            insetInlineStart: insetInlineStart as string,
-            insetInlineEnd: insetInlineEnd as string,
-            width: toPx(width),
-            height: toPx(height),
-          })
-        )}
-      />
-    );
+    const resolved = useResolvedStencil(inputGroupInnerEndDisplayName, inputGroupInnerStencil, {
+      pointerEvents,
+      insetInlineStart: insetInlineStart as string,
+      insetInlineEnd: insetInlineEnd as string,
+      width: toPx(width),
+      height: toPx(height),
+    });
+    return <Element {...mergeStyles(elemProps, resolved)} />;
   }
 );
 
@@ -136,23 +127,18 @@ export const inputGroupInputStencil = createStencil({
   },
 });
 
+const inputGroupInputDisplayName = 'InputGroup.Input';
+
 const InputGroupInput = createSubcomponent(TextInput)({
   modelHook: useInputGroupModel,
   elemPropsHook: useInputGroupInput,
 })<ExtractProps<typeof Flex, never>>(
   ({paddingInlineStart, paddingInlineEnd, ...elemProps}, Element) => {
-    return (
-      <Element
-        as={Element}
-        {...mergeStyles(
-          elemProps,
-          inputGroupInputStencil({
-            paddingInlineStart: toPx(paddingInlineStart),
-            paddingInlineEnd: toPx(paddingInlineEnd),
-          })
-        )}
-      />
-    );
+    const resolved = useResolvedStencil(inputGroupInputDisplayName, inputGroupInputStencil, {
+      paddingInlineStart: toPx(paddingInlineStart),
+      paddingInlineEnd: toPx(paddingInlineEnd),
+    });
+    return <Element as={Element} {...mergeStyles(elemProps, resolved)} />;
   }
 );
 
@@ -243,8 +229,10 @@ export const inputGroupStencil = createStencil({
  * </InputGroup>
  * ```
  */
+const inputGroupDisplayName = 'InputGroup';
+
 export const InputGroup = createContainer('div')({
-  displayName: 'InputGroup',
+  displayName: inputGroupDisplayName,
   modelHook: useInputGroupModel,
   subComponents: {
     /**
@@ -322,5 +310,6 @@ export const InputGroup = createContainer('div')({
     return child;
   });
 
-  return <Element {...mergeStyles(elemProps, inputGroupStencil())}>{mappedChildren}</Element>;
+  const resolved = useResolvedStencil(inputGroupDisplayName, inputGroupStencil, undefined);
+  return <Element {...mergeStyles(elemProps, resolved)}>{mappedChildren}</Element>;
 });

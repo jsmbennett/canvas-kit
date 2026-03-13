@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {
   chevron2xLeftSmallIcon,
   chevron2xRightSmallIcon,
@@ -23,8 +23,7 @@ export interface PaginationControlsProps {}
 export const paginationControlsStencil = createStencil({
   base: {
     display: 'flex',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.xs, system.space.x1),
+    gap: system.space.x1,
     alignItems: 'center',
   },
 });
@@ -39,15 +38,24 @@ const controlButtonStencil = createStencil({
   },
 });
 
+const paginationControlsDisplayName = 'Pagination.Controls';
+
 export const PaginationControls = createComponent('div')({
-  displayName: 'Pagination.Controls',
+  displayName: paginationControlsDisplayName,
   Component(elemProps: PaginationControlsProps, ref, Element) {
-    return <Element ref={ref} {...mergeStyles(elemProps, paginationControlsStencil())} />;
+    const resolved = useResolvedStencil(
+      paginationControlsDisplayName,
+      paginationControlsStencil,
+      undefined
+    );
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });
 
+const jumpToFirstButtonDisplayName = 'Pagination.JumpToFirstButton';
+
 export const JumpToFirstButton = createComponent('button')({
-  displayName: 'Pagination.JumpToFirstButton',
+  displayName: jumpToFirstButtonDisplayName,
   Component({onClick, ...restProps}: ControlButtonProps, ref, Element) {
     const model = React.useContext(PaginationContext);
     const isDisabled = model.state.currentPage <= model.state.firstPage;
@@ -58,7 +66,11 @@ export const JumpToFirstButton = createComponent('button')({
       onClick?.(e);
       model.events.setCurrentPage(model.state.firstPage);
     };
-
+    const resolved = useResolvedStencil(
+      jumpToFirstButtonDisplayName,
+      controlButtonStencil,
+      undefined
+    );
     return (
       <TertiaryButton
         ref={ref}
@@ -67,14 +79,16 @@ export const JumpToFirstButton = createComponent('button')({
         size="small"
         icon={chevron2xLeftSmallIcon}
         onClick={handleClick}
-        {...mergeStyles(restProps, controlButtonStencil())}
+        {...mergeStyles(restProps, resolved)}
       />
     );
   },
 });
 
+const stepToPreviousButtonDisplayName = 'Pagination.StepToPreviousButton';
+
 export const StepToPreviousButton = createComponent('button')({
-  displayName: 'Pagination.StepToPreviousButton',
+  displayName: stepToPreviousButtonDisplayName,
   Component({onClick, ...restProps}: ControlButtonProps, ref, Element) {
     const model = React.useContext(PaginationContext);
     const isDisabled = model.state.currentPage <= model.state.firstPage;
@@ -85,7 +99,11 @@ export const StepToPreviousButton = createComponent('button')({
       onClick?.(e);
       model.events.setCurrentPage(model.state.currentPage - 1);
     };
-
+    const resolved = useResolvedStencil(
+      stepToPreviousButtonDisplayName,
+      controlButtonStencil,
+      undefined
+    );
     return (
       <TertiaryButton
         ref={ref}
@@ -94,14 +112,16 @@ export const StepToPreviousButton = createComponent('button')({
         size="small"
         icon={chevronLeftSmallIcon}
         onClick={handleClick}
-        {...mergeStyles(restProps, controlButtonStencil())}
+        {...mergeStyles(restProps, resolved)}
       />
     );
   },
 });
 
+const stepToNextButtonDisplayName = 'Pagination.StepToNextButton';
+
 export const StepToNextButton = createComponent('button')({
-  displayName: 'Pagination.StepToNextButton',
+  displayName: stepToNextButtonDisplayName,
   Component({onClick, ...restProps}: ControlButtonProps, ref, Element) {
     const model = React.useContext(PaginationContext);
     const isDisabled = model.state.currentPage >= model.state.lastPage;
@@ -112,7 +132,11 @@ export const StepToNextButton = createComponent('button')({
       onClick?.(e);
       model.events.setCurrentPage(model.state.currentPage + 1);
     };
-
+    const resolved = useResolvedStencil(
+      stepToNextButtonDisplayName,
+      controlButtonStencil,
+      undefined
+    );
     return (
       <TertiaryButton
         ref={ref}
@@ -121,14 +145,16 @@ export const StepToNextButton = createComponent('button')({
         size="small"
         icon={chevronRightSmallIcon}
         onClick={handleClick}
-        {...mergeStyles(restProps, controlButtonStencil())}
+        {...mergeStyles(restProps, resolved)}
       />
     );
   },
 });
 
+const jumpToLastButtonDisplayName = 'Paganation.JumpToLastButton';
+
 export const JumpToLastButton = createComponent('button')({
-  displayName: 'Paganation.JumpToLastButton',
+  displayName: jumpToLastButtonDisplayName,
   Component({onClick, ...restProps}: ControlButtonProps, ref, Element) {
     const model = React.useContext(PaginationContext);
     const isDisabled = model.state.currentPage >= model.state.lastPage;
@@ -139,7 +165,11 @@ export const JumpToLastButton = createComponent('button')({
       onClick?.(e);
       model.events.setCurrentPage(model.state.lastPage);
     };
-
+    const resolved = useResolvedStencil(
+      jumpToLastButtonDisplayName,
+      controlButtonStencil,
+      undefined
+    );
     return (
       <TertiaryButton
         ref={ref}
@@ -148,7 +178,7 @@ export const JumpToLastButton = createComponent('button')({
         size="small"
         icon={chevron2xRightSmallIcon}
         onClick={handleClick}
-        {...mergeStyles(restProps, controlButtonStencil())}
+        {...mergeStyles(restProps, resolved)}
       />
     );
   },

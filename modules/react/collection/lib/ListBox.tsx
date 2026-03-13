@@ -4,9 +4,11 @@ import {
   createContainer,
   createElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useListItemRegister} from './useListItemRegister';
 import {useListModel} from './useListModel';
@@ -52,14 +54,12 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
 });
 
 const listBoxContainerStencil = createStencil({
-  parts: {
-    listBoxContainer: 'list-box-container',
-  },
   base: {
     '& :where([data-part="list"])': {
       display: 'flex',
       flexDirection: 'column',
-      marginBlock: 0,
+      marginBlockStart: system.space.zero,
+      marginBlockEnd: system.space.zero,
     },
   },
   modifiers: {
@@ -94,8 +94,10 @@ const listBoxContainerStencil = createStencil({
  * - Inner Box: The element responsible for the virtual container. Height is controlled by the model
  *   and cannot be changed by the developer. All props and ref will be spread to this element.
  */
+const displayName = 'ListBox';
+
 export const ListBox = createContainer('ul')({
-  displayName: 'ListBox',
+  displayName,
   modelHook: useListModel,
   elemPropsHook: useListBox,
   subComponents: {
@@ -116,12 +118,14 @@ export const ListBox = createContainer('ul')({
     Element,
     model
   ) => {
+    const resolved = useResolvedStencil(displayName, listBoxContainerStencil, {
+      orientation: model.state.orientation,
+    });
     // We're removing `marginY, marginBottom, overflowY, marginTo` from elemProps and applying them to the container as to not interfere with the virtualization size. We set
     // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
     return (
       <div
         ref={model.state.containerRef}
-        {...listBoxContainerStencil.parts.listBoxContainer}
         {...handleCsProp(
           {
             style: {
@@ -131,7 +135,7 @@ export const ListBox = createContainer('ul')({
               marginTop: marginTop ?? marginY,
             },
           },
-          listBoxContainerStencil({orientation: model.state.orientation})
+          resolved
         )}
       >
         <Element {...mergeStyles(elemProps)} data-part="list">

@@ -4,6 +4,7 @@ import {
   createElemPropsHook,
   createSubcomponent,
   useForkRef,
+  useResolvedStencil,
   useWindowSize,
 } from '@workday/canvas-kit-react/common';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -20,7 +21,7 @@ const fadeIn = keyframes({
     background: 'none',
   },
   '100%': {
-    background: cssVar(system.color.surface.overlay.scrim, system.color.bg.overlay),
+    background: cssVar(system.color.bg.overlay),
   },
 });
 
@@ -30,12 +31,11 @@ export const modalOverlayContainerStencil = createStencil({
   },
   base: ({containerCenter}) => ({
     position: 'fixed',
-    top: 0,
-    left: 0,
+    top: system.space.zero,
+    left: system.space.zero,
     width: '100vw',
     height: '100vh',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    background: cssVar(system.color.surface.overlay.scrim, system.color.bg.overlay),
+    background: system.color.bg.overlay,
     animationDuration: '0.3s',
     animationName: fadeIn,
     // Allow overriding of animation in special cases
@@ -47,8 +47,8 @@ export const modalOverlayContainerStencil = createStencil({
       maxHeight: '100%',
       display: 'flex',
       position: 'absolute',
-      left: 0,
-      top: 0,
+      left: system.space.zero,
+      top: system.space.zero,
       justifyContent: 'center',
       alignItems: 'center',
       height: '100%',
@@ -73,15 +73,20 @@ export const useModalOverlay = createElemPropsHook(usePopupModel)(({state}, ref)
   };
 });
 
+const modalOpenOverlayDisplayName = 'Modal.OpenOverlay';
+
 const OpenModalOverlay = createSubcomponent('div')({
-  displayName: 'Modal.OpenOverlay',
+  displayName: modalOpenOverlayDisplayName,
   modelHook: useModalModel,
   elemPropsHook: useModalOverlay,
 })<ModalOverlayProps>((elemProps, Element, model) => {
   const windowSize = useWindowSize();
   const containerCenter = windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw';
+  const resolved = useResolvedStencil(modalOpenOverlayDisplayName, modalOverlayContainerStencil, {
+    containerCenter,
+  });
   const content = (
-    <Box {...mergeStyles(elemProps, modalOverlayContainerStencil({containerCenter}))}>
+    <Box {...mergeStyles(elemProps, resolved)}>
       {/* This centering container helps fix an issue with Chrome. Chrome doesn't normally do
       subpixel positioning, but seems to when using flexbox centering. This messes up Popper
       calculations inside the Modal. The centering container forces a "center" pixel calculation

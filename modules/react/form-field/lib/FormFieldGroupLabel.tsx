@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
@@ -65,23 +69,20 @@ export const formFieldGroupLabelStencil = createStencil({
   },
 });
 
+const displayName = 'FormFieldGroup.Label';
+
 export const FormFieldGroupLabel = createSubcomponent('div')({
-  displayName: 'FormFieldGroup.Label',
+  displayName,
   modelHook: useFormFieldModel,
 })<FormFieldGroupLabelProps>(({children, typeLevel, variant, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil(displayName, formFieldGroupLabelStencil, {
+    typeLevel,
+    variant,
+    isRequired: model.state.isRequired as any,
+    orientation: model.state.orientation,
+  });
   return (
-    <Element
-      id={`label-${model.state.id}`}
-      {...mergeStyles(
-        elemProps,
-        formFieldGroupLabelStencil({
-          typeLevel,
-          variant,
-          isRequired: model.state.isRequired as any,
-          orientation: model.state.orientation,
-        })
-      )}
-    >
+    <Element id={`label-${model.state.id}`} {...mergeStyles(elemProps, resolved)}>
       {children}
     </Element>
   );

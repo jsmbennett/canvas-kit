@@ -1,5 +1,5 @@
 import {buttonStencil} from '@workday/canvas-kit-react/button';
-import {createSubcomponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, focusRing, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
@@ -69,15 +69,19 @@ export const pillIconButtonStencil = createStencil({
   },
 });
 
+const displayName = 'Pill.IconButton';
+
 export const PillIconButton = createSubcomponent('button')({
+  displayName,
   modelHook: usePillModel,
 })<PillIconButtonProps>(
   ({size, icon, children, 'aria-label': ariaLabel = '', ...elemProps}, Element, model) => {
+    const resolved = useResolvedStencil(displayName, pillIconButtonStencil, undefined);
     return (
       <Element
         disabled={model.state.disabled}
         aria-labelledby={`removable-${model.state.id} label-${model.state.id}`}
-        {...mergeStyles(elemProps, pillIconButtonStencil())}
+        {...mergeStyles(elemProps, resolved)}
       >
         <SystemIcon
           aria-label={ariaLabel}

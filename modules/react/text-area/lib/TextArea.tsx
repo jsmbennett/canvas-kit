@@ -1,6 +1,11 @@
-import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
+import {
+  ErrorType,
+  GrowthBehavior,
+  createComponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {textInputStencil} from '@workday/canvas-kit-react/text-input';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export type ValueOf<T> = T[keyof T];
@@ -27,9 +32,8 @@ export const TextAreaResizeDirection = {
 export const textAreaStencil = createStencil({
   extends: textInputStencil,
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: cssVar(system.size.xxl, system.space.x16),
-    minWidth: px2rem(280),
+    minHeight: system.space.x16,
+    minWidth: calc.add(calc.multiply(system.space.x20, 3), system.space.x10),
     '&::webkit-resizer': {
       display: 'none',
     },
@@ -56,13 +60,18 @@ export const textAreaStencil = createStencil({
   },
 });
 
+const displayName = 'TextArea';
+
 export const TextArea = createComponent('textarea')({
-  displayName: 'TextArea',
+  displayName,
   Component: (
     {resize = TextAreaResizeDirection.Both, grow, error, ...elemProps}: TextAreaProps,
     ref,
     Element
-  ) => <Element ref={ref} {...handleCsProp(elemProps, textAreaStencil({error, grow, resize}))} />,
+  ) => {
+    const resolved = useResolvedStencil(displayName, textAreaStencil, {error, grow, resize});
+    return <Element ref={ref} {...handleCsProp(elemProps, resolved)} />;
+  },
   subComponents: {
     ErrorType,
     ResizeDirection: TextAreaResizeDirection,

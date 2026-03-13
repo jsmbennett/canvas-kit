@@ -1,7 +1,11 @@
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {CSProps, createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {brand, system} from '@workday/canvas-tokens-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -39,10 +43,10 @@ export const selectInputStencil = createStencil({
   }) => ({
     [hiddenInputPart]: {
       position: 'absolute',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
+      top: system.space.zero,
+      bottom: system.space.zero,
+      left: system.space.zero,
+      right: system.space.zero,
       opacity: system.opacity.zero,
       cursor: 'default',
       pointerEvents: 'none',
@@ -56,14 +60,11 @@ export const selectInputStencil = createStencil({
     },
     [visualInputPart]: {
       caretColor: 'transparent',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.fg.default, system.color.text.default),
+      backgroundColor: system.color.bg.default,
+      color: system.color.text.default,
       cursor: 'default',
       '&::placeholder': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.default, system.color.text.default),
+        color: system.color.text.default,
       },
       '&::selection': {
         backgroundColor: 'transparent',
@@ -79,29 +80,28 @@ export const selectInputStencil = createStencil({
     error: {
       error: ({visualInputPart}) => ({
         [visualInputPart]: {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          backgroundColor: cssVar(
-            system.color.brand.surface.critical.default,
-            brand.error.lightest
-          ),
+          backgroundColor: brand.error.lightest,
         },
       }),
       caution: ({visualInputPart}) => ({
         [visualInputPart]: {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
+          backgroundColor: brand.alert.lightest,
         },
       }),
     },
   },
 });
 
+const displayName = 'Select.Input';
+
 export const SelectInput = createSubcomponent(TextInput)({
+  displayName,
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(({inputStartIcon, formInputProps, error, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil(displayName, selectInputStencil, {error: error ?? undefined});
   return (
-    <InputGroup data-width="ck-formfield-width" {...selectInputStencil({error: error})}>
+    <InputGroup data-width="ck-formfield-width" {...resolved}>
       {inputStartIcon && model.state.selectedIds.length > 0 && (
         <InputGroup.InnerStart {...selectInputStencil.parts.startIconContainer}>
           <SystemIcon {...selectInputStencil.parts.startIcon} icon={inputStartIcon} />

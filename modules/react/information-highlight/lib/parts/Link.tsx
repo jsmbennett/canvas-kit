@@ -1,5 +1,5 @@
 import {Hyperlink} from '@workday/canvas-kit-react/button';
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
@@ -22,15 +22,12 @@ const informationHighlightLinkStencil = createStencil({
   },
 });
 
+const displayName = 'InformationHighlight.Link';
+
 export const Link = createComponent('a')({
-  displayName: 'Link',
+  displayName,
   Component: ({...elemProps}: ExtractProps<typeof Hyperlink, never>, ref, Element) => {
-    return (
-      <Hyperlink
-        as={Element}
-        ref={ref}
-        {...handleCsProp(elemProps, informationHighlightLinkStencil())}
-      />
-    );
+    const resolved = useResolvedStencil(displayName, informationHighlightLinkStencil, undefined);
+    return <Hyperlink as={Element} ref={ref} {...handleCsProp(elemProps, resolved)} />;
   },
 });

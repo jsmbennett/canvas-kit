@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -76,14 +76,16 @@ const labelTextStencil = createStencil({
  *
  * @deprecated ⚠️ `LabelText` has been deprecated and will be removed in a future major version. Please use [FormField.Label](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs) from Main instead.
  */
+const displayName = 'Label';
+
 export const LabelText = createComponent('label')({
-  displayName: 'Label',
+  displayName,
   Component: ({disabled, typeLevel, variant, ...elemProps}: TypeLabelProps, ref, Element) => {
-    return (
-      <Element
-        ref={ref}
-        {...mergeStyles(elemProps, labelTextStencil({variant, disabled, typeLevel}))}
-      />
-    );
+    const resolved = useResolvedStencil(displayName, labelTextStencil, {
+      variant,
+      disabled,
+      typeLevel,
+    });
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });

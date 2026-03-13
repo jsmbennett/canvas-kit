@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
@@ -111,6 +111,10 @@ export const SidePanelToggleButton = createComponent('button')({
     ...elemProps
   }: SidePanelToggleButtonProps) {
     const context = React.useContext(SidePanelContext);
+    const resolved = useResolvedStencil('SidePanel.ToggleButton', sidePanelToggleButtonStencil, {
+      state: context.state as SidePanelTransitionStates,
+      origin: context.origin,
+    });
 
     return (
       <Tooltip
@@ -121,13 +125,7 @@ export const SidePanelToggleButton = createComponent('button')({
           type="button"
           icon={icon}
           variant={variant}
-          {...handleCsProp(
-            elemProps,
-            sidePanelToggleButtonStencil({
-              state: context.state as SidePanelTransitionStates,
-              origin: context.origin,
-            })
-          )}
+          {...handleCsProp(elemProps, resolved)}
           onClick={event => {
             //@ts-ignore this gets called from the useSidePanel hook.
             elemProps.onClick?.(event);

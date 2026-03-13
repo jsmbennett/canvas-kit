@@ -1,7 +1,11 @@
 import * as React from 'react';
 
 import {useListRenderItems} from '@workday/canvas-kit-react/collection';
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {Grid} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -44,21 +48,18 @@ export const segmentedControlListStencil = createStencil({
   },
 });
 
+const displayName = 'SegmentedControl.List';
+
 export const SegmentedControlList = createSubcomponent('div')({
-  displayName: 'SegmentedControl.List',
+  displayName,
   modelHook: useSegmentedControlModel,
 })<SegmentedControlListProps>(({children, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil(displayName, segmentedControlListStencil, {
+    items: `${model.state.items.length}`,
+    orientation: model.state.orientation,
+  });
   return (
-    <Element
-      role="group"
-      {...handleCsProp(
-        elemProps,
-        segmentedControlListStencil({
-          items: `${model.state.items.length}`,
-          orientation: model.state.orientation,
-        })
-      )}
-    >
+    <Element role="group" {...handleCsProp(elemProps, resolved)}>
       {useListRenderItems(model, children)}
     </Element>
   );

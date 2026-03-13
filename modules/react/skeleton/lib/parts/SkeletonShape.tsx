@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -47,26 +47,21 @@ export const skeletonShapeStencil = createStencil({
   }),
 });
 
+const displayName = 'Skeleton.Shape';
+
 export const SkeletonShape = createComponent('div')({
-  displayName: 'Skeleton.Shape',
+  displayName,
   Component: (
     {width = '100%', height, backgroundColor, borderRadius, ...elemProps}: SkeletonShapeProps,
     ref,
     Element
   ) => {
-    return (
-      <Element
-        ref={ref}
-        {...handleCsProp(
-          elemProps,
-          skeletonShapeStencil({
-            width: typeof width === 'number' ? px2rem(width) : width,
-            height: typeof height === 'number' ? px2rem(height) : height,
-            backgroundColor,
-            borderRadius: typeof borderRadius === 'number' ? px2rem(borderRadius) : borderRadius,
-          })
-        )}
-      />
-    );
+    const resolved = useResolvedStencil(displayName, skeletonShapeStencil, {
+      width: typeof width === 'number' ? px2rem(width) : width,
+      height: typeof height === 'number' ? px2rem(height) : height,
+      backgroundColor,
+      borderRadius: typeof borderRadius === 'number' ? px2rem(borderRadius) : borderRadius,
+    });
+    return <Element ref={ref} {...handleCsProp(elemProps, resolved)} />;
   },
 });

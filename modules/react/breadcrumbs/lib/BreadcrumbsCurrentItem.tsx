@@ -8,6 +8,7 @@ import {
   createSubcomponent,
   useForkRef,
   useLocalRef,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {Text, TextProps} from '@workday/canvas-kit-react/text';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
@@ -65,23 +66,20 @@ export const useBreadcrumbsItem = composeHooks(
   useListItemRegister
 );
 
+const displayName = 'Breadcrumbs.Item';
+
 export const BreadcrumbsCurrentItem = createSubcomponent('li')({
-  displayName: 'Breadcrumbs.Item',
+  displayName,
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsItem,
 })<BreadcrumbsCurrentItemProps>(
   ({children, tooltipProps = {}, maxWidth = '350px', ...elemProps}, Element) => {
+    const resolved = useResolvedStencil(displayName, breadcrumbsCurrentItemStencil, {
+      maxWidth: typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth,
+    });
     return (
       <OverflowTooltip {...tooltipProps}>
-        <Text
-          as={Element}
-          {...handleCsProp(
-            elemProps,
-            breadcrumbsCurrentItemStencil({
-              maxWidth: typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth,
-            })
-          )}
-        >
+        <Text as={Element} {...handleCsProp(elemProps, resolved)}>
           {children}
         </Text>
       </OverflowTooltip>

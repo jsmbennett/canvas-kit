@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -18,25 +18,28 @@ export interface ColorPreviewProps extends TextInputProps {
 
 export const colorPreviewStencil = createStencil({
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    backgroundColor: system.color.bg.default,
     borderColor: cssVar(system.color.border.inverse.default, base.neutral0),
     pointerEvents: 'none',
   },
 });
 
+const displayName = 'ColorPreview';
+
 export const ColorPreview = createComponent('input')({
-  displayName: 'ColorPreview',
-  Component: ({id, value, ...elemProps}: ColorPreviewProps, ref, Element) => (
-    <ColorInput
-      ref={ref}
-      as={Element}
-      id={id}
-      value={value}
-      readOnly={true}
-      placeholder=""
-      {...handleCsProp(elemProps, colorPreviewStencil())}
-    />
-  ),
+  displayName,
+  Component: ({id, value, ...elemProps}: ColorPreviewProps, ref, Element) => {
+    const resolved = useResolvedStencil(displayName, colorPreviewStencil, undefined);
+    return (
+      <ColorInput
+        ref={ref}
+        as={Element}
+        id={id}
+        value={value}
+        readOnly={true}
+        placeholder=""
+        {...handleCsProp(elemProps, resolved)}
+      />
+    );
+  },
 });

@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {colorSpace, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {BaseButton, buttonStencil} from './BaseButton';
@@ -18,124 +18,62 @@ export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size'
 export const toolbarIconButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minWidth: cssVar(system.size.sm, system.space.x8),
-    padding: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.sm, system.space.x8),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.borderRadius]: cssVar(system.shape.sm, system.shape.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.fg.muted.soft),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.background]: cssVar(
-      system.color.surface.transparent,
-      system.color.bg.transparent.default
-    ),
+    minWidth: system.space.x8,
+    padding: system.space.zero,
+    height: system.space.x8,
+    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    [systemIconStencil.vars.color]: system.color.fg.default,
 
     '&:focus-visible, &.focus': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(system.color.fg.strong, system.color.fg.muted.soft),
+      [systemIconStencil.vars.color]: system.color.fg.default,
       ...focusRing({
         width: 2,
         separation: 0,
         innerColor: system.color.border.transparent,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        outerColor: cssVar(system.color.brand.focus.primary, brand.common.focusOutline),
+        outerColor: brand.common.focusOutline,
       }),
     },
 
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: colorSpace.darken(
-        system.color.surface.transparent,
-        system.color.bg.alt.default,
-        system.color.surface.overlay.mixin,
-        system.opacity.surface.hover
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.strong,
-        system.color.fg.muted.stronger
-      ),
+      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [systemIconStencil.vars.color]: system.color.fg.muted.stronger,
     },
 
     '&:active, &.active': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: colorSpace.darken(
-        system.color.surface.transparent,
-        system.color.bg.alt.stronger,
-        system.color.surface.overlay.mixin,
-        system.opacity.surface.pressed
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.strong,
-        system.color.fg.muted.stronger
-      ),
+      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
     },
 
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: cssVar(system.color.surface.transparent, 'transparent'),
-      [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.fg.disabled),
+      [buttonStencil.vars.background]: system.color.bg.transparent.default,
+      [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 
     "&[aria-pressed='true']": {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.brand.fg.primary.default,
-        brand.primary.base
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: cssVar(
-        system.color.brand.surface.primary.default,
-        brand.primary.lightest
-      ),
-
-      '&:focus-visible, &.focus': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.strong,
-          brand.primary.dark
-        ),
-      },
+      [systemIconStencil.vars.color]: brand.primary.base,
+      [buttonStencil.vars.background]: brand.primary.lightest,
 
       '&:hover, &.hover': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [buttonStencil.vars.background]: colorSpace.darken(
-          system.color.brand.surface.primary.default,
-          system.color.bg.alt.default,
-          system.color.surface.overlay.mixin,
-          system.opacity.surface.hover
-        ),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.strong,
-          brand.primary.dark
-        ),
+        [buttonStencil.vars.background]: system.color.bg.alt.default,
+        [systemIconStencil.vars.color]: brand.primary.dark,
       },
 
       '&:active, &.active': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [buttonStencil.vars.background]: colorSpace.darken(
-          system.color.brand.surface.primary.default,
-          system.color.bg.alt.stronger,
-          system.color.surface.overlay.mixin,
-          system.opacity.surface.pressed
-        ),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.strong,
-          brand.primary.dark
-        ),
+        [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+        [systemIconStencil.vars.color]: brand.primary.dark,
+      },
+
+      '&:disabled, &.disabled': {
+        [buttonStencil.vars.background]: brand.primary.lightest,
+        [systemIconStencil.vars.color]: brand.primary.light,
       },
     },
   },
 });
 
+export const displayName = 'ToolbarIconButton';
+
 export const ToolbarIconButton = createComponent('button')({
-  displayName: 'ToolbarIconButton',
+  displayName,
   Component: (
     {
       onToggleChange,
@@ -150,6 +88,7 @@ export const ToolbarIconButton = createComponent('button')({
     Element
   ) => {
     const isInitialMount = React.useRef(true);
+    const resolved = useResolvedStencil(displayName, toolbarIconButtonStencil, undefined);
 
     // Only call onToggleChange on update - not on first mount
     React.useEffect(() => {
@@ -167,7 +106,7 @@ export const ToolbarIconButton = createComponent('button')({
         size="small"
         fillIcon={toggled}
         aria-pressed={toggled}
-        {...handleCsProp(elemProps, toolbarIconButtonStencil())}
+        {...handleCsProp(elemProps, resolved)}
       >
         {icon ? (
           <BaseButton.Icon

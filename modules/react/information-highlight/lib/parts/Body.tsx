@@ -1,4 +1,4 @@
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {Text} from '@workday/canvas-kit-react/text';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -23,15 +23,12 @@ const informationHighlightBodyStencil = createStencil({
   },
 });
 
+const displayName = 'InformationHighlight.Body';
+
 export const Body = createComponent('div')({
-  displayName: 'Body',
+  displayName,
   Component: ({...elemProps}: ExtractProps<typeof Text, never>, ref, Element) => {
-    return (
-      <Text
-        as={Element}
-        ref={ref}
-        {...handleCsProp(elemProps, informationHighlightBodyStencil())}
-      />
-    );
+    const resolved = useResolvedStencil(displayName, informationHighlightBodyStencil, undefined);
+    return <Text as={Element} ref={ref} {...handleCsProp(elemProps, resolved)} />;
   },
 });

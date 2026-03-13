@@ -4,6 +4,7 @@ import {
   ExtractProps,
   createElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {Heading, TypeLevelProps, headingStencil} from '@workday/canvas-kit-react/text';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
@@ -55,16 +56,19 @@ export const useSidePanelHeading = createElemPropsHook(useSidePanelModel)(({stat
  *
  * The heading is automatically hidden when the panel is collapsed.
  */
+const displayName = 'SidePanel.Heading';
+
 export const SidePanelHeading = createSubcomponent(Heading)({
-  displayName: 'SidePanel.Heading',
+  displayName,
   modelHook: useSidePanelModel,
   elemPropsHook: useSidePanelHeading,
 })<SidePanelHeadingProps>(({size = 'small', children, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil(displayName, sidePanelHeadingStencil, {
+    size,
+    origin: model.state.origin,
+  });
   return (
-    <Element
-      size={size}
-      {...handleCsProp(elemProps, sidePanelHeadingStencil({size, origin: model.state.origin}))}
-    >
+    <Element size={size} {...handleCsProp(elemProps, resolved)}>
       {children}
     </Element>
   );

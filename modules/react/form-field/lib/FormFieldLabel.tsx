@@ -1,9 +1,14 @@
 import React from 'react';
 
-import {ExtractProps, accessibleHide, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  accessibleHide,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
@@ -25,9 +30,8 @@ export const formFieldLabelStencil = createStencil({
   extends: textStencil,
   base: {
     fontWeight: system.fontWeight.medium,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    color: cssVar(system.color.fg.default, system.color.text.default),
-    paddingInlineStart: 0,
+    color: system.color.text.default,
+    paddingInlineStart: system.space.zero,
     display: 'flex',
     alignItems: 'center',
     minWidth: px2rem(180),
@@ -37,14 +41,11 @@ export const formFieldLabelStencil = createStencil({
       true: {
         '&::after': {
           content: '"*"',
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          fontSize: cssVar(system.fontSize.body.lg, system.fontSize.body.large),
+          fontSize: system.fontSize.body.large,
           fontWeight: system.fontWeight.normal,
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          color: cssVar(system.color.brand.fg.critical.default, brand.error.base),
+          color: brand.error.base,
           textDecoration: 'unset',
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          marginInlineStart: cssVar(system.gap.xs, system.space.x1),
+          marginInlineStart: system.space.x1,
         },
       },
     },
@@ -52,12 +53,10 @@ export const formFieldLabelStencil = createStencil({
       horizontalStart: {
         justifyContent: 'flex-start',
         float: 'left',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        maxHeight: cssVar(system.size.md, system.space.x10),
+        maxHeight: system.space.x10,
       },
       horizontalEnd: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        maxHeight: cssVar(system.size.md, system.space.x10),
+        maxHeight: system.space.x10,
         float: 'left',
         justifyContent: 'flex-end',
       },
@@ -76,27 +75,21 @@ export const formFieldLabelStencil = createStencil({
   },
 });
 
+const displayName = 'FormField.Label';
+
 export const FormFieldLabel = createSubcomponent('label')({
-  displayName: 'FormField.Label',
+  displayName,
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldLabel,
 })<FormFieldLabelProps>(
   ({children, typeLevel, variant, isHidden, ...elemProps}, Element, model) => {
-    return (
-      <Element
-        {...mergeStyles(
-          elemProps,
-          formFieldLabelStencil({
-            typeLevel,
-            variant,
-            isHidden: isHidden ? 'true' : undefined,
-            isRequired: model.state.isRequired as any,
-            orientation: model.state.orientation,
-          })
-        )}
-      >
-        {children}
-      </Element>
-    );
+    const resolved = useResolvedStencil(displayName, formFieldLabelStencil, {
+      typeLevel,
+      variant,
+      isHidden: isHidden ? 'true' : undefined,
+      isRequired: model.state.isRequired as any,
+      orientation: model.state.orientation,
+    });
+    return <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>;
   }
 );

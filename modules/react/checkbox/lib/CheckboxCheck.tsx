@@ -1,6 +1,6 @@
-import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
+import {ErrorType, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {brand, system} from '@workday/canvas-tokens-web';
 
@@ -30,8 +30,7 @@ const checkboxCheckStencil = createStencil({
   modifiers: {
     checked: {
       true: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [systemIconStencil.vars.color]: cssVar(system.color.fg.inverse, brand.primary.accent),
+        [systemIconStencil.vars.color]: brand.primary.accent,
         opacity: system.opacity.full,
         transform: 'scale(1)',
       },
@@ -44,14 +43,9 @@ const checkboxCheckStencil = createStencil({
     },
     variant: {
       inverse: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.default,
-          brand.primary.base
-        ),
+        [systemIconStencil.vars.color]: brand.primary.base,
         '& > div': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+          backgroundColor: brand.primary.base,
         },
       },
     },
@@ -61,28 +55,32 @@ const checkboxCheckStencil = createStencil({
 const indeterminateBoxStencil = createStencil({
   base: {
     width: px2rem(10),
-    height: px2rem(2),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: cssVar(system.color.fg.inverse, brand.primary.accent),
-  },
-  modifiers: {
-    variant: {
-      inverse: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
-      },
-    },
+    height: calc.divide(system.space.x1, 2),
+    backgroundColor: brand.primary.accent,
   },
 });
 
+const displayName = 'CheckboxCheck';
+const indeterminateBoxDisplayName = 'CheckboxCheck.IndeterminateBox';
+
 export const CheckboxCheck = createComponent('div')({
-  displayName: 'CheckboxCheck',
+  displayName,
   Component: ({checked, error, indeterminate, variant}: CheckboxCheckProps) => {
+    const resolved = useResolvedStencil(displayName, checkboxCheckStencil, {
+      checked,
+      indeterminate,
+      variant,
+    });
+    const indeterminateResolved = useResolvedStencil(
+      indeterminateBoxDisplayName,
+      indeterminateBoxStencil,
+      undefined
+    );
     return (
-      <CheckBackground error={error} variant={variant}>
-        <div {...checkboxCheckStencil({checked, indeterminate, variant})}>
+      <CheckBackground error={error}>
+        <div {...resolved}>
           {indeterminate ? (
-            <div {...indeterminateBoxStencil({variant})} />
+            <div {...indeterminateResolved} />
           ) : (
             checked && <SystemIcon icon={checkSmallIcon} />
           )}
