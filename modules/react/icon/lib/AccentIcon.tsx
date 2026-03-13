@@ -1,6 +1,6 @@
 import {CSSObject} from '@emotion/styled';
 
-import {createComponent, getColor, useResolvedStencil} from '@workday/canvas-kit-react/common';
+import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
@@ -87,10 +87,8 @@ export const accentIconStencil = createStencil({
 /**
  *  @deprecated ⚠️ `AccentIcon` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
  */
-const displayName = 'AccentIcon';
-
 export const AccentIcon = createComponent('span')({
-  displayName,
+  displayName: 'AccentIcon',
   Component: (
     {
       transparent,
@@ -104,20 +102,21 @@ export const AccentIcon = createComponent('span')({
     ref,
     Element
   ) => {
-    const resolved = useResolvedStencil(displayName, accentIconStencil, {
-      color: transformColorNameToToken(color),
-      size: typeof size === 'number' ? px2rem(size) : undefined,
-      shouldMirror,
-      shouldMirrorInRTL,
-      transparent,
-    });
     return (
       <Svg
         src={icon}
         type={CanvasIconTypes.Accent}
         as={Element}
         ref={ref}
-        {...handleCsProp(elemProps, [resolved])}
+        {...handleCsProp(elemProps, [
+          accentIconStencil({
+            color: transformColorNameToToken(color),
+            size: typeof size === 'number' ? px2rem(size) : undefined,
+            shouldMirror,
+            shouldMirrorInRTL,
+            transparent,
+          }),
+        ])}
       />
     );
   },

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -174,18 +174,20 @@ export const SidePanel = createComponent('section')({
       return undefined;
     };
 
-    const resolvedPanel = useResolvedStencil('SidePanel', panelStencil, {
-      expanded,
-      variant,
-      expandedWidth: typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
-      collapsedWidth: typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
-    });
-
     return (
       <Element
         ref={ref}
         onTransitionEnd={handleAnimationEnd}
-        {...handleCsProp(elemProps, [resolvedPanel])}
+        {...handleCsProp(elemProps, [
+          panelStencil({
+            expanded,
+            variant,
+            expandedWidth:
+              typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
+            collapsedWidth:
+              typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
+          }),
+        ])}
       >
         <SidePanelContext.Provider
           value={{

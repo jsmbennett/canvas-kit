@@ -5,7 +5,6 @@ import {
   ExtractProps,
   createElemPropsHook,
   createSubcomponent,
-  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
@@ -53,10 +52,8 @@ export const useMenuCard = createElemPropsHook(useMenuModel)(() => {
   return {};
 });
 
-const displayName = 'Menu.Card';
-
 export const MenuCard = createSubcomponent('div')({
-  displayName,
+  displayName: 'Menu.Card',
   modelHook: useMenuModel,
   elemPropsHook: useMenuCard,
 })<MenuCardProps>(({minWidth, maxHeight, ...elemProps}, Element, model) => {
@@ -64,15 +61,19 @@ export const MenuCard = createSubcomponent('div')({
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
 
-  const resolved = useResolvedStencil(displayName, menuCardStencil, {
-    minWidth: typeof minWidth === 'number' ? px2rem(minWidth as number) : minWidth,
-    maxHeight: typeof maxHeight === 'number' ? px2rem(maxHeight as number) : maxHeight,
-    transformOriginVertical: transformOrigin.vertical,
-    transformOriginHorizontal: transformOrigin.horizontal,
-  });
-
   return (
-    <Card as={Element} {...mergeStyles(elemProps, resolved)}>
+    <Card
+      as={Element}
+      {...mergeStyles(
+        elemProps,
+        menuCardStencil({
+          minWidth: typeof minWidth === 'number' ? px2rem(minWidth as number) : minWidth,
+          maxHeight: typeof maxHeight === 'number' ? px2rem(maxHeight as number) : maxHeight,
+          transformOriginVertical: transformOrigin.vertical,
+          transformOriginHorizontal: transformOrigin.horizontal,
+        })
+      )}
+    >
       {elemProps.children}
     </Card>
   );

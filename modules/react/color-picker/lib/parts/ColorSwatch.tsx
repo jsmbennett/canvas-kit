@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {pickForegroundColor, useResolvedStencil} from '@workday/canvas-kit-react/common';
+import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {calc, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
@@ -42,18 +42,21 @@ export const colorPickerColorSwatchStencil = createStencil({
   },
 });
 
-const displayName = 'ColorSwatch';
-
 export const ColorSwatch = ({color, showCheck = false, ...elemProps}: ColorSwatchProps) => {
   const lowerCasedColor = color.toLowerCase();
-  const resolved = useResolvedStencil(displayName, colorPickerColorSwatchStencil, {
-    color,
-    iconColor: pickForegroundColor(color),
-    withShadow: showCheck || lowerCasedColor === '#ffffff',
-  });
 
   return (
-    <div data-color={lowerCasedColor} {...handleCsProp(elemProps, resolved)}>
+    <div
+      data-color={lowerCasedColor}
+      {...handleCsProp(
+        elemProps,
+        colorPickerColorSwatchStencil({
+          color,
+          iconColor: pickForegroundColor(color),
+          withShadow: showCheck || lowerCasedColor === '#ffffff',
+        })
+      )}
+    >
       {showCheck && <SystemIcon icon={checkSmallIcon} />}
     </div>
   );

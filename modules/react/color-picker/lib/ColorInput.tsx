@@ -5,7 +5,6 @@ import {
   GrowthBehavior,
   createComponent,
   expandHex,
-  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {Subtext} from '@workday/canvas-kit-react/text';
 import {TextInput, TextInputProps} from '@workday/canvas-kit-react/text-input';
@@ -127,10 +126,8 @@ const formatValue = (value: string) => {
   return value.replace(/#/g, '').substring(0, 6);
 };
 
-const displayName = 'ColorInput';
-
 export const ColorInput = createComponent('input')({
-  displayName,
+  displayName: 'ColorInput',
   Component: (
     {
       placeholder = 'FFFFFF',
@@ -149,12 +146,6 @@ export const ColorInput = createComponent('input')({
   ) => {
     const formattedValue = formatValue(value);
 
-    const resolved = useResolvedStencil(displayName, colorPickerHexInputStencil, {
-      grow,
-      disabled,
-      width: typeof width === 'number' ? px2rem(width) : width,
-    });
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = formatValue(e.currentTarget.value);
 
@@ -168,7 +159,13 @@ export const ColorInput = createComponent('input')({
     };
 
     return (
-      <div {...resolved}>
+      <div
+        {...colorPickerHexInputStencil({
+          grow,
+          disabled,
+          width: typeof width === 'number' ? px2rem(width) : width,
+        })}
+      >
         <TextInput
           dir="ltr"
           ref={ref}

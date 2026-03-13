@@ -1,4 +1,4 @@
-import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -44,21 +44,24 @@ export const skeletonHeaderStencil = createStencil({
   }),
 });
 
-const displayName = 'Skeleton.Header';
-
 export const SkeletonHeader = createComponent('div')<SkeletonHeaderProps>({
-  displayName,
+  displayName: 'Skeleton.Header',
   Component: (
     {width = '100%', backgroundColor, height, ...elemProps}: SkeletonHeaderProps,
     ref,
     Element
-  ) => {
-    const resolved = useResolvedStencil(displayName, skeletonHeaderStencil, {
-      width: typeof width === 'number' ? px2rem(width) : width,
-      backgroundColor,
-      height: typeof height === 'number' ? px2rem(height) : height,
-    });
-
-    return <SkeletonShape ref={ref} as={Element} {...handleCsProp(elemProps, resolved)} />;
-  },
+  ) => (
+    <SkeletonShape
+      ref={ref}
+      as={Element}
+      {...handleCsProp(
+        elemProps,
+        skeletonHeaderStencil({
+          width: typeof width === 'number' ? px2rem(width) : width,
+          backgroundColor,
+          height: typeof height === 'number' ? px2rem(height) : height,
+        })
+      )}
+    />
+  ),
 });

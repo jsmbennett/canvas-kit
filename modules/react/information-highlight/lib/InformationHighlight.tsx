@@ -1,4 +1,4 @@
-import {createContainer, useResolvedStencil} from '@workday/canvas-kit-react/common';
+import {createContainer} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -196,8 +196,12 @@ export const InformationHighlight = createContainer('section')({
     Link: Link,
   },
 })(({...elemProps}: InformationHighlightProps, Element, model) => {
-  const resolved = useResolvedStencil('InformationHighlight', informationHighlightStencil, {
-    [model.state.variant]: model.state.emphasis,
-  } as any);
-  return <Element {...handleCsProp(elemProps, resolved)} />;
+  return (
+    <Element
+      {...handleCsProp(
+        elemProps,
+        informationHighlightStencil({[model.state.variant]: model.state.emphasis})
+      )}
+    />
+  );
 });

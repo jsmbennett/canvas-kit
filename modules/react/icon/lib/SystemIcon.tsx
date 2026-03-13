@@ -1,6 +1,6 @@
 import {CSSObject} from '@emotion/styled';
 
-import {createComponent, getColor, useResolvedStencil} from '@workday/canvas-kit-react/common';
+import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {iconColors} from '@workday/canvas-kit-react/tokens';
 import {createStencil, createVars, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -202,10 +202,8 @@ export const systemIconStencil = createStencil({
   modifiers: {},
 });
 
-const displayName = 'SystemIcon';
-
 export const SystemIcon = createComponent('span')({
-  displayName,
+  displayName: 'SystemIcon',
   Component: (
     {
       size,
@@ -223,12 +221,6 @@ export const SystemIcon = createComponent('span')({
     ref,
     Element
   ) => {
-    const resolved = useResolvedStencil(displayName, systemIconStencil, {
-      size: typeof size === 'number' ? px2rem(size) : size,
-      color: transformColorNameToToken(fill || color),
-      accentColor: transformColorNameToToken(accent || color),
-      backgroundColor: transformColorNameToToken(background),
-    });
     return (
       <Svg
         as={Element}
@@ -236,7 +228,12 @@ export const SystemIcon = createComponent('span')({
         type={CanvasIconTypes.System}
         ref={ref}
         {...handleCsProp(elemProps, [
-          resolved,
+          systemIconStencil({
+            size: typeof size === 'number' ? px2rem(size) : size,
+            color: transformColorNameToToken(fill || color),
+            accentColor: transformColorNameToToken(accent || color),
+            backgroundColor: transformColorNameToToken(background),
+          }),
           {
             [deprecatedSystemIconVars.colorHover]:
               colorHover && transformColorNameToToken(colorHover),
