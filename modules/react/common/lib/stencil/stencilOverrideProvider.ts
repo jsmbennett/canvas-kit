@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createStencil} from '@workday/canvas-kit-styling';
 
-type StencilConfigInput = Parameters<typeof createStencil>[0];
+export type StencilConfigInput = Parameters<typeof createStencil>[0];
 
 export type StencilOptions = {
   /**
