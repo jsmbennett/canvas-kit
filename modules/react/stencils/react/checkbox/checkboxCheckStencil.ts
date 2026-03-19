@@ -1,8 +1,10 @@
-import {brand, system} from '@workday/canvas-tokens-web';
 import {calc, px2rem} from '@workday/canvas-kit-styling';
-import {systemIconStencil} from '../icon/systemIconStencil';
+import {brand, system} from '@workday/canvas-tokens-web';
 
-export const checkboxCheckStencil = {
+import {systemIconStencil} from '../../../icon/lib/SystemIcon';
+import {defineStencil} from '../../defineStencil';
+
+export const checkboxCheckStencil = defineStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
@@ -19,7 +21,7 @@ export const checkboxCheckStencil = {
   modifiers: {
     checked: {
       true: {
-        [systemIconStencil.vars.color]: brand.primary.accent,
+        [systemIconStencil.vars.color]: system.color.fg.inverse,
         opacity: system.opacity.full,
         transform: 'scale(1)',
       },
@@ -39,4 +41,4 @@ export const checkboxCheckStencil = {
       },
     },
   },
-};
+});

@@ -1,6 +1,8 @@
 import {calc, keyframes, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+import {defineStencil} from '../../defineStencil';
+
 const keyframesLoading = keyframes({
   '0%, 80%, 100%': {
     transform: 'scale(0)',
@@ -10,12 +12,12 @@ const keyframesLoading = keyframes({
   },
 });
 
-export const loadingDotsStencil = {
+export const loadingDotsStencil = defineStencil({
   vars: {
     animationDurationMs: '40ms',
     loadingDotColor: system.color.bg.alt.strong,
   },
-  base: ({loadingDotColor, animationDurationMs}) => ({
+  base: ({loadingDotColor, animationDurationMs}: any) => ({
     display: 'inline-flex',
     gap: system.space.x2,
     '& [data-part="loading-animation-dot"]': {
@@ -43,4 +45,4 @@ export const loadingDotsStencil = {
       },
     },
   }),
-};
+});

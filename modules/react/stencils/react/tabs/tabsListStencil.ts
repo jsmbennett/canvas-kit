@@ -1,7 +1,9 @@
 import {px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const tabsListStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const tabsListStencil = defineStencil({
   base: {
     display: 'flex',
     position: 'relative',
@@ -41,4 +43,4 @@ export const tabsListStencil = {
       right: {},
     },
   },
-};
+});

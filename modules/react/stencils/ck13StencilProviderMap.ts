@@ -1,6 +1,5 @@
 import type {StencilProviderMap} from '../common';
 import type {StencilConfigInput} from '../common/lib/stencil/stencilOverrideProvider';
-
 import {dividerStencil} from './preview-react/divider/dividerStencil';
 import {loadingSparklesStencil} from './preview-react/loading-sparkles/loadingSparklesStencil';
 import {pillCountStencil} from './preview-react/pill/pillCountStencil';
@@ -19,8 +18,13 @@ import {countBadgeStencil} from './react/badge/countBadgeStencil';
 import {actionBarTextStencil} from './react/banner/actionBarTextStencil';
 import {bannerIconStencil} from './react/banner/bannerIconStencil';
 import {bannerLabelStencil} from './react/banner/bannerLabelStencil';
+import {buttonStencil} from './react/button/buttonStencil';
+import {deleteButtonStencil} from './react/button/deleteButtonStencil';
 import {externalHyperlinkStencil} from './react/button/externalHyperlinkStencil';
 import {hyperlinkStencil} from './react/button/hyperlinkStencil';
+import {primaryButtonStencil} from './react/button/primaryButtonStencil';
+import {secondaryButtonStencil} from './react/button/secondaryButtonStencil';
+import {tertiaryButtonStencil} from './react/button/tertiaryButtonStencil';
 import {cardBodyStencil} from './react/card/cardBodyStencil';
 import {cardHeadingStencil} from './react/card/cardHeadingStencil';
 import {cardStencil} from './react/card/cardStencil';
@@ -64,8 +68,8 @@ import {tableBodyStencil} from './react/table/tableBodyStencil';
 import {tableCaptionStencil} from './react/table/tableCaptionStencil';
 import {tableCellStencil} from './react/table/tableCellStencil';
 import {tableFooterStencil} from './react/table/tableFooterStencil';
-import {tableHeaderStencil} from './react/table/tableHeaderStencil';
 import {tableHeadStencil} from './react/table/tableHeadStencil';
+import {tableHeaderStencil} from './react/table/tableHeaderStencil';
 import {tableRowStencil} from './react/table/tableRowStencil';
 import {tableStencil} from './react/table/tableStencil';
 import {tabItemStencil} from './react/tabs/tabItemStencil';
@@ -84,8 +88,7 @@ import {toastIconStencil} from './react/toast/toastIconStencil';
 import {toastMessageStencil} from './react/toast/toastMessageStencil';
 import {toastStencil} from './react/toast/toastStencil';
 
-const toStencilConfig = (stencil: unknown): StencilConfigInput =>
-  stencil as StencilConfigInput;
+const toStencilConfig = (stencil: unknown): StencilConfigInput => stencil as StencilConfigInput;
 
 /**
  * CK13-compatible stencil override map for CK15 displayName keys.
@@ -98,43 +101,46 @@ const toStencilConfig = (stencil: unknown): StencilConfigInput =>
 export const ck13StencilProviderMap: StencilProviderMap = {
   'ActionBar.List': {stencil: toStencilConfig(actionBarListStencil)},
   'ActionBar.OverflowButton': {stencil: toStencilConfig(actionBarOverflowButtonStencil)},
-  'Avatar': {stencil: toStencilConfig(avatarStencil)},
+  Avatar: {stencil: toStencilConfig(avatarStencil)},
   'Banner.ActionTextText': {stencil: toStencilConfig(actionBarTextStencil)},
   'Banner.Icon': {stencil: toStencilConfig(bannerIconStencil)},
   'Banner.Label': {stencil: toStencilConfig(bannerLabelStencil)},
-  'BaseTable': {stencil: toStencilConfig(baseTableStencil)},
-  'BodyText': {stencil: toStencilConfig(bodyTextStencil)},
-  'Card': {stencil: toStencilConfig(cardStencil)},
+  BaseButton: {stencil: toStencilConfig(buttonStencil)},
+  BaseTable: {stencil: toStencilConfig(baseTableStencil)},
+  Button: {stencil: toStencilConfig(buttonStencil)},
+  BodyText: {stencil: toStencilConfig(bodyTextStencil)},
+  Card: {stencil: toStencilConfig(cardStencil)},
   'Card.Body': {stencil: toStencilConfig(cardBodyStencil)},
   'Card.Heading': {stencil: toStencilConfig(cardHeadingStencil)},
-  'CheckBackground': {stencil: toStencilConfig(checkboxBackgroundStencil)},
-  'CheckboxCheck': {stencil: toStencilConfig(checkboxCheckStencil)},
+  CheckBackground: {stencil: toStencilConfig(checkboxBackgroundStencil)},
+  CheckboxCheck: {stencil: toStencilConfig(checkboxCheckStencil)},
   'CheckboxCheck.IndeterminateBox': {stencil: toStencilConfig(indeterminateBoxStencil)},
-  'CheckboxContainer': {stencil: toStencilConfig(checkboxContainerStencil)},
-  'CheckboxInput': {stencil: toStencilConfig(checkboxInputStencil)},
-  'CheckboxRipple': {stencil: toStencilConfig(checkboxRippleStencil)},
+  CheckboxContainer: {stencil: toStencilConfig(checkboxContainerStencil)},
+  CheckboxInput: {stencil: toStencilConfig(checkboxInputStencil)},
+  CheckboxRipple: {stencil: toStencilConfig(checkboxRippleStencil)},
   'Combobox.Menu.List': {stencil: toStencilConfig(comboboxMenuListStencil)},
-  'CountBadge': {stencil: toStencilConfig(countBadgeStencil)},
-  'Divider': {stencil: toStencilConfig(dividerStencil)},
-  'Expandable': {stencil: toStencilConfig(expandableContainerStencil)},
+  CountBadge: {stencil: toStencilConfig(countBadgeStencil)},
+  Divider: {stencil: toStencilConfig(dividerStencil)},
+  Expandable: {stencil: toStencilConfig(expandableContainerStencil)},
   'Expandable.Avatar': {stencil: toStencilConfig(expandableAvatarStencil)},
   'Expandable.Content': {stencil: toStencilConfig(expandableContentStencil)},
   'Expandable.Target': {stencil: toStencilConfig(expandableTargetStencil)},
   'Expandable.Title': {stencil: toStencilConfig(expandableTitleStencil)},
-  'ExternalHyperlink': {stencil: toStencilConfig(externalHyperlinkStencil)},
+  DeleteButton: {stencil: toStencilConfig(deleteButtonStencil)},
+  ExternalHyperlink: {stencil: toStencilConfig(externalHyperlinkStencil)},
   'FormField.Container': {stencil: toStencilConfig(formFieldContainerStencil)},
   'FormField.Field': {stencil: toStencilConfig(formFieldFieldStencil)},
   'FormFieldGroup.List': {stencil: toStencilConfig(formFieldGroupListStencil)},
-  'Heading': {stencil: toStencilConfig(headingStencil)},
-  'Hyperlink': {stencil: toStencilConfig(hyperlinkStencil)},
-  'InputGroup': {stencil: toStencilConfig(inputGroupStencil)},
-  'Label': {stencil: toStencilConfig(labelTextStencil)},
-  'LoadingSparkles': {stencil: toStencilConfig(loadingSparklesStencil)},
+  Heading: {stencil: toStencilConfig(headingStencil)},
+  Hyperlink: {stencil: toStencilConfig(hyperlinkStencil)},
+  InputGroup: {stencil: toStencilConfig(inputGroupStencil)},
+  Label: {stencil: toStencilConfig(labelTextStencil)},
+  LoadingSparkles: {stencil: toStencilConfig(loadingSparklesStencil)},
   'Menu.Divider': {stencil: toStencilConfig(menuDividerStencil)},
   'Menu.Group.Heading': {stencil: toStencilConfig(menuGroupHeadingStencil)},
   'Menu.List': {stencil: toStencilConfig(menuListStencil)},
-  'MenuItem': {stencil: toStencilConfig(menuItemStencil)},
-  'MenuOption': {stencil: toStencilConfig(menuItemStencil)},
+  MenuItem: {stencil: toStencilConfig(menuItemStencil)},
+  MenuOption: {stencil: toStencilConfig(menuItemStencil)},
   'Modal.Body': {stencil: toStencilConfig(modalBodyStencil)},
   'Modal.Card': {stencil: toStencilConfig(modalCardStencil)},
   'Modal.Heading': {stencil: toStencilConfig(modalHeadingStencil)},
@@ -144,25 +150,27 @@ export const ck13StencilProviderMap: StencilProviderMap = {
   'Pill.Icon': {stencil: toStencilConfig(pillIconStencil)},
   'Pill.IconButton': {stencil: toStencilConfig(pillIconButtonStencil)},
   'Pill.Label': {stencil: toStencilConfig(pillLabelStencil)},
+  PrimaryButton: {stencil: toStencilConfig(primaryButtonStencil)},
   'Popup.Body': {stencil: toStencilConfig(popupBodyStencil)},
   'Popup.CloseIcon': {stencil: toStencilConfig(popupCloseIconStencil)},
   'Popup.Heading': {stencil: toStencilConfig(popupHeadingStencil)},
   'RadioButton.Text': {stencil: toStencilConfig(radioTextStencil)},
-  'RadioGroup': {stencil: toStencilConfig(radioGroupStencil)},
+  RadioGroup: {stencil: toStencilConfig(radioGroupStencil)},
   'RadioGroup.Label': {stencil: toStencilConfig(radioLabelStencil)},
   'Select.Card': {stencil: toStencilConfig(selectCardStencil)},
-  'SelectInput': {stencil: toStencilConfig(selectInputStencil)},
-  'Skeleton': {stencil: toStencilConfig(skeletonStencil)},
+  SelectInput: {stencil: toStencilConfig(selectInputStencil)},
+  SecondaryButton: {stencil: toStencilConfig(secondaryButtonStencil)},
+  Skeleton: {stencil: toStencilConfig(skeletonStencil)},
   'StatusIndicator.Label': {stencil: toStencilConfig(statusIndicatorLabelStencil)},
-  'StyledRadioInput': {stencil: toStencilConfig(radioInputStencil)},
-  'StyledTabItem': {stencil: toStencilConfig(tabItemStencil)},
-  'Subtext': {stencil: toStencilConfig(subtextStencil)},
-  'Svg': {stencil: toStencilConfig(svgStencil)},
-  'SwitchBackground': {stencil: toStencilConfig(switchBackgroundStencil)},
-  'SwitchCircle': {stencil: toStencilConfig(switchCircleStencil)},
-  'SwitchContainer': {stencil: toStencilConfig(switchContainerStencil)},
-  'SwitchInput': {stencil: toStencilConfig(switchInputStencil)},
-  'Table': {stencil: toStencilConfig(tableStencil)},
+  StyledRadioInput: {stencil: toStencilConfig(radioInputStencil)},
+  StyledTabItem: {stencil: toStencilConfig(tabItemStencil)},
+  Subtext: {stencil: toStencilConfig(subtextStencil)},
+  Svg: {stencil: toStencilConfig(svgStencil)},
+  SwitchBackground: {stencil: toStencilConfig(switchBackgroundStencil)},
+  SwitchCircle: {stencil: toStencilConfig(switchCircleStencil)},
+  SwitchContainer: {stencil: toStencilConfig(switchContainerStencil)},
+  SwitchInput: {stencil: toStencilConfig(switchInputStencil)},
+  Table: {stencil: toStencilConfig(tableStencil)},
   'Table.Body': {stencil: toStencilConfig(tableBodyStencil)},
   'Table.Caption': {stencil: toStencilConfig(tableCaptionStencil)},
   'Table.Cell': {stencil: toStencilConfig(tableCellStencil)},
@@ -171,10 +179,11 @@ export const ck13StencilProviderMap: StencilProviderMap = {
   'Table.Header': {stencil: toStencilConfig(tableHeaderStencil)},
   'Table.Row': {stencil: toStencilConfig(tableRowStencil)},
   'Tabs.OverflowButton': {stencil: toStencilConfig(tabsOverflowButtonStencil)},
-  'Text': {stencil: toStencilConfig(textStencil)},
-  'TextArea': {stencil: toStencilConfig(textAreaStencil)},
-  'Title': {stencil: toStencilConfig(titleStencil)},
-  'Toast': {stencil: toStencilConfig(toastStencil)},
+  TertiaryButton: {stencil: toStencilConfig(tertiaryButtonStencil)},
+  Text: {stencil: toStencilConfig(textStencil)},
+  TextArea: {stencil: toStencilConfig(textAreaStencil)},
+  Title: {stencil: toStencilConfig(titleStencil)},
+  Toast: {stencil: toStencilConfig(toastStencil)},
   'Toast.Body': {stencil: toStencilConfig(toastBodyStencil)},
   'Toast.CloseIcon': {stencil: toStencilConfig(toastCloseIconStencil)},
   'Toast.Icon': {stencil: toStencilConfig(toastIconStencil)},

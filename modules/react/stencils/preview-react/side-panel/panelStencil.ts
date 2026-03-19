@@ -1,7 +1,9 @@
 import {px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const panelStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const panelStencil = defineStencil({
   vars: {
     expandedWidth: '',
     collapsedWidth: '',
@@ -24,11 +26,11 @@ export const panelStencil = {
       },
     },
     expanded: {
-      true: ({expandedWidth}) => ({
+      true: ({expandedWidth}: any) => ({
         width: expandedWidth,
         maxWidth: expandedWidth,
       }),
-      false: ({collapsedWidth}) => ({
+      false: ({collapsedWidth}: any) => ({
         width: collapsedWidth,
         maxWidth: collapsedWidth,
       }),
@@ -40,4 +42,4 @@ export const panelStencil = {
       },
     },
   },
-};
+});

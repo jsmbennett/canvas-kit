@@ -6,6 +6,7 @@ import {
   PartialEmotionCanvasTheme,
   defaultCanvasTheme,
 } from '@workday/canvas-kit-react/common';
+import {ck13StencilProviderMap} from '@workday/canvas-kit-react/stencils';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -20,8 +21,16 @@ export default makeDecorator({
     const theme: PartialEmotionCanvasTheme = {
       canvas: parameters.theme || defaultCanvasTheme,
     };
+    const stencilOverrides =
+      context.globals?.stencilLibrary === 'ck13' ? ck13StencilProviderMap : undefined;
+
     return (
-      <CanvasProvider theme={theme} className={storyStyles}>
+      <CanvasProvider
+        key={stencilOverrides ? 'ck13' : 'ck15'}
+        theme={theme}
+        className={storyStyles}
+        stencilOverrides={stencilOverrides}
+      >
         {storyFn(context) as React.ReactNode}
       </CanvasProvider>
     );

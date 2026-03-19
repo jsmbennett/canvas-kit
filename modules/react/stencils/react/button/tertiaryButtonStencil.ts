@@ -1,11 +1,12 @@
-import {brand, system} from '@workday/canvas-tokens-web';
-import {buttonColorPropVars} from '../../../button/lib/BaseButton';
-import {buttonStencil} from './buttonStencil';
-import {calc, cssVar} from '@workday/canvas-kit-styling';
 import {focusRing} from '@workday/canvas-kit-react/common';
-import {systemIconStencil} from '../icon/systemIconStencil';
+import {calc} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
-export const tertiaryButtonStencil = {
+import {systemIconStencil} from '../../../icon/lib/SystemIcon';
+import {defineStencil} from '../../defineStencil';
+import {buttonStencil} from './buttonStencil';
+
+export const tertiaryButtonStencil = defineStencil({
   extends: buttonStencil,
   // Base Styles
   base: {
@@ -16,18 +17,18 @@ export const tertiaryButtonStencil = {
     [buttonStencil.vars.background]: 'transparent',
     [buttonStencil.vars.borderRadius]: system.shape.x1,
     [buttonStencil.vars.label]: brand.primary.base,
-    [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, brand.primary.base),
+    [systemIconStencil.vars.color]: 'currentColor',
     // Focus Styles
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: 'transparent',
       [buttonStencil.vars.label]: brand.primary.base,
       [buttonStencil.vars.boxShadowInner]: brand.common.focusOutline,
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, brand.primary.base),
+      [systemIconStencil.vars.color]: 'currentColor',
       ...focusRing({
         width: 2,
         separation: 0,
-        innerColor: system.color.border.inverse,
+        innerColor: system.color.border.inverse.default,
         outerColor: brand.common.focusOutline,
       }),
     },
@@ -35,23 +36,20 @@ export const tertiaryButtonStencil = {
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: system.color.bg.alt.default,
       [buttonStencil.vars.label]: brand.primary.dark,
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, brand.primary.dark),
+      [systemIconStencil.vars.color]: 'currentColor',
     },
     // Active Styles
     '&:active, &.active': {
       [buttonStencil.vars.background]: system.color.bg.alt.strong,
       [buttonStencil.vars.label]: brand.primary.darkest,
-      [systemIconStencil.vars.color]: cssVar(
-        buttonColorPropVars.active.icon,
-        brand.primary.darkest
-      ),
+      [systemIconStencil.vars.color]: 'currentColor',
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.background]: 'transparent',
       [buttonStencil.vars.label]: brand.primary.base,
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, brand.primary.base),
+      [systemIconStencil.vars.color]: 'currentColor',
     },
   },
   modifiers: {
@@ -60,33 +58,18 @@ export const tertiaryButtonStencil = {
       only: {
         padding: 0,
         borderRadius: system.shape.round,
-        [systemIconStencil.vars.color]: cssVar(
-          buttonColorPropVars.default.icon,
-          system.color.fg.strong
-        ),
+        [systemIconStencil.vars.color]: 'currentColor',
         '&:focus-visible, &.focus': {
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.focus.icon,
-            system.color.fg.strong
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
         },
         '&:hover, &.hover': {
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.hover.icon,
-            system.color.fg.strong
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
         },
         '&:active, &.active': {
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.active.icon,
-            system.color.fg.strong
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
         },
         '&:disabled, &.disabled': {
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.disabled.icon,
-            system.color.fg.strong
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
         },
       },
       start: {},
@@ -94,34 +77,19 @@ export const tertiaryButtonStencil = {
     },
     isThemeable: {
       true: {
-        [systemIconStencil.vars.color]: cssVar(
-          buttonColorPropVars.default.icon,
-          brand.primary.base
-        ),
+        [systemIconStencil.vars.color]: 'currentColor',
 
         '&:focus-visible, &.focus': {
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.focus.icon,
-            brand.primary.base
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
         },
         '&:hover, &.hover': {
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.hover.icon,
-            brand.primary.dark
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
         },
         '&:active, &.active': {
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.active.icon,
-            brand.primary.darkest
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
         },
         '&:disabled, &.disabled': {
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.disabled.icon,
-            brand.primary.base
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
         },
       },
     },
@@ -130,52 +98,37 @@ export const tertiaryButtonStencil = {
       inverse: {
         [buttonStencil.vars.background]: 'transparent',
         [buttonStencil.vars.label]: system.color.fg.inverse,
-        [systemIconStencil.vars.color]: cssVar(
-          buttonColorPropVars.default.icon,
-          system.color.fg.inverse
-        ),
+        [systemIconStencil.vars.color]: 'currentColor',
         // Focus Styles
         '&:focus-visible, &.focus': {
           [buttonStencil.vars.background]: system.color.bg.default,
           [buttonStencil.vars.label]: system.color.fg.strong,
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.focus.icon,
-            system.color.fg.strong
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
           ...focusRing({
             inset: 'inner',
             width: 2,
             separation: 2,
             innerColor: system.color.border.contrast.default,
-            outerColor: system.color.border.inverse,
+            outerColor: system.color.border.inverse.default,
           }),
         },
         // Hover Styles
         '&:hover, &.hover': {
           [buttonStencil.vars.background]: system.color.bg.default,
           [buttonStencil.vars.label]: system.color.fg.strong,
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.hover.icon,
-            system.color.fg.strong
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
         },
         // Active Styles
         '&:active, &.active': {
           [buttonStencil.vars.background]: system.color.bg.alt.soft,
           [buttonStencil.vars.label]: system.color.fg.strong,
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.active.icon,
-            system.color.fg.strong
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
         },
         // Disabled Styles
         '&:disabled, &.disabled': {
           [buttonStencil.vars.background]: 'transparent',
           [buttonStencil.vars.label]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.disabled.icon,
-            system.color.fg.inverse
-          ),
+          [systemIconStencil.vars.color]: 'currentColor',
         },
       },
     },
@@ -263,4 +216,4 @@ export const tertiaryButtonStencil = {
       },
     },
   ],
-};
+});

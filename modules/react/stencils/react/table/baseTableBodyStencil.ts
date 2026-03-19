@@ -1,7 +1,6 @@
+import {defineStencil} from '../../defineStencil';
 
-
-
-export const baseTableBodyStencil = {
+export const baseTableBodyStencil = defineStencil({
   base: {
     'tr ': {
       '&:last-of-type': {
@@ -24,4 +23,4 @@ export const baseTableBodyStencil = {
       },
     },
   },
-};
+});

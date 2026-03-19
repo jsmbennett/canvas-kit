@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {colorSpace, createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
@@ -184,6 +184,13 @@ export const SecondaryButton = createComponent('button')({
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil('SecondaryButton', secondaryButtonStencil, {
+      variant,
+      iconPosition,
+      grow,
+      size,
+    });
+
     return (
       <Button
         as={Element}
@@ -191,7 +198,7 @@ export const SecondaryButton = createComponent('button')({
         iconPosition={iconPosition}
         size={size}
         grow={grow}
-        cs={[secondaryButtonStencil({variant, iconPosition, grow, size}), cs]}
+        cs={[resolved, cs]}
         {...elemProps}
       >
         {children}

@@ -1,6 +1,8 @@
 import {cssVar, keyframes} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+import {defineStencil} from '../../defineStencil';
+
 const fadeIn = keyframes({
   '0%': {
     background: 'none',
@@ -10,11 +12,11 @@ const fadeIn = keyframes({
   },
 });
 
-export const modalOverlayContainerStencil = {
+export const modalOverlayContainerStencil = defineStencil({
   vars: {
     containerCenter: '',
   },
-  base: ({containerCenter}) => ({
+  base: ({containerCenter}: any) => ({
     position: 'fixed',
     top: system.space.zero,
     left: system.space.zero,
@@ -46,4 +48,4 @@ export const modalOverlayContainerStencil = {
       },
     },
   }),
-};
+});

@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const informationHighlightBodyStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const informationHighlightBodyStencil = defineStencil({
   base: () => {
     return {
       ...system.type.subtext.large,
@@ -10,4 +11,4 @@ export const informationHighlightBodyStencil = {
       marginBlockEnd: system.space.x2,
     };
   },
-};
+});

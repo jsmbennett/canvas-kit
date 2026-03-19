@@ -1,8 +1,10 @@
 import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {textInputStencil} from '../text-input/textInputStencil';
 
-export const textAreaStencil = {
+export const textAreaStencil = defineStencil({
   extends: textInputStencil,
   base: {
     minHeight: system.space.x16,
@@ -31,4 +33,4 @@ export const textAreaStencil = {
   defaultModifiers: {
     resize: 'both',
   },
-};
+});

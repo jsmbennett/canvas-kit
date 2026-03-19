@@ -1,7 +1,9 @@
 import {calc, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const modalCardStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const modalCardStencil = defineStencil({
   base: {
     margin: system.space.x10,
     width: calc.add(calc.multiply(system.space.x20, 5), system.space.x10),
@@ -14,4 +16,4 @@ export const modalCardStencil = {
       borderRadius: system.space.x6, // 24px border radius on smaller devices.
     },
   },
-};
+});

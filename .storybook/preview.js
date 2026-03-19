@@ -14,6 +14,22 @@ window.__routes = routes;
 
 export const decorators = [CanvasProviderDecorator];
 
+export const globalTypes = {
+  stencilLibrary: {
+    name: 'Stencil Library',
+    description: 'Apply an optional stencil override map to CanvasProvider',
+    defaultValue: 'none',
+    toolbar: {
+      icon: 'paintbrush',
+      dynamicTitle: true,
+      items: [
+        {value: 'none', title: 'None'},
+        {value: 'ck13', title: 'CK13'},
+      ],
+    },
+  },
+};
+
 export const parameters = {
   options: {
     storySort: (a, b) => {

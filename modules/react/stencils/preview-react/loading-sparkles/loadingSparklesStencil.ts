@@ -1,5 +1,7 @@
-import {base} from '@workday/canvas-tokens-web';
 import {keyframes, px2rem} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {systemIconStencil} from '../../react/icon/systemIconStencil';
 
 const ANIMATION_DURATION_MS = 1230;
@@ -19,7 +21,7 @@ const LOADING_ANIMATION = keyframes({
   },
 });
 
-export const loadingSparklesStencil = {
+export const loadingSparklesStencil = defineStencil({
   base: {
     display: 'inline-flex',
     gap: px2rem(1),
@@ -41,4 +43,4 @@ export const loadingSparklesStencil = {
       },
     },
   },
-};
+});

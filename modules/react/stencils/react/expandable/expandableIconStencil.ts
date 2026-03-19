@@ -1,8 +1,9 @@
-
-import {systemIconStencil} from '../icon/systemIconStencil';
 import {system} from '@workday/canvas-tokens-web';
 
-export const expandableIconStencil = {
+import {defineStencil} from '../../defineStencil';
+import {systemIconStencil} from '../icon/systemIconStencil';
+
+export const expandableIconStencil = defineStencil({
   extends: systemIconStencil,
   base: {
     padding: system.space.x1,
@@ -52,4 +53,4 @@ export const expandableIconStencil = {
       },
     },
   ],
-};
+});

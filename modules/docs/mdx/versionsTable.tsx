@@ -6,8 +6,7 @@ import {
 } from '@workday/canvas-kit-preview-react/status-indicator';
 import {Table} from '@workday/canvas-kit-react/table';
 
-// @ts-ignore: Cannot find module error
-import {version} from '../../../lerna.json';
+import {version} from '../../react/version/lib/version';
 
 const statusIndicators = {
   stable: {

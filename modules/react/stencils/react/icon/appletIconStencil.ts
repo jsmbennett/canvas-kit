@@ -1,8 +1,10 @@
-import {base} from '@workday/canvas-tokens-web';
 import {cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {svgStencil} from './svgStencil';
 
-export const appletIconStencil = {
+export const appletIconStencil = defineStencil({
   extends: svgStencil,
   vars: {
     color200: '',
@@ -10,7 +12,7 @@ export const appletIconStencil = {
     color400: '',
     color500: '',
   },
-  base: ({color200, color300, color400, color500, size}) => ({
+  base: ({color200, color300, color400, color500, size}: any) => ({
     [size]: px2rem(92),
     '& .color-100': {
       fill: base.frenchVanilla100,
@@ -31,4 +33,4 @@ export const appletIconStencil = {
       fill: cssVar(color500, base.blueberry400),
     },
   }),
-};
+});

@@ -1,12 +1,14 @@
 import {calc, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const pillCountStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const pillCountStencil = defineStencil({
   vars: {
     backgroundColor: '',
     borderColor: '',
   },
-  base: ({backgroundColor, borderColor}) => ({
+  base: ({backgroundColor, borderColor}: any) => ({
     borderStartStartRadius: system.shape.zero,
     borderStartEndRadius: system.shape.x1,
     borderEndStartRadius: system.shape.zero,
@@ -26,4 +28,4 @@ export const pillCountStencil = {
     backgroundColor: cssVar(backgroundColor, system.color.bg.alt.stronger),
     flex: '0 0 auto',
   }),
-};
+});

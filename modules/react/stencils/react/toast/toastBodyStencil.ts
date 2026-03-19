@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const toastBodyStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const toastBodyStencil = defineStencil({
   base: {
     alignItems: 'flex-start',
     flexDirection: 'column',
@@ -11,4 +12,4 @@ export const toastBodyStencil = {
     flexGrow: 1,
     gap: system.space.x1,
   },
-};
+});

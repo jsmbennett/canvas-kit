@@ -4,6 +4,15 @@ const fs = require('fs');
 const {createDocProgram} = require('../docgen/createDocProgram');
 const glob = require('glob');
 
+function resolveExistingPath(paths) {
+  for (const p of paths) {
+    if (fs.existsSync(p)) {
+      return p;
+    }
+  }
+  return paths[0];
+}
+
 const {parser} = createDocProgram();
 
 let docs = parser.program.getRootFileNames().flatMap(fileName => {
@@ -45,7 +54,10 @@ docs = docs.map(doc => {
   return doc;
 });
 
-const docsFilePath = path.join(__dirname, '../dist/es6/lib/docs.js');
+const docsFilePath = resolveExistingPath([
+  path.join(__dirname, '../dist/es6/docs/lib/docs.js'),
+  path.join(__dirname, '../dist/es6/lib/docs.js'),
+]);
 const docsStr = JSON.stringify(docs, null, '  ');
 const contents = fs
   .readFileSync(docsFilePath)
@@ -58,9 +70,12 @@ fs.writeFileSync(docsFilePath, contents);
  */
 // Source and destination base paths
 const sourceBase = path.join(__dirname, '../lib/stackblitzFiles');
-const destBase = path.join(__dirname, '../dist/es6/lib/stackblitzFiles');
+const destBase = resolveExistingPath([
+  path.join(__dirname, '../dist/es6/docs/lib/stackblitzFiles'),
+  path.join(__dirname, '../dist/es6/lib/stackblitzFiles'),
+]);
 const rootPackageJsonPath = path.join(__dirname, '..', 'package.json');
-const searchPath = path.join(__dirname, '../dist/es6/lib/stackblitzFiles/packageJSONFile*.{ts,js}');
+const searchPath = path.join(destBase, 'packageJSONFile*.{ts,js}');
 const rootPackageJson = JSON.parse(fs.readFileSync(rootPackageJsonPath, 'utf8'));
 const version = rootPackageJson.version || '0.0.0';
 

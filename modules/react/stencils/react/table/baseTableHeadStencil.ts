@@ -1,7 +1,9 @@
 import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const baseTableHeadStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const baseTableHeadStencil = defineStencil({
   base: {
     backgroundColor: system.color.bg.alt.softer,
     minHeight: calc.subtract(system.space.x16, system.space.x4),
@@ -14,4 +16,4 @@ export const baseTableHeadStencil = {
       },
     },
   },
-};
+});

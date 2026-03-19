@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const selectInputStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const selectInputStencil = defineStencil({
   parts: {
     caret: 'select-caret-icon',
     caretContainer: 'select-caret-container',
@@ -18,7 +19,7 @@ export const selectInputStencil = {
     visualInputPart,
     caretContainerPart,
     startIconContainerPart,
-  }) => ({
+  }: any) => ({
     [hiddenInputPart]: {
       position: 'absolute',
       top: system.space.zero,
@@ -44,4 +45,4 @@ export const selectInputStencil = {
       },
     },
   }),
-};
+});

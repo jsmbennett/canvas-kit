@@ -1,7 +1,6 @@
+import {defineStencil} from '../../defineStencil';
 
-
-
-export const inputGroupStencil = {
+export const inputGroupStencil = defineStencil({
   base: {
     display: 'flex',
     position: 'relative',
@@ -18,4 +17,4 @@ export const inputGroupStencil = {
       pointerEvents: 'none',
     },
   },
-};
+});

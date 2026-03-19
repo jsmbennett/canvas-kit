@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const listBoxContainerStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const listBoxContainerStencil = defineStencil({
   base: {
     '& :where([data-part="list"])': {
       display: 'flex',
@@ -23,4 +24,4 @@ export const listBoxContainerStencil = {
       },
     },
   },
-};
+});

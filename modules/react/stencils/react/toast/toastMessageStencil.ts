@@ -1,10 +1,11 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const toastMessageStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const toastMessageStencil = defineStencil({
   base: {
     wordBreak: 'break-word',
     marginBlockStart: system.space.zero,
     marginBlockEnd: system.space.zero,
   },
-};
+});

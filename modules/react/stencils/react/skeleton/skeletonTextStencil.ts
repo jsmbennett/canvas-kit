@@ -1,11 +1,13 @@
 import {cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const skeletonTextStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const skeletonTextStencil = defineStencil({
   vars: {
     backgroundColor: '',
   },
-  base: ({backgroundColor}) => ({
+  base: ({backgroundColor}: any) => ({
     marginBottom: system.space.x6,
     '& [data-part="skeleton-text-lines"]': {
       backgroundColor: cssVar(backgroundColor, system.color.bg.alt.strong),
@@ -18,4 +20,4 @@ export const skeletonTextStencil = {
       width: '60%',
     },
   }),
-};
+});

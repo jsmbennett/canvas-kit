@@ -1,7 +1,9 @@
 import {px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const expandableTitleStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const expandableTitleStencil = defineStencil({
   base: {
     ...system.type.body.medium,
     fontWeight: system.fontWeight.bold,
@@ -9,4 +11,4 @@ export const expandableTitleStencil = {
     padding: `${px2rem(2)} ${system.space.zero}`,
     textAlign: 'left',
   },
-};
+});

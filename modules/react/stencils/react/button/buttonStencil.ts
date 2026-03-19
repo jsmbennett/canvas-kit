@@ -1,7 +1,9 @@
-import {brand, system} from '@workday/canvas-tokens-web';
-import {calc, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {focusRing} from '@workday/canvas-kit-react/common';
-import {systemIconStencil} from '../icon/systemIconStencil';
+import {calc, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+import {systemIconStencil} from '../../../icon/lib/SystemIcon';
+import {defineStencil} from '../../defineStencil';
 
 const buttonColorPropVars = {
   default: createVars(
@@ -55,8 +57,7 @@ const buttonColorPropVars = {
     'borderRadius'
   ),
 };
-
-export const buttonStencil = {
+export const buttonStencil = defineStencil({
   vars: {
     background: '',
     border: '',
@@ -66,7 +67,15 @@ export const buttonStencil = {
     opacity: '',
     borderRadius: '',
   },
-  base: ({background, border, boxShadowInner, boxShadowOuter, label, opacity, borderRadius}) => ({
+  base: ({
+    background,
+    border,
+    boxShadowInner,
+    boxShadowOuter,
+    label,
+    opacity,
+    borderRadius,
+  }: any) => ({
     // Default Styles
     fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
     fontSize: '0.875rem',
@@ -129,7 +138,7 @@ export const buttonStencil = {
         separation: 2,
         innerColor: cssVar(
           buttonColorPropVars.focus.boxShadowInner,
-          cssVar(boxShadowInner, system.color.border.inverse)
+          cssVar(boxShadowInner, system.color.border.inverse.default)
         ),
         outerColor: cssVar(
           buttonColorPropVars.focus.boxShadowOuter,
@@ -331,4 +340,4 @@ export const buttonStencil = {
       },
     },
   ],
-};
+});

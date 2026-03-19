@@ -1,7 +1,7 @@
-
+import {defineStencil} from '../../defineStencil';
 import {svgStencil} from './svgStencil';
 
-export const graphicStencil = {
+export const graphicStencil = defineStencil({
   extends: svgStencil,
   base: {},
   modifiers: {
@@ -12,4 +12,4 @@ export const graphicStencil = {
       },
     },
   },
-};
+});

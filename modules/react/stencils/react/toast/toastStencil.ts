@@ -1,7 +1,9 @@
 import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const toastStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const toastStencil = defineStencil({
   base: {
     display: 'flex',
     flexDirection: 'row',
@@ -9,4 +11,4 @@ export const toastStencil = {
     padding: system.space.zero,
     gap: system.space.x1,
   },
-};
+});

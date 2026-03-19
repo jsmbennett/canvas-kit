@@ -1,10 +1,12 @@
-import {buttonStencil} from '../../react/button/buttonStencil';
-import {calc, px2rem} from '@workday/canvas-kit-styling';
 import {focusRing} from '@workday/canvas-kit-react/common';
-import {systemIconStencil} from '../../react/icon/systemIconStencil';
+import {calc, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const pillIconButtonStencil = {
+import {defineStencil} from '../../defineStencil';
+import {buttonStencil} from '../../react/button/buttonStencil';
+import {systemIconStencil} from '../../react/icon/systemIconStencil';
+
+export const pillIconButtonStencil = defineStencil({
   extends: buttonStencil,
   base: {
     marginInlineEnd: calc.negate(px2rem(7)), // visually pull in the pill to the right size  by -7px
@@ -43,4 +45,4 @@ export const pillIconButtonStencil = {
       [buttonStencil.vars.border]: system.color.border.transparent,
     },
   },
-};
+});

@@ -1,14 +1,16 @@
 import {calc, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const menuCardStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const menuCardStencil = defineStencil({
   vars: {
     minWidth: px2rem(1),
     transformOriginVertical: 'top',
     transformOriginHorizontal: 'left',
     maxHeight: '',
   },
-  base: ({transformOriginVertical, transformOriginHorizontal, minWidth, maxHeight}) => ({
+  base: ({transformOriginVertical, transformOriginHorizontal, minWidth, maxHeight}: any) => ({
     ...system.type.subtext.large,
     color: system.color.text.default,
     position: 'relative',
@@ -26,4 +28,4 @@ export const menuCardStencil = {
       animation: 'none',
     },
   }),
-};
+});

@@ -1,7 +1,9 @@
 import {cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const hyperlinkStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const hyperlinkStencil = defineStencil({
   base: {
     fontFamily: system.fontFamily.default,
     textDecoration: 'underline',
@@ -43,4 +45,4 @@ export const hyperlinkStencil = {
       },
     },
   },
-};
+});

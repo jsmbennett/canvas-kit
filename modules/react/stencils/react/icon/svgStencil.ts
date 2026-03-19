@@ -1,6 +1,8 @@
 import {cssVar} from '@workday/canvas-kit-styling';
 
-export const svgStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const svgStencil = defineStencil({
   vars: {
     /** sets width of svg element */
     width: '',
@@ -9,7 +11,7 @@ export const svgStencil = {
     /** sets width and height of svg element */
     size: '',
   },
-  base: ({width, height, size}) => ({
+  base: ({width, height, size}: any) => ({
     display: 'inline-block',
     '> svg': {
       display: 'block',
@@ -24,4 +26,4 @@ export const svgStencil = {
       },
     },
   },
-};
+});

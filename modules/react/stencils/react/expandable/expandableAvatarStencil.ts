@@ -1,11 +1,12 @@
-import {avatarStencil} from '../avatar/avatarStencil';
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const expandableAvatarStencil = {
+import {defineStencil} from '../../defineStencil';
+import {avatarStencil} from '../avatar/avatarStencil';
+
+export const expandableAvatarStencil = defineStencil({
   extends: avatarStencil,
   base: {
     marginInlineEnd: system.space.x2,
     flexShrink: 0,
   },
-};
+});

@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const textStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const textStencil = defineStencil({
   base: {},
   modifiers: {
     typeLevel: {
@@ -64,4 +65,4 @@ export const textStencil = {
       inverse: {color: system.color.text.inverse},
     },
   },
-};
+});

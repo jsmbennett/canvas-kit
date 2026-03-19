@@ -1,6 +1,7 @@
 /// <reference types="@types/node" />
-import {version} from '@workday/canvas-kit-react/version';
 import {slugify} from '@workday/canvas-kit-styling';
+
+import {version} from '../../../version/lib/version';
 
 // Only add the major version tag for development and test environments
 const versionTag = process.env.NODE_ENV === 'production' ? version : version.split('.')[0];

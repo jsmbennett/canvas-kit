@@ -1,10 +1,11 @@
-import {buttonStencil} from '../../react/button/buttonStencil';
-
-import {pillStencil} from './pillStencil';
-import {systemIconStencil} from '../../react/icon/systemIconStencil';
 import {system} from '@workday/canvas-tokens-web';
 
-export const removeablePillStencil = {
+import {defineStencil} from '../../defineStencil';
+import {buttonStencil} from '../../react/button/buttonStencil';
+import {systemIconStencil} from '../../react/icon/systemIconStencil';
+import {pillStencil} from './pillStencil';
+
+export const removeablePillStencil = defineStencil({
   extends: pillStencil,
   base: {
     '&:focus-visible, &.focus': {
@@ -27,4 +28,4 @@ export const removeablePillStencil = {
     overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
     position: 'relative',
   },
-};
+});

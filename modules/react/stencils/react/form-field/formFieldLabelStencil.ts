@@ -1,9 +1,11 @@
 import {accessibleHide} from '@workday/canvas-kit-react/common';
-import {brand, system} from '@workday/canvas-tokens-web';
 import {px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {textStencil} from '../text/textStencil';
 
-export const formFieldLabelStencil = {
+export const formFieldLabelStencil = defineStencil({
   extends: textStencil,
   base: {
     fontWeight: system.fontWeight.medium,
@@ -50,4 +52,4 @@ export const formFieldLabelStencil = {
   defaultModifiers: {
     typeLevel: 'subtext.large',
   },
-};
+});

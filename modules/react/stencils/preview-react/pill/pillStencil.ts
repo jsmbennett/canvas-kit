@@ -1,16 +1,18 @@
-import {base, system} from '@workday/canvas-tokens-web';
-import {buttonStencil} from '../../react/button/buttonStencil';
-import {cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {focusRing} from '@workday/canvas-kit-react/common';
-import {pillCountStencil} from './pillCountStencil';
-import {systemIconStencil} from '../../react/icon/systemIconStencil';
+import {cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
-export const pillStencil = {
+import {defineStencil} from '../../defineStencil';
+import {buttonStencil} from '../../react/button/buttonStencil';
+import {systemIconStencil} from '../../react/icon/systemIconStencil';
+import {pillCountStencil} from './pillCountStencil';
+
+export const pillStencil = defineStencil({
   extends: buttonStencil,
   vars: {
     maxWidth: '',
   },
-  base: ({maxWidth}) => ({
+  base: ({maxWidth}: any) => ({
     display: 'initial',
     flexDirection: 'row',
     alignItems: 'center',
@@ -79,4 +81,4 @@ export const pillStencil = {
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
   }),
-};
+});

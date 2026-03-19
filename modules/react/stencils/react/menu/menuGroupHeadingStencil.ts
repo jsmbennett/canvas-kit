@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const menuGroupHeadingStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const menuGroupHeadingStencil = defineStencil({
   base: {
     ...system.type.subtext.large,
     display: 'flex',
@@ -12,4 +13,4 @@ export const menuGroupHeadingStencil = {
     boxSizing: 'border-box',
     fontWeight: system.fontWeight.bold,
   },
-};
+});

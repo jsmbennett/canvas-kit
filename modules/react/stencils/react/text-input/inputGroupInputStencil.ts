@@ -1,7 +1,6 @@
+import {defineStencil} from '../../defineStencil';
 
-
-
-export const inputGroupInputStencil = {
+export const inputGroupInputStencil = defineStencil({
   vars: {
     paddingInlineStart: '',
     paddingInlineEnd: '',
@@ -12,10 +11,10 @@ export const inputGroupInputStencil = {
   },
   modifiers: {
     paddingInlineStart: {
-      _: ({paddingInlineStart}) => ({paddingInlineStart}),
+      _: ({paddingInlineStart}: any) => ({paddingInlineStart}),
     },
     paddingInlineEnd: {
-      _: ({paddingInlineEnd}) => ({paddingInlineEnd}),
+      _: ({paddingInlineEnd}: any) => ({paddingInlineEnd}),
     },
   },
-};
+});

@@ -1,8 +1,10 @@
-import {brand, system} from '@workday/canvas-tokens-web';
 import {px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {textStencil} from '../text/textStencil';
 
-export const formFieldGroupLabelStencil = {
+export const formFieldGroupLabelStencil = defineStencil({
   extends: textStencil,
   base: {
     fontWeight: system.fontWeight.medium,
@@ -44,4 +46,4 @@ export const formFieldGroupLabelStencil = {
   defaultModifiers: {
     typeLevel: 'subtext.large',
   },
-};
+});

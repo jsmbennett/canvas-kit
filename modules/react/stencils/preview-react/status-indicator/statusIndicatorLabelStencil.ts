@@ -1,8 +1,9 @@
-
 import {system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {textStencil} from '../../react/text/textStencil';
 
-export const statusIndicatorLabelStencil = {
+export const statusIndicatorLabelStencil = defineStencil({
   extends: textStencil,
   base: {
     fontWeight: system.fontWeight.bold,
@@ -13,4 +14,4 @@ export const statusIndicatorLabelStencil = {
     color: 'inherit',
   },
   defaultModifiers: {typeLevel: 'subtext.large'},
-};
+});

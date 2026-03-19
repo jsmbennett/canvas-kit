@@ -1,8 +1,10 @@
-import {base, system} from '@workday/canvas-tokens-web';
 import {cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {systemIconStencil} from '../../react/icon/systemIconStencil';
 
-export const informationHighlightStencil = {
+export const informationHighlightStencil = defineStencil({
   base: {
     display: 'grid',
     gridTemplateColumns: 'min-content',
@@ -86,4 +88,4 @@ export const informationHighlightStencil = {
       },
     },
   },
-};
+});

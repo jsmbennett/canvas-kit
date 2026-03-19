@@ -1,7 +1,9 @@
 import {calc, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const baseTableHeaderStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const baseTableHeaderStencil = defineStencil({
   base: {
     backgroundColor: system.color.bg.default,
     borderBottom: `${px2rem(1)} solid ${system.color.border.divider}`,
@@ -11,4 +13,4 @@ export const baseTableHeaderStencil = {
     wordBreak: 'break-word',
     fontWeight: system.fontWeight.medium,
   },
-};
+});

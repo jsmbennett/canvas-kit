@@ -1,7 +1,6 @@
+import {defineStencil} from '../../defineStencil';
 
-
-
-export const actionBarTextStencil = {
+export const actionBarTextStencil = defineStencil({
   base: {
     textDecoration: 'underline',
     display: 'inline',
@@ -13,4 +12,4 @@ export const actionBarTextStencil = {
       },
     },
   },
-};
+});

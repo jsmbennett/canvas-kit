@@ -1,14 +1,16 @@
-import {brand, system} from '@workday/canvas-tokens-web';
 import {px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {systemIconStencil} from '../icon/systemIconStencil';
 
-export const menuItemStencil = {
+export const menuItemStencil = defineStencil({
   parts: {
     text: 'menu-item-text',
     icon: 'menu-item-icon',
     selected: 'menu-item-selected',
   },
-  base: ({textPart, iconPart, selectedPart}) => ({
+  base: ({textPart, iconPart, selectedPart}: any) => ({
     ...system.type.subtext.large,
     display: 'flex',
     alignItems: 'center',
@@ -88,4 +90,4 @@ export const menuItemStencil = {
       alignSelf: 'start',
     },
   }),
-};
+});

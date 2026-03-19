@@ -1,8 +1,9 @@
-
 import {system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {textStencil} from '../../react/text/textStencil';
 
-export const radioTextStencil = {
+export const radioTextStencil = defineStencil({
   extends: textStencil,
   base: {
     cursor: 'pointer',
@@ -32,4 +33,4 @@ export const radioTextStencil = {
   defaultModifiers: {
     typeLevel: 'subtext.large',
   },
-};
+});

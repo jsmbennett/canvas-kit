@@ -1,8 +1,9 @@
 import {brand, system} from '@workday/canvas-tokens-web';
 
+import {defineStencil} from '../../defineStencil';
 import {textStencil} from '../text/textStencil';
 
-export const formFieldHintStencil = {
+export const formFieldHintStencil = defineStencil({
   extends: textStencil,
   base: {
     margin: system.space.zero,
@@ -18,4 +19,4 @@ export const formFieldHintStencil = {
   defaultModifiers: {
     typeLevel: 'subtext.medium',
   },
-};
+});

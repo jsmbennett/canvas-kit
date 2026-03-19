@@ -1,9 +1,10 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const popupBodyStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const popupBodyStencil = defineStencil({
   base: {
     overflowY: 'auto',
     padding: system.space.x2,
   },
-};
+});

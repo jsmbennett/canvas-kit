@@ -28,6 +28,50 @@ export type StencilProviderMap = Record<string, StencilOptions>;
  */
 export const StencilOverrideContext = React.createContext<StencilProviderMap | null>(null);
 
+type ResolvedStencil<TArgs extends object | undefined, TResult> = (args?: TArgs) => TResult;
+
+const isStencilFn = (input: unknown): input is (...args: any[]) => any => {
+  return typeof input === 'function';
+};
+
+const toStencilFunction = <TArgs extends object | undefined, TResult>(
+  input: unknown
+): ResolvedStencil<TArgs, TResult> => {
+  if (isStencilFn(input)) {
+    return input as ResolvedStencil<TArgs, TResult>;
+  }
+
+  const config = (input || {}) as Record<string, unknown>;
+  const compiledExtends = config.extends
+    ? toStencilFunction<TArgs, TResult>(config.extends)
+    : undefined;
+  const compiledConfig = compiledExtends
+    ? ({...config, extends: compiledExtends} as unknown as StencilConfigInput)
+    : (config as unknown as StencilConfigInput);
+
+  return createStencil(compiledConfig) as unknown as ResolvedStencil<TArgs, TResult>;
+};
+
+const resolveOverrideStencil = <TArgs extends object | undefined, TResult>(
+  defaultStencil: ResolvedStencil<TArgs, TResult>,
+  overrideEntry: StencilOptions
+): ResolvedStencil<TArgs, TResult> => {
+  if (!overrideEntry.mergeWithDefault) {
+    return toStencilFunction<TArgs, TResult>(overrideEntry.stencil);
+  }
+
+  if (isStencilFn(overrideEntry.stencil)) {
+    // No config object is available to merge when a compiled stencil function is provided.
+    return overrideEntry.stencil as unknown as ResolvedStencil<TArgs, TResult>;
+  }
+
+  const overrideConfig = (overrideEntry.stencil || {}) as unknown as Record<string, unknown>;
+  return toStencilFunction<TArgs, TResult>({
+    ...overrideConfig,
+    extends: defaultStencil,
+  } as unknown as StencilConfigInput);
+};
+
 /**
  * Resolves the stencil to use at render time.
  * If an override config exists in context for the given componentName,
@@ -41,17 +85,7 @@ export function useResolvedStencil<TArgs extends object | undefined, TResult>(
   const providerMap = React.useContext(StencilOverrideContext);
   const overrideEntry = providerMap?.[componentName];
   const overrideStencil = React.useMemo(
-    () =>
-      overrideEntry
-        ? (createStencil(
-            overrideEntry.mergeWithDefault
-              ? {
-                  ...overrideEntry.stencil,
-                  extends: defaultStencil as never,
-                }
-              : overrideEntry.stencil
-          ) as unknown as (args?: TArgs) => TResult)
-        : undefined,
+    () => (overrideEntry ? resolveOverrideStencil(defaultStencil, overrideEntry) : undefined),
     [overrideEntry, defaultStencil]
   );
 

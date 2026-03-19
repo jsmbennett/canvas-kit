@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const expandableTargetStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const expandableTargetStencil = defineStencil({
   base: {
     background: system.color.bg.transparent,
     borderColor: system.color.bg.transparent,
@@ -18,4 +19,4 @@ export const expandableTargetStencil = {
       backgroundColor: system.color.bg.alt.default,
     },
   },
-};
+});

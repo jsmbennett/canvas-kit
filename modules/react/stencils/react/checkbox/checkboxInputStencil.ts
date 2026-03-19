@@ -1,9 +1,11 @@
-import {brand, system} from '@workday/canvas-tokens-web';
-import {calc, px2rem} from '@workday/canvas-kit-styling';
-import {checkboxBackgroundStencil} from './checkboxBackgroundStencil';
 import {focusRing} from '@workday/canvas-kit-react/common';
+import {calc, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
-export const checkboxInputStencil = {
+import {defineStencil} from '../../defineStencil';
+import {checkboxBackgroundStencil} from './checkboxBackgroundStencil';
+
+export const checkboxInputStencil = defineStencil({
   base: {
     borderRadius: system.shape.half,
     width: system.space.x6,
@@ -108,7 +110,7 @@ export const checkboxInputStencil = {
             separation: 0,
             animate: false,
             innerColor: system.color.border.contrast.default,
-            outerColor: system.color.border.inverse,
+            outerColor: system.color.border.inverse.default,
           }),
         },
         '&:checked:focus-visible, &:checked.focus, &:indeterminate:focus-visible, &:indeterminate.focus':
@@ -119,9 +121,9 @@ export const checkboxInputStencil = {
                 separation: 2,
                 animate: false,
                 innerColor: system.color.border.contrast.default,
-                outerColor: system.color.border.inverse,
+                outerColor: system.color.border.inverse.default,
               }),
-              borderColor: system.color.border.inverse,
+              borderColor: system.color.border.inverse.default,
             },
           },
       },
@@ -144,7 +146,7 @@ export const checkboxInputStencil = {
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
-            0 0 0 ${px2rem(2)} ${system.color.border.inverse},
+            0 0 0 ${px2rem(2)} ${system.color.border.inverse.default},
             0 0 0 ${px2rem(4)} ${checkboxBackgroundStencil.vars.errorRingColorInner},
             0 0 0 ${px2rem(5)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,
         },
@@ -172,4 +174,4 @@ export const checkboxInputStencil = {
       },
     },
   ],
-};
+});

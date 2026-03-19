@@ -1,9 +1,11 @@
-import {brand, system} from '@workday/canvas-tokens-web';
-import {px2rem} from '@workday/canvas-kit-styling';
 import {focusRing} from '@workday/canvas-kit-react/common';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {systemIconStencil} from '../icon/systemIconStencil';
 
-export const bannerStencil = {
+export const bannerStencil = defineStencil({
   base: {
     ...system.type.subtext.large,
     // TODO: Need to update fontFamily token [#3221](https://github.com/Workday/canvas-kit/issues/3221).
@@ -64,4 +66,4 @@ export const bannerStencil = {
       },
     },
   },
-};
+});

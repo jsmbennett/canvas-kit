@@ -1,10 +1,12 @@
+import {focusRing} from '@workday/canvas-kit-react/common';
 import {borderRadius} from '@workday/canvas-kit-react/tokens';
 import {calc} from '@workday/canvas-kit-styling';
-import {focusRing} from '@workday/canvas-kit-react/common';
-import {systemIconStencil} from '../icon/systemIconStencil';
 import {system} from '@workday/canvas-tokens-web';
 
-export const avatarStencil = {
+import {defineStencil} from '../../defineStencil';
+import {systemIconStencil} from '../icon/systemIconStencil';
+
+export const avatarStencil = defineStencil({
   vars: {
     size: '',
   },
@@ -12,7 +14,7 @@ export const avatarStencil = {
     icon: 'avatar-icon',
     image: 'avatar-image',
   },
-  base: ({size, iconPart, imagePart}) => ({
+  base: ({size, iconPart, imagePart}: any) => ({
     background: system.color.bg.caution.default,
     position: 'relative',
     display: 'flex',
@@ -56,13 +58,13 @@ export const avatarStencil = {
   }),
   modifiers: {
     variant: {
-      light: ({iconPart}) => ({
+      light: ({iconPart}: any) => ({
         backgroundColor: system.color.bg.alt.default,
         [iconPart]: {
           [systemIconStencil.vars.color]: system.color.fg.default,
         },
       }),
-      dark: ({iconPart}) => ({
+      dark: ({iconPart}: any) => ({
         backgroundColor: system.color.bg.primary.default,
         [iconPart]: {
           [systemIconStencil.vars.color]: system.color.fg.inverse,
@@ -70,42 +72,42 @@ export const avatarStencil = {
       }),
     },
     size: {
-      extraSmall: ({iconPart}) => ({
+      extraSmall: ({iconPart}: any) => ({
         width: system.space.x4,
         height: system.space.x4,
         [iconPart]: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x4, 0.625),
         },
       }),
-      small: ({iconPart}) => ({
+      small: ({iconPart}: any) => ({
         width: system.space.x6,
         height: system.space.x6,
         [iconPart]: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x6, 0.625),
         },
       }),
-      medium: ({iconPart}) => ({
+      medium: ({iconPart}: any) => ({
         width: system.space.x8,
         height: system.space.x8,
         [iconPart]: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x8, 0.625),
         },
       }),
-      large: ({iconPart}) => ({
+      large: ({iconPart}: any) => ({
         width: system.space.x10,
         height: system.space.x10,
         [iconPart]: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x10, 0.625),
         },
       }),
-      extraLarge: ({iconPart}) => ({
+      extraLarge: ({iconPart}: any) => ({
         width: system.space.x16,
         height: system.space.x16,
         [iconPart]: {
           [systemIconStencil.vars.size]: calc.multiply(system.space.x16, 0.625),
         },
       }),
-      extraExtraLarge: ({iconPart}) => ({
+      extraExtraLarge: ({iconPart}: any) => ({
         width: calc.multiply(system.space.x10, 3),
         height: calc.multiply(system.space.x10, 3),
         [iconPart]: {
@@ -114,59 +116,59 @@ export const avatarStencil = {
       }),
     },
     objectFit: {
-      contain: ({imagePart}) => ({
+      contain: ({imagePart}: any) => ({
         [imagePart]: {
           objectFit: 'contain',
         },
       }),
-      fill: ({imagePart}) => ({
+      fill: ({imagePart}: any) => ({
         [imagePart]: {
           objectFit: 'fill',
         },
       }),
-      cover: ({imagePart}) => ({
+      cover: ({imagePart}: any) => ({
         [imagePart]: {
           objectFit: 'cover',
         },
       }),
-      ['scale-down']: ({imagePart}) => ({
+      ['scale-down']: ({imagePart}: any) => ({
         [imagePart]: {
           objectFit: 'scale-down',
         },
       }),
-      none: ({imagePart}) => ({
+      none: ({imagePart}: any) => ({
         [imagePart]: {
           objectFit: 'none',
         },
       }),
-      ['-moz-initial']: ({imagePart}) => ({
+      ['-moz-initial']: ({imagePart}: any) => ({
         [imagePart]: {
           objectFit: '-moz-initial',
         },
       }),
-      ['initial']: ({imagePart}) => ({
+      ['initial']: ({imagePart}: any) => ({
         [imagePart]: {
           objectFit: 'initial',
         },
       }),
-      ['inherit']: ({imagePart}) => ({
+      ['inherit']: ({imagePart}: any) => ({
         [imagePart]: {
           objectFit: 'inherit',
         },
       }),
-      ['revert']: ({imagePart}) => ({
+      ['revert']: ({imagePart}: any) => ({
         [imagePart]: {
           objectFit: 'revert',
         },
       }),
-      ['unset']: ({imagePart}) => ({
+      ['unset']: ({imagePart}: any) => ({
         [imagePart]: {
           objectFit: 'unset',
         },
       }),
     },
     isImageLoaded: {
-      true: ({iconPart, imagePart}) => ({
+      true: ({iconPart, imagePart}: any) => ({
         [iconPart]: {
           opacity: 0,
         },
@@ -180,4 +182,4 @@ export const avatarStencil = {
     variant: 'light',
     objectFit: 'contain',
   },
-};
+});

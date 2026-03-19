@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-import {GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
+import {
+  GrowthBehavior,
+  createComponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
@@ -450,12 +454,14 @@ export const BaseButton = createComponent('button')({
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil('BaseButton', buttonStencil, {size, iconPosition, grow});
+
     return (
       <Element
         ref={ref}
         type="button"
         {...mergeStyles(elemProps, [
-          buttonStencil({size, iconPosition, grow}),
+          resolved,
           buttonColorPropVars.default(colors?.default || {}),
           buttonColorPropVars.focus(colors?.focus || {}),
           buttonColorPropVars.hover(colors?.hover || {}),

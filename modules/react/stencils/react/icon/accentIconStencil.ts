@@ -1,13 +1,15 @@
-import {base} from '@workday/canvas-tokens-web';
 import {cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {svgStencil} from './svgStencil';
 
-export const accentIconStencil = {
+export const accentIconStencil = defineStencil({
   extends: svgStencil,
   vars: {
     color: '',
   },
-  base: ({color, size}) => ({
+  base: ({color, size}: any) => ({
     [size]: px2rem(56),
     '& .color-500': {
       fill: cssVar(color, base.blueberry500),
@@ -25,4 +27,4 @@ export const accentIconStencil = {
       },
     },
   },
-};
+});

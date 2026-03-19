@@ -1,7 +1,9 @@
 import {px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const switchBackgroundStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const switchBackgroundStencil = defineStencil({
   base: {
     position: 'absolute',
     display: 'flex',
@@ -15,4 +17,4 @@ export const switchBackgroundStencil = {
     transition: 'background-color 200ms ease',
     backgroundColor: system.color.bg.muted.soft,
   },
-};
+});

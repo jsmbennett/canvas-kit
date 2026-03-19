@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const menuListStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const menuListStencil = defineStencil({
   base: {
     background: system.color.bg.default,
     borderRadius: system.shape.zero,
@@ -18,4 +19,4 @@ export const menuListStencil = {
       },
     },
   },
-};
+});

@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const informationHighlightLinkStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const informationHighlightLinkStencil = defineStencil({
   base: () => {
     return {
       ...system.type.subtext.large,
@@ -11,4 +12,4 @@ export const informationHighlightLinkStencil = {
       fontWeight: system.fontWeight.bold,
     };
   },
-};
+});

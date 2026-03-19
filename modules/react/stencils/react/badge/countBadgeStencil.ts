@@ -1,6 +1,8 @@
 import {keyframes, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+import {defineStencil} from '../../defineStencil';
+
 const grow = keyframes({
   from: {
     transform: 'scale(0.85)',
@@ -10,7 +12,7 @@ const grow = keyframes({
   },
 });
 
-export const countBadgeStencil = {
+export const countBadgeStencil = defineStencil({
   base: {
     alignItems: 'center',
     animation: `${grow} 0.2s ease`,
@@ -39,4 +41,4 @@ export const countBadgeStencil = {
       },
     },
   },
-};
+});

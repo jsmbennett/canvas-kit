@@ -1,6 +1,10 @@
 import {calc, createVars, keyframes, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+import {defineStencil} from '../../defineStencil';
+
+const tooltipTranslateVars = createVars('positionX', 'positionY');
+
 const tooltipAnimation = keyframes({
   '0%': {
     opacity: 0,
@@ -12,14 +16,12 @@ const tooltipAnimation = keyframes({
   },
 });
 
-const tooltipTranslateVars = createVars('positionX', 'positionY');
-
-export const tooltipContainerStencil = {
+export const tooltipContainerStencil = defineStencil({
   vars: {
     tooltipTransformOriginHorizontal: '',
     tooltipTransformOriginVertical: '',
   },
-  base: ({tooltipTransformOriginHorizontal, tooltipTransformOriginVertical}) => ({
+  base: ({tooltipTransformOriginHorizontal, tooltipTransformOriginVertical}: any) => ({
     ...system.type.subtext.medium,
     display: 'inline-flex',
     position: 'relative',
@@ -78,4 +80,4 @@ export const tooltipContainerStencil = {
       },
     },
   },
-};
+});

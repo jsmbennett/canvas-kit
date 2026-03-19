@@ -1,10 +1,12 @@
-import {base, brand, system} from '@workday/canvas-tokens-web';
-import {buttonStencil} from '../button/buttonStencil';
-import {calc, px2rem} from '@workday/canvas-kit-styling';
 import {focusRing} from '@workday/canvas-kit-react/common';
+import {calc, px2rem} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
+import {buttonStencil} from '../button/buttonStencil';
 import {systemIconStencil} from '../icon/systemIconStencil';
 
-export const tabItemStencil = {
+export const tabItemStencil = defineStencil({
   base: {
     ...system.type.subtext.large,
     fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif`,
@@ -42,7 +44,7 @@ export const tabItemStencil = {
       // focus outline for Windows high contrast theme
       outline: `${px2rem(2)} solid transparent`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
-      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
+      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse.default,
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: system.color.icon.strong,
     },
@@ -79,4 +81,4 @@ export const tabItemStencil = {
       },
     },
   },
-};
+});

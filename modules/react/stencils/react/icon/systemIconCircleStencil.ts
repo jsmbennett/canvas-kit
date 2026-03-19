@@ -1,14 +1,16 @@
-import {base, system} from '@workday/canvas-tokens-web';
 import {calc, cssVar} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {systemIconStencil} from './systemIconStencil';
 
-export const systemIconCircleStencil = {
+export const systemIconCircleStencil = defineStencil({
   vars: {
     containerSize: '',
     background: '',
     color: '',
   },
-  base: ({background, containerSize, color}) => ({
+  base: ({background, containerSize, color}: any) => ({
     background: cssVar(background, base.soap200),
     display: 'flex',
     alignItems: 'center',
@@ -26,4 +28,4 @@ export const systemIconCircleStencil = {
       height: '100%',
     },
   }),
-};
+});

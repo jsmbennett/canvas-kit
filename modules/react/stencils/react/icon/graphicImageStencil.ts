@@ -1,12 +1,11 @@
+import {defineStencil} from '../../defineStencil';
 
-
-
-export const graphicImageStencil = {
+export const graphicImageStencil = defineStencil({
   vars: {
     width: '',
     height: '',
   },
-  base: ({width, height}) => ({
+  base: ({width, height}: any) => ({
     width,
     height,
     display: 'inline-block',
@@ -27,4 +26,4 @@ export const graphicImageStencil = {
       },
     },
   },
-};
+});

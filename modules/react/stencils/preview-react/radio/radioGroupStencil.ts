@@ -1,7 +1,9 @@
-import {brand, system} from '@workday/canvas-tokens-web';
 import {calc, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
-export const radioGroupStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const radioGroupStencil = defineStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
@@ -24,4 +26,4 @@ export const radioGroupStencil = {
       },
     },
   },
-};
+});

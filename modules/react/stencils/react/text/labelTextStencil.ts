@@ -1,8 +1,9 @@
-
 import {system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {textStencil} from './textStencil';
 
-export const labelTextStencil = {
+export const labelTextStencil = defineStencil({
   extends: textStencil,
   base: {
     ...system.type.subtext.large,
@@ -30,4 +31,4 @@ export const labelTextStencil = {
       },
     },
   ],
-};
+});

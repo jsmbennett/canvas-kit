@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const inputGroupInnerStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const inputGroupInnerStencil = defineStencil({
   vars: {
     /**
      * Offset of the inner item. Set by the `InputGroup` and depends on siblings. Do not change this
@@ -20,7 +21,7 @@ export const inputGroupInnerStencil = {
      */
     pointerEvents: '',
   },
-  base: ({width, height, insetInlineStart, insetInlineEnd}) => ({
+  base: ({width, height, insetInlineStart, insetInlineEnd}: any) => ({
     display: 'flex',
     position: 'absolute',
     alignItems: 'center',
@@ -32,7 +33,7 @@ export const inputGroupInnerStencil = {
   }),
   modifiers: {
     pointerEvents: {
-      _: ({pointerEvents}) => ({pointerEvents}),
+      _: ({pointerEvents}: any) => ({pointerEvents}),
     },
   },
-};
+});

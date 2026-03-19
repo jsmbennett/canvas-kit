@@ -1,7 +1,9 @@
 import {calc, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const checkboxRippleStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const checkboxRippleStencil = defineStencil({
   base: {
     borderRadius: system.shape.round,
     boxShadow: 'none',
@@ -11,4 +13,4 @@ export const checkboxRippleStencil = {
     position: 'absolute',
     pointerEvents: 'none',
   },
-};
+});

@@ -19,6 +19,80 @@ export interface FileBlock {
   children: (DescribeBlock | ItBlock)[];
 }
 
+function getImportedBindings(statement: typescript.ImportDeclaration): string[] {
+  const clause = statement.importClause;
+  if (!clause) {
+    return [];
+  }
+
+  const bindings: string[] = [];
+
+  if (clause.name) {
+    bindings.push(clause.name.text);
+  }
+
+  const namedBindings = clause.namedBindings;
+  if (namedBindings) {
+    if (typescript.isNamespaceImport(namedBindings)) {
+      bindings.push(namedBindings.name.text);
+    }
+
+    if (typescript.isNamedImports(namedBindings)) {
+      namedBindings.elements.forEach(element => {
+        bindings.push(element.name.text);
+      });
+    }
+  }
+
+  return bindings;
+}
+
+function stripImportsAndCreateStubs(contents: string): string {
+  const sourceFile = typescript.createSourceFile(
+    'spec.tsx',
+    contents,
+    typescript.ScriptTarget.Latest,
+    true,
+    typescript.ScriptKind.TSX
+  );
+
+  const importRanges: {start: number; end: number}[] = [];
+  const importedBindings = new Set<string>();
+
+  sourceFile.statements.forEach(statement => {
+    if (typescript.isImportDeclaration(statement)) {
+      importRanges.push({
+        start: statement.getFullStart(),
+        end: statement.getEnd(),
+      });
+
+      getImportedBindings(statement).forEach(binding => importedBindings.add(binding));
+    }
+  });
+
+  let stripped = contents;
+  importRanges
+    .sort((a, b) => b.start - a.start)
+    .forEach(range => {
+      stripped = `${stripped.slice(0, range.start)}\n${stripped.slice(range.end)}`;
+    });
+
+  const stubs = [
+    'const __createImportStub = () => {',
+    '  const target = () => {};',
+    '  return new Proxy(target, {',
+    "    get: (_obj, prop) => (prop === 'name' ? 'ImportedExample' : __createImportStub()),",
+    '    apply: () => __createImportStub(),',
+    '    construct: () => ({}),',
+    '  });',
+    '};',
+    'const React = {createElement: () => null};',
+    ...Array.from(importedBindings).map(binding => `const ${binding} = __createImportStub();`),
+  ].join('\n');
+
+  return `${stubs}\n\n${stripped}`;
+}
+
 /**
  * Reads a spec file by getting the file contents as a string, passing through the TypeScript
  * transpiler, setting up custom `describe`, `it`, `beforeEach`, etc functions and runs the file
@@ -33,17 +107,7 @@ export async function parseSpecFile(file: string): Promise<FileBlock | null> {
     const contents = await fs
       .readFile(file)
       .then(contents => contents.toString())
-      .then(contents =>
-        contents.replace(/import (.+) from .+/g, (substr: string, imports: string) => {
-          if (imports.includes('{')) {
-            return `const ${imports.replace(/[{}]/g, '')} = () => {}`;
-          }
-          if (/react/g.test(imports)) {
-            return `const React = {createElement: () => {}}`;
-          }
-          return '';
-        })
-      ) // remove imports
+      .then(stripImportsAndCreateStubs)
       .then(contents => typescript.transpile(contents, {jsx: typescript.JsxEmit.React}))
       .then(contents => {
         let children: (DescribeBlock | ItBlock)[] = [];

@@ -1,7 +1,9 @@
-import {brand, system} from '@workday/canvas-tokens-web';
 import {calc, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
-export const checkboxBackgroundStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const checkboxBackgroundStencil = defineStencil({
   vars: {
     errorRingColorInner: '',
     errorRingColorOuter: '',
@@ -22,14 +24,14 @@ export const checkboxBackgroundStencil = {
   },
   modifiers: {
     error: {
-      error: ({errorRingColorInner, errorRingColorOuter}) => ({
+      error: ({errorRingColorInner, errorRingColorOuter}: any) => ({
         [errorRingColorInner]: brand.error.base,
         [errorRingColorOuter]: 'transparent',
       }),
-      alert: ({errorRingColorInner, errorRingColorOuter}) => ({
+      alert: ({errorRingColorInner, errorRingColorOuter}: any) => ({
         [errorRingColorInner]: brand.alert.base,
         [errorRingColorOuter]: brand.alert.darkest,
       }),
     },
   },
-};
+});

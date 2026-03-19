@@ -1,7 +1,9 @@
 import {calc, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const checkboxContainerStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const checkboxContainerStencil = defineStencil({
   base: {
     display: 'flex',
     alignItems: 'center',
@@ -23,4 +25,4 @@ export const checkboxContainerStencil = {
       paddingInlineStart: system.space.x3,
     },
   },
-};
+});

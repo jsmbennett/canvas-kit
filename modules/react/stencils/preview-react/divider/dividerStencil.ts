@@ -1,11 +1,13 @@
 import {calc, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const dividerStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const dividerStencil = defineStencil({
   vars: {
     space: cssVar(system.space.x4),
   },
-  base: ({space}) => {
+  base: ({space}: any) => {
     return {
       display: 'block',
       height: px2rem(1),
@@ -14,4 +16,4 @@ export const dividerStencil = {
       margin: `${calc.divide(space, 2)} 0`,
     };
   },
-};
+});

@@ -7,8 +7,7 @@ import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-// @ts-ignore: Cannot find module error
-import {version} from '../../../lerna.json';
+import {version} from '../../react/version/lib/version';
 // @ts-ignore: Cannot find module error
 import componentsImage from './Components.png';
 // @ts-ignore: Cannot find module error

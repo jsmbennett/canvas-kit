@@ -1,6 +1,10 @@
 import {createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+import {defineStencil} from '../../defineStencil';
+
+const translateVars = createVars('positionX', 'positionY');
+
 const fadeIn = keyframes({
   '0%': {
     opacity: 1,
@@ -12,15 +16,13 @@ const fadeIn = keyframes({
   },
 });
 
-const translateVars = createVars('positionX', 'positionY');
-
-export const popupCardStencil = {
+export const popupCardStencil = defineStencil({
   vars: {
     maxHeight: '',
     transformOriginHorizontal: '',
     transformOriginVertical: '',
   },
-  base: ({maxHeight, transformOriginHorizontal, transformOriginVertical}) => ({
+  base: ({maxHeight, transformOriginHorizontal, transformOriginVertical}: any) => ({
     ...system.type.subtext.large,
     display: 'flex',
     position: 'relative',
@@ -43,4 +45,4 @@ export const popupCardStencil = {
       transformOrigin: 'bottom center',
     },
   }),
-};
+});

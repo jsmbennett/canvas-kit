@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const sidePanelToggleButtonStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const sidePanelToggleButtonStencil = defineStencil({
   base: {
     position: 'absolute',
     top: system.space.x6,
@@ -76,4 +77,4 @@ export const sidePanelToggleButtonStencil = {
       },
     },
   ],
-};
+});

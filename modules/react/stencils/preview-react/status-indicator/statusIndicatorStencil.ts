@@ -1,8 +1,10 @@
 import {px2rem} from '@workday/canvas-kit-styling';
-import {systemIconStencil} from '../../react/icon/systemIconStencil';
 import {system} from '@workday/canvas-tokens-web';
 
-export const statusIndicatorStencil = {
+import {defineStencil} from '../../defineStencil';
+import {systemIconStencil} from '../../react/icon/systemIconStencil';
+
+export const statusIndicatorStencil = defineStencil({
   base: {
     display: 'inline-flex',
     gap: system.space.x1,
@@ -87,4 +89,4 @@ export const statusIndicatorStencil = {
       },
     },
   },
-};
+});

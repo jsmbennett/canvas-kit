@@ -1,8 +1,10 @@
-import {brand, system} from '@workday/canvas-tokens-web';
 import {calc, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {textInputStencil} from '../../react/text-input/textInputStencil';
 
-export const multiSelectInputStencil = {
+export const multiSelectInputStencil = defineStencil({
   //@ts-ignore Types don't like defining a variable in `base` and using a variable in a nested selector. One or the other is fine, but not both.
   base: {
     border: `1px solid ${system.color.border.input.default}`,
@@ -89,7 +91,7 @@ export const multiSelectInputStencil = {
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
           boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}, 0 0 0 2px ${
-            system.color.border.inverse
+            system.color.border.inverse.default
           }, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
@@ -104,11 +106,11 @@ export const multiSelectInputStencil = {
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base},
-        0 0 0 2px ${system.color.border.inverse},
+        0 0 0 2px ${system.color.border.inverse.default},
         0 0 0 4px ${brand.common.focusOutline}`,
         },
         outlineOffset: px2rem(2),
       },
     },
   },
-};
+});

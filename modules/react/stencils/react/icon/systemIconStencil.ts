@@ -1,5 +1,7 @@
-import {base, system} from '@workday/canvas-tokens-web';
 import {createVars, cssVar} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {svgStencil} from './svgStencil';
 
 const deprecatedSystemIconVars = createVars(
@@ -9,7 +11,7 @@ const deprecatedSystemIconVars = createVars(
   'backgroundHover'
 );
 
-export const systemIconStencil = {
+export const systemIconStencil = defineStencil({
   extends: svgStencil,
   vars: {
     /**
@@ -21,7 +23,7 @@ export const systemIconStencil = {
     accentColor: '',
     backgroundColor: '',
   },
-  base: ({size, width, height, accentColor, backgroundColor, color}) => ({
+  base: ({size, width, height, accentColor, backgroundColor, color}: any) => ({
     '& svg': {
       width: cssVar(width, cssVar(size, system.space.x6)),
       height: cssVar(height, cssVar(size, system.space.x6)),
@@ -66,4 +68,4 @@ export const systemIconStencil = {
     },
   }),
   modifiers: {},
-};
+});

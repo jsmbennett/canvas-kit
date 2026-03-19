@@ -1,9 +1,11 @@
-import {buttonStencil} from '../../react/button/buttonStencil';
 import {cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {pillStencil} from './pillStencil';
 import {system} from '@workday/canvas-tokens-web';
 
-export const readyOnlyPillStencil = {
+import {defineStencil} from '../../defineStencil';
+import {buttonStencil} from '../../react/button/buttonStencil';
+import {pillStencil} from './pillStencil';
+
+export const readyOnlyPillStencil = defineStencil({
   extends: pillStencil,
   base: {
     border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
@@ -22,4 +24,4 @@ export const readyOnlyPillStencil = {
       [buttonStencil.vars.background]: 'transparent',
     },
   },
-};
+});

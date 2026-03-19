@@ -1,7 +1,9 @@
 import {px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const cardStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const cardStencil = defineStencil({
   base: {
     boxShadow: system.depth[1],
     padding: system.space.x8,
@@ -9,4 +11,4 @@ export const cardStencil = {
     border: `${px2rem(1)} solid ${system.color.border.container}`,
     borderRadius: system.shape.x2,
   },
-};
+});

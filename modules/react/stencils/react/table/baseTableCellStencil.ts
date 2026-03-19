@@ -1,7 +1,9 @@
 import {px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const baseTableCellStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const baseTableCellStencil = defineStencil({
   base: {
     alignItems: 'center',
     backgroundColor: system.color.bg.default,
@@ -12,4 +14,4 @@ export const baseTableCellStencil = {
     padding: `${system.space.x2} ${system.space.x4}`,
     wordBreak: 'break-word',
   },
-};
+});

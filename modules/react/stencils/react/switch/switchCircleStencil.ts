@@ -1,7 +1,9 @@
-import {brand, system} from '@workday/canvas-tokens-web';
 import {calc} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
-export const switchCircleStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const switchCircleStencil = defineStencil({
   base: {
     width: system.space.x3,
     height: system.space.x3,
@@ -22,4 +24,4 @@ export const switchCircleStencil = {
       },
     },
   },
-};
+});

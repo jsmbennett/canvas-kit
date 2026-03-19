@@ -1,8 +1,9 @@
-
 import {system} from '@workday/canvas-tokens-web';
+
+import {defineStencil} from '../../defineStencil';
 import {textStencil} from '../text/textStencil';
 
-export const cardHeadingStencil = {
+export const cardHeadingStencil = defineStencil({
   extends: textStencil,
   base: {
     color: system.color.text.strong,
@@ -11,4 +12,4 @@ export const cardHeadingStencil = {
     marginTop: system.space.zero,
   },
   defaultModifiers: {typeLevel: 'body.large'},
-};
+});

@@ -1,11 +1,13 @@
-import {brand, system} from '@workday/canvas-tokens-web';
 import {calc, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
-export const textInputStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const textInputStencil = defineStencil({
   vars: {
     width: '',
   },
-  base: ({width}) => ({
+  base: ({width}: any) => ({
     ...system.type.subtext.large,
     display: 'block',
     border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
@@ -65,7 +67,7 @@ export const textInputStencil = {
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
           boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}, 0 0 0 2px ${
-            system.color.border.inverse
+            system.color.border.inverse.default
           }, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
@@ -80,7 +82,7 @@ export const textInputStencil = {
 
         '&:is(:focus-visible, .focus):not([disabled])': {
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base},
-        0 0 0 2px ${system.color.border.inverse},
+        0 0 0 2px ${system.color.border.inverse.default},
         0 0 0 4px ${brand.common.focusOutline}`,
         },
         outlineOffset: px2rem(2),
@@ -90,4 +92,4 @@ export const textInputStencil = {
   defaultModifiers: {
     grow: 'false',
   },
-};
+});

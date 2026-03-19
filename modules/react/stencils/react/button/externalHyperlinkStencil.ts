@@ -1,9 +1,11 @@
 import {calc, px2rem} from '@workday/canvas-kit-styling';
-import {hyperlinkStencil} from './hyperlinkStencil';
-import {systemIconStencil} from '../icon/systemIconStencil';
 import {system} from '@workday/canvas-tokens-web';
 
-export const externalHyperlinkStencil = {
+import {systemIconStencil} from '../../../icon/lib/SystemIcon';
+import {defineStencil} from '../../defineStencil';
+import {hyperlinkStencil} from './hyperlinkStencil';
+
+export const externalHyperlinkStencil = defineStencil({
   extends: hyperlinkStencil,
   base: {
     display: 'inline-flex',
@@ -24,4 +26,4 @@ export const externalHyperlinkStencil = {
       },
     },
   },
-};
+});

@@ -1,7 +1,9 @@
 import {cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const actionBarListStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const actionBarListStencil = defineStencil({
   base: {
     display: 'flex',
     boxShadow: system.depth[1],
@@ -20,4 +22,4 @@ export const actionBarListStencil = {
       },
     },
   },
-};
+});

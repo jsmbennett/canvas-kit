@@ -1,7 +1,8 @@
-
 import {system} from '@workday/canvas-tokens-web';
 
-export const formFieldStencil = {
+import {defineStencil} from '../../defineStencil';
+
+export const formFieldStencil = defineStencil({
   base: {
     display: 'flex',
     border: 'none',
@@ -46,4 +47,4 @@ export const formFieldStencil = {
   defaultModifiers: {
     orientation: 'vertical',
   },
-};
+});
