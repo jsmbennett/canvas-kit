@@ -1,0 +1,13 @@
+.cnvs-combobox-card {
+  box-sizing: border-box;
+}
+
+.cnvs-combobox-card :where([data-part="list-box-container"]) {
+  border-radius: var(--cnvs-sys-shape-xxl, var(--cnvs-sys-shape-x2));
+}
+
+
+.cnvs-combobox-menu-list {
+  box-sizing: border-box;
+}
+

@@ -29,7 +29,8 @@ export const multiSelectInputStencil = defineStencil({
 
     '& [data-part="user-input"]': {
       ...system.type.subtext.large,
-      backgroundColor: system.color.bg.transparent,
+      // Keep the input surface transparent so container error/caution inset ring remains visible.
+      backgroundColor: 'transparent',
       borderRadius: system.shape.x1,
 
       // collapse the height of the input by the border width so that an empty multi-select
@@ -63,6 +64,7 @@ export const multiSelectInputStencil = defineStencil({
       bottom: system.space.zero,
       left: system.space.zero,
       right: system.space.zero,
+      backgroundColor: 'transparent',
       opacity: system.opacity.zero,
       cursor: 'default',
       pointerEvents: 'none',
@@ -96,7 +98,7 @@ export const multiSelectInputStencil = defineStencil({
           outlineOffset: px2rem(2),
         },
       },
-      alert: {
+      caution: {
         borderColor: brand.alert.darkest,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base}`,
         '&:has(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled])), .focus:not(:has([disabled]))':

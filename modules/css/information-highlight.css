@@ -1,0 +1,122 @@
+.cnvs-information-highlight-body {
+  box-sizing: border-box;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-weight: var(--cnvs-sys-font-weight-normal);
+  line-height: var(--cnvs-sys-line-height-subtext-lg, var(--cnvs-sys-line-height-subtext-large));
+  font-size: var(--cnvs-sys-font-size-subtext-lg, var(--cnvs-sys-font-size-subtext-large));
+  letter-spacing: var(--cnvs-sys-letter-spacing-subtext-lg, var(--cnvs-base-letter-spacing-150));
+  color: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-text-strong));
+  grid-column: 2;
+  margin-block-end: var(--cnvs-sys-gap-sm, var(--cnvs-sys-space-x2));
+}
+
+
+.cnvs-information-highlight-heading {
+  box-sizing: border-box;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  line-height: var(--cnvs-sys-line-height-body-sm, var(--cnvs-sys-line-height-body-small));
+  font-size: var(--cnvs-sys-font-size-body-sm, var(--cnvs-sys-font-size-body-small));
+  letter-spacing: var(--cnvs-sys-letter-spacing-body-sm, var(--cnvs-base-letter-spacing-200));
+  color: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-text-strong));
+  grid-column: 2;
+  margin: 0;
+}
+
+
+.cnvs-information-highlight-link {
+  box-sizing: border-box;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  line-height: var(--cnvs-sys-line-height-subtext-lg, var(--cnvs-sys-line-height-subtext-large));
+  font-size: var(--cnvs-sys-font-size-subtext-lg, var(--cnvs-sys-font-size-subtext-large));
+  letter-spacing: var(--cnvs-sys-letter-spacing-subtext-lg, var(--cnvs-base-letter-spacing-150));
+  grid-column: 2;
+  justify-self: start;
+  color: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-text-strong));
+}
+
+
+.cnvs-information-highlight {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: min-content;
+  gap: var(--cnvs-sys-gap-sm, var(--cnvs-sys-space-x2)) var(--cnvs-sys-gap-md, var(--cnvs-sys-space-x4));
+  padding: var(--cnvs-sys-padding-md, var(--cnvs-sys-space-x4));
+  border-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
+  outline: 0.0625rem solid transparent;
+  border-inline-start: var(--cnvs-base-size-50, var(--cnvs-sys-space-x1)) solid transparent;
+}
+
+
+.cnvs-information-highlight.informational-low {
+  border-inline-start-color: var(--cnvs-sys-color-border-info-default);
+  background-color: var(--cnvs-sys-color-surface-alt-default, var(--cnvs-sys-color-bg-alt-soft));
+}
+
+.cnvs-information-highlight.informational-low [data-part="information-highlight-icon"] {
+  --cnvs-system-icon-accent-color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-icon-inverse));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-info-default, var(--cnvs-sys-color-icon-info-default));
+  --cnvs-system-icon-background-color: var(--cnvs-sys-color-fg-info-default, var(--cnvs-sys-color-icon-info-default));
+}
+
+
+.cnvs-information-highlight.informational-high {
+  border-inline-start-color: var(--cnvs-sys-color-border-info-default);
+  background-color: var(--cnvs-sys-color-surface-info-default, var(--cnvs-sys-color-bg-info-softest));
+}
+
+.cnvs-information-highlight.informational-high [data-part="information-highlight-icon"] {
+  --cnvs-system-icon-accent-color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-icon-inverse));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-info-default, var(--cnvs-sys-color-icon-info-default));
+  --cnvs-system-icon-background-color: var(--cnvs-sys-color-fg-info-default, var(--cnvs-sys-color-icon-info-default));
+}
+
+
+.cnvs-information-highlight.caution-low {
+  border-inline-start-color: var(--cnvs-sys-color-border-warning, var(--cnvs-sys-color-border-caution-default));
+  background-color: var(--cnvs-sys-color-surface-alt-default, var(--cnvs-sys-color-bg-alt-soft));
+}
+
+.cnvs-information-highlight.caution-low [data-part="information-highlight-icon"] {
+  --cnvs-system-icon-accent-color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-icon-inverse));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-warning-default, var(--cnvs-sys-color-icon-caution-softer));
+  --cnvs-system-icon-background-color: var(--cnvs-sys-color-fg-warning-default, var(--cnvs-sys-color-icon-caution-softer));
+}
+
+
+.cnvs-information-highlight.caution-high {
+  border-inline-start-color: var(--cnvs-sys-color-border-warning, var(--cnvs-sys-color-border-caution-default));
+  background-color: var(--cnvs-sys-color-surface-warning-default, var(--cnvs-sys-color-bg-caution-softest));
+}
+
+.cnvs-information-highlight.caution-high [data-part="information-highlight-icon"] {
+  --cnvs-system-icon-accent-color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-icon-inverse));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-warning-default, var(--cnvs-sys-color-icon-caution-softer));
+  --cnvs-system-icon-background-color: var(--cnvs-sys-color-fg-warning-default, var(--cnvs-sys-color-icon-caution-softer));
+}
+
+
+.cnvs-information-highlight.critical-low {
+  border-inline-start-color: var(--cnvs-sys-color-border-danger, var(--cnvs-sys-color-border-critical-default));
+  background-color: var(--cnvs-sys-color-surface-danger-default, var(--cnvs-sys-color-bg-alt-soft));
+}
+
+.cnvs-information-highlight.critical-low [data-part="information-highlight-icon"] {
+  --cnvs-system-icon-accent-color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-icon-critical-default));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-danger-default, var(--cnvs-sys-color-icon-critical-default));
+  --cnvs-system-icon-background-color: var(--cnvs-sys-color-fg-danger-default, transparent);
+}
+
+
+.cnvs-information-highlight.critical-high {
+  border-inline-start-color: var(--cnvs-sys-color-border-danger, var(--cnvs-sys-color-border-critical-default));
+  background-color: var(--cnvs-sys-color-surface-danger-default, var(--cnvs-sys-color-bg-alt-soft));
+}
+
+.cnvs-information-highlight.critical-high [data-part="information-highlight-icon"] {
+  --cnvs-system-icon-accent-color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-icon-inverse));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-danger-default, var(--cnvs-sys-color-icon-critical-default));
+  --cnvs-system-icon-background-color: var(--cnvs-sys-color-fg-danger-default, var(--cnvs-sys-color-icon-critical-default));
+}
+

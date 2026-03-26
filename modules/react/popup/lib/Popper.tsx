@@ -8,7 +8,7 @@ import {
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import {useLocalRef} from '@workday/canvas-kit-react/common';
+import {StencilOverrideContext, useLocalRef} from '@workday/canvas-kit-react/common';
 
 import {fallbackPlacementsModifier} from './fallbackPlacements';
 import {usePopupStack} from './hooks';
@@ -145,6 +145,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const {localRef, elementRef} = useLocalRef(popperInstanceRef);
     const [placement, setPlacement] = React.useState(popperPlacement);
     const stackRef = usePopupStack(ref, anchorElement as HTMLElement);
+    const stencilOverrides = React.useContext(StencilOverrideContext);
 
     const placementRef = React.useRef(popperPlacement);
     placementRef.current = placement;
@@ -224,12 +225,19 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     }, [popperOptions, popperPlacement, fallbackPlacements, placementModifier, localRef]);
 
     const contents = <>{isRenderProp(children) ? children({placement}) : children}</>;
+    const wrappedContents = stencilOverrides ? (
+      <StencilOverrideContext.Provider value={stencilOverrides}>
+        {contents}
+      </StencilOverrideContext.Provider>
+    ) : (
+      contents
+    );
 
     if (!portal) {
-      return contents;
+      return wrappedContents;
     }
 
-    return ReactDOM.createPortal(contents, stackRef.current!);
+    return ReactDOM.createPortal(wrappedContents, stackRef.current!);
   }
 );
 

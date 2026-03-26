@@ -1,0 +1,57 @@
+.cnvs-select-card {
+  box-sizing: border-box;
+  --cnvs-menu-card-max-height: 18.75rem;
+}
+
+
+.cnvs-select-input {
+  box-sizing: border-box;
+}
+
+.cnvs-select-input [data-part="select-hidden-input"] {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: var(--cnvs-sys-opacity-zero);
+  cursor: default;
+  pointer-events: none;
+  min-width: 100%;
+  width: 100%;
+}
+
+.cnvs-select-input [data-part="select-start-icon"], .cnvs-select-input [data-part="select-end-icon"], .cnvs-select-input [data-part="select-caret-container"], .cnvs-select-input [data-part="select-start-icon-container"] {
+  position: absolute;
+  pointer-events: none;
+}
+
+.cnvs-select-input [data-part="select-visual-input"] {
+  caret-color: transparent;
+  background-color: var(--cnvs-sys-color-surface-default, var(--cnvs-sys-color-bg-default));
+  color: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-text-default));
+  cursor: default;
+}
+
+.cnvs-select-input [data-part="select-visual-input"]::placeholder {
+  color: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-text-default));
+}
+
+.cnvs-select-input [data-part="select-visual-input"]::selection {
+  background-color: transparent;
+}
+
+.cnvs-select-input:has(:disabled, .disabled) [data-part="select-caret-icon"] {
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-disabled);
+}
+
+
+.cnvs-select-input.error-error [data-part="select-visual-input"] {
+  background-color: var(--cnvs-sys-color-brand-surface-critical-default, var(--cnvs-brand-error-lightest));
+}
+
+
+.cnvs-select-input.error-caution [data-part="select-visual-input"] {
+  background-color: var(--cnvs-sys-color-brand-surface-caution-default, var(--cnvs-brand-alert-lightest));
+}
+

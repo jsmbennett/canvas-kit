@@ -1,0 +1,73 @@
+.cnvs-disable-body-scroll {
+  overflow: hidden!important;
+}
+
+
+.cnvs-popup-body {
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding-inline: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
+}
+
+
+@keyframes animation-d3gyb {
+  0% {
+    opacity: 1;
+    transform: translate(var(--cnvs-translate-position-x), var(--cnvs-translate-position-y));
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+  
+}
+
+.cnvs-popup-card {
+  box-sizing: border-box;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-weight: var(--cnvs-sys-font-weight-normal);
+  font-size: var(--cnvs-sys-font-size-subtext-lg, var(--cnvs-sys-font-size-subtext-large));
+  line-height: var(--cnvs-sys-line-height-subtext-lg, var(--cnvs-sys-line-height-subtext-large));
+  color: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-text-default));
+  position: relative;
+  max-width: calc(100vw - var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8)));
+  gap: var(--cnvs-sys-gap-lg, var(--cnvs-sys-space-x2));
+  box-shadow: var(--cnvs-sys-depth-3);
+  min-height: 0;
+  padding: var(--cnvs-sys-padding-xl, var(--cnvs-sys-space-x6));
+  border-radius: var(--cnvs-sys-shape-xxxl, var(--cnvs-sys-shape-x6));
+  max-height: var(--cnvs-popup-card-max-height);
+  overflow-y: auto;
+  animation-name: animation-d3gyb;
+  animation-duration: 150ms;
+  animation-timing-function: ease-out;
+  transform-origin: var(--cnvs-popup-card-transform-origin-vertical) var(--cnvs-popup-card-transform-origin-horizontal);
+}
+
+.wd-no-animation .cnvs-popup-card {
+  animation: none;
+}
+
+@media screen and (max-width: 768px) {
+.cnvs-popup-card {
+  transform-origin: bottom center;
+}
+
+
+}
+
+
+.cnvs-popup-close-icon {
+  box-sizing: border-box;
+  position: absolute;
+  inset-inline-end: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x1));
+  top: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x1));
+}
+
+
+.cnvs-popup-heading {
+  box-sizing: border-box;
+  padding-inline: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
+}
+

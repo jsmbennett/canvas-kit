@@ -1,0 +1,149 @@
+.cnvs-segmented-control-item {
+  box-sizing: border-box;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-size: var(--cnvs-sys-font-size-subtext-lg, var(--cnvs-sys-font-size-subtext-large));
+  line-height: var(--cnvs-sys-line-height-subtext-lg, var(--cnvs-sys-line-height-subtext-large));
+  letter-spacing: var(--cnvs-sys-letter-spacing-subtext-lg, var(--cnvs-base-letter-spacing-150));
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  text-align: start;
+  padding-inline: 0;
+  gap: var(--cnvs-sys-gap-xs, var(--cnvs-sys-space-x1));
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-md, var(--cnvs-sys-shape-x1));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-muted-default, var(--cnvs-sys-color-fg-muted-strong));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-muted-default, var(--cnvs-sys-color-fg-muted-strong));
+}
+
+.cnvs-segmented-control-item:hover, .cnvs-segmented-control-item.hover {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-alt-strong, var(--cnvs-sys-color-bg-alt-strong)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-strong));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-strong));
+}
+
+.cnvs-segmented-control-item:active, .cnvs-segmented-control-item.active {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-alt-strong, var(--cnvs-sys-color-bg-alt-strong)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-strong));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-strong));
+}
+
+.cnvs-segmented-control-item:focus-visible, .cnvs-segmented-control-item.focus {
+  --cnvs-button-label: var(--cnvs-sys-color-fg-muted-strong);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-muted-strong);
+}
+
+.cnvs-segmented-control-item:disabled, .cnvs-segmented-control-item.disabled {
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, transparent);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-muted-default, var(--cnvs-sys-color-fg-muted-strong));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-muted-default, var(--cnvs-sys-color-fg-muted-strong));
+}
+
+.cnvs-segmented-control-item[aria-pressed='true'] {
+  --cnvs-button-background: var(--cnvs-sys-color-surface-default, var(--cnvs-sys-color-bg-default));
+  --cnvs-button-border: var(--cnvs-sys-color-border-input-default);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-segmented-control-item[aria-pressed='true']:hover, .cnvs-segmented-control-item[aria-pressed='true'].hover {
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-segmented-control-item[aria-pressed='true']:disabled, .cnvs-segmented-control-item[aria-pressed='true'].disabled {
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+}
+
+.cnvs-segmented-control-item :dir(rtl) svg {
+  transform: scaleX(-1);
+}
+
+
+.cnvs-segmented-control-item.size-large {
+  height: var(--cnvs-sys-size-md, var(--cnvs-sys-space-x10));
+  gap: var(--cnvs-sys-gap-sm, var(--cnvs-sys-space-x2));
+}
+
+
+.cnvs-segmented-control-item.size-medium {
+  height: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+}
+
+
+.cnvs-segmented-control-item.size-small {
+  font-family: var(--cnvs-sys-font-family-default);
+  font-size: var(--cnvs-sys-font-size-subtext-md, var(--cnvs-sys-font-size-subtext-medium));
+  line-height: var(--cnvs-sys-line-height-subtext-md, var(--cnvs-sys-line-height-subtext-medium));
+  letter-spacing: var(--cnvs-sys-letter-spacing-subtext-md, var(--cnvs-base-letter-spacing-100));
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  height: var(--cnvs-sys-size-xs, var(--cnvs-sys-space-x6));
+}
+
+
+
+
+
+.cnvs-segmented-control-item.size-large.variant-iconOnly {
+  min-width: var(--cnvs-sys-size-md, var(--cnvs-sys-space-x10));
+}
+
+
+.cnvs-segmented-control-item.size-large.variant-iconWithText {
+  padding-inline: var(--cnvs-sys-padding-lg, 1.25rem) var(--cnvs-sys-padding-xl, var(--cnvs-sys-space-x6));
+}
+
+
+.cnvs-segmented-control-item.size-large.variant-textOnly {
+  padding-inline: var(--cnvs-sys-padding-xl, var(--cnvs-sys-space-x6));
+}
+
+
+.cnvs-segmented-control-item.size-medium.variant-iconOnly {
+  min-width: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+}
+
+
+.cnvs-segmented-control-item.size-medium.variant-iconWithText {
+  padding-inline: var(--cnvs-sys-padding-md, var(--cnvs-sys-space-x4)) var(--cnvs-sys-padding-lg, 1.25rem);
+}
+
+
+.cnvs-segmented-control-item.size-medium.variant-textOnly {
+  padding-inline: var(--cnvs-sys-padding-lg, 1.25rem);
+}
+
+
+.cnvs-segmented-control-item.size-small.variant-iconOnly {
+  min-width: var(--cnvs-sys-size-xs, var(--cnvs-sys-space-x6));
+}
+
+
+.cnvs-segmented-control-item.size-small.variant-iconWithText {
+  padding-inline: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2)) var(--cnvs-sys-padding-sm, var(--cnvs-sys-space-x3));
+}
+
+
+.cnvs-segmented-control-item.size-small.variant-textOnly {
+  padding-inline: var(--cnvs-sys-padding-sm, var(--cnvs-sys-space-x3));
+}
+
+
+.cnvs-segmented-control-list {
+  box-sizing: border-box;
+  display: inline-grid;
+  background-color: var(--cnvs-sys-color-surface-alt-strong, var(--cnvs-sys-color-bg-alt-soft));
+  border: var(--cnvs-base-size-0, 0.0625rem) solid var(--cnvs-sys-color-border-transparent, var(--cnvs-sys-color-border-input-default));
+  border-radius: var(--cnvs-sys-shape-lg, var(--cnvs-sys-shape-x2));
+  padding: var(--cnvs-sys-padding-xxs, 0.1875rem);
+  grid-gap: var(--cnvs-sys-gap-sm, var(--cnvs-sys-space-x2));
+}
+
+
+.cnvs-segmented-control-list.orientation-vertical {
+  grid-template-rows: repeat(var(--cnvs-segmented-control-list-items), 1fr);
+}
+
+
+.cnvs-segmented-control-list.orientation-horizontal {
+  grid-template-columns: repeat(var(--cnvs-segmented-control-list-items), 1fr);
+}
+

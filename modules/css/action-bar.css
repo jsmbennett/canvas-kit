@@ -1,0 +1,31 @@
+.cnvs-action-bar-list {
+  box-sizing: border-box;
+  display: flex;
+  box-shadow: var(--cnvs-sys-depth-2);
+  gap: var(--cnvs-sys-gap-md, var(--cnvs-sys-space-x4));
+  background: var(--cnvs-sys-color-surface-default, var(--cnvs-sys-color-bg-default));
+  border-block-start: solid 0.0625rem var(--cnvs-sys-color-border-default, var(--cnvs-sys-color-border-divider));
+  padding: var(--cnvs-sys-padding-md, var(--cnvs-sys-space-x4)) var(--cnvs-base-size-500, var(--cnvs-sys-space-x10));
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline: 0;
+}
+
+@media (max-width: 767.5px) {
+.cnvs-action-bar-list {
+  padding: var(--cnvs-sys-size-xxxs, var(--cnvs-sys-space-x4));
+}
+
+.cnvs-action-bar-list >* {
+  flex: 1;
+}
+
+
+}
+
+
+.cnvs-action-bar-overflow-button {
+  box-sizing: border-box;
+  flex: 0;
+}
+

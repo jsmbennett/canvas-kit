@@ -1,0 +1,91 @@
+.cnvs-switch-container {
+  box-sizing: border-box;
+  position: relative;
+  height: var(--cnvs-sys-size-xs, var(--cnvs-sys-space-x6));
+  width: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+}
+
+
+.cnvs-switch-input {
+  box-sizing: border-box;
+  display: flex;
+  position: absolute;
+  height: var(--cnvs-sys-size-xs, var(--cnvs-sys-space-x6));
+  width: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+  border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
+  opacity: 0;
+  cursor: pointer;
+}
+
+.cnvs-switch-input:checked~div:first-of-type, .cnvs-switch-input.checked~div:first-of-type {
+  background-color: var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-base));
+}
+
+.cnvs-switch-input:checked:disabled~div:first-of-type, .cnvs-switch-input.checked:disabled~div:first-of-type, .cnvs-switch-input:checked.disabled~div:first-of-type, .cnvs-switch-input.checked.disabled~div:first-of-type {
+  opacity: var(--cnvs-sys-opacity-disabled);
+}
+
+.cnvs-switch-input:disabled, .cnvs-switch-input.disabled {
+  cursor: not-allowed;
+}
+
+.cnvs-switch-input:disabled~div:first-of-type, .cnvs-switch-input.disabled~div:first-of-type {
+  opacity: var(--cnvs-sys-opacity-disabled);
+}
+
+.cnvs-switch-input:focus-visible, .cnvs-switch-input:focus, .cnvs-switch-input.focus {
+  outline: none;
+}
+
+.cnvs-switch-input:focus-visible~div:first-of-type, .cnvs-switch-input:focus~div:first-of-type, .cnvs-switch-input.focus~div:first-of-type {
+  box-shadow: 0 0 0 2px var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)),0 0 0 4px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1));
+}
+
+
+.cnvs-switch-input.error-error~div:first-of-type {
+  box-shadow: 0 0 0 0.125rem var(--cnvs-sys-color-focus-inverse, var(--cnvs-base-palette-neutral-0)),0 0 0 var(--cnvs-sys-space-x1) var(--cnvs-sys-color-brand-focus-critical, var(--cnvs-brand-common-error-inner)),0 0 0 0.3125rem transparent;
+}
+
+
+.cnvs-switch-input.error-caution~div:first-of-type {
+  box-shadow: 0 0 0 0.125rem var(--cnvs-sys-color-focus-inverse, var(--cnvs-base-palette-neutral-0)),0 0 0 var(--cnvs-sys-space-x1) var(--cnvs-sys-color-brand-focus-caution-inner, var(--cnvs-brand-common-alert-inner)),0 0 0 0.3125rem var(--cnvs-sys-color-brand-border-caution, var(--cnvs-brand-common-alert-outer));
+}
+
+
+.cnvs-switch-background {
+  box-sizing: border-box;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  margin-top: var(--cnvs-sys-gap-xs, var(--cnvs-sys-space-x1));
+  width: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+  height: var(--cnvs-sys-size-xxxs, var(--cnvs-sys-space-x4));
+  border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
+  padding: 0 0.125rem;
+  transition: background-color 200ms ease;
+  background-color: var(--cnvs-sys-color-accent-muted-soft, var(--cnvs-sys-color-bg-muted-soft));
+}
+
+
+.cnvs-switch-circle {
+  box-sizing: border-box;
+  width: var(--cnvs-base-size-150, var(--cnvs-sys-space-x3));
+  height: var(--cnvs-base-size-150, var(--cnvs-sys-space-x3));
+  border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
+  box-shadow: var(--cnvs-sys-depth-1);
+  transition: transform 150ms ease;
+  pointer-events: none;
+  background-color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent));
+  transform: translateX(var(--cnvs-sys-space-zero));
+}
+
+
+.cnvs-switch-circle.checked {
+  transform: translateX(var(--cnvs-sys-size-xxxs, var(--cnvs-sys-space-x4)));
+}
+
+.cnvs-switch-circle.checked :dir(rtl) {
+  transform: translateX(calc(var(--cnvs-sys-size-xxxs, var(--cnvs-sys-space-x4)) * -1));
+}
+

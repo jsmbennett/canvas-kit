@@ -1,0 +1,73 @@
+.cnvs-skeleton-shape {
+  box-sizing: border-box;
+  background-color: var(--cnvs-skeleton-shape-background-color, var(--cnvs-sys-color-surface-loading, var(--cnvs-sys-color-bg-alt-strong)));
+  border-radius: var(--cnvs-skeleton-shape-border-radius, 0);
+  height: var(--cnvs-skeleton-shape-height, 100%);
+  width: var(--cnvs-skeleton-shape-width);
+  margin-bottom: var(--cnvs-sys-size-xxxs, var(--cnvs-sys-space-x4));
+}
+
+
+.cnvs-skeleton-header {
+  box-sizing: border-box;
+  background-color: var(--cnvs-skeleton-header-background-color, var(--cnvs-sys-color-surface-loading, var(--cnvs-sys-color-bg-alt-strong)));
+  border-radius: var(--cnvs-sys-shape-md, var(--cnvs-sys-shape-zero));
+  height: var(--cnvs-skeleton-header-height, var(--cnvs-sys-size-xs, 1.75rem));
+  width: var(--cnvs-skeleton-header-width);
+  margin-bottom: var(--cnvs-sys-size-xxxs, var(--cnvs-sys-space-x4));
+}
+
+
+.cnvs-skeleton-text {
+  box-sizing: border-box;
+  margin-bottom: var(--cnvs-sys-size-xs, var(--cnvs-sys-space-x6));
+}
+
+.cnvs-skeleton-text [data-part="skeleton-text-lines"] {
+  background-color: var(--cnvs-skeleton-text-background-color, var(--cnvs-sys-color-surface-loading, var(--cnvs-sys-color-bg-alt-strong)));
+  height: var(--cnvs-sys-size-xxxs, 1.3125rem);
+  margin-block-end: var(--cnvs-sys-padding-sm, var(--cnvs-sys-space-x3));
+  border-radius: var(--cnvs-sys-shape-md, var(--cnvs-sys-shape-half));
+  width: 100%;
+}
+
+.cnvs-skeleton-text [data-part="skeleton-text-lines"]:last-child {
+  width: 60%;
+}
+
+
+@keyframes animation-1e09ih {
+  from {
+    opacity: 0.4;
+  }
+  
+  to {
+    opacity: 1;
+  }
+  
+}
+
+.cnvs-skeleton {
+  box-sizing: border-box;
+  animation: animation-1e09ih 0.8s linear infinite alternate;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.cnvs-skeleton [data-part="skeleton-accessible-hide"] {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+  position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 1px;
+  min-height: 1px;
+  width: 1px;
+  min-width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+

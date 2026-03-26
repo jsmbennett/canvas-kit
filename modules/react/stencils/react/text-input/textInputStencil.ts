@@ -72,7 +72,7 @@ export const textInputStencil = defineStencil({
           outlineOffset: px2rem(2),
         },
       },
-      alert: {
+      caution: {
         borderColor: brand.alert.darkest,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base}`,
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':

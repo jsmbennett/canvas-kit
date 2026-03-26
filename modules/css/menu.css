@@ -1,0 +1,157 @@
+.cnvs-menu-card {
+  --cnvs-menu-card-min-width: 0.0625rem;
+  --cnvs-menu-card-transform-origin-vertical: top;
+  --cnvs-menu-card-transform-origin-horizontal: left;
+  box-sizing: border-box;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-weight: var(--cnvs-sys-font-weight-normal);
+  line-height: var(--cnvs-sys-line-height-subtext-large);
+  font-size: var(--cnvs-sys-font-size-subtext-large);
+  letter-spacing: var(--cnvs-base-letter-spacing-150);
+  color: var(--cnvs-sys-color-text-default);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform ease-out 150ms;
+  padding: var(--cnvs-sys-padding-xxs, 0);
+  border-radius: var(--cnvs-sys-shape-xxl, var(--cnvs-sys-shape-x2));
+  max-width: calc(100vw - var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8)));
+  box-shadow: var(--cnvs-sys-depth-3);
+  min-width: var(--cnvs-menu-card-min-width);
+  max-height: var(--cnvs-menu-card-max-height);
+  transform-origin: var(--cnvs-menu-card-transform-origin-vertical) var(--cnvs-menu-card-transform-origin-horizontal);
+}
+
+.wd-no-animation .cnvs-menu-card {
+  animation: none;
+}
+
+
+.cnvs-menu-divider {
+  box-sizing: border-box;
+  display: block;
+  height: 0.0625rem;
+  border: none;
+  border-top: 0.0625rem solid var(--cnvs-sys-color-border-default, var(--cnvs-sys-color-border-divider));
+  margin: var(--cnvs-sys-gap-sm, var(--cnvs-sys-space-x2)) var(--cnvs-sys-gap-md, 0);
+}
+
+
+.cnvs-menu-group-heading {
+  box-sizing: border-box;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-size: var(--cnvs-sys-font-size-subtext-lg, var(--cnvs-sys-font-size-subtext-large));
+  line-height: var(--cnvs-sys-line-height-subtext-lg, var(--cnvs-sys-line-height-subtext-large));
+  letter-spacing: var(--cnvs-sys-letter-spacing-subtext-lg, var(--cnvs-base-letter-spacing-150));
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: var(--cnvs-sys-gap-md, var(--cnvs-sys-space-x4));
+  padding: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2)) var(--cnvs-sys-padding-md, var(--cnvs-sys-space-x4));
+}
+
+
+.cnvs-menu-item {
+  box-sizing: border-box;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-weight: var(--cnvs-sys-font-weight-normal);
+  font-size: var(--cnvs-sys-font-size-subtext-lg, var(--cnvs-sys-font-size-subtext-large));
+  line-height: var(--cnvs-sys-line-height-subtext-lg, var(--cnvs-sys-line-height-subtext-large));
+  letter-spacing: var(--cnvs-sys-letter-spacing-subtext-lg, var(--cnvs-base-letter-spacing-150));
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: var(--cnvs-sys-gap-md, var(--cnvs-sys-space-x4));
+  padding: var(--cnvs-sys-padding-sm, var(--cnvs-sys-space-x2)) var(--cnvs-sys-padding-md, var(--cnvs-sys-space-x4));
+  cursor: pointer;
+  color: var(--cnvs-sys-color-fg-default);
+  border-width: 0;
+  border-radius: var(--cnvs-sys-shape-xxl, 0);
+  text-align: start;
+  transition: background-color 80ms,color 80ms;
+  background-color: inherit;
+  min-height: var(--cnvs-sys-size-md, var(--cnvs-sys-space-x10));
+  overflow-wrap: anywhere;
+  --cnvs-system-icon-color: currentColor;
+}
+
+.cnvs-menu-item :where([data-part="menu-item-selected"]) {
+  transition: opacity 80ms linear;
+  opacity: var(--cnvs-sys-opacity-zero);
+}
+
+.cnvs-menu-item:where(:has(span)) {
+  display: flex;
+}
+
+.cnvs-menu-item[aria-selected=true] {
+  color: var(--cnvs-sys-color-brand-fg-primary-strong, var(--cnvs-brand-primary-dark));
+  background-color: var(--cnvs-sys-color-brand-surface-primary-strong, var(--cnvs-brand-primary-lightest));
+}
+
+.cnvs-menu-item[aria-selected=true] :where([data-part="menu-item-selected"]) {
+  opacity: var(--cnvs-sys-opacity-full);
+}
+
+.cnvs-menu-item[aria-selected=true]:where(.focus, :focus-visible) {
+  --cnvs-system-icon-color: currentColor;
+  outline: none;
+  background-color: var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-base));
+  color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent));
+}
+
+.cnvs-menu-item:is(.hover, :hover) {
+  color: var(--cnvs-sys-color-fg-strong);
+  background-color: var(--cnvs-sys-color-surface-overlay-hover-default, var(--cnvs-brand-neutral-lightest));
+}
+
+.cnvs-menu-item:is(.focus, :focus-visible) {
+  color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent));
+  background-color: var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-base));
+  outline: 0.125rem solid transparent;
+  outline-offset: -0.125rem;
+}
+
+.cnvs-menu-item:is(:disabled, [aria-disabled=true]) {
+  cursor: default;
+  opacity: var(--cnvs-sys-opacity-disabled);
+}
+
+.cnvs-menu-item:is(:disabled, [aria-disabled=true]):where(.hover, :hover, [aria-selected=true]) {
+  background: none;
+}
+
+.cnvs-menu-item:is(:disabled, [aria-disabled=true]):where(.focus, :focus-visible) {
+  background-color: var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-light));
+  opacity: var(--cnvs-sys-opacity-disabled);
+}
+
+.cnvs-menu-item :where([data-part="menu-item-text"]) {
+  flex-grow: 1;
+  align-self: center;
+}
+
+.cnvs-menu-item :where([data-part="menu-item-icon"]) {
+  align-self: start;
+}
+
+
+.cnvs-menu-list {
+  box-sizing: border-box;
+  background: var(--cnvs-sys-color-surface-popover, var(--cnvs-sys-color-bg-default));
+  border-radius: var(--cnvs-sys-shape-xxl, 0);
+  padding: 0;
+  gap: var(--cnvs-sys-gap-xs, 0);
+}
+
+
+.cnvs-menu-list.orientation-vertical {
+  flex-direction: column;
+}
+
+
+.cnvs-menu-list.orientation-horizontal {
+  flex-direction: row;
+}
+

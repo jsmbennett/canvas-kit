@@ -1,0 +1,108 @@
+.cnvs-modal-body {
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+.cnvs-modal-body {
+  padding: var(--cnvs-sys-padding-xxs, var(--cnvs-sys-space-x1)) var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2)) var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
+}
+
+
+}
+
+
+.cnvs-modal-card {
+  box-sizing: border-box;
+  margin: var(--cnvs-base-size-500, var(--cnvs-sys-space-x10));
+  width: 27.5rem;
+  border: 0;
+  outline: 0.0625rem solid transparent;
+  box-shadow: var(--cnvs-sys-depth-5);
+  border-radius: var(--cnvs-sys-shape-xxxl, var(--cnvs-sys-shape-x6));
+}
+
+@media screen and (max-width: 768px) {
+.cnvs-modal-card {
+  gap: 0;
+  margin: var(--cnvs-sys-gap-md, var(--cnvs-sys-space-x4));
+  padding: var(--cnvs-sys-gap-md, var(--cnvs-sys-space-x4));
+}
+
+
+}
+
+
+.cnvs-modal-heading {
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+.cnvs-modal-heading {
+  padding: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2)) var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2)) var(--cnvs-sys-padding-xxs, var(--cnvs-sys-space-x1));
+}
+
+
+}
+
+
+@keyframes animation-npftf {
+  0% {
+    background: none;
+  }
+  
+  100% {
+    background: var(--cnvs-sys-color-surface-overlay-scrim, var(--cnvs-sys-color-bg-overlay));
+  }
+  
+}
+
+.cnvs-modal-overlay-container {
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--cnvs-sys-color-surface-overlay-scrim, var(--cnvs-sys-color-bg-overlay));
+  animation-duration: 0.3s;
+  animation-name: animation-npftf;
+}
+
+.wd-no-animation .cnvs-modal-overlay-container {
+  animation: none;
+}
+
+.cnvs-modal-overlay-container>div {
+  max-height: 100%;
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: var(--cnvs-modal-overlay-container-container-center);
+}
+
+@media screen and (max-width: 768px) {
+.cnvs-modal-overlay-container {
+  height: 100%;
+}
+
+.cnvs-modal-overlay-container>div {
+  align-items: end;
+}
+
+
+}
+
+
+.cnvs-modal-overflow-overlay {
+  box-sizing: border-box;
+  overflow: hidden auto;
+}
+
+.cnvs-modal-overflow-overlay>div {
+  max-height: inherit;
+}
+

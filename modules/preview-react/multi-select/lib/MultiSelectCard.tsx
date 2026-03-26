@@ -1,10 +1,12 @@
+import {comboboxCardStencil} from '@workday/canvas-kit-react/combobox';
 import {
   ExtractProps,
   createElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {calc, px2rem} from '@workday/canvas-kit-styling';
+import {calc, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
 
@@ -24,8 +26,10 @@ export const MultiSelectCard = createSubcomponent('div')({
   modelHook: useMultiSelectModel,
   elemPropsHook: useMultiSelectCard,
 })<MultiSelectCardProps>(({children, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil('MultiSelect.Card', comboboxCardStencil, undefined);
+
   return (
-    <Menu.Card as={Element} {...elemProps}>
+    <Menu.Card as={Element} {...handleCsProp(elemProps, resolved)}>
       {children}
     </Menu.Card>
   );

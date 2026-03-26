@@ -1,0 +1,49 @@
+@keyframes animation-1l0blw {
+  from {
+    transform: scale(0.85);
+  }
+  
+  to {
+    transform: scale(1.0);
+  }
+  
+}
+
+.cnvs-count-badge {
+  box-sizing: border-box;
+  align-items: center;
+  animation: animation-1l0blw 0.2s ease;
+  border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
+  display: inline-flex;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-size: var(--cnvs-sys-font-size-subtext-md, var(--cnvs-sys-font-size-subtext-medium));
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  height: 1.25rem;
+  justify-content: center;
+  line-height: var(--cnvs-sys-line-height-subtext-lg, 1.25rem);
+  letter-spacing: var(--cnvs-sys-letter-spacing-subtext-md, var(--cnvs-base-letter-spacing-100));
+  min-width: var(--cnvs-sys-size-xxs, 1.25rem);
+  padding: 0 0.40625rem;
+  background: var(--cnvs-sys-color-accent-danger, var(--cnvs-sys-color-fg-critical-default));
+  color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-text-inverse));
+}
+
+
+.cnvs-count-badge.variant-inverse {
+  background: var(--cnvs-sys-color-surface-inverse, var(--cnvs-sys-color-bg-default));
+  color: var(--cnvs-sys-color-fg-info-strong, var(--cnvs-sys-color-text-primary-default));
+}
+
+
+
+.cnvs-count-badge.emphasis-low {
+  background: var(--cnvs-sys-color-surface-info-strong, var(--cnvs-sys-color-bg-info-softer));
+  color: var(--cnvs-sys-color-fg-info-strong, var(--cnvs-sys-color-fg-info-stronger));
+}
+
+
+.cnvs-count-badge.variant-inverse.emphasis-low {
+  background: var(--cnvs-sys-color-surface-overlay-hover-inverse, var(--cnvs-sys-color-bg-transparent-strong));
+  color: var(--cnvs-sys-color-fg-inverse);
+}
+

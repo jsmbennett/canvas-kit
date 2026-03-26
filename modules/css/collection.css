@@ -1,0 +1,24 @@
+.cnvs-list-box-container {
+  box-sizing: border-box;
+}
+
+.cnvs-list-box-container :where([data-part="list"]) {
+  display: flex;
+  flex-direction: column;
+  margin-block: 0;
+}
+
+
+.cnvs-list-box-container.orientation-vertical {
+  overflow-y: auto;
+}
+
+
+.cnvs-list-box-container.orientation-horizontal {
+  overflow-y: undefined;
+}
+
+.cnvs-list-box-container.orientation-horizontal :where([data-part="list"]) {
+  flex-direction: row;
+}
+

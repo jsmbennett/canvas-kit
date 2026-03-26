@@ -1,0 +1,41 @@
+.cnvs-toast-body {
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--cnvs-sys-padding-md, var(--cnvs-sys-space-x4));
+  flex-grow: 1;
+  gap: var(--cnvs-sys-gap-xs, var(--cnvs-sys-space-x1));
+}
+
+
+.cnvs-toast-close-icon {
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+.cnvs-toast-icon {
+  box-sizing: border-box;
+  align-self: start;
+  margin: var(--cnvs-sys-gap-md, var(--cnvs-sys-space-x4)) var(--cnvs-base-size-150, var(--cnvs-sys-space-x3));
+}
+
+
+.cnvs-toast-message {
+  box-sizing: border-box;
+  word-break: break-word;
+  margin-block: 0;
+}
+
+
+.cnvs-toast {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  width: 22.5rem;
+  padding: 0;
+  gap: var(--cnvs-sys-gap-xs, var(--cnvs-sys-space-x1));
+  border-radius: var(--cnvs-sys-shape-xl, var(--cnvs-sys-shape-x2));
+}
+

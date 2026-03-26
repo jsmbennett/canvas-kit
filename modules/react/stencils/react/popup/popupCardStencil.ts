@@ -29,6 +29,7 @@ export const popupCardStencil = defineStencil({
     maxWidth: `calc(100vw - ${system.space.x8})`,
     flexDirection: 'column',
     boxShadow: system.depth[5],
+    borderRadius: system.shape.md,
     minHeight: system.space.zero,
     padding: system.space.x6,
     maxHeight: maxHeight,

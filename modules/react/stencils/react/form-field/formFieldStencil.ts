@@ -41,7 +41,7 @@ export const formFieldStencil = defineStencil({
     },
     error: {
       error: {},
-      alert: {},
+      caution: {},
     },
   },
   defaultModifiers: {

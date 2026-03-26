@@ -1,0 +1,97 @@
+.cnvs-expandable-avatar {
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+
+.cnvs-expandable-content {
+  box-sizing: border-box;
+  background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
+  padding: var(--cnvs-sys-padding-md, var(--cnvs-sys-space-x4)) var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2)) var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
+}
+
+
+.cnvs-expandable-icon {
+  box-sizing: border-box;
+  padding: var(--cnvs-sys-padding-xxs, var(--cnvs-sys-space-x1));
+}
+
+
+
+
+
+
+
+.cnvs-expandable-icon.position-end.is-expanded {
+  margin-inline-start: auto;
+  transform: rotate(180deg);
+  padding-inline-end: var(--cnvs-sys-padding-sm, var(--cnvs-sys-space-x3));
+}
+
+
+.cnvs-expandable-icon.position-end.is-expanded {
+  margin-inline-start: auto;
+  padding-inline-start: var(--cnvs-sys-padding-sm, var(--cnvs-sys-space-x3));
+}
+
+
+.cnvs-expandable-icon.position-start.is-expanded {
+  margin-inline-end: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
+  transform: rotate(90deg);
+}
+
+.cnvs-expandable-icon.position-start.is-expanded :dir(rtl) {
+  transform: rotate(-90deg);
+}
+
+
+.cnvs-expandable-icon.position-start.is-expanded {
+  margin-inline-end: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
+  transform: rotate(180deg);
+}
+
+
+.cnvs-expandable-target {
+  box-sizing: border-box;
+  background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
+  border-color: var(--cnvs-sys-color-border-transparent, var(--cnvs-sys-color-bg-transparent-default));
+  border-radius: var(--cnvs-sys-shape-xxl, var(--cnvs-sys-shape-x6));
+  border-width: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: var(--cnvs-sys-gap-none, var(--cnvs-sys-space-zero));
+  justify-content: start;
+  padding: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
+  cursor: pointer;
+  width: 100%;
+}
+
+.cnvs-expandable-target:hover, .cnvs-expandable-target.hover {
+  background-color: var(--cnvs-sys-color-surface-overlay-hover-default, var(--cnvs-sys-color-bg-alt-soft));
+}
+
+.cnvs-expandable-target:focus-visible, .cnvs-expandable-target.focus {
+  outline: var(--cnvs-sys-color-brand-border-primary, var(--cnvs-brand-common-focus-outline)) solid 0.125rem;
+}
+
+
+.cnvs-expandable-title {
+  box-sizing: border-box;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  line-height: var(--cnvs-sys-line-height-body-medium);
+  font-size: var(--cnvs-sys-font-size-body-medium);
+  color: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-text-strong));
+  padding: 0.125rem var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
+  text-align: left;
+}
+
+
+.cnvs-expandable-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: var(--cnvs-sys-space-x2);
+}
+

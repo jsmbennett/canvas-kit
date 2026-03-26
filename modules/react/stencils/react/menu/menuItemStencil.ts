@@ -43,6 +43,7 @@ export const menuItemStencil = defineStencil({
     // Selected styles
     '&[aria-selected=true]': {
       color: brand.primary.dark,
+      [systemIconStencil.vars.color]: brand.primary.dark,
       backgroundColor: brand.primary.lightest,
 
       [`& :where(${selectedPart})`]: {
@@ -64,6 +65,7 @@ export const menuItemStencil = defineStencil({
 
     // Focus styles
     '&:is(.focus, :focus-visible)': {
+      [systemIconStencil.vars.color]: brand.primary.accent,
       color: brand.primary.accent,
       backgroundColor: brand.primary.base,
       outline: `${px2rem(2)} solid transparent`,
@@ -73,6 +75,7 @@ export const menuItemStencil = defineStencil({
     // Disabled styles
     '&:is(:disabled, [aria-disabled=true])': {
       color: system.color.text.disabled,
+      [systemIconStencil.vars.color]: system.color.icon.disabled,
       cursor: 'default',
 
       // Focus + Disabled

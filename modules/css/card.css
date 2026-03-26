@@ -1,0 +1,35 @@
+.cnvs-card-body {
+  box-sizing: border-box;
+}
+
+
+.cnvs-card-heading {
+  box-sizing: border-box;
+  color: var(--cnvs-sys-color-fg-strong);
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  margin-block: var(--cnvs-sys-padding-none, var(--cnvs-sys-space-zero));
+}
+
+
+.cnvs-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cnvs-sys-gap-lg, var(--cnvs-sys-space-x6));
+  padding: var(--cnvs-sys-padding-xl, var(--cnvs-sys-space-x6));
+  background-color: var(--cnvs-sys-color-surface-default, var(--cnvs-sys-color-bg-default));
+  border-radius: var(--cnvs-sys-shape-xxl, var(--cnvs-sys-shape-x6));
+  border: 0.0625rem solid var(--cnvs-sys-color-border-default, var(--cnvs-sys-color-border-divider));
+}
+
+
+.cnvs-card.variant-borderless {
+  border-color: transparent;
+}
+
+
+.cnvs-card.variant-tonal {
+  background-color: var(--cnvs-sys-color-surface-alt-default, var(--cnvs-sys-color-bg-alt-soft));
+  border-color: var(--cnvs-sys-color-border-transparent);
+}
+

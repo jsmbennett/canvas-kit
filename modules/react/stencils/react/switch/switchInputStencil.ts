@@ -48,12 +48,12 @@ export const switchInputStencil = defineStencil({
               0 0 0 ${px2rem(5)} transparent`,
         },
       },
-      alert: {
+      caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
           0 0 0 ${px2rem(2)} ${system.color.border.inverse.default},
-          0 0 0 ${system.space.x1} ${brand.alert.base},
-          0 0 0 ${px2rem(5)} ${brand.alert.darkest}`,
+          0 0 0 ${system.space.x1} ${brand.caution400},
+          0 0 0 ${px2rem(5)} ${brand.caution600}`,
         },
       },
     },

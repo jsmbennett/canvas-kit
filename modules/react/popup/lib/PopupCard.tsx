@@ -5,6 +5,7 @@ import {
   ExtractProps,
   createSubcomponent,
   getTransformOrigin,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {
@@ -145,17 +146,18 @@ export const PopupCard = createSubcomponent('div')({
   // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
   const translate = getTransformOrigin(transformOrigin, cssVar(system.gap.sm, system.space.x2));
   const cardMaxHeight = getMaxHeight(elemProps.margin);
+  const resolved = useResolvedStencil('Popup.Card', popupCardStencil, {
+    transformOriginHorizontal: transformOrigin.horizontal,
+    transformOriginVertical: transformOrigin.vertical,
+    maxHeight: cardMaxHeight,
+  });
 
   return (
     <Card
       as={Element}
       ref={ref}
       {...mergeStyles(elemProps, [
-        popupCardStencil({
-          transformOriginHorizontal: transformOrigin.horizontal,
-          transformOriginVertical: transformOrigin.vertical,
-          maxHeight: cardMaxHeight,
-        }),
+        resolved,
         translateVars({positionX: translate.x, positionY: translate.y}),
       ])}
     >

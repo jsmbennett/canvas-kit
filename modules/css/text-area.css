@@ -1,0 +1,30 @@
+.cnvs-text-area {
+  box-sizing: border-box;
+  min-height: var(--cnvs-sys-size-xxl, var(--cnvs-sys-space-x16));
+  min-width: 17.5rem;
+}
+
+.cnvs-text-area::webkit-resizer {
+  display: none;
+}
+
+
+.cnvs-text-area.resize-both {
+  resize: both;
+}
+
+
+.cnvs-text-area.resize-horizontal {
+  resize: horizontal;
+}
+
+
+.cnvs-text-area.resize-vertical {
+  resize: vertical;
+}
+
+
+.cnvs-text-area.resize-none {
+  resize: none;
+}
+

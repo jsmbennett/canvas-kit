@@ -1,0 +1,157 @@
+.cnvs-side-panel-heading {
+  box-sizing: border-box;
+  padding: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
+}
+
+
+.cnvs-side-panel-heading.origin-end {
+  padding-inline-start: 4.25rem;
+}
+
+
+
+.cnvs-side-panel-toggle-button {
+  box-sizing: border-box;
+  position: absolute;
+  top: var(--cnvs-sys-gap-lg, var(--cnvs-sys-space-x6));
+  width: var(--cnvs-sys-gap-lg, var(--cnvs-sys-space-x8));
+  inset-inline-end: var(--cnvs-base-size-150, var(--cnvs-sys-space-x3));
+}
+
+
+.cnvs-side-panel-toggle-button.state-collapsing {
+  margin: 0;
+  transform: scaleX(1);
+}
+
+.cnvs-side-panel-toggle-button.state-collapsing :dir(rtl) {
+  transform: scaleX(-1);
+}
+
+
+.cnvs-side-panel-toggle-button.state-collapsed {
+  margin: auto;
+  transform: scaleX(1);
+}
+
+.cnvs-side-panel-toggle-button.state-collapsed :dir(rtl) {
+  transform: scaleX(-1);
+}
+
+
+.cnvs-side-panel-toggle-button.state-expanded {
+  margin: 0;
+  transform: scaleX(-1);
+}
+
+.cnvs-side-panel-toggle-button.state-expanded :dir(rtl) {
+  transform: scaleX(1);
+}
+
+
+.cnvs-side-panel-toggle-button.state-expanding {
+  margin: 0;
+  transform: scaleX(-1);
+}
+
+.cnvs-side-panel-toggle-button.state-expanding :dir(rtl) {
+  transform: scaleX(1);
+}
+
+
+
+.cnvs-side-panel-toggle-button.origin-end {
+  transform: scaleX(1);
+}
+
+.cnvs-side-panel-toggle-button.origin-end :dir(rtl) {
+  transform: scaleX(-1);
+}
+
+
+.cnvs-side-panel-toggle-button.state-collapsed.origin-end {
+  transform: scaleX(-1);
+}
+
+.cnvs-side-panel-toggle-button.state-collapsed.origin-end :dir(rtl) {
+  transform: scaleX(1);
+}
+
+
+.cnvs-side-panel-toggle-button.state-collapsing.origin-end {
+  transform: scaleX(-1);
+  inset-inline-start: var(--cnvs-base-size-150, var(--cnvs-sys-space-x3));
+}
+
+.cnvs-side-panel-toggle-button.state-collapsing.origin-end :dir(rtl) {
+  transform: scaleX(1);
+  inset-inline-end: var(--cnvs-base-size-150, var(--cnvs-sys-space-x3));
+}
+
+
+.cnvs-side-panel-toggle-button.state-expanded.origin-end {
+  transform: scaleX(1);
+  inset-inline-start: var(--cnvs-base-size-150, var(--cnvs-sys-space-x3));
+}
+
+.cnvs-side-panel-toggle-button.state-expanded.origin-end :dir(rtl) {
+  transform: scaleX(-1);
+  inset-inline-end: var(--cnvs-base-size-150, var(--cnvs-sys-space-x3));
+}
+
+
+.cnvs-side-panel-toggle-button.state-expanding.origin-end {
+  transform: scaleX(1);
+  inset-inline-start: var(--cnvs-base-size-150, var(--cnvs-sys-space-x3));
+}
+
+.cnvs-side-panel-toggle-button.state-expanding.origin-end :dir(rtl) {
+  transform: scaleX(-1);
+  inset-inline-end: var(--cnvs-base-size-150, var(--cnvs-sys-space-x3));
+}
+
+
+.cnvs-panel {
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  outline: 0.0625rem solid transparent;
+  transition: width ease-out 200ms,max-width ease-out 200ms;
+}
+
+
+.cnvs-panel.variant-alternate {
+  background-color: var(--cnvs-sys-color-surface-default, var(--cnvs-sys-color-bg-default));
+  box-shadow: var(--cnvs-sys-depth-3);
+}
+
+
+.cnvs-panel.variant-standard {
+  background-color: var(--cnvs-sys-color-surface-navigation, var(--cnvs-sys-color-bg-alt-softer));
+}
+
+
+.cnvs-panel.expanded-expanded {
+  width: var(--cnvs-panel-expanded-width);
+  max-width: var(--cnvs-panel-expanded-width);
+}
+
+
+.cnvs-panel.expanded-collapsed {
+  width: var(--cnvs-panel-collapsed-width);
+  max-width: var(--cnvs-panel-collapsed-width);
+}
+
+
+.cnvs-panel.expanded-expanding {
+  width: var(--cnvs-panel-expanded-width);
+  max-width: var(--cnvs-panel-expanded-width);
+}
+
+
+.cnvs-panel.expanded-collapsing {
+  width: var(--cnvs-panel-collapsed-width);
+  max-width: var(--cnvs-panel-collapsed-width);
+}
+

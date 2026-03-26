@@ -1,0 +1,132 @@
+.cnvs-tab-item {
+  box-sizing: border-box;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-size: var(--cnvs-sys-font-size-subtext-lg, var(--cnvs-sys-font-size-subtext-large));
+  line-height: var(--cnvs-sys-line-height-subtext-lg, var(--cnvs-sys-line-height-subtext-large));
+  letter-spacing: var(--cnvs-sys-letter-spacing-subtext-lg, var(--cnvs-base-letter-spacing-150));
+  font-weight: var(--cnvs-sys-font-weight-medium);
+  border: none;
+  background-color: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
+  flex: 0 0 auto;
+  min-width: 0;
+  align-items: center;
+  padding: 0 var(--cnvs-sys-padding-md, var(--cnvs-sys-space-x4));
+  height: var(--cnvs-sys-size-lg, 3rem);
+  cursor: pointer;
+  color: var(--cnvs-sys-color-fg-muted-default);
+  position: relative;
+  border-radius: var(--cnvs-sys-shape-md, var(--cnvs-sys-space-x2)) var(--cnvs-sys-shape-md, var(--cnvs-sys-space-x2)) var(--cnvs-sys-shape-none, var(--cnvs-sys-space-zero)) var(--cnvs-sys-shape-zero, var(--cnvs-sys-space-zero));
+  transition: background 150ms ease,color 150ms ease;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  --cnvs-system-icon-color: currentColor;
+  --cnvs-svg-size: 1.25rem;
+}
+
+.cnvs-tab-item:has(span) {
+  display: flex;
+  gap: var(--cnvs-sys-gap-sm, var(--cnvs-sys-space-x2));
+}
+
+.cnvs-tab-item:hover, .cnvs-tab-item.hover, .cnvs-tab-item:focus-visible, .cnvs-tab-item.focus {
+  background-color: var(--cnvs-sys-color-surface-overlay-hover-default, var(--cnvs-sys-color-bg-alt-default));
+  color: var(--cnvs-sys-color-fg-muted-strong, var(--cnvs-sys-color-fg-contrast-default));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-muted-strong, var(--cnvs-sys-color-fg-contrast-default));
+}
+
+.cnvs-tab-item:focus-visible, .cnvs-tab-item.focus {
+  outline: 0.125rem solid transparent;
+  box-shadow: inset 0 0 0 2px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1)),inset 0 0 0 2px var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0));
+  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-focus-inverse, var(--cnvs-base-palette-neutral-0));
+  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
+  color: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-contrast-default));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-icon-strong));
+}
+
+.cnvs-tab-item:disabled, .cnvs-tab-item.disabled, .cnvs-tab-item[aria-disabled] {
+  opacity: var(--cnvs-sys-opacity-disabled, 0.4);
+}
+
+.cnvs-tab-item:disabled:hover, .cnvs-tab-item.disabled:hover, .cnvs-tab-item[aria-disabled]:hover {
+  cursor: auto;
+  background-color: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-muted-default, var(--cnvs-sys-color-fg-disabled));
+}
+
+.cnvs-tab-item[aria-selected=true] {
+  color: var(--cnvs-sys-color-brand-fg-primary-default, var(--cnvs-brand-primary-base));
+  cursor: default;
+  --cnvs-system-icon-color: var(--cnvs-sys-color-brand-fg-primary-default, var(--cnvs-brand-primary-base));
+}
+
+.cnvs-tab-item[aria-selected=true]:after {
+  position: absolute;
+  border-bottom: var(--cnvs-sys-space-x1) solid transparent;
+  border-radius: var(--cnvs-sys-shape-md, var(--cnvs-sys-space-x2)) var(--cnvs-sys-shape-md, var(--cnvs-sys-space-x2)) var(--cnvs-sys-shape-none, var(--cnvs-sys-space-zero)) var(--cnvs-sys-shape-zero, var(--cnvs-sys-space-zero));
+  background-color: var(--cnvs-sys-color-brand-fg-primary-default, var(--cnvs-brand-primary-base));
+  bottom: var(--cnvs-sys-padding-none, var(--cnvs-sys-space-zero));
+  content: '';
+  left: var(--cnvs-sys-padding-none, var(--cnvs-sys-space-zero));
+  margin-block-start: calc(calc(var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2)) / var(--cnvs-sys-padding-xxs, var(--cnvs-sys-space-x1))) * -1);
+  width: 100%;
+}
+
+.cnvs-tab-item[aria-selected=true]:hover, .cnvs-tab-item[aria-selected=true].hover, .cnvs-tab-item[aria-selected=true]:focus-visible, .cnvs-tab-item[aria-selected=true].focus {
+  background-color: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
+  color: var(--cnvs-sys-color-brand-fg-primary-default, var(--cnvs-brand-primary-base));
+}
+
+
+.cnvs-tabs-list {
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+  border-bottom: 0.0625rem solid var(--cnvs-sys-color-border-default, var(--cnvs-sys-color-border-divider));
+  gap: var(--cnvs-sys-gap-xs, var(--cnvs-sys-space-x1));
+  padding-inline: 2.5rem;
+}
+
+@media screen and (max-width: 768px) {
+.cnvs-tabs-list {
+  padding-inline: var(--cnvs-sys-padding-md, var(--cnvs-sys-space-x4));
+}
+
+
+}
+
+
+.cnvs-tabs-list.modality-touch {
+  overflow-x: auto;
+  padding-inline: 0;
+}
+
+.cnvs-tabs-list.modality-touch[data-scroll-position="start"] {
+  mask-image: linear-gradient(to right, white 80%, transparent);
+}
+
+.cnvs-tabs-list.modality-touch[data-scroll-position="middle"] {
+  mask-image: linear-gradient(to left, white 80%, transparent),linear-gradient(to right, white 80%, transparent);
+  mask-composite: intersect;
+}
+
+.cnvs-tabs-list.modality-touch[data-scroll-position="end"] {
+  mask-image: linear-gradient(to left, white 80%, transparent);
+}
+
+
+
+
+
+
+
+
+.cnvs-tabs-overflow-button {
+  box-sizing: border-box;
+}
+
+.cnvs-tabs-overflow-button:has([data-part="tabs-overflow-button-icon"]) {
+  display: flex;
+  gap: var(--cnvs-sys-gap-none, var(--cnvs-sys-space-zero));
+}
+

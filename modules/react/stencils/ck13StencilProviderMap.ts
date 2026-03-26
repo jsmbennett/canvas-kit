@@ -2,6 +2,7 @@ import type {StencilProviderMap} from '../common';
 import type {StencilConfigInput} from '../common/lib/stencil/stencilOverrideProvider';
 import {dividerStencil} from './preview-react/divider/dividerStencil';
 import {loadingSparklesStencil} from './preview-react/loading-sparkles/loadingSparklesStencil';
+import {multiSelectInputStencil} from './preview-react/multi-select/multiSelectInputStencil';
 import {pillCountStencil} from './preview-react/pill/pillCountStencil';
 import {pillIconButtonStencil} from './preview-react/pill/pillIconButtonStencil';
 import {pillIconStencil} from './preview-react/pill/pillIconStencil';
@@ -11,6 +12,7 @@ import {radioInputStencil} from './preview-react/radio/radioInputStencil';
 import {radioLabelStencil} from './preview-react/radio/radioLabelStencil';
 import {radioTextStencil} from './preview-react/radio/radioTextStencil';
 import {statusIndicatorLabelStencil} from './preview-react/status-indicator/statusIndicatorLabelStencil';
+import {statusIndicatorStencil} from './preview-react/status-indicator/statusIndicatorStencil';
 import {actionBarListStencil} from './react/action-bar/actionBarListStencil';
 import {actionBarOverflowButtonStencil} from './react/action-bar/actionBarOverflowButtonStencil';
 import {avatarStencil} from './react/avatar/avatarStencil';
@@ -34,6 +36,7 @@ import {checkboxContainerStencil} from './react/checkbox/checkboxContainerStenci
 import {checkboxInputStencil} from './react/checkbox/checkboxInputStencil';
 import {checkboxRippleStencil} from './react/checkbox/checkboxRippleStencil';
 import {indeterminateBoxStencil} from './react/checkbox/indeterminateBoxStencil';
+import {comboboxCardStencil} from './react/combobox/comboboxCardStencil';
 import {comboboxMenuListStencil} from './react/combobox/comboboxMenuListStencil';
 import {expandableAvatarStencil} from './react/expandable/expandableAvatarStencil';
 import {expandableContainerStencil} from './react/expandable/expandableContainerStencil';
@@ -44,6 +47,7 @@ import {formFieldContainerStencil} from './react/form-field/formFieldContainerSt
 import {formFieldFieldStencil} from './react/form-field/formFieldFieldStencil';
 import {formFieldGroupListStencil} from './react/form-field/formFieldGroupListStencil';
 import {svgStencil} from './react/icon/svgStencil';
+import {menuCardStencil} from './react/menu/menuCardStencil';
 import {menuDividerStencil} from './react/menu/menuDividerStencil';
 import {menuGroupHeadingStencil} from './react/menu/menuGroupHeadingStencil';
 import {menuItemStencil} from './react/menu/menuItemStencil';
@@ -54,6 +58,7 @@ import {modalHeadingStencil} from './react/modal/modalHeadingStencil';
 import {modalOverflowOverlayStencil} from './react/modal/modalOverflowOverlayStencil';
 import {modalOverlayContainerStencil} from './react/modal/modalOverlayContainerStencil';
 import {popupBodyStencil} from './react/popup/popupBodyStencil';
+import {popupCardStencil} from './react/popup/popupCardStencil';
 import {popupCloseIconStencil} from './react/popup/popupCloseIconStencil';
 import {popupHeadingStencil} from './react/popup/popupHeadingStencil';
 import {selectCardStencil} from './react/select/selectCardStencil';
@@ -76,6 +81,7 @@ import {tabItemStencil} from './react/tabs/tabItemStencil';
 import {tabsOverflowButtonStencil} from './react/tabs/tabsOverflowButtonStencil';
 import {textAreaStencil} from './react/text-area/textAreaStencil';
 import {inputGroupStencil} from './react/text-input/inputGroupStencil';
+import {textInputStencil} from './react/text-input/textInputStencil';
 import {bodyTextStencil} from './react/text/bodyTextStencil';
 import {headingStencil} from './react/text/headingStencil';
 import {labelTextStencil} from './react/text/labelTextStencil';
@@ -118,6 +124,7 @@ export const ck13StencilProviderMap: StencilProviderMap = {
   CheckboxContainer: {stencil: toStencilConfig(checkboxContainerStencil)},
   CheckboxInput: {stencil: toStencilConfig(checkboxInputStencil)},
   CheckboxRipple: {stencil: toStencilConfig(checkboxRippleStencil)},
+  'Combobox.Card': {stencil: toStencilConfig(comboboxCardStencil)},
   'Combobox.Menu.List': {stencil: toStencilConfig(comboboxMenuListStencil)},
   CountBadge: {stencil: toStencilConfig(countBadgeStencil)},
   Divider: {stencil: toStencilConfig(dividerStencil)},
@@ -136,11 +143,16 @@ export const ck13StencilProviderMap: StencilProviderMap = {
   InputGroup: {stencil: toStencilConfig(inputGroupStencil)},
   Label: {stencil: toStencilConfig(labelTextStencil)},
   LoadingSparkles: {stencil: toStencilConfig(loadingSparklesStencil)},
+  'Menu.Card': {stencil: toStencilConfig(menuCardStencil)},
   'Menu.Divider': {stencil: toStencilConfig(menuDividerStencil)},
   'Menu.Group.Heading': {stencil: toStencilConfig(menuGroupHeadingStencil)},
   'Menu.List': {stencil: toStencilConfig(menuListStencil)},
   MenuItem: {stencil: toStencilConfig(menuItemStencil)},
   MenuOption: {stencil: toStencilConfig(menuItemStencil)},
+  'MultiSelect.Card': {stencil: toStencilConfig(comboboxCardStencil)},
+  'MultiSelect.Input': {stencil: toStencilConfig(multiSelectInputStencil)},
+  'MultiSelect.Item': {stencil: toStencilConfig(menuItemStencil)},
+  'MultiSelect.SearchInput': {stencil: toStencilConfig(multiSelectInputStencil)},
   'Modal.Body': {stencil: toStencilConfig(modalBodyStencil)},
   'Modal.Card': {stencil: toStencilConfig(modalCardStencil)},
   'Modal.Heading': {stencil: toStencilConfig(modalHeadingStencil)},
@@ -152,7 +164,8 @@ export const ck13StencilProviderMap: StencilProviderMap = {
   'Pill.Label': {stencil: toStencilConfig(pillLabelStencil)},
   PrimaryButton: {stencil: toStencilConfig(primaryButtonStencil)},
   'Popup.Body': {stencil: toStencilConfig(popupBodyStencil)},
-  'Popup.CloseIcon': {stencil: toStencilConfig(popupCloseIconStencil)},
+  'Popup.Card': {stencil: toStencilConfig(popupCardStencil), mergeWithDefault: true},
+  'Popup.CloseIcon': {stencil: toStencilConfig(popupCloseIconStencil), mergeWithDefault: true},
   'Popup.Heading': {stencil: toStencilConfig(popupHeadingStencil)},
   'RadioButton.Text': {stencil: toStencilConfig(radioTextStencil)},
   RadioGroup: {stencil: toStencilConfig(radioGroupStencil)},
@@ -161,6 +174,7 @@ export const ck13StencilProviderMap: StencilProviderMap = {
   SelectInput: {stencil: toStencilConfig(selectInputStencil)},
   SecondaryButton: {stencil: toStencilConfig(secondaryButtonStencil)},
   Skeleton: {stencil: toStencilConfig(skeletonStencil)},
+  StatusIndicator: {stencil: toStencilConfig(statusIndicatorStencil)},
   'StatusIndicator.Label': {stencil: toStencilConfig(statusIndicatorLabelStencil)},
   StyledRadioInput: {stencil: toStencilConfig(radioInputStencil)},
   StyledTabItem: {stencil: toStencilConfig(tabItemStencil)},
@@ -182,6 +196,7 @@ export const ck13StencilProviderMap: StencilProviderMap = {
   TertiaryButton: {stencil: toStencilConfig(tertiaryButtonStencil)},
   Text: {stencil: toStencilConfig(textStencil)},
   TextArea: {stencil: toStencilConfig(textAreaStencil)},
+  TextInput: {stencil: toStencilConfig(textInputStencil)},
   Title: {stencil: toStencilConfig(titleStencil)},
   Toast: {stencil: toStencilConfig(toastStencil)},
   'Toast.Body': {stencil: toStencilConfig(toastBodyStencil)},

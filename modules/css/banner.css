@@ -1,0 +1,95 @@
+.cnvs-action-bar-text {
+  box-sizing: border-box;
+  text-decoration: underline;
+  display: inline;
+}
+
+
+.cnvs-action-bar-text.is-sticky {
+  display: none;
+}
+
+
+.cnvs-banner-icon {
+  box-sizing: border-box;
+  margin-inline-end: var(--cnvs-sys-space-x3);
+}
+
+
+.cnvs-banner-label {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 0%;
+}
+
+
+.cnvs-banner {
+  box-sizing: border-box;
+  font-family: var(--cnvs-sys-font-family-default),Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-weight: var(--cnvs-sys-font-weight-medium);
+  line-height: var(--cnvs-sys-line-height-subtext-lg, var(--cnvs-sys-line-height-subtext-large));
+  font-size: var(--cnvs-sys-font-size-subtext-lg, var(--cnvs-sys-font-size-subtext-large));
+  letter-spacing: var(--cnvs-sys-letter-spacing-subtext-lg, var(--cnvs-base-letter-spacing-150));
+  padding: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2)) var(--cnvs-sys-padding-md, var(--cnvs-sys-space-x4));
+  border: 0;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  border-start-start-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
+  border-start-end-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
+  border-end-start-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
+  border-end-end-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
+  cursor: pointer;
+  transition: background-color 120ms;
+  outline: var(--cnvs-sys-gap-xs, var(--cnvs-sys-space-x1)) solid transparent;
+}
+
+.cnvs-banner:focus-visible, .cnvs-banner.focus {
+  outline: var(--cnvs-sys-gap-xs, var(--cnvs-sys-shape-x1)) double transparent;
+  box-shadow: 0 0 0 2px var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)),0 0 0 4px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1));
+}
+
+
+.cnvs-banner.has-errors {
+  background-color: var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-base));
+  color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent));
+}
+
+.cnvs-banner.has-errors:hover, .cnvs-banner.has-errors.hover {
+  background: color-mix(in srgb, var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-dark)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
+}
+
+.cnvs-banner.has-errors [data-part="exclamation-circle-icon"] {
+  --cnvs-system-icon-accent-color: var(--cnvs-sys-color-brand-accent-critical, currentColor);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-inverse, currentColor);
+  --cnvs-system-icon-background-color: var(--cnvs-sys-color-fg-inverse, none);
+}
+
+
+.cnvs-banner.has-errors-false {
+  background-color: var(--cnvs-sys-color-brand-accent-caution, var(--cnvs-brand-alert-base));
+  color: var(--cnvs-brand-alert-accent);
+}
+
+.cnvs-banner.has-errors-false:hover, .cnvs-banner.has-errors-false.hover {
+  background: color-mix(in srgb, var(--cnvs-sys-color-brand-accent-caution, var(--cnvs-brand-alert-dark)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
+}
+
+.cnvs-banner.has-errors-false [data-part="exclamation-triangle-icon"] {
+  --cnvs-system-icon-accent-color: var(--cnvs-sys-color-fg-inverse, currentColor);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-brand-fg-caution-strong, currentColor);
+  --cnvs-system-icon-background-color: var(--cnvs-sys-color-brand-fg-caution-strong, none);
+}
+
+
+.cnvs-banner.is-sticky {
+  width: 13.875rem;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+
+.cnvs-banner.is-sticky-false {
+  width: 20.5rem;
+}
+

@@ -1,0 +1,150 @@
+.cnvs-pagination-additional-details {
+  box-sizing: border-box;
+  display: flex;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-weight: var(--cnvs-sys-font-weight-normal);
+  line-height: var(--cnvs-sys-line-height-subtext-medium);
+  font-size: var(--cnvs-sys-font-size-subtext-medium);
+  letter-spacing: var(--cnvs-base-letter-spacing-100);
+  color: var(--cnvs-sys-color-text-hint);
+  margin-block-start: var(--cnvs-sys-space-x3);
+}
+
+
+.cnvs-pagination-additional-details.should-hide-details {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+  position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 1px;
+  min-height: 1px;
+  width: 1px;
+  min-width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  margin-block-start: var(--cnvs-sys-space-zero);
+}
+
+
+.cnvs-pagination-controls {
+  box-sizing: border-box;
+  display: flex;
+  gap: var(--cnvs-sys-gap-xs, var(--cnvs-sys-space-x1));
+  align-items: center;
+}
+
+
+.cnvs-control-button {
+  box-sizing: border-box;
+}
+
+.cnvs-control-button:dir(rtl) .wd-icon {
+  transform: scaleX(-1);
+}
+
+
+.cnvs-pagination-go-to-form {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--cnvs-sys-gap-sm, var(--cnvs-sys-space-x2));
+}
+
+.cnvs-pagination-go-to-form :dir(rtl) {
+  padding-inline: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
+}
+
+
+.cnvs-pagination-go-to-label {
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+
+.cnvs-pagination-go-to-text-input {
+  box-sizing: border-box;
+  min-width: 3.4375rem;
+  width: 3.4375rem;
+}
+
+
+.cnvs-pagination-page-button {
+  box-sizing: border-box;
+  min-width: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+  height: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+  padding: 0;
+  font-weight: var(--cnvs-sys-font-weight-normal);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-default);
+}
+
+.cnvs-pagination-page-button:hover, .cnvs-pagination-page-button.hover {
+  --cnvs-button-background: var(--cnvs-sys-color-surface-alt-default, var(--cnvs-sys-color-bg-alt-soft));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-pagination-page-button:active, .cnvs-pagination-page-button.active, .cnvs-pagination-page-button:focus-visible, .cnvs-pagination-page-button.focus {
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+}
+
+.cnvs-pagination-page-button:disabled, .cnvs-pagination-page-button.disabled {
+  --cnvs-button-background: var(--cnvs-sys-color-fg-disabled);
+}
+
+
+.cnvs-pagination-page-button.toggled {
+  font-weight: var(--cnvs-sys-font-weight-bold);
+  --cnvs-button-background: var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-base));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
+}
+
+.cnvs-pagination-page-button.toggled:hover, .cnvs-pagination-page-button.toggled.hover, .cnvs-pagination-page-button.toggled:active, .cnvs-pagination-page-button.toggled.active, .cnvs-pagination-page-button.toggled:focus-visible, .cnvs-pagination-page-button.toggled.focus {
+  --cnvs-button-background: var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-base));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
+}
+
+.cnvs-pagination-page-button.toggled:disabled, .cnvs-pagination-page-button.toggled.disabled {
+  --cnvs-button-background: var(--cnvs-sys-color-fg-disabled);
+}
+
+
+.cnvs-pagination-list {
+  box-sizing: border-box;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+.cnvs-pagination-list-item {
+  box-sizing: border-box;
+  display: flex;
+}
+
+
+.cnvs-pagination-page-list {
+  box-sizing: border-box;
+  display: flex;
+  margin: 0;
+  padding-inline: 0;
+  gap: var(--cnvs-sys-gap-xs, var(--cnvs-sys-space-x1));
+}
+
+
+.cnvs-pagination {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.cnvs-pagination-nav {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+

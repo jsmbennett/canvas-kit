@@ -1,0 +1,221 @@
+.cnvs-pill-avatar {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  font-family: var(--cnvs-sys-font-family-default);
+  font-weight: var(--cnvs-sys-font-weight-normal);
+  line-height: var(--cnvs-sys-line-height-subtext-sm, var(--cnvs-sys-line-height-subtext-small));
+  font-size: var(--cnvs-sys-font-size-subtext-sm, var(--cnvs-sys-font-size-subtext-small));
+  letter-spacing: var(--cnvs-sys-letter-spacing-subtext-sm, var(--cnvs-base-letter-spacing-50));
+}
+
+.cnvs-pill-avatar:disabled, .cnvs-pill-avatar.disabled {
+  opacity: var(--cnvs-sys-opacity-disabled);
+}
+
+
+.cnvs-pill-count {
+  box-sizing: border-box;
+  border-start-start-radius: 0;
+  border-start-end-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
+  border-end-start-radius: 0;
+  border-end-end-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
+  border-width: 0;
+  border-inline-start-width: 0;
+  border-style: solid;
+  border-color: var(--cnvs-pill-count-border-color, var(--cnvs-sys-color-border-transparent));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--cnvs-sys-size-xs, var(--cnvs-sys-space-x6));
+  width: var(--cnvs-sys-size-xs, var(--cnvs-sys-space-x6));
+  padding: 0 var(--cnvs-sys-padding-xxs, var(--cnvs-sys-space-x1));
+  margin-inline-end: calc(var(--cnvs-sys-gap-sm, var(--cnvs-sys-space-x3)) * -1);
+  margin-inline-start: var(--cnvs-sys-gap-xs, var(--cnvs-sys-space-x1));
+  background-color: var(--cnvs-pill-count-background-color, var(--cnvs-sys-color-surface-alt-strong, var(--cnvs-sys-color-bg-alt-stronger)));
+  flex: 0 0 auto;
+}
+
+
+.cnvs-pill-icon {
+  box-sizing: border-box;
+  margin-inline-start: calc(var(--cnvs-sys-gap-xs, var(--cnvs-sys-space-x1)) * -1);
+  --cnvs-svg-size: 1.25rem;
+  flex: 0 0 auto;
+}
+
+
+.cnvs-pill-icon-button {
+  box-sizing: border-box;
+  margin-inline-end: calc(0.4375rem * -1);
+  margin-inline-start: calc(0.125rem * -1);
+  border-radius: 0.125rem;
+  height: var(--cnvs-sys-size-xxs, 1.25rem);
+  width: var(--cnvs-sys-size-xxs, 1.25rem);
+  padding: 0;
+  overflow: visible;
+  flex: 0 0 auto;
+  --cnvs-button-border: var(--cnvs-sys-color-border-transparent);
+  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-alt-default));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong);
+  --cnvs-svg-size: var(--cnvs-sys-size-xs, var(--cnvs-sys-space-x6));
+}
+
+.cnvs-pill-icon-button ::after {
+  content: "";
+  height: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+  width: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+  position: absolute;
+  left: calc(0.4375rem * -1);
+  bottom: calc(0.4375rem * -1);
+  margin: 0;
+  pointer-events: all;
+}
+
+.cnvs-pill-icon-button:focus-visible, .cnvs-pill-icon-button.focus {
+  --cnvs-button-border: var(--cnvs-sys-color-border-transparent);
+  box-shadow: 0 0 0 0px var(--cnvs-sys-color-border-transparent),0 0 0 2px var(--cnvs-brand-common-focus-outline, rgba(8,117,225,1));
+}
+
+.cnvs-pill-icon-button:hover, .cnvs-pill-icon-button.hover {
+  --cnvs-button-border: var(--cnvs-sys-color-border-transparent);
+}
+
+.cnvs-pill-icon-button:active, .cnvs-pill-icon-button.active {
+  --cnvs-button-border: var(--cnvs-sys-color-border-transparent);
+}
+
+.cnvs-pill-icon-button:disabled, .cnvs-pill-icon-button.disabled {
+  --cnvs-button-border: var(--cnvs-sys-color-border-transparent);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-disabled);
+}
+
+
+.cnvs-pill-label {
+  box-sizing: border-box;
+  flex-shrink: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+.cnvs-pill {
+  box-sizing: border-box;
+  display: initial;
+  flex-direction: row;
+  align-items: center;
+  border-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
+  font-family: var(--cnvs-sys-font-family-default);
+  font-size: var(--cnvs-sys-font-size-subtext-lg, var(--cnvs-sys-font-size-subtext-large));
+  letter-spacing: var(--cnvs-sys-letter-spacing-subtext-lg, var(--cnvs-base-letter-spacing-150));
+  line-height: var(--cnvs-sys-line-height-subtext-sm, var(--cnvs-sys-line-height-subtext-small));
+  box-shadow: none;
+  outline: none;
+  font-weight: var(--cnvs-sys-font-weight-medium);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: fit-content;
+  padding: 0.125rem var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
+  height: var(--cnvs-sys-size-xs, var(--cnvs-sys-space-x6));
+  position: relative;
+  gap: var(--cnvs-sys-gap-xs, var(--cnvs-sys-space-x1));
+  max-width: var(--cnvs-pill-max-width);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  --cnvs-button-background: var(--cnvs-sys-color-surface-alt-strong, var(--cnvs-sys-color-bg-alt-default));
+  --cnvs-button-border: var(--cnvs-sys-color-border-transparent);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-system-icon-color: currentColor;
+  --cnvs-pill-count-border-color: transparent;
+}
+
+.cnvs-pill:has(span) {
+  display: flex;
+  line-height: var(--cnvs-sys-line-height-subtext-lg, var(--cnvs-sys-line-height-subtext-large));
+}
+
+.cnvs-pill:hover, .cnvs-pill.hover {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-alt-strong, var(--cnvs-sys-color-bg-alt-strong)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
+  --cnvs-button-border: var(--cnvs-sys-color-border-transparent);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-stronger);
+  --cnvs-system-icon-color: currentColor;
+  --cnvs-pill-count-border-color: transparent;
+}
+
+.cnvs-pill:active, .cnvs-pill.active {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-alt-strong, var(--cnvs-sys-color-bg-alt-stronger)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-system-icon-color: currentColor;
+  --cnvs-pill-count-border-color: transparent;
+}
+
+.cnvs-pill:focus-visible, .cnvs-pill.focus {
+  --cnvs-button-border: var(--cnvs-sys-color-brand-border-primary, var(--cnvs-sys-color-border-primary-default));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  border-color: var(--cnvs-sys-color-brand-border-primary, var(--cnvs-sys-color-border-primary-default));
+  --cnvs-system-icon-color: currentColor;
+  box-shadow: 0 0 0 1px var(--cnvs-sys-color-brand-border-primary, var(--cnvs-sys-color-border-primary-default)),0 0 0 1px var(--cnvs-sys-color-brand-border-primary, var(--cnvs-sys-color-border-primary-default));
+}
+
+.cnvs-pill:disabled, .cnvs-pill.disabled {
+  --cnvs-button-background: var(--cnvs-sys-color-surface-alt-strong, var(--cnvs-sys-color-bg-alt-default));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-disabled);
+  --cnvs-system-icon-color: currentColor;
+  --cnvs-pill-count-background-color: var(--cnvs-sys-color-surface-alt-strong, var(--cnvs-sys-color-bg-alt-strong));
+  --cnvs-pill-count-border-color: transparent;
+}
+
+
+.cnvs-pill.variant-read-only {
+  border: 0.0625rem solid var(--cnvs-sys-color-border-default, var(--cnvs-sys-color-border-container));
+  cursor: default;
+  --cnvs-button-background: var(--cnvs-sys-color-bg-default);
+}
+
+.cnvs-pill.variant-read-only:hover, .cnvs-pill.variant-read-only.hover {
+  border-color: var(--cnvs-sys-color-border-default, var(--cnvs-sys-color-border-container));
+  --cnvs-button-background: var(--cnvs-sys-color-bg-default);
+}
+
+.cnvs-pill.variant-read-only:focus-visible, .cnvs-pill.variant-read-only.focus {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-default);
+}
+
+.cnvs-pill.variant-read-only:active, .cnvs-pill.variant-read-only.active {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-default);
+}
+
+.cnvs-pill.variant-read-only:disabled, .cnvs-pill.variant-read-only.disabled {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-default);
+}
+
+
+.cnvs-pill.variant-removable {
+  cursor: default;
+  overflow: revert;
+  position: relative;
+}
+
+.cnvs-pill.variant-removable:focus-visible, .cnvs-pill.variant-removable.focus {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-alt-default);
+  --cnvs-button-border: var(--cnvs-sys-color-border-input-default);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  box-shadow: none;
+}
+
+.cnvs-pill.variant-removable:hover, .cnvs-pill.variant-removable.hover {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-alt-strong, var(--cnvs-sys-color-bg-alt-strong)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
+  --cnvs-pill-count-background-color: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-muted-softer));
+}
+
+.cnvs-pill.variant-removable:active, .cnvs-pill.variant-removable.active {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-alt-strong, var(--cnvs-sys-color-bg-alt-stronger)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
+  --cnvs-pill-count-background-color: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-muted-softer));
+}
+
+.cnvs-pill.variant-removable:disabled, .cnvs-pill.variant-removable.disabled {
+  --cnvs-button-background: var(--cnvs-sys-color-bg-alt-default);
+  --cnvs-system-icon-color: currentColor;
+}
+
