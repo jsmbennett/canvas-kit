@@ -4,6 +4,8 @@ import * as React from 'react';
 import {createStyles, getCache, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
+import type {StencilProviderMap} from './stencil';
+import {StencilOverrideContext} from './stencil/stencilOverrideProvider';
 import {PartialEmotionCanvasTheme, defaultCanvasTheme, useTheme} from './theming';
 
 export interface CanvasProviderProps {
@@ -14,6 +16,13 @@ export interface CanvasProviderProps {
    * While we support theme overrides, we advise to use global theming via CSS Variables.
    */
   theme?: PartialEmotionCanvasTheme;
+  /**
+   * Optional stencil override map keyed by component displayName.
+   * When provided, Canvas components within this provider will use overridden stencils
+   * for the component displayNames specified in the map. Each map entry can choose
+   * to merge with or replace the component default stencil.
+   */
+  stencilOverrides?: StencilProviderMap;
 }
 
 const mappedKeys = {
@@ -378,11 +387,20 @@ export const useCanvasThemeToCssVars = (
 export const CanvasProvider = ({
   children,
   theme = {canvas: {}}, // default to empty theme to avoid breaking changes
+  stencilOverrides,
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const {className, ...elemProps} = useCanvasThemeToCssVars(theme, props);
   const cache = getCache();
   const rest = {...elemProps, ...props};
+  const content =
+    stencilOverrides != null ? (
+      <StencilOverrideContext.Provider value={stencilOverrides}>
+        {children}
+      </StencilOverrideContext.Provider>
+    ) : (
+      children
+    );
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme as Theme}>
@@ -390,7 +408,7 @@ export const CanvasProvider = ({
           dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
           {...(rest as React.HTMLAttributes<HTMLDivElement>)}
         >
-          {children}
+          {content}
         </div>
       </ThemeProvider>
     </CacheProvider>
