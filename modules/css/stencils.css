@@ -1,4 +1,4 @@
-@keyframes animation-36osti {
+@keyframes animation-14h4s6 {
   0%, 79%, 100% {
     opacity: 0.2;
     transform: scale(0.55);
@@ -16,7 +16,7 @@
   
 }
 
-@keyframes animation-449xw3 {
+@keyframes animation-2lr7z1 {
   from {
     transform: scale(0.85);
   }
@@ -27,7 +27,7 @@
   
 }
 
-@keyframes animation-qjblo {
+@keyframes animation-3jckd3 {
   0% {
     background: none;
   }
@@ -38,7 +38,20 @@
   
 }
 
-@keyframes animation-1fkos1 {
+@keyframes animation-jyy5t {
+  0% {
+    opacity: 1;
+    transform: translate(var(--cnvs-translate-position-x), var(--cnvs-translate-position-y));
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+  
+}
+
+@keyframes animation-2u6fyh {
   from {
     opacity: 0.4;
   }
@@ -49,26 +62,13 @@
   
 }
 
-@keyframes animation-26ppgx {
+@keyframes animation-1c9w4g {
   0%, 80%, 100% {
     transform: scale(0);
   }
   
   40% {
     transform: scale(1);
-  }
-  
-}
-
-@keyframes animation-ecsn0 {
-  0% {
-    opacity: 1;
-    transform: translate(var(--cnvs-translate-position-x), var(--cnvs-translate-position-y));
-  }
-  
-  100% {
-    opacity: 1;
-    transform: translate(0);
   }
   
 }

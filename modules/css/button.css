@@ -211,6 +211,296 @@
 }
 
 
+.cnvs-delete-button {
+  box-sizing: border-box;
+  --cnvs-button-background: var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-base));
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent)));
+}
+
+.cnvs-delete-button:focus-visible, .cnvs-delete-button.focus {
+  --cnvs-button-background: var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-base));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent)));
+  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)));
+  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
+}
+
+.cnvs-delete-button:hover, .cnvs-delete-button.hover {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-dark)) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-hover, 0) * 100%));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent)));
+}
+
+.cnvs-delete-button:active, .cnvs-delete-button.active {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-darkest)) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-pressed, 0) * 100%));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent)));
+}
+
+.cnvs-delete-button:disabled, .cnvs-delete-button.disabled {
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+  --cnvs-button-background: var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-base));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-disabled-icon, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent)));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent));
+}
+
+
+.cnvs-secondary-button {
+  box-sizing: border-box;
+  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
+  --cnvs-button-border: var(--cnvs-sys-color-border-input-default);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-strong));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
+}
+
+.cnvs-secondary-button:focus-visible, .cnvs-secondary-button.focus {
+  --cnvs-button-background: var(--cnvs-sys-color-surface-default, var(--cnvs-sys-color-bg-default));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-stronger));
+  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)));
+  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, currentColor);
+}
+
+.cnvs-secondary-button:hover, .cnvs-secondary-button.hover {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-base-palette-slate-100)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-stronger));
+  --cnvs-button-border: var(--cnvs-sys-color-border-input-hover, var(--cnvs-sys-color-border-input-strong));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, currentColor);
+}
+
+.cnvs-secondary-button:active, .cnvs-secondary-button.active {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-alt-strong)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-stronger));
+  --cnvs-button-border: var(--cnvs-sys-color-border-input-hover, var(--cnvs-sys-color-border-input-strong));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, currentColor);
+}
+
+.cnvs-secondary-button:disabled, .cnvs-secondary-button.disabled {
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-strong));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
+}
+
+
+.cnvs-secondary-button.variant-inverse {
+  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, transparent);
+  --cnvs-button-border: var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
+}
+
+.cnvs-secondary-button.variant-inverse:hover, .cnvs-secondary-button.variant-inverse.hover {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-strong)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
+  --cnvs-button-border: var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, currentColor);
+}
+
+.cnvs-secondary-button.variant-inverse:focus-visible, .cnvs-secondary-button.variant-inverse.focus {
+  --cnvs-button-background: var(--cnvs-sys-color-surface-inverse, var(--cnvs-sys-color-bg-translucent));
+  --cnvs-button-border: var(--cnvs-sys-color-border-transparent, transparent);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-contrast-default, var(--cnvs-sys-color-fg-inverse));
+  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-border-contrast-default);
+  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, currentColor);
+}
+
+.cnvs-secondary-button.variant-inverse:active, .cnvs-secondary-button.variant-inverse.active {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-stronger)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
+  --cnvs-button-border: var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, currentColor);
+}
+
+.cnvs-secondary-button.variant-inverse:disabled, .cnvs-secondary-button.variant-inverse.disabled {
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, transparent);
+  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
+}
+
+
+.cnvs-primary-button {
+  box-sizing: border-box;
+  --cnvs-button-background: var(--cnvs-brand-action-base, var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-base)));
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
+  --cnvs-button-label: var(--cnvs-brand-action-accent, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent)));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
+}
+
+.cnvs-primary-button:focus-visible, .cnvs-primary-button.focus {
+  --cnvs-button-background: var(--cnvs-brand-action-base, var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-base)));
+  --cnvs-button-label: var(--cnvs-brand-action-accent, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent)));
+  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)));
+  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, currentColor);
+}
+
+.cnvs-primary-button:hover, .cnvs-primary-button.hover {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-brand-action-base, var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-action-dark, var(--cnvs-brand-primary-dark)))) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-hover, 0) * 100%));
+  --cnvs-button-label: var(--cnvs-brand-action-accent, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent)));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, currentColor);
+}
+
+.cnvs-primary-button:active, .cnvs-primary-button.active {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-brand-action-base, var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-action-darkest, var(--cnvs-brand-primary-darkest)))) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-pressed, 0) * 100%));
+  --cnvs-button-label: var(--cnvs-brand-action-accent, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent)));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, currentColor);
+}
+
+.cnvs-primary-button:disabled, .cnvs-primary-button.disabled {
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+  --cnvs-button-background: var(--cnvs-brand-action-base, var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-base)));
+  --cnvs-button-label: var(--cnvs-brand-action-accent, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent)));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
+}
+
+
+.cnvs-primary-button.variant-inverse {
+  --cnvs-button-background: var(--cnvs-brand-action-lightest, var(--cnvs-sys-color-surface-inverse, var(--cnvs-brand-primary-lightest)));
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
+}
+
+.cnvs-primary-button.variant-inverse:hover, .cnvs-primary-button.variant-inverse.hover {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-brand-action-lightest, var(--cnvs-sys-color-surface-inverse, var(--cnvs-brand-action-lighter, var(--cnvs-brand-primary-lighter)))) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-hover, 0) * 100%));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-stronger);
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, currentColor);
+}
+
+.cnvs-primary-button.variant-inverse:focus-visible, .cnvs-primary-button.variant-inverse.focus {
+  --cnvs-button-background: var(--cnvs-brand-action-lightest, var(--cnvs-sys-color-surface-inverse, var(--cnvs-brand-action-lightest, var(--cnvs-brand-primary-lightest))));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-border-contrast-default);
+  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, currentColor);
+}
+
+.cnvs-primary-button.variant-inverse:active, .cnvs-primary-button.variant-inverse.active {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-brand-action-lightest, var(--cnvs-sys-color-surface-inverse, var(--cnvs-brand-action-light, var(--cnvs-brand-primary-light)))) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-pressed, 0) * 100%));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-stronger);
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, currentColor);
+}
+
+.cnvs-primary-button.variant-inverse:disabled, .cnvs-primary-button.variant-inverse.disabled {
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+  --cnvs-button-background: var(--cnvs-brand-action-lightest, var(--cnvs-sys-color-surface-inverse, var(--cnvs-brand-primary-lightest)));
+  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-disabled-icon, currentColor);
+}
+
+
+.cnvs-toolbar-dropdown-button {
+  box-sizing: border-box;
+  padding: 0;
+  min-width: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+  gap: 0;
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-muted-soft)));
+  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
+}
+
+.cnvs-toolbar-dropdown-button:focus-visible, .cnvs-toolbar-dropdown-button.focus {
+  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-soft)));
+  box-shadow: 0 0 0 0px var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0))),0 0 0 2px var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
+}
+
+.cnvs-toolbar-dropdown-button:hover, .cnvs-toolbar-dropdown-button.hover {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-alt-default)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-muted-soft)));
+}
+
+.cnvs-toolbar-dropdown-button:active, .cnvs-toolbar-dropdown-button.active {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-alt-stronger)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-stronger)));
+}
+
+.cnvs-toolbar-dropdown-button:disabled, .cnvs-toolbar-dropdown-button.disabled {
+  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, transparent);
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+  --cnvs-system-icon-color: var(--cnvs-button-color-prop-disabled-icon, var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-muted-soft)));
+}
+
+.cnvs-toolbar-dropdown-button [data-part="toolbar-dropdown-btn-custom-icon"] {
+  margin-inline-start: var(--cnvs-sys-padding-xxs, var(--cnvs-sys-space-x1));
+  margin-inline-end: calc(0.125rem * -1);
+}
+
+.cnvs-toolbar-dropdown-button [data-part="toolbar-dropdown-btn-arrow"] {
+  margin: 0;
+  margin-inline-end: 0.125rem;
+}
+
+
+.cnvs-toolbar-dropdown-button.should-mirror-icon [data-part="toolbar-dropdown-btn-custom-icon"] {
+  margin-inline-end: 0;
+  margin-inline-start: 0.125rem;
+}
+
+
+.cnvs-toolbar-dropdown-button.should-mirror-icon-in-r-t-l:dir(rtl) [data-part="toolbar-dropdown-btn-custom-icon"] {
+  margin-inline-end: 0;
+  margin-inline-start: 0.125rem;
+}
+
+
+.cnvs-toolbar-icon-button {
+  box-sizing: border-box;
+  min-width: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+  padding: 0;
+  height: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
+  --cnvs-button-border-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-muted-soft));
+  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
+}
+
+.cnvs-toolbar-icon-button:focus-visible, .cnvs-toolbar-icon-button.focus {
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-soft));
+  box-shadow: 0 0 0 0px var(--cnvs-sys-color-border-transparent),0 0 0 2px var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
+}
+
+.cnvs-toolbar-icon-button:hover, .cnvs-toolbar-icon-button.hover {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-alt-default)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-stronger));
+}
+
+.cnvs-toolbar-icon-button:active, .cnvs-toolbar-icon-button.active {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-alt-stronger)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-stronger));
+}
+
+.cnvs-toolbar-icon-button:disabled, .cnvs-toolbar-icon-button.disabled {
+  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
+  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, transparent);
+  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-disabled));
+}
+
+.cnvs-toolbar-icon-button[aria-pressed='true'] {
+  --cnvs-system-icon-color: var(--cnvs-sys-color-brand-fg-primary-default, var(--cnvs-brand-primary-base));
+  --cnvs-button-background: var(--cnvs-sys-color-brand-surface-primary-default, var(--cnvs-brand-primary-lightest));
+}
+
+.cnvs-toolbar-icon-button[aria-pressed='true']:focus-visible, .cnvs-toolbar-icon-button[aria-pressed='true'].focus {
+  --cnvs-system-icon-color: var(--cnvs-sys-color-brand-fg-primary-strong, var(--cnvs-brand-primary-dark));
+}
+
+.cnvs-toolbar-icon-button[aria-pressed='true']:hover, .cnvs-toolbar-icon-button[aria-pressed='true'].hover {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-brand-surface-primary-default, var(--cnvs-sys-color-bg-alt-default)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-brand-fg-primary-strong, var(--cnvs-brand-primary-dark));
+}
+
+.cnvs-toolbar-icon-button[aria-pressed='true']:active, .cnvs-toolbar-icon-button[aria-pressed='true'].active {
+  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-brand-surface-primary-default, var(--cnvs-sys-color-bg-alt-stronger)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
+  --cnvs-system-icon-color: var(--cnvs-sys-color-brand-fg-primary-strong, var(--cnvs-brand-primary-dark));
+}
+
+
 .cnvs-tertiary-button {
   box-sizing: border-box;
   padding-inline: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
@@ -375,391 +665,5 @@
 .cnvs-tertiary-button.size-extraSmall.icon-position-end {
   padding-inline-start: var(--cnvs-sys-padding-xs, var(--cnvs-sys-space-x2));
   padding-inline-end: var(--cnvs-sys-padding-xxs, var(--cnvs-sys-space-x1));
-}
-
-
-.cnvs-toolbar-icon-button {
-  box-sizing: border-box;
-  min-width: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
-  padding: 0;
-  height: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
-  --cnvs-button-border-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
-  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-muted-soft));
-  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
-}
-
-.cnvs-toolbar-icon-button:focus-visible, .cnvs-toolbar-icon-button.focus {
-  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-soft));
-  box-shadow: 0 0 0 0px var(--cnvs-sys-color-border-transparent),0 0 0 2px var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
-}
-
-.cnvs-toolbar-icon-button:hover, .cnvs-toolbar-icon-button.hover {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-alt-default)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
-  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-stronger));
-}
-
-.cnvs-toolbar-icon-button:active, .cnvs-toolbar-icon-button.active {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-alt-stronger)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
-  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-stronger));
-}
-
-.cnvs-toolbar-icon-button:disabled, .cnvs-toolbar-icon-button.disabled {
-  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
-  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, transparent);
-  --cnvs-system-icon-color: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-disabled));
-}
-
-.cnvs-toolbar-icon-button[aria-pressed='true'] {
-  --cnvs-system-icon-color: var(--cnvs-sys-color-brand-fg-primary-default, var(--cnvs-brand-primary-base));
-  --cnvs-button-background: var(--cnvs-sys-color-brand-surface-primary-default, var(--cnvs-brand-primary-lightest));
-}
-
-.cnvs-toolbar-icon-button[aria-pressed='true']:focus-visible, .cnvs-toolbar-icon-button[aria-pressed='true'].focus {
-  --cnvs-system-icon-color: var(--cnvs-sys-color-brand-fg-primary-strong, var(--cnvs-brand-primary-dark));
-}
-
-.cnvs-toolbar-icon-button[aria-pressed='true']:hover, .cnvs-toolbar-icon-button[aria-pressed='true'].hover {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-brand-surface-primary-default, var(--cnvs-sys-color-bg-alt-default)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
-  --cnvs-system-icon-color: var(--cnvs-sys-color-brand-fg-primary-strong, var(--cnvs-brand-primary-dark));
-}
-
-.cnvs-toolbar-icon-button[aria-pressed='true']:active, .cnvs-toolbar-icon-button[aria-pressed='true'].active {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-brand-surface-primary-default, var(--cnvs-sys-color-bg-alt-stronger)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
-  --cnvs-system-icon-color: var(--cnvs-sys-color-brand-fg-primary-strong, var(--cnvs-brand-primary-dark));
-}
-
-
-.cnvs-toolbar-dropdown-button {
-  box-sizing: border-box;
-  padding: 0;
-  min-width: var(--cnvs-sys-size-sm, var(--cnvs-sys-space-x8));
-  gap: 0;
-  --cnvs-button-border-radius: var(--cnvs-sys-shape-sm, var(--cnvs-sys-shape-x1));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-muted-soft)));
-  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
-}
-
-.cnvs-toolbar-dropdown-button:focus-visible, .cnvs-toolbar-dropdown-button.focus {
-  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-soft)));
-  box-shadow: 0 0 0 0px var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0))),0 0 0 2px var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
-}
-
-.cnvs-toolbar-dropdown-button:hover, .cnvs-toolbar-dropdown-button.hover {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-alt-default)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-muted-soft)));
-}
-
-.cnvs-toolbar-dropdown-button:active, .cnvs-toolbar-dropdown-button.active {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-alt-stronger)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-muted-stronger)));
-}
-
-.cnvs-toolbar-dropdown-button:disabled, .cnvs-toolbar-dropdown-button.disabled {
-  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, transparent);
-  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-disabled-icon, var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-muted-soft)));
-}
-
-.cnvs-toolbar-dropdown-button [data-part="toolbar-dropdown-btn-custom-icon"] {
-  margin-inline-start: var(--cnvs-sys-padding-xxs, var(--cnvs-sys-space-x1));
-  margin-inline-end: calc(0.125rem * -1);
-}
-
-.cnvs-toolbar-dropdown-button [data-part="toolbar-dropdown-btn-arrow"] {
-  margin: 0;
-  margin-inline-end: 0.125rem;
-}
-
-
-.cnvs-toolbar-dropdown-button.should-mirror-icon [data-part="toolbar-dropdown-btn-custom-icon"] {
-  margin-inline-end: 0;
-  margin-inline-start: 0.125rem;
-}
-
-
-.cnvs-toolbar-dropdown-button.should-mirror-icon-in-r-t-l:dir(rtl) [data-part="toolbar-dropdown-btn-custom-icon"] {
-  margin-inline-end: 0;
-  margin-inline-start: 0.125rem;
-}
-
-
-.cnvs-hyperlink {
-  box-sizing: border-box;
-  font-family: var(--cnvs-sys-font-family-default);
-  text-decoration: underline;
-  color: var(--cnvs-sys-color-fg-info-default, var(--cnvs-sys-color-text-primary-default));
-  cursor: pointer;
-  border-radius: 0.125rem;
-  padding: 0 0.125rem;
-  margin: 0 -2px;
-  transition: color 0.15s,background-color 0.15s;
-  word-break: break-word;
-}
-
-.cnvs-hyperlink:hover, .cnvs-hyperlink.hover {
-  color: var(--cnvs-sys-color-fg-info-strong, var(--cnvs-sys-color-text-primary-strong));
-  background: var(--cnvs-sys-color-surface-alt-default, var(--cnvs-sys-color-bg-alt-soft));
-}
-
-.cnvs-hyperlink:focus, .cnvs-hyperlink.focus, .cnvs-hyperlink:focus-visible {
-  box-shadow: 0 0 0 0.125rem var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
-  outline: none;
-}
-
-.cnvs-hyperlink:active, .cnvs-hyperlink.active {
-  color: var(--cnvs-sys-color-fg-info-strong, var(--cnvs-sys-color-text-primary-stronger));
-  background: var(--cnvs-sys-color-surface-alt-default, var(--cnvs-sys-color-bg-alt-default));
-}
-
-
-.cnvs-hyperlink.variant-inverse {
-  color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-text-inverse));
-}
-
-.cnvs-hyperlink.variant-inverse:hover, .cnvs-hyperlink.variant-inverse.hover {
-  color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-text-inverse));
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.cnvs-hyperlink.variant-inverse:focus, .cnvs-hyperlink.variant-inverse.focus, .cnvs-hyperlink.variant-inverse:focus-visible {
-  box-shadow: 0 0 0 0.125rem var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-text-inverse));
-}
-
-.cnvs-hyperlink.variant-inverse:active, .cnvs-hyperlink.variant-inverse.active {
-  color: var(--cnvs-sys-color-brand-fg-primary-strong, var(--cnvs-sys-color-text-primary-stronger));
-  background: var(--cnvs-sys-color-surface-navigation, var(--cnvs-sys-color-bg-alt-soft));
-}
-
-
-.cnvs-hyperlink.variant-standalone {
-  text-decoration: none;
-}
-
-
-.cnvs-hyperlink.variant-standalone-inverse {
-  text-decoration: none;
-  color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-text-inverse));
-}
-
-.cnvs-hyperlink.variant-standalone-inverse:hover, .cnvs-hyperlink.variant-standalone-inverse.hover {
-  color: var(--cnvs-sys-color-fg-inverse, var(--cnvs-sys-color-text-inverse));
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.cnvs-hyperlink.variant-standalone-inverse:focus, .cnvs-hyperlink.variant-standalone-inverse.focus, .cnvs-hyperlink.variant-standalone-inverse:focus-visible {
-  box-shadow: 0 0 0 0.125rem var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-text-inverse));
-}
-
-.cnvs-hyperlink.variant-standalone-inverse:active, .cnvs-hyperlink.variant-standalone-inverse.active {
-  color: var(--cnvs-sys-color-brand-fg-primary-strong, var(--cnvs-sys-color-text-primary-stronger));
-  background: var(--cnvs-sys-color-surface-navigation, var(--cnvs-sys-color-bg-alt-soft));
-}
-
-
-.cnvs-external-hyperlink {
-  box-sizing: border-box;
-}
-
-.cnvs-external-hyperlink [data-part="external-hyperlink-icon"] {
-  vertical-align: text-top;
-  --cnvs-system-icon-color: currentColor;
-  --cnvs-svg-size: 1em;
-  width: calc(1em - 0.0625rem);
-  min-width: calc(var(--cnvs-sys-size-xxxs, var(--cnvs-sys-space-x4)) - 0.0625rem);
-  margin-inline-start: calc(var(--cnvs-sys-space-x1) - 0.125rem);
-}
-
-.cnvs-external-hyperlink [data-part="external-hyperlink-icon"]>svg {
-  min-width: var(--cnvs-sys-size-xxxs, var(--cnvs-sys-space-x4));
-  min-height: var(--cnvs-sys-size-xxxs, var(--cnvs-sys-space-x4));
-}
-
-.cnvs-external-hyperlink [data-part="external-hyperlink-icon"] :dir(rtl) {
-  transform: rotate(270deg);
-}
-
-
-.cnvs-primary-button {
-  box-sizing: border-box;
-  --cnvs-button-background: var(--cnvs-brand-action-base, var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-base)));
-  --cnvs-button-border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
-  --cnvs-button-label: var(--cnvs-brand-action-accent, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent)));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
-}
-
-.cnvs-primary-button:focus-visible, .cnvs-primary-button.focus {
-  --cnvs-button-background: var(--cnvs-brand-action-base, var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-base)));
-  --cnvs-button-label: var(--cnvs-brand-action-accent, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent)));
-  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)));
-  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, currentColor);
-}
-
-.cnvs-primary-button:hover, .cnvs-primary-button.hover {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-brand-action-base, var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-action-dark, var(--cnvs-brand-primary-dark)))) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-hover, 0) * 100%));
-  --cnvs-button-label: var(--cnvs-brand-action-accent, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent)));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, currentColor);
-}
-
-.cnvs-primary-button:active, .cnvs-primary-button.active {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-brand-action-base, var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-action-darkest, var(--cnvs-brand-primary-darkest)))) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-pressed, 0) * 100%));
-  --cnvs-button-label: var(--cnvs-brand-action-accent, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent)));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, currentColor);
-}
-
-.cnvs-primary-button:disabled, .cnvs-primary-button.disabled {
-  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
-  --cnvs-button-background: var(--cnvs-brand-action-base, var(--cnvs-sys-color-brand-accent-primary, var(--cnvs-brand-primary-base)));
-  --cnvs-button-label: var(--cnvs-brand-action-accent, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-primary-accent)));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
-}
-
-
-.cnvs-primary-button.variant-inverse {
-  --cnvs-button-background: var(--cnvs-brand-action-lightest, var(--cnvs-sys-color-surface-inverse, var(--cnvs-brand-primary-lightest)));
-  --cnvs-button-border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
-}
-
-.cnvs-primary-button.variant-inverse:hover, .cnvs-primary-button.variant-inverse.hover {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-brand-action-lightest, var(--cnvs-sys-color-surface-inverse, var(--cnvs-brand-action-lighter, var(--cnvs-brand-primary-lighter)))) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-hover, 0) * 100%));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-stronger);
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, currentColor);
-}
-
-.cnvs-primary-button.variant-inverse:focus-visible, .cnvs-primary-button.variant-inverse.focus {
-  --cnvs-button-background: var(--cnvs-brand-action-lightest, var(--cnvs-sys-color-surface-inverse, var(--cnvs-brand-action-lightest, var(--cnvs-brand-primary-lightest))));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
-  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-border-contrast-default);
-  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, currentColor);
-}
-
-.cnvs-primary-button.variant-inverse:active, .cnvs-primary-button.variant-inverse.active {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-brand-action-lightest, var(--cnvs-sys-color-surface-inverse, var(--cnvs-brand-action-light, var(--cnvs-brand-primary-light)))) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-pressed, 0) * 100%));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-stronger);
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, currentColor);
-}
-
-.cnvs-primary-button.variant-inverse:disabled, .cnvs-primary-button.variant-inverse.disabled {
-  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
-  --cnvs-button-background: var(--cnvs-brand-action-lightest, var(--cnvs-sys-color-surface-inverse, var(--cnvs-brand-primary-lightest)));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-strong);
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-disabled-icon, currentColor);
-}
-
-
-.cnvs-secondary-button {
-  box-sizing: border-box;
-  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
-  --cnvs-button-border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
-  --cnvs-button-border: var(--cnvs-sys-color-border-input-default);
-  --cnvs-button-label: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-strong));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
-}
-
-.cnvs-secondary-button:focus-visible, .cnvs-secondary-button.focus {
-  --cnvs-button-background: var(--cnvs-sys-color-surface-default, var(--cnvs-sys-color-bg-default));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-stronger));
-  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)));
-  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, currentColor);
-}
-
-.cnvs-secondary-button:hover, .cnvs-secondary-button.hover {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-base-palette-slate-100)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-stronger));
-  --cnvs-button-border: var(--cnvs-sys-color-border-input-hover, var(--cnvs-sys-color-border-input-strong));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, currentColor);
-}
-
-.cnvs-secondary-button:active, .cnvs-secondary-button.active {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-alt-strong)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-strong, var(--cnvs-sys-color-fg-stronger));
-  --cnvs-button-border: var(--cnvs-sys-color-border-input-hover, var(--cnvs-sys-color-border-input-strong));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, currentColor);
-}
-
-.cnvs-secondary-button:disabled, .cnvs-secondary-button.disabled {
-  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
-  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-default));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-default, var(--cnvs-sys-color-fg-strong));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
-}
-
-
-.cnvs-secondary-button.variant-inverse {
-  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, transparent);
-  --cnvs-button-border: var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
-}
-
-.cnvs-secondary-button.variant-inverse:hover, .cnvs-secondary-button.variant-inverse.hover {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-strong)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-hover, 0) * 100%));
-  --cnvs-button-border: var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, currentColor);
-}
-
-.cnvs-secondary-button.variant-inverse:focus-visible, .cnvs-secondary-button.variant-inverse.focus {
-  --cnvs-button-background: var(--cnvs-sys-color-surface-inverse, var(--cnvs-sys-color-bg-translucent));
-  --cnvs-button-border: var(--cnvs-sys-color-border-transparent, transparent);
-  --cnvs-button-label: var(--cnvs-sys-color-fg-contrast-default, var(--cnvs-sys-color-fg-inverse));
-  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-border-contrast-default);
-  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, currentColor);
-}
-
-.cnvs-secondary-button.variant-inverse:active, .cnvs-secondary-button.variant-inverse.active {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-surface-transparent, var(--cnvs-sys-color-bg-transparent-stronger)) , var(--cnvs-sys-color-surface-overlay-mixin, black) calc(var(--cnvs-sys-opacity-surface-pressed, 0) * 100%));
-  --cnvs-button-border: var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, currentColor);
-}
-
-.cnvs-secondary-button.variant-inverse:disabled, .cnvs-secondary-button.variant-inverse.disabled {
-  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
-  --cnvs-button-background: var(--cnvs-sys-color-surface-transparent, transparent);
-  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse);
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, currentColor);
-}
-
-
-.cnvs-delete-button {
-  box-sizing: border-box;
-  --cnvs-button-background: var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-base));
-  --cnvs-button-border-radius: var(--cnvs-sys-shape-full, var(--cnvs-sys-shape-round));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-default-icon, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent)));
-}
-
-.cnvs-delete-button:focus-visible, .cnvs-delete-button.focus {
-  --cnvs-button-background: var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-base));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-focus-icon, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent)));
-  --cnvs-button-box-shadow-inner: var(--cnvs-sys-color-focus-inverse, var(--cnvs-sys-color-border-inverse-default, var(--cnvs-base-palette-neutral-0)));
-  --cnvs-button-box-shadow-outer: var(--cnvs-sys-color-brand-focus-primary, var(--cnvs-brand-common-focus-outline));
-}
-
-.cnvs-delete-button:hover, .cnvs-delete-button.hover {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-dark)) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-hover, 0) * 100%));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-hover-icon, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent)));
-}
-
-.cnvs-delete-button:active, .cnvs-delete-button.active {
-  --cnvs-button-background: color-mix(in srgb, var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-darkest)) , var(--cnvs-sys-color-accent-overlay-mixin, black) calc(var(--cnvs-sys-opacity-accent-pressed, 0) * 100%));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-active-icon, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent)));
-}
-
-.cnvs-delete-button:disabled, .cnvs-delete-button.disabled {
-  --cnvs-button-opacity: var(--cnvs-sys-opacity-disabled);
-  --cnvs-button-background: var(--cnvs-sys-color-brand-accent-critical, var(--cnvs-brand-error-base));
-  --cnvs-system-icon-color: var(--cnvs-button-color-prop-disabled-icon, var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent)));
-  --cnvs-button-label: var(--cnvs-sys-color-fg-inverse, var(--cnvs-brand-error-accent));
 }
 

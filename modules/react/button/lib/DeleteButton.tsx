@@ -96,6 +96,11 @@ const deleteButtonStencil = createStencil({
       [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
     },
   },
+  modifiers: {
+    grow: {
+      true: {},
+    },
+  },
 });
 
 /**
