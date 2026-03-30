@@ -1,4 +1,8 @@
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -25,13 +29,14 @@ export const BannerIcon = createSubcomponent('span')({
   elemPropsHook: useBannerIcon,
 })<BannerIconProps>((elemProps, Element, model) => {
   const {icon, ...iconButtonProps} = elemProps;
+  const resolved = useResolvedStencil('Banner.Icon', bannerIconStencil, undefined);
 
   return (
     <SystemIcon
       as={Element}
       data-part={model.state.hasError ? 'exclamation-circle-icon' : 'exclamation-triangle-icon'}
       icon={icon!}
-      {...handleCsProp(iconButtonProps, bannerIconStencil())}
+      {...handleCsProp(iconButtonProps, resolved)}
     />
   );
 });

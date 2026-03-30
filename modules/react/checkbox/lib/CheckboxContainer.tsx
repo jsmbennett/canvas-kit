@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {LabelText} from '@workday/canvas-kit-react/text';
 import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -44,8 +44,9 @@ const checkboxContainerStencil = createStencil({
 export const CheckboxContainer = createComponent('div')({
   displayName: 'CheckboxContainer',
   Component: ({children, disabled, id, label, variant}: CheckboxContainerProps) => {
+    const resolved = useResolvedStencil('CheckboxContainer', checkboxContainerStencil, undefined);
     return (
-      <div {...checkboxContainerStencil()}>
+      <div {...resolved}>
         <div>{children}</div>
         {label && (
           <LabelText

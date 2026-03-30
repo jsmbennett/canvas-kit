@@ -1,7 +1,11 @@
 import * as React from 'react';
 
 import {useListRenderItems, useOverflowListMeasure} from '@workday/canvas-kit-react/collection';
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -44,9 +48,10 @@ export const BreadcrumbsList = createSubcomponent('ul')({
 })<BreadcrumbsListProps>(({overflowButton, children, ...elemProps}, Element, model) => {
   const items = useListRenderItems(model, children) as [];
   const splitIndex = items.length - 2;
+  const resolved = useResolvedStencil('Breadcrumbs.List', breadcrumbsListStencil, undefined);
 
   return (
-    <Element role="list" {...handleCsProp(elemProps, breadcrumbsListStencil())}>
+    <Element role="list" {...handleCsProp(elemProps, resolved)}>
       {items.length ? items.slice(0, splitIndex) : items}
       {overflowButton}
       {items.length ? items.slice(splitIndex, items.length) : null}

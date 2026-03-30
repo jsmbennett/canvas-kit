@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {
   CSProps,
   createStencil,
@@ -115,9 +115,10 @@ export const CountBadge = createComponent('span')({
     Element
   ) => {
     const formattedCount = count < limit ? `${count}` : `${limit - 1}+`;
+    const resolved = useResolvedStencil('CountBadge', countBadgeStencil, {variant, emphasis});
 
     return (
-      <Element ref={ref} {...handleCsProp(elemProps, [countBadgeStencil({variant, emphasis})])}>
+      <Element ref={ref} {...handleCsProp(elemProps, [resolved])}>
         {formattedCount}
       </Element>
     );

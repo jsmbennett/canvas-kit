@@ -9,6 +9,7 @@ import {
   createSubcomponent,
   dispatchInputEvent,
   useForkRef,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
@@ -322,5 +323,6 @@ export const InputGroup = createContainer('div')({
     return child;
   });
 
-  return <Element {...mergeStyles(elemProps, inputGroupStencil())}>{mappedChildren}</Element>;
+  const resolved = useResolvedStencil('InputGroup', inputGroupStencil, undefined);
+  return <Element {...mergeStyles(elemProps, resolved)}>{mappedChildren}</Element>;
 });

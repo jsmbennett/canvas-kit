@@ -1,4 +1,4 @@
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {createStencil} from '@workday/canvas-kit-styling';
@@ -21,9 +21,10 @@ export const pillLabelStencil = createStencil({
 export const PillLabel = createSubcomponent('span')({
   modelHook: usePillModel,
 })<PillLabelProps>(({tooltipProps, children, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil('Pill.Label', pillLabelStencil, undefined);
   return (
     <OverflowTooltip {...tooltipProps}>
-      <Element id={`label-${model.state.id}`} {...mergeStyles(elemProps, pillLabelStencil())}>
+      <Element id={`label-${model.state.id}`} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     </OverflowTooltip>

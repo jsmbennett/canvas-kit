@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -27,8 +27,9 @@ export const expandableTitleStencil = createStencil({
 export const ExpandableTitle = createComponent('div')({
   displayName: 'Expandable.Title',
   Component: ({children, ...elemProps}: ExpandableTitleProps, ref, Element) => {
+    const resolved = useResolvedStencil('Expandable.Title', expandableTitleStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, expandableTitleStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

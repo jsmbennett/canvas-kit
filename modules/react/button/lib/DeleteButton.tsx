@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {colorSpace, createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
@@ -96,6 +96,11 @@ const deleteButtonStencil = createStencil({
       [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
     },
   },
+  modifiers: {
+    grow: {
+      true: {},
+    },
+  },
 });
 
 /**
@@ -110,6 +115,12 @@ export const DeleteButton = createComponent('button')({
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil('DeleteButton', deleteButtonStencil, {
+      size,
+      iconPosition,
+      grow,
+    });
+
     return (
       <Button
         as={Element}
@@ -117,7 +128,7 @@ export const DeleteButton = createComponent('button')({
         size={size}
         grow={grow}
         iconPosition={iconPosition}
-        cs={[deleteButtonStencil({size, iconPosition}), cs]}
+        cs={[resolved, cs]}
         {...elemProps}
       >
         {children}

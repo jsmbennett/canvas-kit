@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, createVars} from '@workday/canvas-kit-styling';
 
@@ -28,14 +28,12 @@ export const TableRow = createComponent('tr')({
      * This is the calculated amount of valid React children
      */
     const childrenArray = validChildren(children).length;
+    const resolved = useResolvedStencil('Table.Row', tableRowStencil, undefined);
 
     return (
       <Element
         ref={ref}
-        {...mergeStyles(elemProps, [
-          tableRowStencil(),
-          {[tableRowChildrenVars.cellNumber]: childrenArray},
-        ])}
+        {...mergeStyles(elemProps, [resolved, {[tableRowChildrenVars.cellNumber]: childrenArray}])}
       >
         {children}
       </Element>

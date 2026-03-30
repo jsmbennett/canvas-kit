@@ -1,7 +1,11 @@
 import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -24,8 +28,9 @@ export const PopupHeading = createSubcomponent('h2')({
   modelHook: usePopupModel,
   elemPropsHook: usePopupHeading,
 })<PopupHeadingProps>(({children, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil('Popup.Heading', popupHeadingStencil, undefined);
   return (
-    <Card.Heading as={Element} {...mergeStyles(elemProps, popupHeadingStencil())}>
+    <Card.Heading as={Element} {...mergeStyles(elemProps, resolved)}>
       {children}
     </Card.Heading>
   );

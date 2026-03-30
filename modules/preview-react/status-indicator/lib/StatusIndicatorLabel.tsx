@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {TextProps, textStencil} from '@workday/canvas-kit-react/text';
 import {createStencil} from '@workday/canvas-kit-styling';
@@ -22,8 +22,11 @@ const statusIndicatorLabelStencil = createStencil({
 export const StatusIndicatorLabel = createComponent('span')({
   displayName: 'StatusIndicator.Label',
   Component: ({children, typeLevel, ...elemProps}: StatusIndicatorLabelProps, ref, Element) => {
+    const resolved = useResolvedStencil('StatusIndicator.Label', statusIndicatorLabelStencil, {
+      typeLevel,
+    });
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, statusIndicatorLabelStencil({typeLevel}))}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

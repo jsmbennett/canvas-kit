@@ -18,6 +18,7 @@ import {
   focusRing,
   slugify,
   useModalityType,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -211,8 +212,9 @@ const tabItemStencil = createStencil({
 export const StyledTabItem = createComponent('button')<TabsItemProps>({
   displayName: 'StyledTabItem',
   Component: ({children, ...elemProps}, ref, Element) => {
+    const resolved = useResolvedStencil('StyledTabItem', tabItemStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tabItemStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 
@@ -50,7 +50,8 @@ export const Subtext = createComponent('p')({
   displayName: 'Subtext',
   Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `subtext.${size}` as TextProps['typeLevel'];
-    return <Element ref={ref} {...mergeStyles(elemProps, subtextStencil({typeLevel, variant}))} />;
+    const resolved = useResolvedStencil('Subtext', subtextStencil, {typeLevel, variant});
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });
 
@@ -87,7 +88,8 @@ export const BodyText = createComponent('p')({
   displayName: 'BodyText',
   Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `body.${size}` as TextProps['typeLevel'];
-    return <Element ref={ref} {...mergeStyles(elemProps, bodyTextStencil({typeLevel, variant}))} />;
+    const resolved = useResolvedStencil('BodyText', bodyTextStencil, {typeLevel, variant});
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });
 
@@ -124,7 +126,8 @@ export const Heading = createComponent('h2')({
   displayName: 'Heading',
   Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `heading.${size}` as TextProps['typeLevel'];
-    return <Element ref={ref} {...mergeStyles(elemProps, headingStencil({typeLevel, variant}))} />;
+    const resolved = useResolvedStencil('Heading', headingStencil, {typeLevel, variant});
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });
 
@@ -161,6 +164,7 @@ export const Title = createComponent('h1')({
   displayName: 'Title',
   Component: ({size, variant, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `title.${size}` as TextProps['typeLevel'];
-    return <Element ref={ref} {...mergeStyles(elemProps, titleStencil({typeLevel, variant}))} />;
+    const resolved = useResolvedStencil('Title', titleStencil, {typeLevel, variant});
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });

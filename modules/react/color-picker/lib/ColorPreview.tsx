@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -28,15 +28,18 @@ export const colorPreviewStencil = createStencil({
 
 export const ColorPreview = createComponent('input')({
   displayName: 'ColorPreview',
-  Component: ({id, value, ...elemProps}: ColorPreviewProps, ref, Element) => (
-    <ColorInput
-      ref={ref}
-      as={Element}
-      id={id}
-      value={value}
-      readOnly={true}
-      placeholder=""
-      {...handleCsProp(elemProps, colorPreviewStencil())}
-    />
-  ),
+  Component: ({id, value, ...elemProps}: ColorPreviewProps, ref, Element) => {
+    const resolved = useResolvedStencil('ColorPreview', colorPreviewStencil, undefined);
+    return (
+      <ColorInput
+        ref={ref}
+        as={Element}
+        id={id}
+        value={value}
+        readOnly={true}
+        placeholder=""
+        {...handleCsProp(elemProps, resolved)}
+      />
+    );
+  },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -72,6 +72,7 @@ export const Expandable = createContainer('div')({
      */
     Content: ExpandableContent,
   },
-})<ExpandableProps>(({children, ...elementProps}, Element) => (
-  <Element {...mergeStyles(elementProps, expandableContainerStencil())}>{children}</Element>
-));
+})<ExpandableProps>(({children, ...elementProps}, Element) => {
+  const resolved = useResolvedStencil('Expandable', expandableContainerStencil, undefined);
+  return <Element {...mergeStyles(elementProps, resolved)}>{children}</Element>;
+});

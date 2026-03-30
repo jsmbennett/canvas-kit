@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 
@@ -33,9 +37,8 @@ export const BannerActionText = createSubcomponent('span')({
   modelHook: useBannerModel,
   elemPropsHook: useBannerActionText,
 })<BannerActionTextProps>(({children = 'View All', ...elemProps}, Element, model) => {
-  return (
-    <Element {...mergeStyles(elemProps, actionBarTextStencil({isSticky: model.state.isSticky}))}>
-      {children}
-    </Element>
-  );
+  const resolved = useResolvedStencil('Banner.ActionTextText', actionBarTextStencil, {
+    isSticky: model.state.isSticky,
+  });
+  return <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>;
 });

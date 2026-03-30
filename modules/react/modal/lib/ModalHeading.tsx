@@ -1,4 +1,8 @@
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
@@ -22,5 +26,6 @@ export const ModalHeading = createSubcomponent('h2')({
   modelHook: useModalModel,
   elemPropsHook: useModalHeading,
 })<ModalHeadingProps>((elemProps, Element) => {
-  return <Popup.Heading as={Element} {...mergeStyles(elemProps, modalHeadingStencil())} />;
+  const resolved = useResolvedStencil('Modal.Heading', modalHeadingStencil, undefined);
+  return <Popup.Heading as={Element} {...mergeStyles(elemProps, resolved)} />;
 });

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {colorSpace, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
@@ -150,6 +150,7 @@ export const ToolbarIconButton = createComponent('button')({
     Element
   ) => {
     const isInitialMount = React.useRef(true);
+    const resolved = useResolvedStencil('ToolbarIconButton', toolbarIconButtonStencil, undefined);
 
     // Only call onToggleChange on update - not on first mount
     React.useEffect(() => {
@@ -167,7 +168,7 @@ export const ToolbarIconButton = createComponent('button')({
         size="small"
         fillIcon={toggled}
         aria-pressed={toggled}
-        {...handleCsProp(elemProps, toolbarIconButtonStencil())}
+        {...handleCsProp(elemProps, resolved)}
       >
         {icon ? (
           <BaseButton.Icon

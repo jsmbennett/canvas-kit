@@ -7,6 +7,7 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
@@ -51,11 +52,7 @@ export const multiSelectInputStencil = createStencil({
       fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
       fontWeight: system.fontWeight.normal,
       lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(
-        system.color.surface.transparent,
-        system.color.bg.transparent.default
-      ),
+      backgroundColor: 'transparent',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       borderRadius: cssVar(system.shape.md, system.shape.x1),
 
@@ -100,6 +97,7 @@ export const multiSelectInputStencil = createStencil({
       bottom: 0,
       left: 0,
       right: 0,
+      backgroundColor: 'transparent',
       opacity: system.opacity.zero,
       cursor: 'default',
       pointerEvents: 'none',
@@ -240,8 +238,10 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
     },
     Element
   ) => {
+    const resolved = useResolvedStencil('MultiSelect.Input', multiSelectInputStencil, {error});
+
     return (
-      <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({error}))}>
+      <div {...handleCsProp({className, cs, style}, resolved)}>
         <InputGroup>
           <InputGroup.Input data-part="form-input" {...formInputProps} />
           <InputGroup.Input
@@ -282,8 +282,12 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
     },
     Element
   ) => {
+    const resolved = useResolvedStencil('MultiSelect.SearchInput', multiSelectInputStencil, {
+      error,
+    });
+
     return (
-      <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({}))}>
+      <div {...handleCsProp({className, cs, style}, resolved)}>
         <InputGroup>
           <InputGroup.InnerStart pointerEvents="none" width={system.space.x8}>
             <SystemIcon icon={searchIcon} size={system.space.x4} />

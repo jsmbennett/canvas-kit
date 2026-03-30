@@ -4,7 +4,11 @@ import {
   useListItemRegister,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
-import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  composeHooks,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
@@ -67,8 +71,9 @@ export const BreadcrumbsItem = createSubcomponent('li')({
     Link: BreadcrumbsLink,
   },
 })<BreadcrumbsItemProps>(({children, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil('Breadcrumbs.Item', breadcrumbsItemStencil, undefined);
   return (
-    <Element {...mergeStyles(elemProps, breadcrumbsItemStencil())}>
+    <Element {...mergeStyles(elemProps, resolved)}>
       {children}
       <SystemIcon
         icon={chevronRightSmallIcon}

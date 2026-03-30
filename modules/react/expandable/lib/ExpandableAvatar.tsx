@@ -1,5 +1,5 @@
 import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-react/avatar';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 
@@ -23,6 +23,7 @@ export const ExpandableAvatar = createComponent('div')({
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil('Expandable.Avatar', expandableAvatarStencil);
     return (
       <Avatar
         as={Element}
@@ -30,7 +31,7 @@ export const ExpandableAvatar = createComponent('div')({
         isDecorative={isDecorative}
         ref={ref}
         size="extraSmall"
-        {...mergeStyles(elemProps, expandableAvatarStencil())}
+        {...mergeStyles(elemProps, resolved)}
       />
     );
   },

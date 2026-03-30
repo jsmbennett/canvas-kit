@@ -6,6 +6,7 @@ import {
   createElemPropsHook,
   createSubModelElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -49,12 +50,9 @@ export const TabsOverflowButton = createSubcomponent('button')({
   modelHook: useTabsModel,
   elemPropsHook: useTabsOverflowButton,
 })<OverflowButtonProps>(({children, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil('Tabs.OverflowButton', tabsOverflowButtonStencil, undefined);
   return (
-    <StyledTabItem
-      type="button"
-      as={Element}
-      {...mergeStyles(elemProps, tabsOverflowButtonStencil())}
-    >
+    <StyledTabItem type="button" as={Element} {...mergeStyles(elemProps, resolved)}>
       <span>{children}</span>
       <SystemIcon data-part="tabs-overflow-button-icon" icon={chevronDownSmallIcon} />
     </StyledTabItem>

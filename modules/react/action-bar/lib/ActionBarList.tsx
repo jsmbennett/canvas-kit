@@ -1,7 +1,11 @@
 import * as React from 'react';
 
 import {useListRenderItems, useOverflowListMeasure} from '@workday/canvas-kit-react/collection';
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -63,8 +67,9 @@ export const ActionBarList = createSubcomponent('div')({
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarList,
 })<ActionBarListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil('ActionBar.List', actionBarListStencil, undefined);
   return (
-    <Element {...mergeStyles(elemProps, actionBarListStencil())}>
+    <Element {...mergeStyles(elemProps, resolved)}>
       {useListRenderItems(model, children)}
       {overflowButton}
     </Element>

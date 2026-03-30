@@ -4,8 +4,9 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
-import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
+import {StyledMenuItem, menuItemStencil} from '@workday/canvas-kit-react/menu';
 import {handleCsProp} from '@workday/canvas-kit-styling';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
@@ -26,8 +27,10 @@ export const MultiSelectItem = createSubcomponent('li')({
     Icon: Combobox.Menu.Item.Icon,
   },
 })<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element, _model) => {
+  const resolved = useResolvedStencil('MultiSelect.Item', menuItemStencil, undefined);
+
   return (
-    <StyledMenuItem as={Element} {...handleCsProp(elemProps)}>
+    <StyledMenuItem as={Element} {...handleCsProp(elemProps, resolved)}>
       {children}
     </StyledMenuItem>
   );

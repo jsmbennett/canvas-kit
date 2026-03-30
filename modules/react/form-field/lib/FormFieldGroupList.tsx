@@ -1,4 +1,4 @@
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {
   CSProps,
@@ -52,11 +52,11 @@ export const FormFieldGroupList = createSubcomponent('div')({
   displayName: 'FormFieldGroup.List',
   modelHook: useFormFieldModel,
 })<FormFieldGroupListProps>(({children, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil('FormFieldGroup.List', formFieldGroupListStencil, {
+    error: model.state.error,
+  });
   return (
-    <Element
-      data-width="ck-formfield-width"
-      {...handleCsProp(elemProps, formFieldGroupListStencil({error: model.state.error}))}
-    >
+    <Element data-width="ck-formfield-width" {...handleCsProp(elemProps, resolved)}>
       {children}
     </Element>
   );

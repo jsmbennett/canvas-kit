@@ -1,4 +1,8 @@
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Subtext} from '@workday/canvas-kit-react/text';
 import {createStencil} from '@workday/canvas-kit-styling';
@@ -17,13 +21,9 @@ export const toastMessageStencil = createStencil({
 export const ToastMessage = createSubcomponent('p')({
   modelHook: useToastModel,
 })<ToastMessageProps>(({children, ...elemProps}, Element, model) => {
+  const resolved = useResolvedStencil('Toast.Message', toastMessageStencil, undefined);
   return (
-    <Subtext
-      size="large"
-      id={model.state.id}
-      as={Element}
-      {...mergeStyles(elemProps, toastMessageStencil())}
-    >
+    <Subtext size="large" id={model.state.id} as={Element} {...mergeStyles(elemProps, resolved)}>
       {children}
     </Subtext>
   );

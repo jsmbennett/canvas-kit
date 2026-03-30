@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-import {ErrorType, createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {
+  ErrorType,
+  createComponent,
+  focusRing,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {
   CSProps,
   calc,
@@ -242,13 +247,18 @@ export const CheckboxInput = createComponent('input')({
   displayName: 'CheckboxInput',
   Component: ({variant, error, indeterminate, ...elemProps}: CheckboxProps, ref, Element) => {
     const {checked, disabled} = elemProps;
+    const resolved = useResolvedStencil('CheckboxInput', checkboxInputStencil, {
+      variant,
+      disabled,
+      error: !!error,
+    });
 
     return (
       <Element
         type="checkbox"
         ref={ref}
         aria-checked={indeterminate ? 'mixed' : checked}
-        {...handleCsProp(elemProps, checkboxInputStencil({variant, disabled, error: !!error}))}
+        {...handleCsProp(elemProps, resolved)}
       />
     );
   },

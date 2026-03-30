@@ -5,6 +5,7 @@ import {
   createElemPropsHook,
   createSubcomponent,
   subModelHook,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {FlexProps} from '@workday/canvas-kit-react/layout';
@@ -65,8 +66,13 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsOverflowButton,
 })<BreadcrumbsOverflowButtonProps>(({style, ...elemProps}, Element) => {
+  const resolved = useResolvedStencil(
+    'Breadcrumbs.OverflowButton',
+    breadcrumbsOverflowButtonStencil,
+    undefined
+  );
   return (
-    <li {...breadcrumbsOverflowButtonStencil()} {...style}>
+    <li {...resolved} {...style}>
       <TertiaryButton
         as={Element}
         icon={relatedActionsIcon}

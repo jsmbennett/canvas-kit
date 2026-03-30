@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {FlexProps, GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -66,8 +66,9 @@ export const tableHeaderStencil = createStencil({
 export const TableBody = createComponent('tbody')({
   displayName: 'Table.Body',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+    const resolved = useResolvedStencil('Table.Body', tableBodyStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableBodyStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );
@@ -77,8 +78,9 @@ export const TableBody = createComponent('tbody')({
 export const TableCaption = createComponent('caption')({
   displayName: 'Table.Caption',
   Component: ({children, ...elemProps}: FlexProps, ref, Element) => {
+    const resolved = useResolvedStencil('Table.Caption', tableCaptionStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableCaptionStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );
@@ -88,8 +90,9 @@ export const TableCaption = createComponent('caption')({
 export const TableCell = createComponent('td')({
   displayName: 'Table.Cell',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+    const resolved = useResolvedStencil('Table.Cell', tableCellStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableCellStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );
@@ -99,8 +102,9 @@ export const TableCell = createComponent('td')({
 export const TableFooter = createComponent('tfoot')({
   displayName: 'Table.Footer',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+    const resolved = useResolvedStencil('Table.Footer', tableFooterStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableFooterStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );
@@ -110,8 +114,9 @@ export const TableFooter = createComponent('tfoot')({
 export const TableHead = createComponent('thead')({
   displayName: 'Table.Head',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+    const resolved = useResolvedStencil('Table.Head', tableHeadStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableHeadStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );
@@ -121,8 +126,9 @@ export const TableHead = createComponent('thead')({
 export const TableHeader = createComponent('th')({
   displayName: 'Table.Header',
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
+    const resolved = useResolvedStencil('Table.Header', tableHeaderStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableHeaderStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );
@@ -175,8 +181,9 @@ export default function App() {
 export const Table = createComponent('table')({
   displayName: 'Table',
   Component: ({children, ...elemProps}: TableProps, ref, Element) => {
+    const resolved = useResolvedStencil('Table', tableStencil, undefined);
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tableStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

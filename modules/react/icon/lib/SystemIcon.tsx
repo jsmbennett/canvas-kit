@@ -1,6 +1,6 @@
 import {CSSObject} from '@emotion/styled';
 
-import {createComponent, getColor} from '@workday/canvas-kit-react/common';
+import {createComponent, getColor, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {iconColors} from '@workday/canvas-kit-react/tokens';
 import {createStencil, createVars, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -221,6 +221,13 @@ export const SystemIcon = createComponent('span')({
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil('SystemIcon', systemIconStencil, {
+      size: typeof size === 'number' ? px2rem(size) : size,
+      color: transformColorNameToToken(fill || color),
+      accentColor: transformColorNameToToken(accent || color),
+      backgroundColor: transformColorNameToToken(background),
+    });
+
     return (
       <Svg
         as={Element}
@@ -228,12 +235,7 @@ export const SystemIcon = createComponent('span')({
         type={CanvasIconTypes.System}
         ref={ref}
         {...handleCsProp(elemProps, [
-          systemIconStencil({
-            size: typeof size === 'number' ? px2rem(size) : size,
-            color: transformColorNameToToken(fill || color),
-            accentColor: transformColorNameToToken(accent || color),
-            backgroundColor: transformColorNameToToken(background),
-          }),
+          resolved,
           {
             [deprecatedSystemIconVars.colorHover]:
               colorHover && transformColorNameToToken(colorHover),

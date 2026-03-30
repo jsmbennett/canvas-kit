@@ -1,6 +1,6 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 
-import {BaseButton, ButtonContainerProps} from './BaseButton';
+import {BaseButton, ButtonContainerProps, buttonStencil} from './BaseButton';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
@@ -42,6 +42,7 @@ export const Button = createComponent('button')({
       shouldMirrorIcon,
       shouldMirrorIconInRTL,
       size = 'medium',
+      grow,
       ...elemProps
     }: ButtonProps,
     ref,
@@ -54,15 +55,22 @@ export const Button = createComponent('button')({
           ? 'start'
           : 'only'
         : undefined;
+    const resolved = useResolvedStencil('Button', buttonStencil, {
+      size,
+      iconPosition: baseIconPosition,
+      grow,
+    });
 
     return (
       <BaseButton
         as={Element}
         ref={ref}
         size={size}
+        grow={grow}
         icon={icon}
         colors={colors}
         iconPosition={baseIconPosition}
+        cs={[resolved, elemProps.cs]}
         {...elemProps}
       >
         {icon && baseIconPosition === 'start' && (

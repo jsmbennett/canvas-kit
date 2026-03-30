@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
@@ -103,9 +103,12 @@ export const hyperlinkStencil = createStencil({
  */
 export const Hyperlink = createComponent('a')({
   displayName: 'Hyperlink',
-  Component: ({children, variant, ...elemProps}: HyperlinkProps, ref, Element) => (
-    <Element ref={ref} {...handleCsProp(elemProps, hyperlinkStencil({variant}))}>
-      {children}
-    </Element>
-  ),
+  Component: ({children, variant, ...elemProps}: HyperlinkProps, ref, Element) => {
+    const resolved = useResolvedStencil('Hyperlink', hyperlinkStencil, {variant});
+    return (
+      <Element ref={ref} {...handleCsProp(elemProps, resolved)}>
+        {children}
+      </Element>
+    );
+  },
 });

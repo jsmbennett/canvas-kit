@@ -1,4 +1,4 @@
-import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {
   calc,
@@ -154,16 +154,13 @@ export const ToolbarDropdownButton = createComponent('button')({
     ref,
     Element
   ) => {
+    const resolved = useResolvedStencil('ToolbarDropdownButton', toolbarDropdownButtonStencil, {
+      shouldMirrorIcon,
+      shouldMirrorIconInRTL,
+    });
+
     return (
-      <BaseButton
-        ref={ref}
-        as={Element}
-        size="small"
-        {...handleCsProp(
-          elemProps,
-          toolbarDropdownButtonStencil({shouldMirrorIcon, shouldMirrorIconInRTL})
-        )}
-      >
+      <BaseButton ref={ref} as={Element} size="small" {...handleCsProp(elemProps, resolved)}>
         {icon ? (
           <BaseButton.Icon
             className="wdc-toolbar-dropdown-btn-custom-icon"

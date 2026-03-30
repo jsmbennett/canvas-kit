@@ -12,6 +12,7 @@ import {
   createElemPropsHook,
   createSubcomponent,
   useLocalRef,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -176,12 +177,9 @@ const MenuItemText = createComponent('span')({
 export const StyledMenuItem = createComponent('button')({
   displayName: 'MenuItem',
   Component: ({children, isDisabled, ...elemProps}: MenuItemProps, ref, Element) => {
+    const resolved = useResolvedStencil('MenuItem', menuItemStencil, {});
     return (
-      <Element
-        ref={ref}
-        aria-disabled={isDisabled}
-        {...mergeStyles(elemProps, menuItemStencil({}))}
-      >
+      <Element ref={ref} aria-disabled={isDisabled} {...mergeStyles(elemProps, resolved)}>
         {typeof children === 'string' ? <MenuItemText>{children}</MenuItemText> : children}
       </Element>
     );

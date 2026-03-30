@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -65,8 +65,9 @@ export const cardStencil = createStencil({
 export const Card = createComponent('div')({
   displayName: 'Card',
   Component: ({children, variant, ...elemProps}: CardProps, ref, Element) => {
+    const resolved = useResolvedStencil('Card', cardStencil, {variant});
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, cardStencil({variant}))}>
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

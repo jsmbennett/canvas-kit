@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -19,6 +19,7 @@ export const menuDividerStencil = createStencil({
 export const MenuDivider = createComponent('hr')({
   displayName: 'Menu.Divider',
   Component({...elemProps}: DividerProps, ref, Element) {
-    return <Element ref={ref} {...handleCsProp(elemProps, menuDividerStencil())} />;
+    const resolved = useResolvedStencil('Menu.Divider', menuDividerStencil, undefined);
+    return <Element ref={ref} {...handleCsProp(elemProps, resolved)} />;
   },
 });

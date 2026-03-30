@@ -52,6 +52,44 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 <CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
 ```
 
+#### Stencil Overrides
+
+You can override component stencils globally with the `stencilOverrides` prop. Pass a map of
+`createStencil` config objects keyed by component displayName to CanvasProvider;
+it will wrap children with the stencil context internally.
+
+```tsx
+import {
+  CanvasProvider,
+  StencilProviderMap,
+} from '@workday/canvas-kit-react/common';
+
+const stencilOverrides: StencilProviderMap = {
+  Text: {
+    mergeWithDefault: true,
+    stencil: {
+      base: {fontSize: '18px', fontWeight: 600},
+    },
+  },
+  PrimaryButton: {
+    stencil: {
+      base: {fontWeight: 700},
+    },
+  },
+};
+
+<CanvasProvider stencilOverrides={stencilOverrides}>
+  <App />
+</CanvasProvider>
+```
+
+The provider map keys must match the component's `displayName` (e.g. `"Text"`, `"PrimaryButton"`,
+`"Card.Body"`). Each value must include a `stencil` config accepted by `createStencil`, plus optional
+`mergeWithDefault`:
+
+- `mergeWithDefault: true` layers the custom stencil on top of the component default stencil.
+- `mergeWithDefault: false` (or omitted) replaces the component default stencil.
+
 #### Storybook Decorator
 
 We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your

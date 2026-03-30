@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
-import {focusRing} from '@workday/canvas-kit-react/common';
+import {focusRing, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
@@ -70,8 +70,9 @@ const colorPickerSwatchBookStencil = createStencil({
 });
 
 export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => {
+  const resolved = useResolvedStencil('SwatchBook', colorPickerSwatchBookStencil, undefined);
   return (
-    <div {...colorPickerSwatchBookStencil()}>
+    <div {...resolved}>
       {colors.map((color: string | SwatchBookColorObject, index: number) => {
         const hexCode = typeof color === 'object' ? color.value : color.toLowerCase();
         const label = typeof color === 'object' ? color.label : color.toLowerCase();

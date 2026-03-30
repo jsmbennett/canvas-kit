@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {ExtractStencilProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
@@ -247,21 +247,15 @@ export const StatusIndicator = createComponent('div')({
     Icon: StatusIndicatorIcon,
   },
   Component: ({variant, emphasis, children, ...elemProps}: StatusIndicatorProps, ref, Element) => {
+    const resolved = useResolvedStencil('StatusIndicator', statusIndicatorStencil, {
+      variant:
+        deprecatedVariantsMap[variant as keyof typeof deprecatedVariantsMap] ||
+        (variant as keyof typeof statusIndicatorStencil.modifiers.variant),
+      emphasis,
+    });
+
     return (
-      <Element
-        ref={ref}
-        {...mergeStyles(
-          elemProps,
-          statusIndicatorStencil({
-            variant:
-              // collapse the type to only the allowed modifiers. Look them up in the map, then
-              // fallback to the passed variant.
-              deprecatedVariantsMap[variant as keyof typeof deprecatedVariantsMap] ||
-              (variant as keyof typeof statusIndicatorStencil.modifiers.variant),
-            emphasis,
-          })
-        )}
-      >
+      <Element ref={ref} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Element>
     );

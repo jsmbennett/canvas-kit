@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
@@ -113,10 +113,11 @@ export const Toast = createContainer('div')({
     Link: ToastLink,
   },
 })<ToastProps>(({children, ...elemProps}, _, model) => {
+  const resolved = useResolvedStencil('Toast', toastStencil, undefined);
   return (
     <Popup.Card
       {...getAriaAttributes(model.state.mode, model.state.id)}
-      {...mergeStyles(elemProps, toastStencil())}
+      {...mergeStyles(elemProps, resolved)}
     >
       {children}
     </Popup.Card>

@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -79,11 +79,7 @@ const labelTextStencil = createStencil({
 export const LabelText = createComponent('label')({
   displayName: 'Label',
   Component: ({disabled, typeLevel, variant, ...elemProps}: TypeLabelProps, ref, Element) => {
-    return (
-      <Element
-        ref={ref}
-        {...mergeStyles(elemProps, labelTextStencil({variant, disabled, typeLevel}))}
-      />
-    );
+    const resolved = useResolvedStencil('Label', labelTextStencil, {variant, disabled, typeLevel});
+    return <Element ref={ref} {...mergeStyles(elemProps, resolved)} />;
   },
 });

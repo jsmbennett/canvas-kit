@@ -5,6 +5,7 @@ import {
   createElemPropsHook,
   createSubModelElemPropsHook,
   createSubcomponent,
+  useResolvedStencil,
 } from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
@@ -36,11 +37,12 @@ export const ActionBarOverflowButton = createSubcomponent('button')({
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarOverflowButton,
 })<ActionBarOverflowButtonProps>((elemProps, Element) => {
+  const resolved = useResolvedStencil(
+    'ActionBar.OverflowButton',
+    actionBarOverflowButtonStencil,
+    undefined
+  );
   return (
-    <SecondaryButton
-      as={Element}
-      icon={relatedActionsIcon}
-      {...mergeStyles(elemProps, actionBarOverflowButtonStencil())}
-    />
+    <SecondaryButton as={Element} icon={relatedActionsIcon} {...mergeStyles(elemProps, resolved)} />
   );
 });

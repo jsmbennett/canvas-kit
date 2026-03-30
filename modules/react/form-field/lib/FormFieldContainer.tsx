@@ -1,4 +1,4 @@
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -23,10 +23,6 @@ export const FormFieldContainer = createSubcomponent('div')({
   displayName: 'FormField.Container',
   modelHook: useFormFieldModel,
 })<CSProps>((elemProps, Element, model) => {
-  return (
-    <Element
-      data-width="ck-formfield-width"
-      {...handleCsProp(elemProps, formFieldContainerStencil())}
-    />
-  );
+  const resolved = useResolvedStencil('FormField.Container', formFieldContainerStencil, undefined);
+  return <Element data-width="ck-formfield-width" {...handleCsProp(elemProps, resolved)} />;
 });

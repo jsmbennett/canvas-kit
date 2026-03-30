@@ -1,4 +1,4 @@
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
@@ -22,8 +22,9 @@ export const toastBodyStencil = createStencil({
 export const ToastBody = createComponent('div')({
   displayName: 'Toast.Body',
   Component: ({children, ...elemProps}: ToastBodyProps, ref, Element) => {
+    const resolved = useResolvedStencil('Toast.Body', toastBodyStencil, undefined);
     return (
-      <Flex ref={ref} as={Element} {...mergeStyles(elemProps, toastBodyStencil())}>
+      <Flex ref={ref} as={Element} {...mergeStyles(elemProps, resolved)}>
         {children}
       </Flex>
     );

@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {calc, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {extLinkIcon} from '@workday/canvas-system-icons-web';
@@ -52,20 +52,18 @@ export const ExternalHyperlink = createComponent('a')({
     {children, iconLabel, variant, ...elemProps}: ExternalHyperlinkProps,
     ref,
     Element
-  ) => (
-    <Element
-      ref={ref}
-      target="_blank"
-      rel="noreferrer"
-      {...handleCsProp(elemProps, externalHyperlinkStencil({variant}))}
-    >
-      <span data-part="external-hyperlink-children">{children}</span>
-      <SystemIcon
-        icon={extLinkIcon}
-        role="img"
-        aria-label={iconLabel}
-        {...externalHyperlinkStencil.parts.externalHyperlinkIcon}
-      />
-    </Element>
-  ),
+  ) => {
+    const resolved = useResolvedStencil('ExternalHyperlink', externalHyperlinkStencil, {variant});
+    return (
+      <Element ref={ref} target="_blank" rel="noreferrer" {...handleCsProp(elemProps, resolved)}>
+        <span data-part="external-hyperlink-children">{children}</span>
+        <SystemIcon
+          icon={extLinkIcon}
+          role="img"
+          aria-label={iconLabel}
+          {...externalHyperlinkStencil.parts.externalHyperlinkIcon}
+        />
+      </Element>
+    );
+  },
 });

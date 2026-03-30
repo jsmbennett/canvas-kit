@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -16,6 +16,7 @@ export const toastIconStencil = createStencil({
 export const ToastIcon = createComponent('div')({
   displayName: 'Toast.Icon',
   Component: (elemProps: ToastIconProps, ref, Element) => {
-    return <SystemIcon ref={ref} as={Element} {...handleCsProp(elemProps, toastIconStencil())} />;
+    const resolved = useResolvedStencil('Toast.Icon', toastIconStencil, undefined);
+    return <SystemIcon ref={ref} as={Element} {...handleCsProp(elemProps, resolved)} />;
   },
 });

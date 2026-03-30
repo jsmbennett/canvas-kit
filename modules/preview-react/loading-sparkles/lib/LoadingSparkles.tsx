@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {CSProps, createStencil, handleCsProp, keyframes, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -65,8 +65,9 @@ export const loadingSparklesStencil = createStencil({
 export const LoadingSparkles = createComponent('div')({
   displayName: 'LoadingSparkles',
   Component: (elemProps: CSProps, ref, Element) => {
+    const resolved = useResolvedStencil('LoadingSparkles', loadingSparklesStencil, undefined);
     return (
-      <Element ref={ref} role="status" {...handleCsProp(elemProps, loadingSparklesStencil())}>
+      <Element ref={ref} role="status" {...handleCsProp(elemProps, resolved)}>
         <Sparkle />
         <Sparkle />
         <Sparkle />

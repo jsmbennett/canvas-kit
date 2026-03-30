@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createSubcomponent,
+  useResolvedStencil,
+} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
@@ -38,7 +42,6 @@ export const RadioText = createSubcomponent('span')({
   modelHook: useRadioModel,
 })(({children, ...elemProps}: ExtractProps<typeof Text>, Element) => {
   const {variant, disabled} = React.useContext(RadioLabelContext);
-  return (
-    <Element {...mergeStyles(elemProps, radioTextStencil({variant, disabled}))}>{children}</Element>
-  );
+  const resolved = useResolvedStencil('RadioButton.Text', radioTextStencil, {variant, disabled});
+  return <Element {...mergeStyles(elemProps, resolved)}>{children}</Element>;
 });

@@ -4,6 +4,7 @@ import {
   createElemPropsHook,
   createSubcomponent,
   useForkRef,
+  useResolvedStencil,
   useWindowSize,
 } from '@workday/canvas-kit-react/common';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -80,8 +81,11 @@ const OpenModalOverlay = createSubcomponent('div')({
 })<ModalOverlayProps>((elemProps, Element, model) => {
   const windowSize = useWindowSize();
   const containerCenter = windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw';
+  const resolved = useResolvedStencil('Modal.OpenOverlay', modalOverlayContainerStencil, {
+    containerCenter,
+  });
   const content = (
-    <Box {...mergeStyles(elemProps, modalOverlayContainerStencil({containerCenter}))}>
+    <Box {...mergeStyles(elemProps, resolved)}>
       {/* This centering container helps fix an issue with Chrome. Chrome doesn't normally do
       subpixel positioning, but seems to when using flexbox centering. This messes up Popper
       calculations inside the Modal. The centering container forces a "center" pixel calculation

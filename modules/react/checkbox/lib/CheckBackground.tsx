@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
+import {ErrorType, createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
@@ -86,11 +86,12 @@ export const checkboxBackgroundStencil = createStencil({
 export const CheckBackground = createComponent('div')({
   displayName: 'CheckBackground',
   Component: ({error, variant, children}: CheckBackgroundProps) => {
+    const resolved = useResolvedStencil('CheckBackground', checkboxBackgroundStencil, {
+      error,
+      variant,
+    });
     return (
-      <div
-        {...checkboxBackgroundStencil.parts.background}
-        {...checkboxBackgroundStencil({error, variant})}
-      >
+      <div {...checkboxBackgroundStencil.parts.background} {...resolved}>
         {children}
       </div>
     );

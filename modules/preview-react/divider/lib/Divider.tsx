@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, useResolvedStencil} from '@workday/canvas-kit-react/common';
 import {
   CSProps,
   calc,
@@ -53,7 +53,8 @@ export interface DividerProps extends CSProps {
  */
 export const Divider = createComponent('hr')({
   displayName: 'Divider',
-  Component: ({space, ...elemProps}: DividerProps, ref, Element) => (
-    <Element ref={ref} {...handleCsProp(elemProps, dividerStencil({space}))} />
-  ),
+  Component: ({space, ...elemProps}: DividerProps, ref, Element) => {
+    const resolved = useResolvedStencil('Divider', dividerStencil, {space});
+    return <Element ref={ref} {...handleCsProp(elemProps, resolved)} />;
+  },
 });
